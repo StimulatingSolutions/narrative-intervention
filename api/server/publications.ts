@@ -27,7 +27,7 @@ Meteor.publish('messages', function(chatId: string): Mongo.Cursor<Message> {
   });
 });
 
-Meteor.publishComposite('chats', function(): PublishCompositeConfig<Chat> {
+Meteor["publishComposite"]('chats', function(): PublishCompositeConfig<Chat> {
   if (!this.userId) {
     return;
   }
