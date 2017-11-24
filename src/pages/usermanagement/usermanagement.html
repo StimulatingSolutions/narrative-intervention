@@ -5,6 +5,15 @@
 </ion-header>
 
 <ion-content padding class="user-management-page-content">
+
+  <ion-list no-lines>
+    <div class='flex' *ngFor="let user of allUsers | async">>
+      <ion-icon name="close-circle"></ion-icon>
+      <ion-icon name="hand"></ion-icon>
+      <div>{{user.profile.email}}</div>
+    </div>
+  </ion-list>
+
   <ion-buttons>
     <button ion-button (click)="showAddUser(true)">Add User</button>
     <button ion-button (click)="removeUser()">Remove User</button>
@@ -18,12 +27,12 @@
       <ion-card-content>
         <ion-item>
           <ion-label floating>Email</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="addUserEmail" type="email"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input [(ngModel)]="addUserPassword" (keypress)="onInputKeypress($event)" type="password"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>

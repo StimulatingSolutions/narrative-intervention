@@ -10,6 +10,19 @@ const nonEmptyString = Match.Where((str) => {
 });
 
 Meteor.methods({
+
+  createNewUser(email: string, password: string, name: string): void {
+      Accounts.createUser({
+        email: email,
+        password: password,
+        profile: {
+          name: name,
+          email: email,
+          picture: ''
+        }
+      })
+  },
+
   addChat(receiverId: string): void {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized',
