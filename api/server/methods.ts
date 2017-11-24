@@ -1,3 +1,4 @@
+import { Accounts } from 'meteor/accounts-base';
 import { Chats } from './collections/chats';
 import { Messages } from './collections/messages';
 import { MessageType, Profile } from './models';

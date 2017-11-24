@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
+import { UserManagementPage } from '../usermanagement/usermanagement';
 
 @Component({
   selector: 'welcome',
@@ -6,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePage implements OnInit {
 
-  constructor() {}
+  constructor(
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {}
+
+  viewUserManagement(): void {
+    this.navCtrl.push(UserManagementPage, {});
+  }
 
 }

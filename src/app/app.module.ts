@@ -15,6 +15,7 @@ import { VerificationPage } from '../pages/verification/verification';
 import { LandingPage } from '../pages/landing/landing';
 import { WelcomePage } from '../pages/landing/welcome';
 import { PhoneService } from '../services/phone';
+import { UserManagementPage } from '../pages/usermanagement/usermanagement';
 import { MyApp } from './app.component';
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MyApp } from './app.component';
     NewChatComponent,
     MessagesOptionsComponent,
     LandingPage,
-    WelcomePage
+    WelcomePage,
+    UserManagementPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { MyApp } from './app.component';
     NewChatComponent,
     MessagesOptionsComponent,
     LandingPage,
-    WelcomePage
+    WelcomePage,
+    UserManagementPage
   ],
   providers: [
     StatusBar,

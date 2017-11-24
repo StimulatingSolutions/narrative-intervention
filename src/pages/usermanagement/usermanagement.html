@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="whatsapp">
+    <ion-title>Account Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="user-management-page-content">
+  <ion-buttons>
+    <button ion-button (click)="showAddUser(true)">Add User</button>
+    <button ion-button (click)="removeUser()">Remove User</button>
+  </ion-buttons>
+
+  <div *ngIf="addUserVisible" class='add-user-section'>
+    <ion-card>
+      <ion-card-header>
+        Add User
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="addUser()">Add</button>
+        <button ion-button (click)="showAddUser(false)">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+</ion-content>
