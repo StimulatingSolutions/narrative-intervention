@@ -6,8 +6,6 @@ export class EmailService {
 
   login(email: string, password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      debugger
-      console.log('login: ', email, password);
       Meteor.loginWithPassword({email: email}, password, (e: Error) => {
         if (e) {
           return reject(e);

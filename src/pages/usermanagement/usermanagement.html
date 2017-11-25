@@ -19,17 +19,34 @@
         Edit User
       </ion-card-header>
       <ion-card-content>
-        <ion-list radio-group>
+        <ion-list radio-group [(ngModel)]="editUserAccountActive">
           <ion-list-header>
             Account Active
           </ion-list-header>
           <ion-item>
             <ion-label>Active</ion-label>
-            <ion-radio value="go"></ion-radio>
+            <ion-radio value="active"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Deactive</ion-label>
-            <ion-radio value="rust"></ion-radio>
+            <ion-radio value="deactive"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list radio-group [(ngModel)]="editUserAccountType">
+          <ion-list-header>
+            Account Type
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Teacher</ion-label>
+            <ion-radio value="teacher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Researcher</ion-label>
+            <ion-radio value="researcher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Admin</ion-label>
+            <ion-radio value="admin"></ion-radio>
           </ion-item>
         </ion-list>
         <ion-item>
@@ -42,7 +59,7 @@
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
-        <button ion-button (click)="updateProfile()">Update User</button>
+        <button ion-button (click)="updateUser()">Update User</button>
         <button ion-button (click)="hideUserEdit()">Cancel</button>
       </ion-buttons>
     </ion-card>

@@ -6,11 +6,16 @@ import { Observable } from 'rxjs';
 import { Users } from 'api/collections';
 import { User } from 'api/models';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'usermanagement',
   templateUrl: 'usermanagement.html'
 })
 export class UserManagementPage implements OnInit {
+
+  private accountTypeRoles = ['admin', 'researcher', 'teacher'];
+  private accountActiveRoles = ['active', 'deactive'];
 
   addUserVisible: boolean;
   addUserName: string;
@@ -19,7 +24,8 @@ export class UserManagementPage implements OnInit {
 
   editUserVisible: boolean;
   editUserName: string;
-  editUserAccountActive: boolean;
+  editUserAccountActive: string;
+  editUserAccountType: string;
   editUserEmail: string;
   userToEdit: User;
 
@@ -88,10 +94,22 @@ export class UserManagementPage implements OnInit {
   }
 
   selectUserToEdit(user): void {
+    console.log('selected user: ', user)
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;
-    //this.editUserAccountActive = user.
+
+    this.accountTypeRoles.forEach( accountTypeRole => {
+      if (_.includes(user.roles, accountTypeRole)){
+        this.editUserAccountType = accountTypeRole;
+      }
+    })
+    this.accountActiveRoles.forEach( accountActiveRole => {
+      if (_.includes(user.roles, accountActiveRole)){
+        this.editUserAccountActive = accountActiveRole;
+      }
+    })
+
     this.editUserVisible = true;
   }
 
@@ -107,7 +125,9 @@ export class UserManagementPage implements OnInit {
       picture: ''
     }
 
-    MeteorObservable.call('updateProfile', this.userToEdit, profile).subscribe({
+    const accountRoles = [this.editUserAccountActive, this.editUserAccountType]
+
+    MeteorObservable.call('updateUser', this.userToEdit, profile, accountRoles).subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -119,6 +139,8 @@ export class UserManagementPage implements OnInit {
         this.editUserVisible = false;
         this.editUserEmail = '';
         this.editUserName = '';
+        this.editUserAccountActive = '';
+        this.editUserAccountType = '';
       },
       error: (e: Error) => {
         this.handleError(e);
