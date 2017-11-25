@@ -1,10 +1,22 @@
 .user-management-page-content {
 
+  .user-update-list {
+    display: flex;
+
+    .user-edit-button {
+      cursor: pointer;
+    }
+
+    & > * {
+      padding: 5px;
+    }
+  }
+
   .add-user-section {
     padding: 20px;
+  }
 
-    .action-buttons {
-      padding: 20px;
-    }
+  .action-buttons {
+    padding: 20px;
   }
 }

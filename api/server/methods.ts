@@ -1,7 +1,7 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Chats } from './collections/chats';
 import { Messages } from './collections/messages';
-import { MessageType, Profile } from './models';
+import { MessageType, Profile, User } from './models';
 import { check, Match } from 'meteor/check';
 
 const nonEmptyString = Match.Where((str) => {
@@ -68,15 +68,18 @@ Meteor.methods({
 
     Chats.remove(chatId);
   },
-  updateProfile(profile: Profile): void {
-    if (!this.userId) throw new Meteor.Error('unauthorized',
-      'User must be logged-in to create a new chat');
 
-    check(profile, {
-      name: nonEmptyString
-    });
-
-    Meteor.users.update(this.userId, {
+  updateProfile(user: User, profile: Profile): void {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+    }
+    console.log('here?')
+    // check(profile, {
+    //   name: nonEmptyString
+    // });
+    console.log('user id: ', user._id)
+    console.log('profile: ', profile)
+    Meteor.users.update(user._id, {
       $set: {profile}
     });
   },

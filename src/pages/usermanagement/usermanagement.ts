@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Users } from 'api/collections';
 import { User } from 'api/models';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'usermanagement',
   templateUrl: 'usermanagement.html'
@@ -13,8 +15,14 @@ import { User } from 'api/models';
 export class UserManagementPage implements OnInit {
 
   addUserVisible: boolean;
+  addUserName: string;
   addUserEmail: string;
   addUserPassword: string;
+
+  editUserVisible: boolean;
+  editUserName: string;
+  editUserEmail: string;
+  userToEdit: User;
 
   allUsers;
 
@@ -23,6 +31,7 @@ export class UserManagementPage implements OnInit {
     private alertCtrl: AlertController,
   ) {
     this.addUserVisible = false;
+    this.editUserVisible = false;
   }
 
   ngOnInit(): void {
@@ -58,7 +67,7 @@ export class UserManagementPage implements OnInit {
       return
     }
 
-    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserPassword).subscribe({
+    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserPassword, this.addUserName).subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -72,21 +81,65 @@ export class UserManagementPage implements OnInit {
         this.addUserPassword = '';
       },
       error: (e: Error) => {
-        debugger
-        const alert = this.alertCtrl.create({
-          title: 'Oops!',
-          message: e.message,
-          buttons: ['OK']
-        });
-        alert.present();
+        this.handleError(e);
       }
     });
 
     //this.addUserVisible = false;
   }
 
+  selectUserToEdit(user): void {
+    this.userToEdit = user;
+    this.editUserName = user.profile.name;
+    this.editUserEmail = user.profile.email;
+    this.editUserVisible = true;
+  }
+
+  hideUserEdit(): void {
+    this.editUserVisible = false;
+  }
+
+  updateProfile(user): void {
+
+    const profile = {
+      name: this.editUserName,
+      email: this.userToEdit.profile.email,
+      picture: ''
+    }
+
+    MeteorObservable.call('updateProfile', this.userToEdit, profile).subscribe({
+      next: () => {
+        const alert = this.alertCtrl.create({
+          title: 'Success!',
+          message: "User: " + this.editUserEmail + ' has been updated.',
+          buttons: ['OK']
+        });
+        alert.present();
+
+        this.editUserVisible = false;
+        this.editUserEmail = '';
+        this.editUserName = '';
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
+  }
+
   removeUser(): void {
 
+  }
+
+  handleError(e: Error): void {
+    console.error(e);
+
+    const alert = this.alertCtrl.create({
+      title: 'Oops!',
+      message: e.message,
+      buttons: ['OK']
+    });
+
+    alert.present();
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {

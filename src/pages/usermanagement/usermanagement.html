@@ -7,16 +7,36 @@
 <ion-content padding class="user-management-page-content">
 
   <ion-list no-lines>
-    <div class='flex' *ngFor="let user of allUsers | async">>
-      <ion-icon name="close-circle"></ion-icon>
-      <ion-icon name="hand"></ion-icon>
+    <div class='user-update-list' *ngFor="let user of allUsers | async">
+      <ion-icon name="md-settings" class='user-edit-button' (click)="selectUserToEdit(user)"></ion-icon>
       <div>{{user.profile.email}}</div>
     </div>
   </ion-list>
 
+  <div *ngIf="editUserVisible" class='edit-user-section'>
+    <ion-card>
+      <ion-card-header>
+        Edit User
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input [(ngModel)]="editUserName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input [(ngModel)]="editUserEmail" type="email"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="updateProfile()">Update User</button>
+        <button ion-button (click)="hideUserEdit()">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+
   <ion-buttons>
     <button ion-button (click)="showAddUser(true)">Add User</button>
-    <button ion-button (click)="removeUser()">Remove User</button>
   </ion-buttons>
 
   <div *ngIf="addUserVisible" class='add-user-section'>
@@ -26,10 +46,13 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input [(ngModel)]="addUserName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label floating>Email</ion-label>
           <ion-input [(ngModel)]="addUserEmail" type="email"></ion-input>
         </ion-item>
-
         <ion-item>
           <ion-label floating>Password</ion-label>
           <ion-input [(ngModel)]="addUserPassword" (keypress)="onInputKeypress($event)" type="password"></ion-input>
