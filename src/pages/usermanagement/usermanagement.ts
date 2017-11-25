@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import { Users } from 'api/collections';
 import { User } from 'api/models';
 
-import * as _ from 'lodash';
-
 @Component({
   selector: 'usermanagement',
   templateUrl: 'usermanagement.html'
