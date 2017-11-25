@@ -21,6 +21,7 @@ export class UserManagementPage implements OnInit {
 
   editUserVisible: boolean;
   editUserName: string;
+  editUserAccountActive: boolean;
   editUserEmail: string;
   userToEdit: User;
 
@@ -92,6 +93,7 @@ export class UserManagementPage implements OnInit {
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;
+    //this.editUserAccountActive = user.
     this.editUserVisible = true;
   }
 
@@ -99,7 +101,7 @@ export class UserManagementPage implements OnInit {
     this.editUserVisible = false;
   }
 
-  updateProfile(user): void {
+  updateUser(user): void {
 
     const profile = {
       name: this.editUserName,

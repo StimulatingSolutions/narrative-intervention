@@ -19,6 +19,19 @@
         Edit User
       </ion-card-header>
       <ion-card-content>
+        <ion-list radio-group>
+          <ion-list-header>
+            Account Active
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Active</ion-label>
+            <ion-radio value="go"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Deactive</ion-label>
+            <ion-radio value="rust"></ion-radio>
+          </ion-item>
+        </ion-list>
         <ion-item>
           <ion-label floating>Name</ion-label>
           <ion-input [(ngModel)]="editUserName" type="text"></ion-input>
