@@ -2,7 +2,7 @@
 set -e
 
 # build client files
-npm run meteor-client:bundle
+meteor npm run meteor-client:bundle
 
 # statically serve up all files from www; see server/doc-root.ts to see how index.html is handled as /
 cd api
@@ -12,4 +12,4 @@ cd ..
 cat "// mock cordova.js file for webapp deployment" > ./www/cordova.js
 
 # start the meteor server for API and (due to the above) static serving of the ionic client files
-npm run api
+meteor npm run api

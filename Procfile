@@ -1,1 +1,1 @@
-web: npm run heroku
+web: meteor npm run heroku
