@@ -1,1 +1,3 @@
 node_modules/
+# public is a symbolic link to ../www
+public
