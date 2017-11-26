@@ -5,6 +5,7 @@ echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 echo "PATH: $PATH"
 echo "meteor: "`which meteor`
 echo "npm: "`which npm`
+echo "ls: "`ls -la /app/.meteor/heroku_build/bin`
 
 # build client files
 meteor npm run meteor-client:bundle
