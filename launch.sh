@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# build client files
-meteor-client bundle -s api
 
 # mock the cordova.js file because the webapp doesn't need it, but still tries to load
 cat "// mock cordova.js file for webapp deployment" > ./www/cordova.js
