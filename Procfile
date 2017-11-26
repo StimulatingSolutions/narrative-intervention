@@ -1,1 +1,1 @@
-web: meteor npm run heroku
+web: ./launch.sh

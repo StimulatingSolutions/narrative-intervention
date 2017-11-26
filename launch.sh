@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+echo "PATH: $PATH"
+echo "meteor: "`which meteor`
+echo "npm: "`which npm`
+
 # build client files
 meteor npm run meteor-client:bundle
 
