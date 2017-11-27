@@ -12,7 +12,10 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "meteor-client:bundle": "meteor-client bundle -s api",
-    "heroku": "./launch.sh"
+    "prod:build": "./scripts/prod-build.sh",
+    "prod:bundle": "./scripts/prod-bundle.sh",
+    "prod:unbundle": "./scripts/prod-unbundle.sh",
+    "prod:launch": "./scripts/prod-launch.sh"
   },
   "dependencies": {
     "@angular/common": "5.0.1",
