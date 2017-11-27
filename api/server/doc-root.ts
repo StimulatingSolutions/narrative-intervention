@@ -24,18 +24,13 @@ function report(dir) {
 }
 
 
-report(process.env.PWD);
-report(process.env.PWD+'/..');
-report(process.env.PWD+'/api');
-report(process.env.PWD + '/.meteor/heroku_build');
-report(process.env.PWD + '/.meteor/heroku_build/app');
-report(process.env.PWD + '/.meteor/heroku_build/app/api');
+report(process.env.PWD+'/api/public');
 if (fs.existsSync(process.env.PWD + '/public/index.html')) {
   // dev environment
   path = process.env.PWD + '/public/index.html';
-} else if (fs.existsSync(process.env.PWD + '/.meteor/heroku_build/app/api/public/index.html')) {
+} else if (fs.existsSync(process.env.PWD + '/api/public/index.html')) {
   // heroku environment
-  path = process.env.PWD + '/.meteor/heroku_build/app/api/public/index.html';
+  path = process.env.PWD + '/api/public/index.html';
 }
 // calculate eTag for possibly more efficient 304 responses
 data = fs.readFileSync(path);
