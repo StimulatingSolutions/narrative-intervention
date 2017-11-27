@@ -10,8 +10,18 @@ let crypto = Npm.require('crypto');
 
 
 // load file data -- this will only ever really get used on prod in our setup, so no need to worry about changing data
-let data: string = fs.readFileSync(process.env.PWD + '/public/index.html');
+
+let path: string;
+let data: string;
+if (fs.existsSync(process.env.PWD + '/public/index.html')) {
+  // dev environment
+  path = process.env.PWD + '/public/index.html';
+} else if (fs.existsSync(process.env.PWD + '/.meteor/heroku_build/app/public/index.html')) {
+  // heroku environment
+  path = process.env.PWD + '/.meteor/heroku_build/app/public/index.html';
+}
 // calculate eTag for possibly more efficient 304 responses
+data = fs.readFileSync(path);
 let eTag: string = crypto.createHash('md5').update(data).digest('hex');
 
 
