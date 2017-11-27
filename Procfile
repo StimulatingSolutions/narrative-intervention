@@ -1,1 +1,1 @@
-web: ./launch.sh
+web: ./scripts/prod-launch.sh
