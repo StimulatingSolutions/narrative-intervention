@@ -2,15 +2,13 @@
 set -e
 
 
-#./scripts/prod-unbundle.sh
-
-# mock the cordova.js file because the webapp doesn't need it, but still tries to load
-#cat "// mock cordova.js file for webapp deployment" > ./www/cordova.js
+echo "--------------------------------- app root"
+ls -lah .meteor/heroku_build/bin/node
 
 cd api
 
-# statically serve up all files from www; see server/doc-root.ts to see how index.html is handled as /
-#ln -s ../www public
+echo "--------------------------------- inside api"
+ls -lah .meteor/heroku_build/bin/node
 
 # start the meteor server for API and (due to the above) static serving of the ionic client files
 .meteor/heroku_build/bin/node .meteor/heroku_build/app/main.js
