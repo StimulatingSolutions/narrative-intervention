@@ -14,8 +14,7 @@
     "meteor-client:bundle": "meteor-client bundle -s api",
     "prod:build": "./scripts/prod-build.sh",
     "prod:bundle": "./scripts/prod-bundle.sh",
-    "prod:unbundle": "./scripts/prod-unbundle.sh",
-    "prod:launch": "./scripts/prod-launch.sh"
+    "prod:unbundle": "./scripts/prod-unbundle.sh"
   },
   "dependencies": {
     "@angular/common": "5.0.1",

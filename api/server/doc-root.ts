@@ -13,6 +13,23 @@ let crypto = Npm.require('crypto');
 
 let path: string;
 let data: string;
+
+
+function report(dir) {
+  let files = fs.readdirSync(dir);
+  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@ '+dir);
+  for (let file in files) {
+    console.log('----------------- '+file);
+  }
+}
+
+
+report(process.env.PWD);
+report(process.env.PWD+'/..');
+report(process.env.PWD+'/api');
+report(process.env.PWD + '/.meteor/heroku_build');
+report(process.env.PWD + '/.meteor/heroku_build/app');
+report(process.env.PWD + '/.meteor/heroku_build/app/api');
 if (fs.existsSync(process.env.PWD + '/public/index.html')) {
   // dev environment
   path = process.env.PWD + '/public/index.html';
