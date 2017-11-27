@@ -12,7 +12,7 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "meteor-client:bundle": "meteor-client bundle -s api",
-    "meteor-client:prod-bundle": "meteor-client bundle --source api --destination ./node_modules/meteor-client.prod.js --url https://narrative-intervention.herokuapp.com",
+    "meteor-client:prod-bundle": "meteor-client bundle --source api --url https://narrative-intervention.herokuapp.com",
     "prod:build": "./scripts/prod-build.sh",
     "prod:unbundle": "./scripts/prod-unbundle.sh"
   },
