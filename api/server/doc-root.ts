@@ -14,17 +14,6 @@ let crypto = Npm.require('crypto');
 let path: string;
 let data: string;
 
-
-function report(dir) {
-  let files = fs.readdirSync(dir);
-  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@ '+dir);
-  for (let file of files) {
-    console.log('----------------- '+file);
-  }
-}
-
-
-report(process.env.PWD+'/api/public');
 if (fs.existsSync(process.env.PWD + '/public/index.html')) {
   // dev environment
   path = process.env.PWD + '/public/index.html';
