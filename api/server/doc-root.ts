@@ -18,7 +18,7 @@ let data: string;
 function report(dir) {
   let files = fs.readdirSync(dir);
   console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@ '+dir);
-  for (let file in files) {
+  for (let file of files) {
     console.log('----------------- '+file);
   }
 }
