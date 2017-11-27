@@ -16,9 +16,9 @@ let data: string;
 if (fs.existsSync(process.env.PWD + '/public/index.html')) {
   // dev environment
   path = process.env.PWD + '/public/index.html';
-} else if (fs.existsSync(process.env.PWD + '/.meteor/heroku_build/app/public/index.html')) {
+} else if (fs.existsSync(process.env.PWD + '/.meteor/heroku_build/app/api/public/index.html')) {
   // heroku environment
-  path = process.env.PWD + '/.meteor/heroku_build/app/public/index.html';
+  path = process.env.PWD + '/.meteor/heroku_build/app/api/public/index.html';
 }
 // calculate eTag for possibly more efficient 304 responses
 data = fs.readFileSync(path);
