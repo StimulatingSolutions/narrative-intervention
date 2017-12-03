@@ -10,14 +10,15 @@ import * as _ from 'lodash';
 Meteor.startup(() => {
 
   //VARIABLES
-  process.env.MAIL_URL='smtp://no-reply%40undeadreckoning.com:1FKKte!EXc3CeGAkK_H17qW1bhYvPMrRx7vW62MZUK7*dLjR_Xiz38O_QEOSB9iy@smtp.gmail.com:587';
+  //BE SURE TO SET MAIL_RUL
+  //process.env.MAIL_URL
 
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
   }
 
   //UNCOMMENT AND RUN TO CLEAR ALL USERS
-  //Users.remove({});
+  Users.remove({});
 
   //SETUP USER ROLES
   const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
@@ -29,15 +30,15 @@ Meteor.startup(() => {
 
   if (Users.collection.find().count() === 0) {
     Accounts.createUser({
-      email: 'admin@gmail.com',
-      password: 'admin',
+      email: process.env.NAR_INN_ADMIN_EMAIL,
       profile: {
         name: 'admin',
-        email: 'admin@gmail.com',
+        email: process.env.NAR_INN_ADMIN_EMAIL,
         picture: ''
       }
     });
-    const newAdminUser = Accounts.findUserByEmail('admin@gmail.com');
+    const newAdminUser = Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL);
+    Accounts.sendEnrollmentEmail(newAdminUser._id, process.env.NAR_INN_ADMIN_EMAIL);
     Roles.setUserRoles(newAdminUser._id, ['admin', 'active']);
   }
 
