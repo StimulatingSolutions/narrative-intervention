@@ -14,16 +14,33 @@ const nonEmptyString = Match.Where((str) => {
 
 Meteor.methods({
 
-  createNewUser(email: string, password: string, name: string): void {
+  createNewUser(email: string, name: string): void {
       Accounts.createUser({
         email: email,
-        password: password,
         profile: {
           name: name,
           email: email,
           picture: ''
         }
       })
+
+      const newUserId = Accounts.findUserByEmail(email)._id;
+      Roles.setUserRoles(newUserId, 'active');
+      Accounts.sendEnrollmentEmail(newUserId, email);
+  },
+
+  sendRestUserPasswordEmail(email: string): void {
+
+    const newUserId = Accounts.findUserByEmail(email)._id;
+
+    Accounts.sendResetPasswordEmail(newUserId);
+
+  },
+
+  sendRestUserPasswordEmailFromId(id: string): void {
+
+    Accounts.sendResetPasswordEmail(id);
+
   },
 
   updateUser(user: User, profile: Profile, roles: string[]){

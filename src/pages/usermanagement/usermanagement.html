@@ -60,6 +60,7 @@
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="updateUser()">Update User</button>
+        <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
         <button ion-button (click)="hideUserEdit()">Cancel</button>
       </ion-buttons>
     </ion-card>
@@ -82,10 +83,6 @@
         <ion-item>
           <ion-label floating>Email</ion-label>
           <ion-input [(ngModel)]="addUserEmail" type="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Password</ion-label>
-          <ion-input [(ngModel)]="addUserPassword" (keypress)="onInputKeypress($event)" type="password"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>

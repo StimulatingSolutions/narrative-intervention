@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Meteor } from 'meteor/meteor'
+import { LandingPage } from '../../pages/landing/landing';
 
 import { UserManagementPage } from '../usermanagement/usermanagement';
 
@@ -17,6 +19,14 @@ export class WelcomePage implements OnInit {
 
   viewUserManagement(): void {
     this.navCtrl.push(UserManagementPage, {});
+  }
+
+  logout(): void {
+    Meteor.logout( () => {
+      this.navCtrl.setRoot(LandingPage, {}, {
+        animate: true
+      });
+    });
   }
 
 }

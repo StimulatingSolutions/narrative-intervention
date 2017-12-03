@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { EmailService } from '../../services/email';
 import { WelcomePage } from '../landing/welcome';
+import { MeteorObservable } from 'meteor-rxjs';
 
 @Component({
   selector: 'login',
@@ -31,6 +32,22 @@ export class LoginPage {
     }).catch((e) => {
       this.handleError(e);
     })
+  }
+
+  resetUserPassword(): void {
+    MeteorObservable.call('sendRestUserPasswordEmail', this.loginEmail).subscribe({
+      next: (result) => {
+        const alert = this.alertCtrl.create({
+          title: 'Password Reset!',
+          message: "Password Rest instrutions have been sent to " + this.loginEmail + '.',
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
   }
 
 
