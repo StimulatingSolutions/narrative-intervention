@@ -1,54 +1,61 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Users } from './collections/users';
+import { Roles } from 'meteor/alanning:roles';
+import initializeEmailTemplates from './emailTemplates';
+
+import * as _ from 'lodash';
 
 Meteor.startup(() => {
+
+  //VARIABLES
+  //BE SURE TO SET MAIL_RUL
+  //process.env.MAIL_URL
+
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
-    SMS.twilio = Meteor.settings['twilio'];
   }
 
-  if (Users.collection.find().count() > 0) {
-    return;
+  //SETUP USER ROLES
+  const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
+  const currentRoles = Roles.getAllRoles().map( role => {return role.name});
+  const missingRoles = _.difference(rolesList, currentRoles);
+  missingRoles.forEach( missingRole => {
+    Roles.createRole(missingRole);
+  })
+
+  //BOOTSTRAP INITIAL ADMIN USER
+  if (Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL) === undefined) {
+    Accounts.createUser({
+      email: process.env.NAR_INN_ADMIN_EMAIL,
+      profile: {
+        name: 'admin',
+        email: process.env.NAR_INN_ADMIN_EMAIL,
+        picture: ''
+      }
+    });
+    const newAdminUser = Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL);
+    Accounts.sendEnrollmentEmail(newAdminUser._id, process.env.NAR_INN_ADMIN_EMAIL);
+    Roles.setUserRoles(newAdminUser._id, ['admin', 'active']);
   }
 
-  Accounts.createUserWithPhone({
-   phone: '+972540000001',
-   profile: {
-     name: 'Ethan Gonzalez',
-     picture: 'https://randomuser.me/api/portraits/men/1.jpg'
-   }
-  });
+  Accounts.validateLoginAttempt( attempt => {
 
-  Accounts.createUserWithPhone({
-   phone: '+972540000002',
-   profile: {
-     name: 'Bryan Wallace',
-     picture: 'https://randomuser.me/api/portraits/lego/1.jpg'
-   }
-  });
+    console.log('LOGIN', attempt)
 
-  Accounts.createUserWithPhone({
-   phone: '+972540000003',
-   profile: {
-     name: 'Avery Stewart',
-     picture: 'https://randomuser.me/api/portraits/women/1.jpg'
-   }
-  });
+    if (attempt.type === 'password'){
+      if (!attempt.allowed){
+        return false;
+      }
+      return _.includes(attempt.user.roles, 'active');
+    }
 
-  Accounts.createUserWithPhone({
-   phone: '+972540000004',
-   profile: {
-     name: 'Katie Peterson',
-     picture: 'https://randomuser.me/api/portraits/women/2.jpg'
-   }
-  });
+    if (attempt.type === 'resume'){
+      return attempt.allowed;
+    }
 
-  Accounts.createUserWithPhone({
-   phone: '+972540000005',
-   profile: {
-     name: 'Ray Edwards',
-     picture: 'https://randomuser.me/api/portraits/men/2.jpg'
-   }
-  });
+  })
+
+  initializeEmailTemplates();
+
 });

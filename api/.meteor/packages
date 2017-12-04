@@ -21,5 +21,7 @@ barbatus:typescript
 check@1.2.5
 accounts-base@1.4.0
 npm-bcrypt@0.9.3
-mys:accounts-phone
 reywood:publish-composite
+accounts-ui
+accounts-password
+alanning:roles

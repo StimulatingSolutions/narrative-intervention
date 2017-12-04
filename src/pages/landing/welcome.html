@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar color="whatsapp">
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logout()">
+        Logout
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -9,5 +14,9 @@
       Welcome after login!
     </div>
   </div>
+
+  <ion-item>
+    <button ion-button (click)="viewUserManagement()">User Management</button>
+  </ion-item>
 
 </ion-content>

@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { Alert, AlertController, NavController } from 'ionic-angular';
-import { PhoneService } from '../../services/phone';
-import { VerificationPage } from '../verification/verification';
+import { AlertController, NavController } from 'ionic-angular';
+import { EmailService } from '../../services/email';
+import { WelcomePage } from '../landing/welcome';
+import { MeteorObservable } from 'meteor-rxjs';
 
 @Component({
   selector: 'login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  private phone = '';
+  private loginEmail = '';
+  private loginPassword = '';
 
   constructor(
     private alertCtrl: AlertController,
-    private phoneService: PhoneService,
+    private emailService: EmailService,
     private navCtrl: NavController
   ) {}
 
@@ -22,41 +24,32 @@ export class LoginPage {
     }
   }
 
-  login(phone: string = this.phone): void {
-    const alert = this.alertCtrl.create({
-      title: 'Confirm',
-      message: `Would you like to proceed with the phone number ${phone}?`,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.handleLogin(alert);
-            return false;
-          }
-        }
-      ]
-    });
-
-    alert.present();
-  }
-
-  handleLogin(alert: Alert): void {
-    alert.dismiss().then(() => {
-      return this.phoneService.verify(this.phone);
-    })
-    .then(() => {
-      this.navCtrl.push(VerificationPage, {
-        phone: this.phone
+  login(): void {
+    this.emailService.login(this.loginEmail, this.loginPassword).then(() => {
+      this.navCtrl.setRoot(WelcomePage, {}, {
+        animate: true
       });
-    })
-    .catch((e) => {
+    }).catch((e) => {
       this.handleError(e);
+    })
+  }
+
+  resetUserPassword(): void {
+    MeteorObservable.call('sendRestUserPasswordEmail', this.loginEmail).subscribe({
+      next: (result) => {
+        const alert = this.alertCtrl.create({
+          title: 'Password Reset!',
+          message: "Password Rest instrutions have been sent to " + this.loginEmail + '.',
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
     });
   }
+
 
   handleError(e: Error): void {
     console.error(e);
