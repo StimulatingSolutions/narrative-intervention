@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar color="whatsapp">
+    <ion-title>Account Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="user-management-page-content">
+
+  <ion-list no-lines>
+    <div class='user-update-list' *ngFor="let user of allUsers | async">
+      <ion-icon name="md-settings" class='user-edit-button' (click)="selectUserToEdit(user)"></ion-icon>
+      <div>{{user.profile.email}}</div>
+    </div>
+  </ion-list>
+
+  <div *ngIf="editUserVisible" class='edit-user-section'>
+    <ion-card>
+      <ion-card-header>
+        Edit User
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list radio-group [(ngModel)]="editUserAccountActive">
+          <ion-list-header>
+            Account Active
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Active</ion-label>
+            <ion-radio value="active"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Deactive</ion-label>
+            <ion-radio value="deactive"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-list radio-group [(ngModel)]="editUserAccountType">
+          <ion-list-header>
+            Account Type
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Teacher</ion-label>
+            <ion-radio value="teacher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Researcher</ion-label>
+            <ion-radio value="researcher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Admin</ion-label>
+            <ion-radio value="admin"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input [(ngModel)]="editUserName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input [(ngModel)]="editUserEmail" type="email"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="updateUser()">Update User</button>
+        <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
+        <button ion-button (click)="hideUserEdit()">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+
+  <ion-buttons>
+    <button ion-button (click)="showAddUser(true)">Add User</button>
+  </ion-buttons>
+
+  <div *ngIf="addUserVisible" class='add-user-section'>
+    <ion-card>
+      <ion-card-header>
+        Add User
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Name</ion-label>
+          <ion-input [(ngModel)]="addUserName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input [(ngModel)]="addUserEmail" type="email"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="addUser()">Add</button>
+        <button ion-button (click)="showAddUser(false)">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+</ion-content>
