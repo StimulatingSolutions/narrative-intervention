@@ -14,7 +14,8 @@
     "meteor-client:bundle": "meteor-client bundle -s api",
     "meteor-client:prod-bundle": "meteor-client bundle --source api --url https://narrative-intervention.stimulating-solutions.com",
     "prod:build": "./scripts/prod-build.sh",
-    "prod:unbundle": "./scripts/prod-unbundle.sh"
+    "prod:unbundle": "./scripts/prod-unbundle.sh",
+    "rebuild-lesson-plan": "ts-node ./scripts/rebuild-lesson-plan.ts"
   },
   "dependencies": {
     "@angular/common": "5.0.1",
@@ -48,6 +49,8 @@
     "@types/meteor": "^1.4.12",
     "@types/meteor-accounts-phone": "0.0.5",
     "@types/meteor-publish-composite": "0.0.33",
+    "get-stdin": "^5.0.1",
+    "regex-escape": "^3.4.7",
     "tmp": "0.0.33",
     "typescript": "^2.6.1",
     "typescript-extends": "^1.0.1"
