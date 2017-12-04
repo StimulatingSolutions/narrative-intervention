@@ -11,7 +11,7 @@ fi
 npm run meteor-client:prod-bundle
 npm run ionic:build
 
-tar -czvf client-bundle.tgz ./node_modules/meteor-client.js ./www
+tar -czvf client-bundle.tgz ./node_modules/meteor-client.js ./www ./src/pages/lesson-plans
 
 if [ -e ./node_modules/meteor-client.dev.js ]
 then
