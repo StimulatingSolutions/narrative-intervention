@@ -11,7 +11,10 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "meteor-client:bundle": "meteor-client bundle -s api"
+    "meteor-client:bundle": "meteor-client bundle -s api",
+    "meteor-client:prod-bundle": "meteor-client bundle --source api --url https://narrative-intervention.stimulating-solutions.com",
+    "prod:build": "./scripts/prod-build.sh",
+    "prod:unbundle": "./scripts/prod-unbundle.sh"
   },
   "dependencies": {
     "@angular/common": "5.0.1",
