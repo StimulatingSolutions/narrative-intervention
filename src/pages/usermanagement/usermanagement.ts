@@ -14,14 +14,17 @@ import * as _ from 'lodash';
 })
 export class UserManagementPage implements OnInit {
 
+  private accountTypeRoles = ['admin', 'researcher', 'teacher'];
+  private accountActiveRoles = ['active', 'deactive'];
+
   addUserVisible: boolean;
   addUserName: string;
   addUserEmail: string;
-  addUserPassword: string;
 
   editUserVisible: boolean;
   editUserName: string;
-  editUserAccountActive: boolean;
+  editUserAccountActive: string;
+  editUserAccountType: string;
   editUserEmail: string;
   userToEdit: User;
 
@@ -58,7 +61,7 @@ export class UserManagementPage implements OnInit {
 
     //CHECK EMPTYS
     const validEmail = this.addUserEmail.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    if(this.addUserEmail === '' || this.addUserPassword === '' || !validEmail){
+    if(this.addUserEmail === '' || !validEmail){
       const alert = this.alertCtrl.create({
         title: 'Oops!',
         message: 'Valid Email and password required.',
@@ -68,7 +71,7 @@ export class UserManagementPage implements OnInit {
       return
     }
 
-    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserPassword, this.addUserName).subscribe({
+    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserName).subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -79,7 +82,6 @@ export class UserManagementPage implements OnInit {
 
         this.addUserVisible = false;
         this.addUserEmail = '';
-        this.addUserPassword = '';
       },
       error: (e: Error) => {
         this.handleError(e);
@@ -89,11 +91,41 @@ export class UserManagementPage implements OnInit {
     //this.addUserVisible = false;
   }
 
+  resetUserPassword(): void {
+    console.log('USER!: ', this.userToEdit);
+
+    MeteorObservable.call('sendRestUserPasswordEmailFromId', this.userToEdit._id).subscribe({
+      next: (result) => {
+        const alert = this.alertCtrl.create({
+          title: 'Password Reset Sent',
+          message: "Password Rest instrutions have been sent to " + this.userToEdit.profile.email + '.',
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
+  }
+
   selectUserToEdit(user): void {
+    console.log('selected user: ', user)
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;
-    //this.editUserAccountActive = user.
+
+    this.accountTypeRoles.forEach( accountTypeRole => {
+      if (_.includes(user.roles, accountTypeRole)){
+        this.editUserAccountType = accountTypeRole;
+      }
+    })
+    this.accountActiveRoles.forEach( accountActiveRole => {
+      if (_.includes(user.roles, accountActiveRole)){
+        this.editUserAccountActive = accountActiveRole;
+      }
+    })
+
     this.editUserVisible = true;
   }
 
@@ -109,7 +141,9 @@ export class UserManagementPage implements OnInit {
       picture: ''
     }
 
-    MeteorObservable.call('updateProfile', this.userToEdit, profile).subscribe({
+    const accountRoles = [this.editUserAccountActive, this.editUserAccountType]
+
+    MeteorObservable.call('updateUser', this.userToEdit, profile, accountRoles).subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -121,6 +155,8 @@ export class UserManagementPage implements OnInit {
         this.editUserVisible = false;
         this.editUserEmail = '';
         this.editUserName = '';
+        this.editUserAccountActive = '';
+        this.editUserAccountType = '';
       },
       error: (e: Error) => {
         this.handleError(e);

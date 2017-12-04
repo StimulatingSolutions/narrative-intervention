@@ -15,6 +15,7 @@ import { VerificationPage } from '../pages/verification/verification';
 import { LandingPage } from '../pages/landing/landing';
 import { WelcomePage } from '../pages/landing/welcome';
 import { PhoneService } from '../services/phone';
+import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
 import { MyApp } from './app.component';
 
@@ -57,7 +58,8 @@ import { MyApp } from './app.component';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PhoneService
+    PhoneService,
+    EmailService
   ]
 })
 export class AppModule {}
