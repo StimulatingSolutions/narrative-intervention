@@ -2,10 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Users } from './collections/users';
 import { Roles } from 'meteor/alanning:roles';
+import initializeEmailTemplates from './emailTemplates';
 
 import * as _ from 'lodash';
-
-
 
 Meteor.startup(() => {
 
@@ -17,9 +16,6 @@ Meteor.startup(() => {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
   }
 
-  //UNCOMMENT AND RUN TO CLEAR ALL USERS
-  Users.remove({});
-
   //SETUP USER ROLES
   const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
   const currentRoles = Roles.getAllRoles().map( role => {return role.name});
@@ -28,7 +24,8 @@ Meteor.startup(() => {
     Roles.createRole(missingRole);
   })
 
-  if (Users.collection.find().count() === 0) {
+  //BOOTSTRAP INITIAL ADMIN USER
+  if (Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL) === undefined) {
     Accounts.createUser({
       email: process.env.NAR_INN_ADMIN_EMAIL,
       profile: {
@@ -41,31 +38,6 @@ Meteor.startup(() => {
     Accounts.sendEnrollmentEmail(newAdminUser._id, process.env.NAR_INN_ADMIN_EMAIL);
     Roles.setUserRoles(newAdminUser._id, ['admin', 'active']);
   }
-
-  //SETUP ACCOUNTS EMAIL TEMPLATES
-  Accounts.emailTemplates.siteName = 'AwesomeSite';
-  Accounts.emailTemplates.from = 'Stimulating Solutions <no-reply@stimulating-solutions.com>';
-  Accounts.emailTemplates.enrollAccount.subject = (user) => {
-    return `Welcome to Awesome Town, ${user.profile.name}`;
-  };
-  Accounts.emailTemplates.enrollAccount.text = (user, url) => {
-    return 'You have been selected to participate in building a better future!'
-      + ' To activate your account, simply click the link below:\n\n'
-      + url;
-  };
-  Accounts.emailTemplates.resetPassword.from = () => {
-    // Overrides the value set in `Accounts.emailTemplates.from` when resetting
-    // passwords.
-    return 'Stimulating Solutions Password Reset <no-reply@stimulating-solutions.com>';
-  };
-  Accounts.emailTemplates.verifyEmail = {
-     subject() {
-        return "Activate your account now!";
-     },
-     text(user, url) {
-        return `Hey ${user}! Verify your e-mail by following this link: ${url}`;
-     }
-  };
 
   Accounts.validateLoginAttempt( attempt => {
 
@@ -83,5 +55,7 @@ Meteor.startup(() => {
     }
 
   })
+
+  initializeEmailTemplates();
 
 });
