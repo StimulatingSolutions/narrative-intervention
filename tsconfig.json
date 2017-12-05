@@ -22,7 +22,8 @@
     "types": [
       "@types/meteor",
       "@types/meteor-accounts-phone"
-    ]
+    ],
+    "typeRoots" : ["./typings"]
   },
   "include": [
     "src/**/*.ts",
