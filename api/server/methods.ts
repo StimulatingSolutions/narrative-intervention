@@ -25,7 +25,7 @@ Meteor.methods({
       })
 
       const newUserId = Accounts.findUserByEmail(email)._id;
-      Roles.setUserRoles(newUserId, 'active');
+      Roles.setUserRoles(newUserId, 'active'); 
       Accounts.sendEnrollmentEmail(newUserId, email);
   },
 
