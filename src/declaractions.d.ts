@@ -8,10 +8,3 @@
   For more info on type definition files, check out the Typescript docs here:
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
-declare module "meteor/alanning:roles" {
-  export module Roles {
-    function userIsInRole(id?: any,value?: any): boolean{  }
-    function addUsersToRoles(id?: any,value?: any): boolean{ }
-    function setUserRoles(id?: any,value?: any): void{ }
-  }
-}
