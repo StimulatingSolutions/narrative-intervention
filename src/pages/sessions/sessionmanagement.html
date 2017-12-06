@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="whatsapp">
+    <ion-title>Session Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="session-management-page-content">
+
+  <ion-list no-lines>
+    <div class='session-update-list' *ngFor="let session of allSessions | async">
+      <ion-icon name="md-settings" class='session-edit-button' (click)="selectSessionToEdit(session)"></ion-icon>
+      <div>{{session.name}}</div>
+    </div>
+  </ion-list>
+
+  <div *ngIf="editSessionVisible" class='edit-session-section'>
+    <ion-card>
+      <ion-card-header>
+        Edit Session
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Session Name</ion-label>
+          <ion-input [(ngModel)]="editSessionName" type="text"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="updateSession()">Update Session</button>
+        <button ion-button (click)="hideSessionEdit()">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+
+  <ion-buttons>
+    <button ion-button (click)="showAddSession(true)">Add Session</button>
+  </ion-buttons>
+
+  <div *ngIf="addSessionVisible" class='add-session-section'>
+    <ion-card>
+      <ion-card-header>
+        Add Session
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Session Name</ion-label>
+          <ion-input [(ngModel)]="addSessionName" type="text"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="addSession()">Add</button>
+        <button ion-button (click)="showAddSession(false)">Cancel</button>
+      </ion-buttons>
+    </ion-card>
+  </div>
+</ion-content>

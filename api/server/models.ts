@@ -36,3 +36,10 @@ export interface School {
   _id?: string;
   name: string;
 }
+
+export interface Session {
+  _id?: string;
+  name: string;
+  date: Date;
+  shortId: string;
+}

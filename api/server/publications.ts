@@ -1,8 +1,11 @@
-import { User, Message, Chat, School } from './models';
+import { User, Message, Chat, School, Session } from './models';
 import { Users } from './collections/users';
 import { Messages } from './collections/messages';
 import { Chats } from './collections/chats';
 import { Schools } from './collections/schools';
+import { Sessions } from './collections/sessions';
+
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.publish('users', function(): Mongo.Cursor<User> {
   if (!this.userId) {
@@ -68,4 +71,27 @@ Meteor.publish('schools', function(): Mongo.Cursor<School> {
   return Schools.collection.find({}, {
     fields: { name: 1}
   });
+});
+
+Meteor.publish('sessions', function(): Mongo.Cursor<School> {
+  if (!this.userId) {
+    return;
+  }
+
+  Sessions.collection.find({}, {
+    fields: { name: 1}
+  }).forEach( session => {
+      console.log("SESSION: ", session)
+  })
+
+  if (Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    return Sessions.collection.find({}, {
+      fields: { name: 1}
+    });
+  } else {
+    return Schools.collection.find({}, {
+      fields: { name: 1}
+    });
+  }
+
 });

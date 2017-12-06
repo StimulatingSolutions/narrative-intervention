@@ -1,0 +1,24 @@
+.session-management-page-content {
+
+  .session-update-list {
+    display: flex;
+
+    .session-edit-button {
+      cursor: pointer;
+    }
+    .account-active {
+      width: 200px;
+    }
+    & > * {
+      padding: 5px;
+    }
+  }
+
+  .add-session-section {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    padding: 20px;
+  }
+}
