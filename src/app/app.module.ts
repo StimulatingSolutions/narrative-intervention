@@ -14,6 +14,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { VerificationPage } from '../pages/verification/verification';
 import { LandingPage } from '../pages/landing/landing';
 import { WelcomePage } from '../pages/landing/welcome';
+import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
 import { PhoneService } from '../services/phone';
 import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
@@ -32,7 +33,8 @@ import { MyApp } from './app.component';
     MessagesOptionsComponent,
     LandingPage,
     WelcomePage,
-    UserManagementPage
+    UserManagementPage,
+    SchoolManagementPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { MyApp } from './app.component';
     MessagesOptionsComponent,
     LandingPage,
     WelcomePage,
-    UserManagementPage
+    UserManagementPage,
+    SchoolManagementPage
   ],
   providers: [
     StatusBar,

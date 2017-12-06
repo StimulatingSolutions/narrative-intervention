@@ -1,0 +1,24 @@
+.school-management-page-content {
+
+  .school-update-list {
+    display: flex;
+
+    .school-edit-button {
+      cursor: pointer;
+    }
+    .account-active {
+      width: 200px;
+    }
+    & > * {
+      padding: 5px;
+    }
+  }
+
+  .add-school-section {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    padding: 20px;
+  }
+}

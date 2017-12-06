@@ -31,3 +31,8 @@ export interface Message {
 export interface User extends Meteor.User {
  profile?: Profile;
 }
+
+export interface School {
+  _id?: string;
+  name: string;
+}

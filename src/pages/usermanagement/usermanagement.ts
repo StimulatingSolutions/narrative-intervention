@@ -114,17 +114,28 @@ export class UserManagementPage implements OnInit {
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;
+    this.editUserAccountType = null;
+    this.editUserAccountActive = null;
 
-    this.accountTypeRoles.forEach( accountTypeRole => {
-      if (_.includes(user.roles, accountTypeRole)){
-        this.editUserAccountType = accountTypeRole;
+    MeteorObservable.call<string[]>('getUserRoles', user._id).subscribe({
+      next: (result: string[]) => {
+        this.accountTypeRoles.forEach( accountTypeRole => {
+          if (_.includes(result, accountTypeRole)){
+            this.editUserAccountType = accountTypeRole;
+          }
+        })
+        this.accountActiveRoles.forEach( accountActiveRole => {
+          if (_.includes(result, accountActiveRole)){
+            this.editUserAccountActive = accountActiveRole;
+          }
+        })
+      },
+      error: (e: Error) => {
+        this.handleError(e);
       }
-    })
-    this.accountActiveRoles.forEach( accountActiveRole => {
-      if (_.includes(user.roles, accountActiveRole)){
-        this.editUserAccountActive = accountActiveRole;
-      }
-    })
+    });
+
+
 
     this.editUserVisible = true;
   }
