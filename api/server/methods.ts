@@ -239,6 +239,9 @@ Meteor.methods({
         'User does not have permission');
     }
 
+    session.creatersId = this.userId;
+
+    console.log('creating session: ', session)
     Sessions.insert(session);
   },
 
@@ -254,7 +257,21 @@ Meteor.methods({
 
     Sessions.update(session._id, {
       $set: {
-        name: updates.name
+        name: updates.name,
+        schoolId: updates.schoolId,
+        active: updates.active
+      }
+    });
+  },
+
+  setSessionActive(id: string, active: boolean){
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+    }
+    console.log('updating active:', active)
+    Sessions.update(id, {
+      $set: {
+        active: active
       }
     });
   }

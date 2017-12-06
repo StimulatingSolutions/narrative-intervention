@@ -40,6 +40,8 @@ export interface School {
 export interface Session {
   _id?: string;
   name: string;
-  date: Date;
   shortId: string;
+  creatersId: string;
+  schoolId: string;
+  active: boolean;
 }

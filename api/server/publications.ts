@@ -73,25 +73,32 @@ Meteor.publish('schools', function(): Mongo.Cursor<School> {
   });
 });
 
-Meteor.publish('sessions', function(): Mongo.Cursor<School> {
+Meteor.publish('sessions', function(): Mongo.Cursor<Session> {
   if (!this.userId) {
     return;
   }
 
-  Sessions.collection.find({}, {
-    fields: { name: 1}
-  }).forEach( session => {
-      console.log("SESSION: ", session)
-  })
-
+  // return {
+  //   find: () => {
+  //
+  //   }
+  // }
   if (Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
-    return Sessions.collection.find({}, {
-      fields: { name: 1}
-    });
+    console.log("Returning all sessions")
+    const session = Sessions.collection.find({});
+    session.forEach( session => {
+      console.log(session)
+    })
+    return session
   } else {
-    return Schools.collection.find({}, {
-      fields: { name: 1}
-    });
+    console.log("Returning users sessions")
+    const session = Sessions.collection.find({ creatersId: this.userId });
+    session.forEach( session => {
+      console.log(session)
+    })
+    return session
   }
+
+  //return Schools.collection.find({}, {});
 
 });

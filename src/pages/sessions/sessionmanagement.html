@@ -9,7 +9,8 @@
   <ion-list no-lines>
     <div class='session-update-list' *ngFor="let session of allSessions | async">
       <ion-icon name="md-settings" class='session-edit-button' (click)="selectSessionToEdit(session)"></ion-icon>
-      <div>{{session.name}}</div>
+      <div [ngClass]="session.active ? 'session-active': 'session-inactive'">{{session.name}}</div>
+      <div class='session-short-id'>{{session.shortId}}</div>
     </div>
   </ion-list>
 
@@ -23,8 +24,18 @@
           <ion-label floating>Session Name</ion-label>
           <ion-input [(ngModel)]="editSessionName" type="text"></ion-input>
         </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label>Session School</ion-label>
+            <ion-select [(ngModel)]="editSessionSchoolId">
+              <ion-option *ngFor="let school of allSchools | async" [value]="school._id">{{school.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
       </ion-card-content>
       <ion-buttons class='action-buttons'>
+        <button ion-button (click)="toggleSessionActive(!editSessionActive)">{{ editSessionActive === true ? "Deactivate Session" : "Activate Session"}}</button>
         <button ion-button (click)="updateSession()">Update Session</button>
         <button ion-button (click)="hideSessionEdit()">Cancel</button>
       </ion-buttons>
@@ -45,6 +56,14 @@
           <ion-label floating>Session Name</ion-label>
           <ion-input [(ngModel)]="addSessionName" type="text"></ion-input>
         </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label>Session School</ion-label>
+            <ion-select [(ngModel)]="addSessionSchoolId">
+              <ion-option *ngFor="let school of allSchools | async" [value]="school._id">{{school.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="addSession()">Add</button>

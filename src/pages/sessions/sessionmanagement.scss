@@ -21,4 +21,13 @@
   .action-buttons {
     padding: 20px;
   }
+
+  .session-active {
+    color: green;
+  }
+
+  .session-short-id {
+    color: blue;
+    cursor: pointer;
+  }
 }
