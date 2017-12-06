@@ -12,12 +12,13 @@ Meteor.startup(() => {
   //BE SURE TO SET MAIL_RUL
   //process.env.MAIL_URL
 
+
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
   }
 
   //SETUP USER ROLES
-  const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
+  const rolesList = ['teacher', 'researcher', 'manager', 'admin', 'active', 'deactive'];
   const currentRoles = Roles.getAllRoles().map( role => {return role.name});
   const missingRoles = _.difference(rolesList, currentRoles);
   missingRoles.forEach( missingRole => {
@@ -41,7 +42,7 @@ Meteor.startup(() => {
 
   Accounts.validateLoginAttempt( attempt => {
 
-    console.log('LOGIN', attempt)
+    //console.log('LOGIN', attempt)
 
     if (attempt.type === 'password'){
       if (!attempt.allowed){

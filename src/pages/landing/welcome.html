@@ -15,8 +15,11 @@
     </div>
   </div>
 
-  <ion-item>
+  <ion-item [hidden]='!showUserManagement'>
     <button ion-button (click)="viewUserManagement()">User Management</button>
+  </ion-item>
+  <ion-item [hidden]='!showSchoolManagement'>
+    <button ion-button (click)="viewSchoolManagement()">School Management</button>
   </ion-item>
 
 </ion-content>

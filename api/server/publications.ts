@@ -1,7 +1,8 @@
-import { User, Message, Chat } from './models';
+import { User, Message, Chat, School } from './models';
 import { Users } from './collections/users';
 import { Messages } from './collections/messages';
 import { Chats } from './collections/chats';
+import { Schools } from './collections/schools';
 
 Meteor.publish('users', function(): Mongo.Cursor<User> {
   if (!this.userId) {
@@ -57,4 +58,14 @@ Meteor["publishComposite"]('chats', function(): PublishCompositeConfig<Chat> {
       }
     ]
   };
+});
+
+Meteor.publish('schools', function(): Mongo.Cursor<School> {
+  if (!this.userId) {
+    return;
+  }
+
+  return Schools.collection.find({}, {
+    fields: { name: 1}
+  });
 });
