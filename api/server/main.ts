@@ -14,8 +14,6 @@ Meteor.startup(() => {
   //BE SURE TO SET MAIL_RUL
   //process.env.MAIL_URL
 
-  //Sessions.remove({})
-
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);
   }
