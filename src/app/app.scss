@@ -27,3 +27,17 @@ $options-popover-margin: 5px;
  left: calc(100% - #{$options-popover-width} - #{$options-popover-margin}) !important;
  top: $options-popover-margin !important;
 }
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: lightgrey;
+}
+
+ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
+  max-width: 800px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  background-color: white;
+}
