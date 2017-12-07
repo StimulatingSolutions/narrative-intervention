@@ -10,7 +10,7 @@
     <div class='session-update-list' *ngFor="let session of allSessions | async">
       <ion-icon name="md-settings" class='session-edit-button' (click)="selectSessionToEdit(session)"></ion-icon>
       <div [ngClass]="session.active ? 'session-active': 'session-inactive'">{{session.name}}</div>
-      <div class='session-short-id'>{{session.shortId}}</div>
+      <div class='session-short-id' (click)='viewSession(session)'>{{session.shortId}}</div>
     </div>
   </ion-list>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
 
@@ -7,8 +7,10 @@ import { Schools } from 'api/collections';
 import { Sessions } from 'api/collections';
 import { Session, School } from 'api/models';
 
+import { TeacherSessionPage } from '../teacherSession/teacherSession';
+
 //import * as _ from 'lodash';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import * as shortid from 'shortid';
 
 @Component({
@@ -31,16 +33,14 @@ export class SessionManagementPage implements OnInit {
   allSessions;
 
   constructor(
-    //private navCtrl: NavController
+    private navCtrl: NavController,
     private alertCtrl: AlertController,
   ) {}
 
   ngOnInit(): void {
     MeteorObservable.subscribe('sessions').subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
-        console.log('all sessions before', this.allSessions)
         this.allSessions = this.findSessions();
-        console.log('all sessions', this.allSessions)
       });
     });
     MeteorObservable.subscribe('schools').subscribe(() => {
@@ -51,17 +51,10 @@ export class SessionManagementPage implements OnInit {
   }
 
   findSchools(): Observable<School[]> {
-    Schools.find({}).forEach( school => {
-      console.log('school! ', school);
-    })
     return Schools.find({});
   }
 
   findSessions(): Observable<Session[]> {
-    console.log('finding sessions', Sessions.find({}))
-    Sessions.find({}).forEach( session => {
-      console.log('session! ', session);
-    })
     return Sessions.find({});
   }
 
@@ -88,6 +81,7 @@ export class SessionManagementPage implements OnInit {
     }
     MeteorObservable.call('createNewSession', newSession).subscribe({
       next: (result) => {
+
         const alert = this.alertCtrl.create({
           title: 'Success!',
           message: "Session: " + this.addSessionName,
@@ -97,6 +91,9 @@ export class SessionManagementPage implements OnInit {
 
         this.addSessionVisible = false;
         this.addSessionName = '';
+
+        const newId = Sessions.findOne({shortId: newSession.shortId})._id;
+        this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
       },
       error: (e: Error) => {
         this.handleError(e);
@@ -107,7 +104,6 @@ export class SessionManagementPage implements OnInit {
   }
 
   selectSessionToEdit(session): void {
-    console.log('selected session: ', session)
     this.sessionToEdit = session;
     this.editSessionName = session.name;
     this.editSessionSchoolId = session.schoolId;
@@ -166,6 +162,10 @@ export class SessionManagementPage implements OnInit {
         this.handleError(e);
       }
     });
+  }
+
+  viewSession(session: Session): void {
+    this.navCtrl.push(TeacherSessionPage, {sessionId: session._id});
   }
 
   handleError(e: Error): void {

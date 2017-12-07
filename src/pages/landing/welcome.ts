@@ -36,6 +36,10 @@ export class WelcomePage implements OnInit {
         this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
         this.showSchoolManagement = !!_.intersection(result, ['admin', 'researcher', 'manager']).length;
         this.showSessionManagement = !!_.intersection(result, ['admin', 'researcher', 'manager', 'teacher']).length;
+
+        if (_.indexOf(result, 'teacher') > -1){
+          this.navCtrl.push(SessionManagementPage, {});
+        }
         console.log('tools', this.showUserManagement, this.showSchoolManagement, this.showSessionManagement)
       },
       error: (e: Error) => {
