@@ -1,5 +1,15 @@
 body {
-  padding: .5in;
+  padding: 0;
+  margin: 0;
+  background-color: lightgrey;
+}
+.lesson-plan-wrapper {
+  width: 800px;
+  margin: 0 auto;
+  background-color: white;
+}
+.lesson-plan {
+  padding: .25in .5in .5in;
 }
 p {
   margin: 0;
