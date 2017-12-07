@@ -2,7 +2,8 @@ import { Accounts } from 'meteor/accounts-base';
 import { Chats } from './collections/chats';
 import { Messages } from './collections/messages';
 import { Schools } from './collections/schools';
-import { MessageType, Profile, User, School } from './models';
+import { Sessions } from './collections/sessions';
+import { MessageType, Profile, User, School, Session } from './models';
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -225,5 +226,65 @@ Meteor.methods({
         name: updates.name
       }
     });
+  },
+
+  //SESSIONS
+  createNewSession(session: Session): void {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+    }
+
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager', 'teacher'])){
+      throw new Meteor.Error('unauthorized',
+        'User does not have permission');
+    }
+
+    session.creatersId = this.userId;
+
+    console.log('creating session: ', session)
+    Sessions.insert(session);
+  },
+
+  updateSession(session: Session, updates: any){
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+    }
+
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager'])){
+      throw new Meteor.Error('unauthorized',
+        'User does not have permission');
+    }
+
+    Sessions.update(session._id, {
+      $set: {
+        name: updates.name,
+        schoolId: updates.schoolId,
+        active: updates.active
+      }
+    });
+  },
+
+  setSessionActive(id: string, active: boolean){
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+    }
+    console.log('updating active:', active)
+    Sessions.update(id, {
+      $set: {
+        active: active
+      }
+    });
+  },
+
+  findSessionByShortId(id: string){
+    const session = Sessions.findOne({shortId: id});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+
+    return session._id;
   }
 });

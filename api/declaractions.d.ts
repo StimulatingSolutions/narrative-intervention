@@ -1,1 +1,0 @@
-../src/declaractions.d.ts

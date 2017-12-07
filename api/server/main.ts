@@ -6,12 +6,13 @@ import initializeEmailTemplates from './emailTemplates';
 
 import * as _ from 'lodash';
 
+import { Sessions } from './collections/sessions';
+
 Meteor.startup(() => {
 
   //VARIABLES
   //BE SURE TO SET MAIL_RUL
   //process.env.MAIL_URL
-
 
   if (Meteor.settings) {
     Object.assign(Accounts._options, Meteor.settings['accounts-phone']);

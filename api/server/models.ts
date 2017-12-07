@@ -36,3 +36,12 @@ export interface School {
   _id?: string;
   name: string;
 }
+
+export interface Session {
+  _id?: string;
+  name: string;
+  shortId: string;
+  creatersId: string;
+  schoolId: string;
+  active: boolean;
+}
