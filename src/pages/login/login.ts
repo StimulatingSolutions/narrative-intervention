@@ -4,6 +4,8 @@ import { EmailService } from '../../services/email';
 import { WelcomePage } from '../landing/welcome';
 import { MeteorObservable } from 'meteor-rxjs';
 
+import { StudentSessionPage } from '../studentSession/studentSession';
+
 @Component({
   selector: 'login',
   templateUrl: 'login.html'
@@ -11,6 +13,7 @@ import { MeteorObservable } from 'meteor-rxjs';
 export class LoginPage {
   private loginEmail = '';
   private loginPassword = '';
+  private loginSession = '';
 
   constructor(
     private alertCtrl: AlertController,
@@ -48,6 +51,16 @@ export class LoginPage {
         this.handleError(e);
       }
     });
+  }
+
+  joinSession(): void {
+    Meteor.call('findSessionByShortId', this.loginSession, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+      this.navCtrl.push(StudentSessionPage, {sessionId: result});
+    })
   }
 
 

@@ -20,6 +20,7 @@ import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
 import { SessionManagementPage } from '../pages/sessions/sessionmanagement';
 import { TeacherSessionPage } from '../pages/teacherSession/teacherSession';
+import { StudentSessionPage } from '../pages/studentSession/studentSession';
 import { MyApp } from './app.component';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MyApp } from './app.component';
     UserManagementPage,
     SchoolManagementPage,
     SessionManagementPage,
-    TeacherSessionPage
+    TeacherSessionPage,
+    StudentSessionPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { MyApp } from './app.component';
     UserManagementPage,
     SchoolManagementPage,
     SessionManagementPage,
-    TeacherSessionPage
+    TeacherSessionPage,
+    StudentSessionPage
   ],
   providers: [
     StatusBar,

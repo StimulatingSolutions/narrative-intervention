@@ -9,9 +9,15 @@ import { Session, School } from 'api/models';
 
 import { TeacherSessionPage } from '../teacherSession/teacherSession';
 
-//import * as _ from 'lodash';
+import * as _ from 'lodash';
 //import * as moment from 'moment';
-import * as shortid from 'shortid';
+//import * as shortid from 'shortid';
+
+function generateNumId() {
+  const min = 0;
+  const max = 999999;
+  return _.padStart(Math.floor(Math.random()*(max-min+1)+min).toString(), 6, '0');
+}
 
 @Component({
   selector: 'sessionmanagement',
@@ -74,7 +80,7 @@ export class SessionManagementPage implements OnInit {
     const newSession: Session = {
       name: this.addSessionName,
       //date: moment().utc().toDate(),
-      shortId: shortid.generate(),
+      shortId: generateNumId(),
       creatersId: '',
       schoolId: this.addSessionSchoolId,
       active: true
@@ -140,6 +146,7 @@ export class SessionManagementPage implements OnInit {
   }
 
   showAddSession(visible: boolean): void {
+    console.log('SHOW ADD SESSION', visible)
     this.addSessionVisible = visible;
   }
 

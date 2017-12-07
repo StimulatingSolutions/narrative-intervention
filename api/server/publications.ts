@@ -89,9 +89,6 @@ Meteor.publish('sessions', function(): Mongo.Cursor<Session> {
 });
 
 Meteor.publish('activeSession', function(sessionId): Mongo.Cursor<Session> {
-  if (!this.userId) {
-    return;
-  }
 
   return Sessions.collection.find({ _id: sessionId });
   //return Schools.collection.find({}, {});

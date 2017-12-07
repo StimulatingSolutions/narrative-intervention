@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavParams, NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 
 import { Sessions } from 'api/collections';
 import { Session } from 'api/models';
@@ -30,7 +30,7 @@ export class TeacherSessionPage implements OnInit {
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('activeSession').subscribe((result) => {
+    MeteorObservable.subscribe('activeSession', this.teacherSessionId).subscribe((result) => {
       MeteorObservable.autorun().subscribe((result1) => {
         this.session = Sessions.findOne({_id: this.teacherSessionId});
       });

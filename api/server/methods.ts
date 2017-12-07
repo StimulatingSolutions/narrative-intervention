@@ -274,5 +274,17 @@ Meteor.methods({
         active: active
       }
     });
+  },
+
+  findSessionByShortId(id: string){
+    const session = Sessions.findOne({shortId: id});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+
+    return session._id;
   }
 });
