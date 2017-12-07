@@ -23,7 +23,9 @@ getStdin().then((s: string) => {
       ${fs.readFileSync('./src/pages/lesson-plans/lesson-plan.scss')}
       </STYLE>
     </HEAD>
-    <BODY>\n`
+    <BODY>
+    <div class="lesson-plan-wrapper">
+    <div class="lesson-plan">\n`
   );
 
   // rebuilding
@@ -100,7 +102,7 @@ getStdin().then((s: string) => {
 
 
   // trailing markup
-  console.log('</ol>\n\n</BODY></HTML>');
+  console.log('</ol>\n</div></div>\n</BODY></HTML>');
 
   process.exit(0);
 });
