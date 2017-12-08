@@ -24,6 +24,10 @@
       <ion-label floating>Session Id</ion-label>
       <ion-input [(ngModel)]="loginSession" type="text"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label floating>User Id</ion-label>
+      <ion-input [(ngModel)]="sessionUserId" type="text"></ion-input>
+    </ion-item>
   </ion-list>
   <ion-buttons class='action-buttons'>
     <button ion-button (click)="joinSession()">Join Session</button>

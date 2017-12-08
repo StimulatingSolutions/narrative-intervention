@@ -14,6 +14,7 @@ export class LoginPage {
   private loginEmail = '';
   private loginPassword = '';
   private loginSession = '';
+  private sessionUserId = '';
 
   constructor(
     private alertCtrl: AlertController,
@@ -54,12 +55,26 @@ export class LoginPage {
   }
 
   joinSession(): void {
+    if (this.sessionUserId === ''){
+      const alert = this.alertCtrl.create({
+        title: 'Join Session',
+        message: 'User Id is required.',
+        buttons: ['OK']
+      });
+      alert.present();
+
+      return;
+    }
+
     Meteor.call('findSessionByShortId', this.loginSession, (error, result) => {
       if (error){
         this.handleError(error);
         return;
       }
-      this.navCtrl.push(StudentSessionPage, {sessionId: result});
+      this.navCtrl.push(StudentSessionPage, {
+        sessionId: result,
+        sessionUserId: this.sessionUserId
+      });
     })
   }
 
