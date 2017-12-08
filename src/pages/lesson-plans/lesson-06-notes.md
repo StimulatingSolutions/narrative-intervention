@@ -3,3 +3,19 @@
 - fix `<ol>` stuff in `8. Closure`
 - remove `<step>` before `Students may try to get up`
 - ratings placeholders
+
+```angular2html
+<step
+  questionType=""
+  correctAnswer=""
+  (onGetResponses)="getResponses($event)"
+  
+  [stepsContext]="steps"
+  [highlightedStepId]="suggestedStepId"
+  [currentQuestionId]="gettingResponsesFor">
+</step>
+```
+
+```
+(onGetResponses)="getResponses($event)" questionType="goal" correctAnswer="" 
+```
