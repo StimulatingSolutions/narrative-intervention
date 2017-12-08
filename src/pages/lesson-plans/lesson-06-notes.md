@@ -12,7 +12,7 @@
   
   [stepsContext]="steps"
   [highlightedStepId]="suggestedStepId"
-  [currentQuestionId]="gettingResponsesFor">
+  [currentQuestionStepId]="gettingResponsesFor">
 </step>
 ```
 
