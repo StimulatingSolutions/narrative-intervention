@@ -1,0 +1,10 @@
+<div
+  class="step-content"
+  [ngClass]="{
+    subdued:  (currentQuestionStepId === null && done) || (currentQuestionStepId !== null && currentQuestionStepId !== stepId),
+    highlighted: currentQuestionStepId === stepId || (currentQuestionStepId === null && highlightedStepId === stepId)
+  }"
+  (click)="clickStep()"
+>
+  <ng-content></ng-content>
+</div>
