@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
@@ -41,6 +41,7 @@ export class SessionManagementPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private alertCtrl: AlertController,
+    private ref: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -146,8 +147,9 @@ export class SessionManagementPage implements OnInit {
   }
 
   showAddSession(visible: boolean): void {
-    console.log('SHOW ADD SESSION', visible)
+    //console.log('SHOW ADD SESSION', visible)
     this.addSessionVisible = visible;
+    this.ref.detectChanges();
   }
 
   toggleSessionActive(active: boolean): void {

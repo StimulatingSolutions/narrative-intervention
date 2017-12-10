@@ -1,33 +1,42 @@
-.session-management-page-content {
+.student-session-page-content {
 
-  .session-update-list {
+  height: 100%;
+  width: 100%;
+
+  .img-button {
+    margin: 10px;
+    opacity: .3;
+    height: 43vh;
+    width: 49vh;
+  }
+
+  .goal {
+    background: url(../assets/imgs/goal.png);
+    background-size: 100% 100%;
+  }
+
+  .try {
+    background: url(../assets/imgs/try.png);
+    background-size: 100% 100%;
+  }
+
+  .outcome-fail {
+    background: url(../assets/imgs/outcomefail.png);
+    background-size: 100% 100%;
+  }
+
+  .outcome-yes {
+    background: url(../assets/imgs/outcomeyes.png);
+    background-size: 100% 100%;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  .card-row {
+    height: 49%;
     display: flex;
-
-    .session-edit-button {
-      cursor: pointer;
-    }
-    .account-active {
-      width: 200px;
-    }
-    & > * {
-      padding: 5px;
-    }
-  }
-
-  .add-session-section {
-    padding: 20px;
-  }
-
-  .action-buttons {
-    padding: 20px;
-  }
-
-  .session-active {
-    color: green;
-  }
-
-  .session-short-id {
-    color: blue;
-    cursor: pointer;
+    justify-content: space-around;
   }
 }
