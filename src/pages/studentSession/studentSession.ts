@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 //import { Observable } from 'rxjs';
@@ -20,12 +20,14 @@ export class StudentSessionPage implements OnInit {
 
   studentSessionId: string;
   session: Session;
+  selectedCard: string;
 
   constructor(
     //private navCtrl: NavController
     private alertCtrl: AlertController,
     private navParams: NavParams,
     public navCtrl: NavController,
+    private ref: ChangeDetectorRef,
   ) {
     this.studentSessionId = navParams.get('sessionId');
     console.log('incoming id', this.studentSessionId)
@@ -44,6 +46,12 @@ export class StudentSessionPage implements OnInit {
         }
       });
     });
+  }
+
+  selectCard(cardName: string): void {
+    console.log('card selected!', cardName);
+    this.selectedCard = cardName;
+    this.ref.detectChanges();
   }
 
   handleError(e: Error): void {

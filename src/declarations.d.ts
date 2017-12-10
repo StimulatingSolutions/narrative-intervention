@@ -31,3 +31,5 @@ declare module "meteor/alanning:roles"
 //   function getUsersInRole(roleName: string): Mongo.Cursor<RolesDAO>;
 //   var GLOBAL_GROUP: string;
 // }
+
+declare module '*.png'
