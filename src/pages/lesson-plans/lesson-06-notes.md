@@ -10,7 +10,7 @@
   correctAnswer=""
   (onGetResponses)="getResponses($event)"
   
-  [stepsContext]="steps"
+  [allSteps]="steps"
   [highlightedStepId]="suggestedStepId"
   [currentQuestionStepId]="gettingResponsesFor">
 </step>

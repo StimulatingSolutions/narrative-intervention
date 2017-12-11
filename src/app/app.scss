@@ -35,9 +35,21 @@ body {
 }
 
 ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
+  background-color: lightgrey;
+  max-width: 1024px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.focus-outline :focus {
+  outline: none !important;
+}
+
+ion-navbar, ion-header, ion-content {
+  background-color: white;
   max-width: 800px;
   margin: 0 auto;
   left: 0;
   right: 0;
-  background-color: white;
 }

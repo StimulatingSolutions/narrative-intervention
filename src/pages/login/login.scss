@@ -4,8 +4,11 @@
     font-size: medium;
     margin: 50px;
   }
-
-  .text-input {
-    text-align: center;
+  .form-header {
+    margin-bottom: 0;
+    font-size: 200%;
+    ion-label {
+      margin-bottom: 0;
+    }
   }
 }

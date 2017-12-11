@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
@@ -26,6 +26,7 @@ export class SchoolManagementPage implements OnInit {
   constructor(
     //private navCtrl: NavController
     private alertCtrl: AlertController,
+    private ref: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +40,7 @@ export class SchoolManagementPage implements OnInit {
   findSchools(): Observable<School[]> {
     Schools.find({}).forEach( school => {
       console.log('school! ', school);
-    })
+    });
     return Schools.find({});
   }
 
@@ -58,7 +59,7 @@ export class SchoolManagementPage implements OnInit {
 
     const newSchool = {
       name: this.addSchoolName
-    }
+    };
     MeteorObservable.call('createNewSchool', newSchool).subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
@@ -80,7 +81,7 @@ export class SchoolManagementPage implements OnInit {
   }
 
   selectSchoolToEdit(school): void {
-    console.log('selected school: ', school)
+    console.log('selected school: ', school);
     this.schoolToEdit = school;
     this.editSchoolName = school.name;
     this.editSchoolVisible = true;
@@ -92,9 +93,9 @@ export class SchoolManagementPage implements OnInit {
 
   updateSchool(school): void {
 
-    var updates = {
+    let updates = {
       name: this.editSchoolName
-    }
+    };
     MeteorObservable.call('updateSchool', this.schoolToEdit, updates).subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
@@ -115,6 +116,7 @@ export class SchoolManagementPage implements OnInit {
 
   showAddSchool(visible: boolean): void {
     this.addSchoolVisible = visible;
+    this.ref.detectChanges();
   }
 
   handleError(e: Error): void {
