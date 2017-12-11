@@ -11,9 +11,13 @@
     margin: 10px;
     opacity: .3;
     width: 50%;
-    background-position: center;
+    background-position: right center;
     background-repeat: no-repeat;
     background-size: contain;
+  }
+
+  .img-button:last-child {
+    background-position: left center;
   }
 
   .goal {
