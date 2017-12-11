@@ -6,6 +6,7 @@
 
 <ion-content padding class="login-page-content">
   <ion-list>
+    <ion-list-header class="form-header">Teachers:</ion-list-header>
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input [(ngModel)]="loginEmail" type="text"></ion-input>
@@ -19,13 +20,20 @@
     <button ion-button (click)="login()">Login</button>
     <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
   </ion-buttons>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
   <ion-list>
+    <ion-list-header class="form-header">Students:</ion-list-header>
     <ion-item>
-      <ion-label floating>Session Id</ion-label>
+      <ion-label floating>Session Code</ion-label>
       <ion-input [(ngModel)]="loginSession" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>User Id</ion-label>
+      <ion-label floating>Student Id</ion-label>
       <ion-input [(ngModel)]="sessionUserId" type="text"></ion-input>
     </ion-item>
   </ion-list>

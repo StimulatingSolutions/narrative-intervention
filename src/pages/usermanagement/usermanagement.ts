@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
@@ -33,6 +33,7 @@ export class UserManagementPage implements OnInit {
   constructor(
     //private navCtrl: NavController
     private alertCtrl: AlertController,
+    private ref: ChangeDetectorRef,
   ) {
     this.addUserVisible = false;
     this.editUserVisible = false;
@@ -49,12 +50,13 @@ export class UserManagementPage implements OnInit {
   findUsers(): Observable<User[]> {
     Users.find({ 'profile.email': { $exists: true }}).forEach( user => {
       console.log('users has email in profile', user);
-    })
+    });
     return Users.find({ 'profile.email': { $exists: true }});
   }
 
   showAddUser(visible: boolean): void {
     this.addUserVisible = visible;
+    this.ref.detectChanges();
   }
 
   addUser(): void {
@@ -110,7 +112,7 @@ export class UserManagementPage implements OnInit {
   }
 
   selectUserToEdit(user): void {
-    console.log('selected user: ', user)
+    console.log('selected user: ', user);
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;
@@ -123,7 +125,7 @@ export class UserManagementPage implements OnInit {
           if (_.includes(result, accountTypeRole)){
             this.editUserAccountType = accountTypeRole;
           }
-        })
+        });
         this.accountActiveRoles.forEach( accountActiveRole => {
           if (_.includes(result, accountActiveRole)){
             this.editUserAccountActive = accountActiveRole;
@@ -150,9 +152,9 @@ export class UserManagementPage implements OnInit {
       name: this.editUserName,
       email: this.userToEdit.profile.email,
       picture: ''
-    }
+    };
 
-    const accountRoles = [this.editUserAccountActive, this.editUserAccountType]
+    const accountRoles = [this.editUserAccountActive, this.editUserAccountType];
 
     MeteorObservable.call('updateUser', this.userToEdit, profile, accountRoles).subscribe({
       next: () => {

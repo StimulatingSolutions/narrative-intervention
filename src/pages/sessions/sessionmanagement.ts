@@ -85,7 +85,7 @@ export class SessionManagementPage implements OnInit {
       creatersId: '',
       schoolId: this.addSessionSchoolId,
       active: true
-    }
+    };
     MeteorObservable.call('createNewSession', newSession).subscribe({
       next: (result) => {
 
@@ -124,10 +124,10 @@ export class SessionManagementPage implements OnInit {
 
   updateSession(session): void {
 
-    var updates = {
+    let updates = {
       name: this.editSessionName,
       schoolId: this.editSessionSchoolId
-    }
+    };
     MeteorObservable.call('updateSession', this.sessionToEdit, updates).subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
