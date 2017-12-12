@@ -1,33 +1,47 @@
-.session-management-page-content {
+.student-session-page-content {
 
-  .session-update-list {
+  max-height: 600px;
+  max-width: 1024px;
+
+  ion-navbar, ion-header, ion-content {
+    max-width: 1024px;
+  }
+
+  .img-button {
+    margin: 10px;
+    opacity: .3;
+    width: 50%;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .img-button:last-child {
+    background-position: left center;
+  }
+
+  .goal {
+    background-image: url(../assets/imgs/goal.png);
+  }
+
+  .try {
+    background-image: url(../assets/imgs/try.png);
+  }
+
+  .outcome-fail {
+    background-image: url(../assets/imgs/outcomefail.png);
+  }
+
+  .outcome-yes {
+    background-image: url(../assets/imgs/outcomeyes.png);
+  }
+  .active {
+    opacity: 1;
+  }
+
+  .card-row {
+    height: 49%;
     display: flex;
-
-    .session-edit-button {
-      cursor: pointer;
-    }
-    .account-active {
-      width: 200px;
-    }
-    & > * {
-      padding: 5px;
-    }
-  }
-
-  .add-session-section {
-    padding: 20px;
-  }
-
-  .action-buttons {
-    padding: 20px;
-  }
-
-  .session-active {
-    color: green;
-  }
-
-  .session-short-id {
-    color: blue;
-    cursor: pointer;
+    justify-content: space-around;
   }
 }
