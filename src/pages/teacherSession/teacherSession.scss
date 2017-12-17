@@ -1,5 +1,23 @@
 .session-management-page-content {
 
+  display: flex;
+
+  .scroll-content {
+    display: flex !important;
+  }
+
+  .session-container {
+    width: 84%;
+    height: 100%;
+    overflow: auto;
+    display: block;
+  }
+
+  .side-bar-container {
+    width: 15%;
+    height: 100%;
+    background: blue;
+  }
   .session-update-list {
     display: flex;
 

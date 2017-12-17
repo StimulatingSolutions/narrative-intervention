@@ -6,13 +6,21 @@
 
 <ion-content padding class="session-management-page-content">
 
-  <ion-list no-lines>
-    <div>{{session?.name}}</div>
-    <div>{{session?.shortId}}</div>
-  </ion-list>
+  <div class='session-container'>
+    <ion-list no-lines>
+      <div>{{session?.name}}</div>
+    </ion-list>
+    <ion-buttons>
+      <button ion-button (click)="toggleSessionActive(!session.active)">{{ session?.active === true ? "Deactivate Session" : "Activate Session"}}</button>
+    </ion-buttons>
+    <div class='lessons-container'>
+      <lessonplans></lessonplans>
+    </div>
+  </div>
 
-  <ion-buttons>
-    <button ion-button (click)="toggleSessionActive(!session.active)">{{ session?.active === true ? "Deactivate Session" : "Activate Session"}}</button>
-  </ion-buttons>
+  <div class='side-bar-container'>
+    <sideBarInfo [session]='session' ></sideBarInfo>
+  </div>
+
 
 </ion-content>

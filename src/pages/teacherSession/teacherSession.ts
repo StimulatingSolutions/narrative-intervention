@@ -12,7 +12,7 @@ import { Session } from 'api/models';
 
 @Component({
   selector: 'teacherSession',
-  templateUrl: 'teacherSession.html'
+  templateUrl: 'teacherSession.html',
 })
 export class TeacherSessionPage implements OnInit {
 
