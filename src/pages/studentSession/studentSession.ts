@@ -19,6 +19,7 @@ import { LandingPage } from '../landing/landing';
 export class StudentSessionPage implements OnInit {
 
   studentSessionId: string;
+  userId: string;
   session: Session;
   selectedCard: string;
 
@@ -30,6 +31,7 @@ export class StudentSessionPage implements OnInit {
     private ref: ChangeDetectorRef,
   ) {
     this.studentSessionId = navParams.get('sessionId');
+    this.userId = navParams.get('userId');
     console.log('incoming id', this.studentSessionId)
   }
 
@@ -46,6 +48,21 @@ export class StudentSessionPage implements OnInit {
         }
       });
     });
+    Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+    })
   }
 
   selectCard(cardName: string): void {

@@ -269,6 +269,13 @@ Meteor.methods({
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
     console.log('updating active:', active)
+    if (!active){
+      Sessions.update(id, {
+        $set: {
+          activeUsers: []
+        }
+      });
+    }
     Sessions.update(id, {
       $set: {
         active: active
@@ -276,15 +283,56 @@ Meteor.methods({
     });
   },
 
-  findSessionByShortId(id: string){
-    const session = Sessions.findOne({shortId: id});
+  findSessionByShortId(sessionId: string){
+    const session = Sessions.findOne({shortId: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
     if (!session.active){
       throw new Meteor.Error('Session Error', 'Session is not active');
     }
-
     return session._id;
+  },
+
+  joinSession(sessionId: string, userId: string){
+    console.log('join session', sessionId, userId);
+    const session = Sessions.findOne({_id: sessionId});
+    console.log(session);
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+    if (_.includes(session.activeUsers, userId)){
+      return;
+    }
+    const newUsers = session.activeUsers.slice();
+    newUsers.push(userId);
+    Sessions.update(sessionId, {
+      $set: {
+        activeUsers: newUsers
+      }
+    });
+
+  },
+
+  leaveSession(sessionId: string, userId: string){
+    const session = Sessions.findOne({shortId: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+    let newUsers = session.activeUsers.slice();
+    newUsers = _.remove(newUsers, n => {
+      return n === userId;
+    });
+    Sessions.update(sessionId, {
+      $set: {
+        activeUsers: newUsers
+      }
+    });
   }
 });

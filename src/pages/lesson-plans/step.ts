@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output, OnInit} from "@angular/core";
 
 
 let nextStepId: number = 0;
@@ -8,7 +8,7 @@ let nextQuestionId: number = 0;
   selector: 'step',
   templateUrl: 'step.html'
 })
-export class Step {
+export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
@@ -24,6 +24,9 @@ export class Step {
 
 
   constructor() {
+  }
+
+  ngOnInit(): void {
     this.stepId = nextStepId++;
     if (this.questionType) {
       // not all steps are questions
@@ -31,6 +34,7 @@ export class Step {
     }
     this.allSteps[this.stepId] = this;
   }
+
 
   clickStep() {
     if (!this.questionType) {

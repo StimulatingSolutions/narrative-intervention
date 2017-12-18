@@ -1,8 +1,8 @@
-.session-management-page-content {
+.teacher-session-page-content {
 
   display: flex;
 
-  .scroll-content {
+  & > .scroll-content {
     display: flex !important;
   }
 

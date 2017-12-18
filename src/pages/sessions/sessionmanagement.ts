@@ -84,7 +84,8 @@ export class SessionManagementPage implements OnInit {
       shortId: generateNumId(),
       creatersId: '',
       schoolId: this.addSessionSchoolId,
-      active: true
+      active: true,
+      activeUsers: []
     };
     MeteorObservable.call('createNewSession', newSession).subscribe({
       next: (result) => {

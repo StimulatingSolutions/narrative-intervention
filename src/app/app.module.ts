@@ -24,6 +24,7 @@ import { StudentSessionPage } from '../pages/studentSession/studentSession';
 import { SideBarInfo } from '../pages/teacherSession/sideBarInfo';
 import { LessonPlans } from '../pages/lesson-plans/lessonPlans';
 import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
+import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MyApp } from './app.component';
     StudentSessionPage,
     SideBarInfo,
     LessonPlans,
-    Lesson06
+    Lesson06,
+    Step
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { MyApp } from './app.component';
     StudentSessionPage,
     SideBarInfo,
     LessonPlans,
-    Lesson06
+    Lesson06,
+    Step
   ],
   providers: [
     StatusBar,

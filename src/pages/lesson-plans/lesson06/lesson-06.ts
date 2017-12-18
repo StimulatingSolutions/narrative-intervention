@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Step } from '../step';
 //import { Observable } from 'rxjs';
 
 
@@ -12,8 +13,19 @@ import { Component } from '@angular/core';
 })
 export class Lesson06 {
 
-  constructor() {
+  // allSteps: any[];  // there might be a better way of doing this
+  // questionType?: string;
+  // correctAnswer?: string;  // sometimes, a question will not have a correct answer
+  // highlightedStepId: number;
+  // currentQuestionStepId: number;
 
+  steps: Step[];
+  suggestedStepId: number;
+  gettingResponsesFor: number;
+
+
+  constructor() {
+    this.steps = [];
   }
 
 

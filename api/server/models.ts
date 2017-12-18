@@ -44,4 +44,5 @@ export interface Session {
   creatersId: string;
   schoolId: string;
   active: boolean;
+  activeUsers: string[];
 }
