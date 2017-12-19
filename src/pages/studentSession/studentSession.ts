@@ -46,6 +46,15 @@ export class StudentSessionPage implements OnInit {
             animate: true
           });
         }
+        if (this.session.readyForResponse) {
+          console.log('Sending Response!', this.selectedCard)
+          Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, (error, result) => {
+            if (error){
+              this.handleError(error);
+              return;
+            }
+          })
+        }
       });
     });
     Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
@@ -90,3 +99,21 @@ export class StudentSessionPage implements OnInit {
   }
 
 }
+
+/*
+<ion-content padding class="student-session-page-content">
+  <div [class.hidden]="!session?.readyForResponse">
+    <div class='card-row'>
+      <div [class.active]="selectedCard == 'goal' || selectedCard == undefined" class="img-button goal" (click)="selectCard('goal')"></div>
+      <div [class.active]="selectedCard == 'try' || selectedCard == undefined" class="img-button try" (click)="selectCard('try')"></div>
+    </div>
+    <div class='card-row'>
+      <div [class.active]="selectedCard == 'outcome-yes' || selectedCard == undefined" class="img-button outcome-yes" (click)="selectCard('outcome-yes')"></div>
+      <div [class.active]="selectedCard == 'outcome-fail' || selectedCard == undefined" class="img-button outcome-fail" (click)="selectCard('outcome-fail')"></div>
+    </div>
+  </div>
+  <div [class.hidden]="session?.readyForResponse">
+    Waiting for question?
+  </div>
+</ion-content>
+*/

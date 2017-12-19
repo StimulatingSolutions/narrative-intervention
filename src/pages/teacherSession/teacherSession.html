@@ -13,8 +13,8 @@
     <ion-buttons>
       <button ion-button (click)="toggleSessionActive(!session.active)">{{ session?.active === true ? "Deactivate Session" : "Activate Session"}}</button>
     </ion-buttons>
-    <div class='lessons-container'>
-      <lessonplans></lessonplans>
+    <div *ngIf="session" class='lessons-container'>
+      <lessonplans [session]="session"></lessonplans>
     </div>
   </div>
 

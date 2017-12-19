@@ -1,10 +1,11 @@
 .step-content {
   // probably need to move the <step> styling from lesson-plan.scss to here
 
-  .subdued {
-
+  &.subdued {
+    opacity: .3;
   }
-  .highlighted {
-
+  &.highlighted {
+    padding: 5px;
+    border: 1px solid #ff00006b;
   }
 }

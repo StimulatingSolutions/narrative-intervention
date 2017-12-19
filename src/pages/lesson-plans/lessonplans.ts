@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 //import { Observable } from 'rxjs';
-
+import { Session } from 'api/models';
 
 //import * as _ from 'lodash';
 // import * as moment from 'moment';
@@ -12,6 +12,8 @@ import { Component } from '@angular/core';
 })
 export class LessonPlans {
 
+  @Input() session: Session;
+  
   constructor() {
 
   }

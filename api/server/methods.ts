@@ -334,5 +334,65 @@ Meteor.methods({
         activeUsers: newUsers
       }
     });
+  },
+
+  updateSessionStep(sessionId: string, stepNumber: number){
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+
+    Sessions.update(sessionId, {
+      $set: {
+        currentStep: stepNumber
+      }
+    });
+  },
+
+  updateSessionReadyForResponse(sessionId: string, ready: boolean){
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+
+    Sessions.update(sessionId, {
+      $set: {
+        readyForResponse: ready
+      }
+    });
+  },
+
+  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string){
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+
+    const dup = session.responses.slice();
+    const removed = _.remove(dup, response => {
+      return response.studentId === studentId && response.step === session.currentStep ;
+    });
+
+    dup.push({
+      step: session.currentStep,
+      studentId: studentId,
+      response: selectedCard
+    });
+
+    console.log("SETTING RESPONSES", dup)
+    Sessions.update(sessionId, {
+      $set: {
+        responses: dup
+      }
+    });
   }
 });

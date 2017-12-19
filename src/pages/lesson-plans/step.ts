@@ -21,6 +21,7 @@ export class Step implements OnInit {
   @Input() currentQuestionStepId: number;
 
   @Output() onGetResponses = new EventEmitter<number>();
+  @Output() onCompleteNonQuestion = new EventEmitter<number>();
 
 
   constructor() {
@@ -35,12 +36,23 @@ export class Step implements OnInit {
     this.allSteps[this.stepId] = this;
   }
 
+  ngDoCheck(): void {
+    //console.log('current step', this.currentQuestionStepId)
+    //console.log('steps', this.allSteps);
+    //console.log('highlighted', this.highlightedStepId)
+  }
+
 
   clickStep() {
+
     if (!this.questionType) {
       this.done = !this.done;
+      if(this.done){
+        this.onCompleteNonQuestion.emit(this.stepId);
+      }
       return;
     }
+
     this.onGetResponses.emit(this.stepId);
   }
 }

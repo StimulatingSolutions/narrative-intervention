@@ -1,4 +1,6 @@
 <ion-content class="side-bar-info-content">
+  <div>Session Id:</div>
   <div>{{session?.shortId}}</div>
   <div>Students: {{session?.activeUsers.length || 0}}</div>
+  <div>Step: {{session?.currentStep + 1}}</div>
 </ion-content>
