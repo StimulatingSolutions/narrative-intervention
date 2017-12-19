@@ -40,9 +40,52 @@ export class Lesson06 implements OnInit {
     this.gettingResponsesFor = this.session.currentStep;
   }
 
-  getResponses(args) {
+  stepClicked(stepId) {
+
+    if (stepId !== this.suggestedStepId){
+      return;
+    }
+
+    //IF CURRENT QUESTION - FINISH IT
+    if (this.steps[stepId].questionType){
+      Meteor.call('updateSessionReadyForResponse', this.session._id, false, (error, result) => {
+        if (error){
+          this.handleError(error);
+          return;
+        }
+      })
+    }
+
+    //UPDATE TO NEXT STEP
     this.suggestedStepId++;
     this.gettingResponsesFor++;
+
+    Meteor.call('updateSessionStep', this.session._id, this.gettingResponsesFor, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+      //IF NEW STEP IS QUSTION READY RESPONSES;
+      if(this.steps[this.gettingResponsesFor].questionType){
+        Meteor.call('updateSessionReadyForResponse', this.session._id, true, (error, result) => {
+          if (error){
+            this.handleError(error);
+            return;
+          }
+        });
+      }
+    });
+  }
+
+  getResponses(stepId) {
+
+    if (stepId !== this.suggestedStepId){
+      return;
+    }
+
+    this.suggestedStepId++;
+    this.gettingResponsesFor++;
+
     Meteor.call('updateSessionReadyForResponse', this.session._id, true, (error, result) => {
       if (error){
         this.handleError(error);
@@ -57,9 +100,15 @@ export class Lesson06 implements OnInit {
     })
   }
 
-  handleCompleteNonQuestion(args) {
+  handleCompleteNonQuestion(stepId) {
+
+    if (stepId !== this.suggestedStepId){
+      return;
+    }
+
     this.suggestedStepId++;
     this.gettingResponsesFor++;
+
     Meteor.call('updateSessionStep', this.session._id, this.gettingResponsesFor, (error, result) => {
       if (error){
         this.handleError(error);

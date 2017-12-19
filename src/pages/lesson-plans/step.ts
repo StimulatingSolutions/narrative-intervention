@@ -23,6 +23,7 @@ export class Step implements OnInit {
   @Output() onGetResponses = new EventEmitter<number>();
   @Output() onCompleteNonQuestion = new EventEmitter<number>();
 
+  @Output() onStepClicked =  new EventEmitter<number>();
 
   constructor() {
   }
@@ -45,14 +46,16 @@ export class Step implements OnInit {
 
   clickStep() {
 
-    if (!this.questionType) {
-      this.done = !this.done;
-      if(this.done){
-        this.onCompleteNonQuestion.emit(this.stepId);
-      }
-      return;
-    }
+    this.onStepClicked.emit(this.stepId);
 
-    this.onGetResponses.emit(this.stepId);
+    // if (this.questionType) {
+    //   this.done = !this.done;
+    //   if(this.done){
+    //     this.onCompleteNonQuestion.emit(this.stepId);
+    //   }
+    //   return;
+    // }
+    //
+    // this.onGetResponses.emit(this.stepId);
   }
 }

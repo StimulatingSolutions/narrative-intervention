@@ -2,7 +2,8 @@
   class="step-content"
   [ngClass]="{
     subdued:  (currentQuestionStepId === null && done) || (currentQuestionStepId !== null && currentQuestionStepId !== stepId),
-    highlighted: currentQuestionStepId === stepId || (currentQuestionStepId === null && highlightedStepId === stepId)
+    highlighted: currentQuestionStepId === stepId || (currentQuestionStepId === null && highlightedStepId === stepId),
+    question: questionType !== undefined
   }"
   (click)="clickStep()"
 >

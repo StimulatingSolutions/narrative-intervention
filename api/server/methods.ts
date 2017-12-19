@@ -368,7 +368,7 @@ Meteor.methods({
     });
   },
 
-  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string){
+  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string, date: Date){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -376,22 +376,21 @@ Meteor.methods({
     if (!session.active){
       throw new Meteor.Error('Session Error', 'Session is not active');
     }
+    if (!session.readyForResponse){
+      throw new Meteor.Error('Session Error', 'Session is not receiving responses');
+    }
 
-    const dup = session.responses.slice();
-    const removed = _.remove(dup, response => {
-      return response.studentId === studentId && response.step === session.currentStep ;
-    });
-
-    dup.push({
+    const newResponse = {
       step: session.currentStep,
       studentId: studentId,
-      response: selectedCard
-    });
+      response: selectedCard,
+      date: date
+    }
+    console.log('Recording Response', newResponse);
 
-    console.log("SETTING RESPONSES", dup)
     Sessions.update(sessionId, {
-      $set: {
-        responses: dup
+      $push: {
+        responses: newResponse
       }
     });
   }

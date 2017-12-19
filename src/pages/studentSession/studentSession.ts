@@ -36,24 +36,13 @@ export class StudentSessionPage implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('init', this.session);
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
         this.session = Sessions.findOne({_id: this.studentSessionId});
-        console.log('SESSION', this.session);
         if (!this.session.active){
           this.navCtrl.setRoot(LandingPage, {}, {
             animate: true
           });
-        }
-        if (this.session.readyForResponse) {
-          console.log('Sending Response!', this.selectedCard)
-          Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, (error, result) => {
-            if (error){
-              this.handleError(error);
-              return;
-            }
-          })
         }
       });
     });
@@ -65,6 +54,12 @@ export class StudentSessionPage implements OnInit {
     })
   }
 
+  ngDoCheck () {
+    //console.log(this.session)
+
+  }
+
+
   ngOnDestroy(): void {
     Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
       if (error){
@@ -75,8 +70,17 @@ export class StudentSessionPage implements OnInit {
   }
 
   selectCard(cardName: string): void {
-    console.log('card selected!', cardName);
     this.selectedCard = cardName;
+    if (this.session && this.session.readyForResponse) {
+      const date = new Date();
+      Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
+        if (error){
+          this.handleError(error);
+          return;
+        }
+      })
+    }
+
     this.ref.detectChanges();
   }
 

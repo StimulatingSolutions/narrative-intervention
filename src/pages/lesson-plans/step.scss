@@ -6,6 +6,10 @@
   }
   &.highlighted {
     padding: 5px;
-    border: 1px solid #ff00006b;
+    border: 3px solid #427feb;
+  }
+  &.question {
+    padding: 5px;
+    border: 3px solid #1b6b62;
   }
 }
