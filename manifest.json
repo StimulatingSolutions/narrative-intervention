@@ -1,0 +1,19 @@
+{
+  "lang": "en",
+  "name": "UKY Narrative Intervention",
+  "short_name": "UKY-NI",
+  "icons": [{
+    "src": "assets/imgs/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "start_url": "https://narrative-intervention.stimulating-solutions.com/index.html",
+  "scope": "/",
+  "mjs_extended_scope": [
+    "https://narrative-intervention.herokuapp.com/*",
+    "wss://narrative-intervention.stimulating-solutions.com/*"
+  ],
+  "display": "fullscreen",
+  "background_color": "#4e8ef7",
+  "theme_color": "#4e8ef7"
+}
