@@ -43,6 +43,11 @@ export class Step implements OnInit {
     //console.log('highlighted', this.highlightedStepId)
   }
 
+  ngOnDestroy(): void {
+    nextStepId = 0;
+    nextQuestionId = 0;
+  }
+
 
   clickStep() {
 
@@ -58,4 +63,5 @@ export class Step implements OnInit {
     //
     // this.onGetResponses.emit(this.stepId);
   }
+
 }

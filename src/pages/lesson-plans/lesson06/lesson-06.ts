@@ -26,7 +26,7 @@ export class Lesson06 implements OnInit {
   steps: Step[];
   suggestedStepId: number;
   gettingResponsesFor: number;
-
+  inGetResponsesMode: boolean;
 
   constructor(
     private alertCtrl: AlertController
@@ -38,6 +38,15 @@ export class Lesson06 implements OnInit {
     this.steps = [];
     this.suggestedStepId = this.session.currentStep;
     this.gettingResponsesFor = this.session.currentStep;
+    this.inGetResponsesMode = false;
+  }
+
+  ngDoCheck () {
+    //QUESTION CLOSED IN SIDEBAR
+    if (this.inGetResponsesMode && !this.session.readyForResponse){
+      this.advanceStep();
+      this.inGetResponsesMode = false;
+    }
   }
 
   stepClicked(stepId) {
@@ -46,17 +55,16 @@ export class Lesson06 implements OnInit {
       return;
     }
 
-    //IF CURRENT QUESTION - FINISH IT
+    //IF CURRENT QUESTION - RETURN
     if (this.steps[stepId].questionType){
-      Meteor.call('updateSessionReadyForResponse', this.session._id, false, (error, result) => {
-        if (error){
-          this.handleError(error);
-          return;
-        }
-      })
+      return;
     }
 
     //UPDATE TO NEXT STEP
+    this.advanceStep();
+  }
+
+  advanceStep () {
     this.suggestedStepId++;
     this.gettingResponsesFor++;
 
@@ -72,7 +80,18 @@ export class Lesson06 implements OnInit {
             this.handleError(error);
             return;
           }
+          this.inGetResponsesMode = true;
         });
+
+        const highlightedDiv = <HTMLElement>document.getElementsByClassName('step-content highlighted')[0];
+
+        if (highlightedDiv) {
+          const offset = highlightedDiv.offsetTop;
+          const lesson = document.getElementsByClassName('lessons-container')[0];
+          const scollDiv = lesson.getElementsByTagName("body")[0];
+          scollDiv.scrollTop = offset - 100;
+          scollDiv.className = "block-scroll";
+        }
       }
     });
   }

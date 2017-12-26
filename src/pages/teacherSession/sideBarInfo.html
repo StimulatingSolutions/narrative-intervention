@@ -3,4 +3,11 @@
   <div>{{session?.shortId}}</div>
   <div>Students: {{session?.activeUsers.length || 0}}</div>
   <div>Step: {{session?.currentStep + 1}}</div>
+
+  <ion-buttons>
+    <button ion-button (click)="findMyPlace()" [class.hidden]="session?.readyForResponse" >Find My Place</button>
+    <button ion-button (click)="closeQuestion()" [class.hidden]="!session?.readyForResponse" >Done!</button>
+  </ion-buttons>
+
+  <div [class.hidden]="!session?.readyForResponse">Waiting For: {{waitCount}}</div>
 </ion-content>

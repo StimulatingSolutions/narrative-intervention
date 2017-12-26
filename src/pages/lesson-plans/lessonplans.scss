@@ -4,6 +4,10 @@
     width: 600px;
     overflow: auto;
   }
+
+  .block-scroll {
+    overflow-x: hidden !important;
+  }
 }
 
 body {

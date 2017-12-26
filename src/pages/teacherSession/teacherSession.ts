@@ -54,6 +54,17 @@ export class TeacherSessionPage implements OnInit {
 
   }
 
+  handleFindPlace (): void {
+    const highlightedDiv = <HTMLElement>document.getElementsByClassName('step-content highlighted')[0];
+
+    if (highlightedDiv) {
+      const offset = highlightedDiv.offsetTop;
+      const lesson = document.getElementsByClassName('lessons-container')[0];
+      const scollDiv = lesson.getElementsByTagName("body")[0];
+      scollDiv.scrollTop = offset - 100;
+    }
+  }
+
   handleError(e: Error): void {
     console.error(e);
 

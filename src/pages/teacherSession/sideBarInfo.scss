@@ -2,4 +2,8 @@
   background: lightgrey;
   display: flex;
   flex-direction: row;
+
+  .hidden {
+    display: none;
+  }
 }

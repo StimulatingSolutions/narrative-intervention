@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="teacher-session-page-content">
+<ion-content padding class="teacher-session-page-content" >
 
   <div class='session-container'>
     <ion-list no-lines>
@@ -18,8 +18,8 @@
     </div>
   </div>
 
-  <div class='side-bar-container'>
-    <sideBarInfo [session]='session' ></sideBarInfo>
+  <div *ngIf="session" class='side-bar-container'>
+    <sideBarInfo [session]='session' (onFindPlace)='handleFindPlace($event)'></sideBarInfo>
   </div>
 
 
