@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.stimulating-solutions.narrative-intervention" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>NarrativeIntervention</name>
+    <name>Narrative Intervention</name>
     <description>An app to facilitate the UKY Narrative Intervention.</description>
     <author email="joe@stimulating-solutions.com" href="https://www.stimulating-solutions.com/">Stimulating Solutions, LLC</author>
     <content src="https://narrative-intervention.stimulating-solutions.com/index.html" />
