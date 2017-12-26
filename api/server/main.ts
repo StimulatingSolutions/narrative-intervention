@@ -1,12 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { Users } from './collections/users';
 import { Roles } from 'meteor/alanning:roles';
 import initializeEmailTemplates from './emailTemplates';
 
 import * as _ from 'lodash';
-
-import { Sessions } from './collections/sessions';
 
 Meteor.startup(() => {
 
@@ -24,7 +21,7 @@ Meteor.startup(() => {
   const missingRoles = _.difference(rolesList, currentRoles);
   missingRoles.forEach( missingRole => {
     Roles.createRole(missingRole);
-  })
+  });
 
   //BOOTSTRAP INITIAL ADMIN USER
   if (Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL) === undefined) {
@@ -36,7 +33,7 @@ Meteor.startup(() => {
         picture: ''
       }
     });
-    const newAdminUser = Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL);
+    const newAdminUser: MongoObject = Accounts.findUserByEmail(process.env.NAR_INN_ADMIN_EMAIL);
     Accounts.sendEnrollmentEmail(newAdminUser._id, process.env.NAR_INN_ADMIN_EMAIL);
     Roles.setUserRoles(newAdminUser._id, ['admin', 'active']);
   }
@@ -56,7 +53,7 @@ Meteor.startup(() => {
       return attempt.allowed;
     }
 
-  })
+  });
 
   initializeEmailTemplates();
 

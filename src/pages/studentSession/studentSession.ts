@@ -29,7 +29,7 @@ export class StudentSessionPage implements OnInit {
     public navCtrl: NavController,
     private ref: ChangeDetectorRef,
   ) {
-    this.studentSessionId = navParams.get('sessionId');
+    this.studentSessionId = this.navParams.get('sessionId');
     console.log('incoming id', this.studentSessionId)
   }
 

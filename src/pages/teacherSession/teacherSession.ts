@@ -25,7 +25,7 @@ export class TeacherSessionPage implements OnInit {
     private navParams: NavParams,
     public navCtrl: NavController,
   ) {
-    this.teacherSessionId = navParams.get('sessionId');
+    this.teacherSessionId = this.navParams.get('sessionId');
     console.log('incoming id', this.teacherSessionId)
   }
 
