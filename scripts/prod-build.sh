@@ -17,9 +17,10 @@ then
   ionic cordova build android
   mv ./platforms/android/build/outputs/apk/android-debug.apk ./src/assets/narrative-intervention.apk
   echo "removing unneeded files from APK"
-  zip ./src/assets/narrative-intervention.apk -q -d "assets/www/assets/*" "assets/www/build/*"
+  zip ./src/assets/narrative-intervention.apk -d "assets/www/assets/*" "assets/www/build/vendor*"
 fi
 
+echo "creating deployment tarball"
 tar -czvf client-bundle.tgz ./node_modules/meteor-client.js ./www ./src/pages/lesson-plans
 
 if [ -e ./node_modules/meteor-client.dev.js ]
