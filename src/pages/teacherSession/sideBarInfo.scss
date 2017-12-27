@@ -1,9 +1,25 @@
 .side-bar-info-content {
-  background: lightgrey;
+  background: #efefef;
   display: flex;
   flex-direction: row;
 
   .hidden {
     display: none;
+  }
+
+  .bar-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .button-container {
+    padding: 7px;
+  }
+
+  .bottom-buttons {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
   }
 }

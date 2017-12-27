@@ -16,7 +16,7 @@ import { Session } from 'api/models';
 })
 export class TeacherSessionPage implements OnInit {
 
-  teacherSessionId: string;
+  incomingSessionId: string;
   session: Session;
 
   constructor(
@@ -25,33 +25,15 @@ export class TeacherSessionPage implements OnInit {
     private navParams: NavParams,
     public navCtrl: NavController,
   ) {
-    this.teacherSessionId = navParams.get('sessionId');
-    console.log('incoming id', this.teacherSessionId)
+    this.incomingSessionId = navParams.get('sessionId');
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('activeSession', this.teacherSessionId).subscribe((result) => {
+    MeteorObservable.subscribe('activeSession', this.incomingSessionId).subscribe((result) => {
       MeteorObservable.autorun().subscribe((result1) => {
-        this.session = Sessions.findOne({_id: this.teacherSessionId});
+        this.session = Sessions.findOne({_id: this.incomingSessionId});
       });
     });
-  }
-
-  toggleSessionActive(active: boolean): void {
-    MeteorObservable.call('setSessionActive', this.teacherSessionId, active).subscribe({
-      next: () => {
-        const alert = this.alertCtrl.create({
-          title: 'Success!',
-          message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
-          buttons: ['OK']
-        });
-        alert.present();
-      },
-      error: (e: Error) => {
-        this.handleError(e);
-      }
-    });
-
   }
 
   handleFindPlace (): void {

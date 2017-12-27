@@ -38,7 +38,7 @@ export class Lesson06 implements OnInit {
     this.steps = [];
     this.suggestedStepId = this.session.currentStep;
     this.gettingResponsesFor = this.session.currentStep;
-    this.inGetResponsesMode = false;
+    this.inGetResponsesMode = this.session.readyForResponse;
   }
 
   ngDoCheck () {

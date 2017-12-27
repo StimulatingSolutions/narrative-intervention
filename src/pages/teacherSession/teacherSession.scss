@@ -7,14 +7,14 @@
   }
 
   .session-container {
-    width: 84%;
+    width: 80%;
     height: 100%;
     overflow: auto;
     display: block;
   }
 
   .side-bar-container {
-    width: 15%;
+    width: 20%;
     height: 100%;
     background: blue;
   }
@@ -47,5 +47,11 @@
   .session-short-id {
     color: blue;
     cursor: pointer;
+  }
+
+  .session-title{
+    font-size: 1.6rem;
+    color: #222;
+    padding: 16px;
   }
 }

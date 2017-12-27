@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
+import { MeteorObservable } from 'meteor-rxjs';
 //import { Observable } from 'rxjs';
 
 import { Session } from 'api/models';
@@ -31,13 +32,6 @@ export class SideBarInfo {
   ngDoCheck () {
     //QUESTION CLOSED IN SIDEBAR
     if (this.session.readyForResponse){
-      debugger
-      // currentStep: number;
-      // readyForResponse: boolean;
-      // responses: any[];
-
-      // step: session.currentStep,
-      // studentId: studentId,
 
       const stepResponses = this.session.responses.filter( response => {
         return response.step === this.session.currentStep;
@@ -48,8 +42,25 @@ export class SideBarInfo {
       this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
     }
   }
+
   findMyPlace (): void {
     this.onFindPlace.emit();
+  }
+
+  toggleSessionActive(active: boolean): void {
+    MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
+      next: () => {
+        const alert = this.alertCtrl.create({
+          title: 'Success!',
+          message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
   }
 
   closeQuestion (): void {

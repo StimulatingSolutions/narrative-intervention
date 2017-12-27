@@ -4,15 +4,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="teacher-session-page-content" >
+<ion-content class="teacher-session-page-content" >
 
-  <div class='session-container'>
-    <ion-list no-lines>
-      <div>{{session?.name}}</div>
-    </ion-list>
-    <ion-buttons>
-      <button ion-button (click)="toggleSessionActive(!session.active)">{{ session?.active === true ? "Deactivate Session" : "Activate Session"}}</button>
-    </ion-buttons>
+  <div padding class='session-container'>
     <div *ngIf="session" class='lessons-container'>
       <lessonplans [session]="session"></lessonplans>
     </div>
@@ -21,6 +15,5 @@
   <div *ngIf="session" class='side-bar-container'>
     <sideBarInfo [session]='session' (onFindPlace)='handleFindPlace($event)'></sideBarInfo>
   </div>
-
 
 </ion-content>
