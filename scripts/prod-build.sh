@@ -16,9 +16,9 @@ if [[ "$1" == "--build-apk" ]]
 then
   ionic cordova build android
   mv ./platforms/android/build/outputs/apk/android-debug.apk ./src/assets/narrative-intervention.apk
-  cp ./src/assets/narrative-intervention.apk ./www/assets/narrative-intervention.apk
   echo "removing unneeded files from APK"
   zip ./src/assets/narrative-intervention.apk -d "assets/www/assets/*" "assets/www/build/vendor*"
+  cp ./src/assets/narrative-intervention.apk ./www/assets/narrative-intervention.apk
 fi
 
 echo "creating deployment tarball"
