@@ -66,14 +66,14 @@ export class LoginPage {
       return;
     }
 
-    Meteor.call('findSessionByShortId', this.loginSession, (error, result) => {
+    Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
       if (error){
         this.handleError(error);
         return;
       }
       this.navCtrl.push(StudentSessionPage, {
         sessionId: result,
-        sessionUserId: this.sessionUserId
+        userId: this.sessionUserId
       });
     })
   }

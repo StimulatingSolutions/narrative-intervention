@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output, OnInit} from "@angular/core";
 
 
 let nextStepId: number = 0;
@@ -8,7 +8,7 @@ let nextQuestionId: number = 0;
   selector: 'step',
   templateUrl: 'step.html'
 })
-export class Step {
+export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
@@ -21,9 +21,14 @@ export class Step {
   @Input() currentQuestionStepId: number;
 
   @Output() onGetResponses = new EventEmitter<number>();
+  @Output() onCompleteNonQuestion = new EventEmitter<number>();
 
+  @Output() onStepClicked =  new EventEmitter<number>();
 
   constructor() {
+  }
+
+  ngOnInit(): void {
     this.stepId = nextStepId++;
     if (this.questionType) {
       // not all steps are questions
@@ -32,11 +37,31 @@ export class Step {
     this.allSteps[this.stepId] = this;
   }
 
-  clickStep() {
-    if (!this.questionType) {
-      this.done = !this.done;
-      return;
-    }
-    this.onGetResponses.emit(this.stepId);
+  ngDoCheck(): void {
+    //console.log('current step', this.currentQuestionStepId)
+    //console.log('steps', this.allSteps);
+    //console.log('highlighted', this.highlightedStepId)
   }
+
+  ngOnDestroy(): void {
+    nextStepId = 0;
+    nextQuestionId = 0;
+  }
+
+
+  clickStep() {
+
+    this.onStepClicked.emit(this.stepId);
+
+    // if (this.questionType) {
+    //   this.done = !this.done;
+    //   if(this.done){
+    //     this.onCompleteNonQuestion.emit(this.stepId);
+    //   }
+    //   return;
+    // }
+    //
+    // this.onGetResponses.emit(this.stepId);
+  }
+
 }

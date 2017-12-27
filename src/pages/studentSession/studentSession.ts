@@ -19,6 +19,7 @@ import { LandingPage } from '../landing/landing';
 export class StudentSessionPage implements OnInit {
 
   studentSessionId: string;
+  userId: string;
   session: Session;
   selectedCard: string;
 
@@ -30,15 +31,14 @@ export class StudentSessionPage implements OnInit {
     private ref: ChangeDetectorRef,
   ) {
     this.studentSessionId = this.navParams.get('sessionId');
+    this.userId = this.navParams.get('userId');
     console.log('incoming id', this.studentSessionId)
   }
 
   ngOnInit(): void {
-    console.log('init', this.session);
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
         this.session = Sessions.findOne({_id: this.studentSessionId});
-        console.log('SESSION', this.session);
         if (!this.session.active){
           this.navCtrl.setRoot(LandingPage, {}, {
             animate: true
@@ -46,11 +46,41 @@ export class StudentSessionPage implements OnInit {
         }
       });
     });
+    Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+    })
+  }
+
+  ngDoCheck () {
+    //console.log(this.session)
+
+  }
+
+
+  ngOnDestroy(): void {
+    Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+    })
   }
 
   selectCard(cardName: string): void {
-    console.log('card selected!', cardName);
     this.selectedCard = cardName;
+    if (this.session && this.session.readyForResponse) {
+      const date = new Date();
+      Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
+        if (error){
+          this.handleError(error);
+          return;
+        }
+      })
+    }
+
     this.ref.detectChanges();
   }
 
@@ -73,3 +103,21 @@ export class StudentSessionPage implements OnInit {
   }
 
 }
+
+/*
+<ion-content padding class="student-session-page-content">
+  <div [class.hidden]="!session?.readyForResponse">
+    <div class='card-row'>
+      <div [class.active]="selectedCard == 'goal' || selectedCard == undefined" class="img-button goal" (click)="selectCard('goal')"></div>
+      <div [class.active]="selectedCard == 'try' || selectedCard == undefined" class="img-button try" (click)="selectCard('try')"></div>
+    </div>
+    <div class='card-row'>
+      <div [class.active]="selectedCard == 'outcome-yes' || selectedCard == undefined" class="img-button outcome-yes" (click)="selectCard('outcome-yes')"></div>
+      <div [class.active]="selectedCard == 'outcome-fail' || selectedCard == undefined" class="img-button outcome-fail" (click)="selectCard('outcome-fail')"></div>
+    </div>
+  </div>
+  <div [class.hidden]="session?.readyForResponse">
+    Waiting for question?
+  </div>
+</ion-content>
+*/

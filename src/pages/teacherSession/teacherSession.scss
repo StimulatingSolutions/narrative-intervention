@@ -1,5 +1,23 @@
-.session-management-page-content {
+.teacher-session-page-content {
 
+  display: flex;
+
+  & > .scroll-content {
+    display: flex !important;
+  }
+
+  .session-container {
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    display: block;
+  }
+
+  .side-bar-container {
+    width: 20%;
+    height: 100%;
+    background: blue;
+  }
   .session-update-list {
     display: flex;
 
@@ -29,5 +47,11 @@
   .session-short-id {
     color: blue;
     cursor: pointer;
+  }
+
+  .session-title{
+    font-size: 1.6rem;
+    color: #222;
+    padding: 16px;
   }
 }
