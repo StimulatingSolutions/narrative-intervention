@@ -33,18 +33,17 @@ Meteor.methods({
         email: email,
         picture: ''
       }
-    })
+    });
 
-    const newUser = Accounts.findUserByEmail(email);
+    const newUser: MongoObject = Accounts.findUserByEmail(email);
     Accounts.sendEnrollmentEmail(newUser._id, email);
     Roles.setUserRoles(newUser._id, ['active']);
   },
 
   sendRestUserPasswordEmail(email: string): void {
 
-    const newUserId = Accounts.findUserByEmail(email)._id;
-
-    Accounts.sendResetPasswordEmail(newUserId);
+    const newUser: MongoObject = Accounts.findUserByEmail(email);
+    Accounts.sendResetPasswordEmail(newUser._id);
 
   },
 

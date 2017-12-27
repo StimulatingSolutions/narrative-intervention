@@ -30,8 +30,8 @@ export class StudentSessionPage implements OnInit {
     public navCtrl: NavController,
     private ref: ChangeDetectorRef,
   ) {
-    this.studentSessionId = navParams.get('sessionId');
-    this.userId = navParams.get('userId');
+    this.studentSessionId = this.navParams.get('sessionId');
+    this.userId = this.navParams.get('userId');
     console.log('incoming id', this.studentSessionId)
   }
 
