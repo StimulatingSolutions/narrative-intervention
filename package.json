@@ -14,6 +14,7 @@
     "meteor-client:bundle": "meteor-client bundle -s api",
     "meteor-client:prod-bundle": "meteor-client bundle --source api --url https://narrative-intervention.stimulating-solutions.com",
     "prod:build": "./scripts/prod-build.sh",
+    "prod:build-apk": "./scripts/prod-build.sh --build-apk",
     "prod:unbundle": "./scripts/prod-unbundle.sh",
     "rebuild-lesson-plan": "ts-node ./scripts/rebuild-lesson-plan.ts"
   },
