@@ -29,8 +29,8 @@ export class LoginPage {
   }
 
   login(): void {
-    this.emailService.login(this.loginEmail, this.loginPassword).then(() => {
-      this.navCtrl.setRoot(WelcomePage, {}, {
+    this.emailService.login(this.loginEmail.trim(), this.loginPassword).then(() => {
+      return this.navCtrl.setRoot(WelcomePage, {}, {
         animate: true
       });
     }).catch((e) => {
@@ -39,14 +39,14 @@ export class LoginPage {
   }
 
   resetUserPassword(): void {
-    MeteorObservable.call('sendRestUserPasswordEmail', this.loginEmail).subscribe({
-      next: (result) => {
+    MeteorObservable.call('sendResetUserPasswordEmail', this.loginEmail.trim()).subscribe({
+      next: () => {
         const alert = this.alertCtrl.create({
           title: 'Password Reset!',
-          message: "Password Rest instrutions have been sent to " + this.loginEmail + '.',
+          message: "Password Reset instructions have been sent to " + this.loginEmail.trim() + '.',
           buttons: ['OK']
         });
-        alert.present();
+        return alert.present();
       },
       error: (e: Error) => {
         this.handleError(e);
@@ -62,8 +62,6 @@ export class LoginPage {
         buttons: ['OK']
       });
       alert.present();
-
-      return;
     }
 
     Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
@@ -71,7 +69,7 @@ export class LoginPage {
         this.handleError(error);
         return;
       }
-      this.navCtrl.push(StudentSessionPage, {
+      return this.navCtrl.push(StudentSessionPage, {
         sessionId: result,
         userId: this.sessionUserId
       });
