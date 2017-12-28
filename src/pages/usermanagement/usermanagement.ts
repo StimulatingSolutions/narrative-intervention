@@ -48,9 +48,6 @@ export class UserManagementPage implements OnInit {
   }
 
   findUsers(): Observable<User[]> {
-    Users.find({ 'profile.email': { $exists: true }}).forEach( user => {
-      console.log('users has email in profile', user);
-    });
     return Users.find({ 'profile.email': { $exists: true }});
   }
 
@@ -96,11 +93,11 @@ export class UserManagementPage implements OnInit {
   resetUserPassword(): void {
     console.log('USER!: ', this.userToEdit);
 
-    MeteorObservable.call('sendRestUserPasswordEmailFromId', this.userToEdit._id).subscribe({
+    MeteorObservable.call('sendResetUserPasswordEmailFromId', this.userToEdit._id).subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Password Reset Sent',
-          message: "Password Rest instrutions have been sent to " + this.userToEdit.profile.email + '.',
+          message: "Password Reset instructions have been sent to " + this.userToEdit.profile.email + '.',
           buttons: ['OK']
         });
         alert.present();

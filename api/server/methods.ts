@@ -40,14 +40,14 @@ Meteor.methods({
     Roles.setUserRoles(newUser._id, ['active']);
   },
 
-  sendRestUserPasswordEmail(email: string): void {
+  sendResetUserPasswordEmail(email: string): void {
 
     const newUser: MongoObject = Accounts.findUserByEmail(email);
     Accounts.sendResetPasswordEmail(newUser._id);
 
   },
 
-  sendRestUserPasswordEmailFromId(id: string): void {
+  sendResetUserPasswordEmailFromId(id: string): void {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
