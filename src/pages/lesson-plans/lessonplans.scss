@@ -1,11 +1,7 @@
 .lessons-container {
 
-  .block-scroll {
-    overflow: hidden !important;
-  }
-
   .lesson-plan-wrapper {
-    overflow: auto;
+    overflow: hidden;
     margin: 0 auto;
     background-color: white;
   }
@@ -13,9 +9,13 @@
     padding: .25in .5in .5in;
     display: block;
   }
+  h2 {
+    font-size: 3.0rem;
+  }
   p {
     margin: 0;
     line-height: 115%;
+    font-size: 1.8rem;
   }
   .center {
     text-align: center;

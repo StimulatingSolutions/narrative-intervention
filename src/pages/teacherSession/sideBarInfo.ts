@@ -69,9 +69,8 @@ export class SideBarInfo {
         this.handleError(error);
         return;
       }
-    })
-    const lesson = document.getElementsByClassName('lessons-container')[0];
-    const scrollDiv = lesson.getElementsByTagName("body")[0];
+    });
+    const scrollDiv = document.getElementsByClassName('session-container')[0];
     scrollDiv.classList.remove("block-scroll");
   }
 
