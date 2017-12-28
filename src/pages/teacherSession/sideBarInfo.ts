@@ -71,8 +71,8 @@ export class SideBarInfo {
       }
     })
     const lesson = document.getElementsByClassName('lessons-container')[0];
-    const scollDiv = lesson.getElementsByTagName("body")[0];
-    scollDiv.classList.remove("block-scroll");
+    const scrollDiv = lesson.getElementsByTagName("body")[0];
+    scrollDiv.classList.remove("block-scroll");
   }
 
   handleError(e: Error): void {

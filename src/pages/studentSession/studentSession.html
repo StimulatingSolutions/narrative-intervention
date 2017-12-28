@@ -1,10 +1,10 @@
 <ion-content padding class="student-session-page-content">
     <div class='card-row'>
-      <div [class.active]="selectedCard == 'goal' || selectedCard == undefined" class="img-button goal" (click)="selectCard('goal')"></div>
-      <div [class.active]="selectedCard == 'try' || selectedCard == undefined" class="img-button try" (click)="selectCard('try')"></div>
+      <div [class.active]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+      <div [class.active]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
     </div>
     <div class='card-row'>
-      <div [class.active]="selectedCard == 'outcome-yes' || selectedCard == undefined" class="img-button outcome-yes" (click)="selectCard('outcome-yes')"></div>
-      <div [class.active]="selectedCard == 'outcome-fail' || selectedCard == undefined" class="img-button outcome-fail" (click)="selectCard('outcome-fail')"></div>
+      <div [class.active]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
+      <div [class.active]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
     </div>
 </ion-content>

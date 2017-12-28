@@ -42,8 +42,8 @@ export class TeacherSessionPage implements OnInit {
     if (highlightedDiv) {
       const offset = highlightedDiv.offsetTop;
       const lesson = document.getElementsByClassName('lessons-container')[0];
-      const scollDiv = lesson.getElementsByTagName("body")[0];
-      scollDiv.scrollTop = offset - 100;
+      const scrollDiv = lesson.getElementsByTagName("body")[0];
+      scrollDiv.scrollTop = offset - 100;
     }
   }
 
