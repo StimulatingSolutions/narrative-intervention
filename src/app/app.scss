@@ -53,3 +53,7 @@ ion-navbar, ion-header, ion-content {
   left: 0;
   right: 0;
 }
+
+.block-scroll {
+  overflow-y: hidden !important;
+}

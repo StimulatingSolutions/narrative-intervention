@@ -74,7 +74,7 @@ export class Lesson06 implements OnInit {
         return;
       }
       //IF NEW STEP IS QUSTION READY RESPONSES;
-      if(this.steps[this.gettingResponsesFor].questionType){
+      if(this.steps[this.gettingResponsesFor] && this.steps[this.gettingResponsesFor].questionType){
         Meteor.call('updateSessionReadyForResponse', this.session._id, true, (error, result) => {
           if (error){
             this.handleError(error);
@@ -87,10 +87,9 @@ export class Lesson06 implements OnInit {
 
         if (highlightedDiv) {
           const offset = highlightedDiv.offsetTop;
-          const lesson = document.getElementsByClassName('lessons-container')[0];
-          const scrollDiv = lesson.getElementsByTagName("body")[0];
-          scrollDiv.scrollTop = offset - 100;
-          scrollDiv.className = "block-scroll";
+          const scrollDiv = document.getElementsByClassName('session-container')[0];
+          scrollDiv.scrollTo({top: offset - 100, left: 0, behavior: "smooth"});
+          scrollDiv.classList.add("block-scroll");
         }
       }
     });
