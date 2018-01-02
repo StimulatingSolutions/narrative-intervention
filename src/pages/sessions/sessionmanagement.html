@@ -20,15 +20,11 @@
         Edit Session
       </ion-card-header>
       <ion-card-content>
-        <ion-item>
-          <ion-label floating>Session Name</ion-label>
-          <ion-input [(ngModel)]="editSessionName" type="text"></ion-input>
-        </ion-item>
         <ion-list>
           <ion-item>
             <ion-label>Session School</ion-label>
             <ion-select [(ngModel)]="editSessionSchoolId">
-              <ion-option *ngFor="let school of allSchools | async" [value]="school._id">{{school.name}}</ion-option>
+              <ion-option *ngFor="let school of allSchools | async" [value]="school.name">{{school.name}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -52,18 +48,20 @@
         Add Session
       </ion-card-header>
       <ion-card-content>
-        <ion-item>
-          <ion-label floating>Session Name</ion-label>
-          <ion-input [(ngModel)]="addSessionName" type="text"></ion-input>
-        </ion-item>
         <ion-list>
           <ion-item>
             <ion-label>Session School</ion-label>
             <ion-select [(ngModel)]="addSessionSchoolId">
-              <ion-option *ngFor="let school of allSchools | async" [value]="school._id">{{school.name}}</ion-option>
+              <ion-option *ngFor="let school of allSchools | async" [value]="school.name">{{school.name}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
+        <ion-item>
+          <ion-label>Session Number</ion-label>
+          <ion-select [(ngModel)]="addSessionId">
+            <ion-option *ngFor="let sessionId of allSessionIds" [value]="sessionId">{{sessionId}}</ion-option>
+          </ion-select>
+        </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="addSession()">Add</button>

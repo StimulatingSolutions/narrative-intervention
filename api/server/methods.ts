@@ -336,7 +336,7 @@ Meteor.methods({
     });
   },
 
-  updateSessionStep(sessionId: string, stepNumber: number){
+  updateSessionQuestionStepId (sessionId: string, stepNumber: number){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -347,12 +347,12 @@ Meteor.methods({
 
     Sessions.update(sessionId, {
       $set: {
-        currentStep: stepNumber
+        questionStepId: stepNumber
       }
     });
   },
 
-  updateSessionReadyForResponse(sessionId: string, ready: boolean){
+  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -361,9 +361,11 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session is not active');
     }
 
+    console.log('ready for response!', ready, stepId);
     Sessions.update(sessionId, {
       $set: {
-        readyForResponse: ready
+        readyForResponse: ready,
+        questionStepId: stepId
       }
     });
   },
@@ -381,7 +383,7 @@ Meteor.methods({
     }
 
     const newResponse = {
-      step: session.currentStep,
+      step: session.questionStepId,
       studentId: studentId,
       response: selectedCard,
       date: date
@@ -393,5 +395,30 @@ Meteor.methods({
         responses: newResponse
       }
     });
+  },
+
+  updateCompletedStepList(sessionId: string, add: boolean, stepId: number){
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (!session.active){
+      throw new Meteor.Error('Session Error', 'Session is not active');
+    }
+    if(add){
+      Sessions.update(sessionId, {
+        $push: {
+          completedSteps: stepId
+        }
+      });
+    } else {
+      Sessions.update(sessionId, {
+        $pull: {
+          completedSteps: stepId
+        }
+      }, {
+        multi: true
+      });
+    }
   }
 });

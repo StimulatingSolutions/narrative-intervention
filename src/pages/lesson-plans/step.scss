@@ -2,14 +2,19 @@
   // probably need to move the <step> styling from lesson-plan.scss to here
 
   &.subdued {
-    opacity: .3;
+    opacity: .5;
   }
   &.highlighted {
     padding: 5px;
-    border: 3px solid #427feb;
+    border: 3px solid #dfea2c;
+    background-color: #dfea2c;
   }
   &.question {
     padding: 5px;
-    border: 3px solid #1b6b62;
+    border: 3px solid #d8d8d8;
+  }
+  &.active-question {
+    border: 3px solid #dc8686;
+    background-color: #dc8686;
   }
 }

@@ -45,7 +45,8 @@ export interface Session {
   schoolId: string;
   active: boolean;
   activeUsers: string[];
-  currentStep: number;
+  questionStepId: number;
   readyForResponse: boolean;
   responses: any[];
+  completedSteps: number[]
 }
