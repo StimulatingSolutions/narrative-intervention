@@ -51,8 +51,10 @@
     "meteor-rxjs": "^0.4.8",
     "meteor-typings": "^1.4.1",
     "moment": "^2.19.3",
+    "raf": "^3.4.0",
     "rxjs": "5.5.2",
     "shortid": "^2.2.8",
+    "smoothscroll-polyfill": "^0.4.0",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
   },
