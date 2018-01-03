@@ -10,7 +10,7 @@ import { Session, School } from 'api/models';
 import { TeacherSessionPage } from '../teacherSession/teacherSession';
 
 import * as _ from 'lodash';
-//import * as moment from 'moment';
+import * as moment from 'moment';
 //import * as shortid from 'shortid';
 
 function generateNumId() {
@@ -28,6 +28,7 @@ export class SessionManagementPage implements OnInit {
   addSessionVisible: boolean;
   addSessionName: string;
   addSessionSchoolId: string;
+  addSessionId: number;
 
   editSessionVisible: boolean;
   editSessionName: string;
@@ -37,12 +38,15 @@ export class SessionManagementPage implements OnInit {
 
   allSchools;
   allSessions;
+  allSessionIds: string[];
 
   constructor(
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private ref: ChangeDetectorRef,
-  ) {}
+  ) {
+    this.allSessionIds = ['6'];
+  }
 
   ngOnInit(): void {
     MeteorObservable.subscribe('sessions').subscribe(() => {
@@ -68,10 +72,10 @@ export class SessionManagementPage implements OnInit {
   addSession(): void {
 
     //CHECK EMPTYS
-    if(this.addSessionName === ''){
+    if(this.addSessionId === undefined || this.addSessionSchoolId === undefined){
       const alert = this.alertCtrl.create({
         title: 'Oops!',
-        message: 'Valid Session Name isrequired.',
+        message: 'All fields are required.',
         buttons: ['OK']
       });
       alert.present();
@@ -79,23 +83,24 @@ export class SessionManagementPage implements OnInit {
     }
 
     const newSession: Session = {
-      name: this.addSessionName,
+      name: this.addSessionSchoolId + ", Session " + this.addSessionId + ", " + moment().format('YYYY/MM/DD'),
       //date: moment().utc().toDate(),
       shortId: generateNumId(),
       creatersId: '',
       schoolId: this.addSessionSchoolId,
       active: true,
       activeUsers: [],
-      currentStep: 0,
+      questionStepId: null,
       readyForResponse: false,
-      responses: []
+      responses: [],
+      completedSteps: []
     };
     MeteorObservable.call('createNewSession', newSession).subscribe({
       next: (result) => {
 
         const alert = this.alertCtrl.create({
           title: 'Success!',
-          message: "Session: " + this.addSessionName,
+          message: "Session: " + newSession.name,
           buttons: ['OK']
         });
         alert.present();

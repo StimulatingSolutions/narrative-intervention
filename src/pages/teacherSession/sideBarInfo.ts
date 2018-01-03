@@ -20,6 +20,7 @@ export class SideBarInfo {
   @Output() onFindPlace =  new EventEmitter<void>();
 
   waitCount: number;
+  currentStep: number;
 
   constructor(
     //private navCtrl: NavController
@@ -34,13 +35,14 @@ export class SideBarInfo {
     if (this.session.readyForResponse){
 
       const stepResponses = this.session.responses.filter( response => {
-        return response.step === this.session.currentStep;
+        return response.step === this.session.questionStepId;
       });
       const ids = stepResponses.map( response => {
         return response.studentId;
       });
       this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
     }
+    this.currentStep = ((_.max(this.session.completedSteps) || 0) + 1);
   }
 
   findMyPlace (): void {
@@ -64,14 +66,17 @@ export class SideBarInfo {
   }
 
   closeQuestion (): void {
-    Meteor.call('updateSessionReadyForResponse', this.session._id, false, (error, result) => {
+    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
       if (error){
         this.handleError(error);
         return;
       }
+      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
-    const scrollDiv = document.getElementsByClassName('session-container')[0];
-    scrollDiv.classList.remove("block-scroll");
+  }
+
+  exitCurrentSession (): void {
+    this.navCtrl.pop();
   }
 
   handleError(e: Error): void {

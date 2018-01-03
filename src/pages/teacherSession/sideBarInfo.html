@@ -21,7 +21,7 @@
         Current Step
       </ion-card-header>
       <ion-card-content>
-        {{session?.currentStep + 1}}
+        {{currentStep}}
       </ion-card-content>
     </ion-card>
   </div>
@@ -43,8 +43,9 @@
 
   <div class='bottom-buttons'>
     <ion-buttons class='button-container'>
-      <button ion-button [class.hidden]="!session?.active" color='danger' (click)="toggleSessionActive(false)">Deactivate</button>
-      <button ion-button [class.hidden]=" session?.active" (click)="toggleSessionActive(true)">Activate</button>
+      <!-- <button ion-button [class.hidden]="!session?.active" color='danger' (click)="toggleSessionActive(false)">Deactivate</button> -->
+      <!-- <button ion-button [class.hidden]=" session?.active" (click)="toggleSessionActive(true)">Activate</button> -->
+      <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
     </ion-buttons>
   </div>
 

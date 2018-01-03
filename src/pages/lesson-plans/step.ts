@@ -41,6 +41,8 @@ export class Step implements OnInit {
     //console.log('current step', this.currentQuestionStepId)
     //console.log('steps', this.allSteps);
     //console.log('highlighted', this.highlightedStepId)
+
+
   }
 
   ngOnDestroy(): void {
@@ -62,6 +64,10 @@ export class Step implements OnInit {
     // }
     //
     // this.onGetResponses.emit(this.stepId);
+  }
+
+  setDoneStatus(done){
+    this.done = done;
   }
 
 }
