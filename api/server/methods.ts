@@ -356,9 +356,6 @@ Meteor.methods({
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
-    }
 
     console.log('ready for response!', ready, stepId);
     Sessions.update(sessionId, {
@@ -373,9 +370,6 @@ Meteor.methods({
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
-    }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
     }
     if (!session.readyForResponse){
       throw new Meteor.Error('Session Error', 'Session is not receiving responses');
@@ -400,9 +394,6 @@ Meteor.methods({
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
-    }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
     }
     if(add){
       Sessions.update(sessionId, {

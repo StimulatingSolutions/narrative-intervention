@@ -71,6 +71,7 @@ export class SideBarInfo {
         this.handleError(error);
         return;
       }
+      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
   }
 

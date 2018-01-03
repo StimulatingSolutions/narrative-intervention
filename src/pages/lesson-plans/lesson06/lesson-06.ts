@@ -86,6 +86,7 @@ export class Lesson06 implements OnInit {
       const scrollDiv = document.getElementsByClassName('session-container')[0];
       scrollDiv.scrollTo({top: offset - 100, left: 0, behavior: "smooth"});
       scrollDiv.classList.add("block-scroll");
+      document.getElementsByClassName("side-bar-info-content")[0].classList.add("active-question");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];
       scrollDiv.classList.remove("block-scroll");
@@ -150,35 +151,36 @@ export class Lesson06 implements OnInit {
   }
 
   completeReadyForResponse (stepId) {
-   Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
-     console.log('updated step done', result);
-   });
-   this.completedSteps.push(this.gettingResponsesFor);
-   Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
-     if (error){
-       this.handleError(error);
-       return;
-     }
-   });
-   this.inGetResponsesMode = false;
-   this.gettingResponsesFor = null;
- }
+    Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
+      console.log('updated step done', result);
+    });
+    this.completedSteps.push(this.gettingResponsesFor);
+    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
+      if (error){
+        this.handleError(error);
+        return;
+      }
+      this.inGetResponsesMode = false;
+      this.gettingResponsesFor = null;
+      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
+    });
+  }
 
- toggleSessionActive (active: boolean): void {
-   MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
-     next: () => {
-       const alert = this.alertCtrl.create({
-         title: 'Success!',
-         message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
-         buttons: ['OK']
-       });
-       alert.present();
-     },
-     error: (e: Error) => {
-       this.handleError(e);
-     }
-   });
- }
+  toggleSessionActive(active: boolean): void {
+    MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
+      next: () => {
+        const alert = this.alertCtrl.create({
+          title: 'Success!',
+          message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error: (e: Error) => {
+        this.handleError(e);
+      }
+    });
+  }
 
   handleError(e: Error): void {
     console.error(e);
