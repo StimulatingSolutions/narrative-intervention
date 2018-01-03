@@ -12,16 +12,14 @@
   }
 
   .img-button {
+    flex: 0 0 auto;
     margin: 10px;
-    opacity: .3;
-    width: 50%;
-    background-position: right center;
+    height: 264px;
+    width: 264px;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-  }
-
-  .img-button:last-child {
-    background-position: left center;
+    border-radius: 1px;
   }
 
   .goal {
@@ -33,19 +31,22 @@
   }
 
   .outcome-fail {
-    background-image: url(../assets/imgs/outcomefail.png);
+    background-image: url(../assets/imgs/outcome-fail.png);
   }
 
   .outcome-yes {
-    background-image: url(../assets/imgs/outcomeyes.png);
+    background-image: url(../assets/imgs/outcome-yes.png);
   }
+
   .active {
-    opacity: 1;
+    -webkit-box-shadow: 0 0 8px 12px #FF4;
+    -moz-box-shadow: 0 0 8px 12px #FF4;
+    box-shadow: 0 0 8px 12px #FF4;
   }
 
   .card-row {
-    height: 49%;
+    height: 284px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
   }
 }

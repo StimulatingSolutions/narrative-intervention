@@ -7,14 +7,15 @@
   }
 
   .session-container {
-    width: 80%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
     display: block;
+    flex: 1 1 auto;
   }
 
   .side-bar-container {
-    width: 20%;
+    flex: 0 0 auto;
+    width: 160px;
     height: 100%;
     background: blue;
   }

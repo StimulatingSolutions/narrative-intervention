@@ -83,14 +83,12 @@ export class Lesson06 implements OnInit {
     const questionDiv = <HTMLElement>document.getElementsByClassName('active-question')[0];
     if (questionDiv) {
       const offset = questionDiv.offsetTop;
-      const lesson = document.getElementsByClassName('lessons-container')[0];
-      const scollDiv = lesson.getElementsByTagName("body")[0];
-      scollDiv.scrollTop = offset - 100;
-      scollDiv.className = "block-scroll";
+      const scrollDiv = document.getElementsByClassName('session-container')[0];
+      scrollDiv.scrollTo({top: offset - 100, left: 0, behavior: "smooth"});
+      scrollDiv.classList.add("block-scroll");
     } else {
-      const lesson = document.getElementsByClassName('lessons-container')[0];
-      const scollDiv = lesson.getElementsByTagName("body")[0];
-      scollDiv.classList.remove("block-scroll");
+      const scrollDiv = document.getElementsByClassName('session-container')[0];
+      scrollDiv.classList.remove("block-scroll");
     }
   }
 

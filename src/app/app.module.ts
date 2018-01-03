@@ -27,6 +27,10 @@ import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
 import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
 
+require('raf');
+require('smoothscroll-polyfill').polyfill();
+
+
 @NgModule({
   declarations: [
     MyApp,
