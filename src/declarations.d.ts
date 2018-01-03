@@ -33,3 +33,8 @@ declare module "meteor/alanning:roles"
 // }
 
 declare module '*.png'
+
+
+interface MongoObject extends Object {
+  _id?: string;
+}

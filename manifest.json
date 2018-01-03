@@ -1,0 +1,26 @@
+{
+  "lang": "en",
+  "name": "Narrative Structure Intervention",
+  "short_name": "NS",
+  "icons": [
+    {
+      "src": "/assets/icon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://narrative-intervention.stimulating-solutions.com/index.html",
+  "scope": "/",
+  "mjs_extended_scope": [
+    "https://narrative-intervention.herokuapp.com/*",
+    "wss://narrative-intervention.stimulating-solutions.com/*"
+  ],
+  "display": "fullscreen",
+  "background_color": "#4e8ef7",
+  "theme_color": "#4e8ef7"
+}

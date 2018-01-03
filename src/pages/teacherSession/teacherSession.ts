@@ -12,7 +12,7 @@ import { Session } from 'api/models';
 
 @Component({
   selector: 'teacherSession',
-  templateUrl: 'teacherSession.html',
+  templateUrl: 'teacherSession.html'
 })
 export class TeacherSessionPage implements OnInit {
 
@@ -25,7 +25,7 @@ export class TeacherSessionPage implements OnInit {
     private navParams: NavParams,
     public navCtrl: NavController,
   ) {
-    this.incomingSessionId = navParams.get('sessionId');
+    this.incomingSessionId = this.navParams.get('sessionId');
   }
 
   ngOnInit(): void {
