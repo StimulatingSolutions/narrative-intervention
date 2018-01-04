@@ -40,9 +40,9 @@ export class WelcomePage implements OnInit {
   public showSchoolManagement: boolean;
   public showSessionManagement: boolean;
 
-  private unfinishedSessions;
-  private allSchools;
-  private allSessionIds: string[];
+  public unfinishedSessions;
+  public allSchools;
+  public allSessionIds: string[];
 
 
   constructor(
@@ -61,7 +61,7 @@ export class WelcomePage implements OnInit {
         this.roles = result;
         this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
         this.showSchoolManagement = !!_.intersection(result, ['admin', 'researcher', 'manager']).length;
-        this.showSessionManagement = !!_.intersection(result, ['admin', 'researcher', 'manager', 'teacher']).length;
+        this.showSessionManagement = !!_.intersection(result, ['admin', 'researcher']).length;
 
         console.log('tools', this.showUserManagement, this.showSchoolManagement, this.showSessionManagement)
       },
