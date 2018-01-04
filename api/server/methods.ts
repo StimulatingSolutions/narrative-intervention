@@ -42,7 +42,13 @@ Meteor.methods({
 
   sendResetUserPasswordEmail(email: string): void {
 
+    if (!email) {
+      throw new Meteor.Error('no email entered', 'Please enter the email address of the account you need to reset');
+    }
     const newUser: MongoObject = Accounts.findUserByEmail(email);
+    if (!newUser) {
+      throw new Meteor.Error('account not found', 'Please double-check the email address you entered.');
+    }
     Accounts.sendResetPasswordEmail(newUser._id);
 
   },
