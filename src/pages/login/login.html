@@ -15,29 +15,39 @@
       <ion-label floating>Password</ion-label>
       <ion-input [(ngModel)]="loginPassword" type="password"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="login()">Login</button>
+        <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
+      </ion-buttons>
+    </ion-item>
   </ion-list>
-  <ion-buttons class='action-buttons'>
-    <button ion-button (click)="login()">Login</button>
-    <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
-  </ion-buttons>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
   <br/>
   <br/>
   <ion-list>
     <ion-list-header class="form-header">Students:</ion-list-header>
     <ion-item>
       <ion-label floating>Session Code</ion-label>
-      <ion-input [(ngModel)]="loginSession" type="text"></ion-input>
+      <ion-input [(ngModel)]="loginSession" type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student Id</ion-label>
-      <ion-input [(ngModel)]="sessionUserId" type="text"></ion-input>
+      <ion-input [(ngModel)]="sessionUserId" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="joinSession()">Join Session</button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
-  <ion-buttons class='action-buttons'>
-    <button ion-button (click)="joinSession()">Join Session</button>
-  </ion-buttons>
+  <br/>
+  <br/>
+  <ion-list>
+    <ion-list-header class="form-header">Questions?</ion-list-header>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="danger" (click)="info()">Click here for information</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
 </ion-content>

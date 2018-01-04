@@ -88,4 +88,9 @@ export class LoginPage {
 
     alert.present();
   }
+
+  info(): void {
+    // go to info page
+    //this.navCtrl.push(LoginPage, {});
+  }
 }

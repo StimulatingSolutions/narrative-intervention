@@ -9,20 +9,99 @@
 </ion-header>
 
 <ion-content padding class="welcome-page-content">
-  <div class="instructions">
-    <div>
-      Welcome after login!
+  <ion-list *ngIf="(unfinishedSessions | async)?.length > 0">
+    <ion-list-header>Your in-progress sessions:</ion-list-header>
+    <ion-item *ngFor="let session of unfinishedSessions | async">
+      <div class="session-name">{{session.name}}</div>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="viewSession(session)">Join Session</button>
+        <button ion-button color="danger" (click)="finishSession(session)">Mark Session Finished</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <br/>
+  <br/>
+  <br/>
+  <ion-list>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="showAddSession(true)">Create Session</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="showJoinSession(true)">Join Someone Else's Session</button>
+      </ion-buttons>
+    </ion-item>
+
+    <div *ngIf="addSessionVisible" class='action-form'>
+      <ion-card>
+        <ion-card-header>
+          Create Session
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label>School</ion-label>
+              <ion-select [(ngModel)]="addSessionSchoolId">
+                <ion-option *ngFor="let school of allSchools | async" [value]="school.name">{{school.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label>Lesson Number</ion-label>
+            <ion-select [(ngModel)]="addSessionId">
+              <ion-option *ngFor="let sessionId of allSessionIds" [value]="sessionId">{{sessionId}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-card-content>
+        <ion-buttons class='action-buttons'>
+          <button ion-button (click)="addSession()">Create</button>
+          <button ion-button (click)="showAddSession(false)">Cancel</button>
+        </ion-buttons>
+      </ion-card>
     </div>
-  </div>
 
-  <ion-item [hidden]='!showUserManagement'>
-    <button ion-button (click)="viewUserManagement()">User Management</button>
-  </ion-item>
-  <ion-item [hidden]='!showSchoolManagement'>
-    <button ion-button (click)="viewSchoolManagement()">School Management</button>
-  </ion-item>
-  <ion-item [hidden]='!showSessionManagement'>
-    <button ion-button (click)="viewSessionManagement()">Session Management</button>
-  </ion-item>
+    <div *ngIf="joinSessionVisible" class='action-form'>
+      <ion-card>
+        <ion-card-header>
+          Join Someone Else's Session
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Session Code</ion-label>
+              <ion-input [(ngModel)]="joinSessionCode" type="number"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        <ion-buttons class='action-buttons'>
+          <button ion-button (click)="joinSession()">Join</button>
+          <button ion-button (click)="showJoinSession(false)">Cancel</button>
+        </ion-buttons>
+      </ion-card>
+    </div>
+  </ion-list>
+  <br/>
+  <br/>
+  <br/>
 
+  <ion-list [hidden]='!showUserManagement && !showSchoolManagement && !showSessionManagement'>
+    <ion-list-header>Management Options:</ion-list-header>
+    <ion-item [hidden]='!showUserManagement'>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="secondary" (click)="viewUserManagement()">User Management</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item [hidden]='!showSchoolManagement'>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="secondary" (click)="viewSchoolManagement()">School Management</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item [hidden]='!showSessionManagement'>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="secondary" (click)="viewSessionManagement()">Session Management</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
 </ion-content>

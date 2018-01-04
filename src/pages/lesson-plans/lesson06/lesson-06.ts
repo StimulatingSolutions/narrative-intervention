@@ -168,14 +168,7 @@ export class Lesson06 implements OnInit {
 
   toggleSessionActive(active: boolean): void {
     MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
-      next: () => {
-        const alert = this.alertCtrl.create({
-          title: 'Success!',
-          message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
-          buttons: ['OK']
-        });
-        alert.present();
-      },
+      next: () => {},
       error: (e: Error) => {
         this.handleError(e);
       }

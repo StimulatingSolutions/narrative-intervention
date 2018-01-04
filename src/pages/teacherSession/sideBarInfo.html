@@ -1,40 +1,17 @@
 <ion-content class="side-bar-info-content">
   <ion-card>
-    <ion-card-header>
-      Session Id
+    <ion-card-header *ngIf="session?.readyForResponse">
+      Waiting For: {{waitCount}}
+    </ion-card-header>
+    <ion-card-header *ngIf="!session?.readyForResponse">
+      Students: {{session?.activeUsers.length || 0}}
     </ion-card-header>
     <ion-card-content>
-      {{session?.shortId}}
+      <div *ngFor="let user of session?.activeUsers">
+        {{user}}
+      </div>
     </ion-card-content>
   </ion-card>
-  <div [class.hidden]="session?.readyForResponse">
-    <ion-card>
-      <ion-card-header>
-        Students
-      </ion-card-header>
-      <ion-card-content>
-        {{session?.activeUsers.length || 0}}
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        Current Step
-      </ion-card-header>
-      <ion-card-content>
-        {{currentStep}}
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div [class.hidden]="!session?.readyForResponse">
-    <ion-card>
-      <ion-card-header>
-        Waiting For
-      </ion-card-header>
-      <ion-card-content>
-        {{waitCount}}
-      </ion-card-content>
-    </ion-card>
-  </div>
 
   <ion-buttons class='button-container'>
     <button ion-button (click)="findMyPlace()" [class.hidden]="session?.readyForResponse" >Find My Place</button>
