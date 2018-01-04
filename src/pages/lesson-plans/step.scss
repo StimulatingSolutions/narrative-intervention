@@ -1,20 +1,20 @@
 .step-content {
-  // probably need to move the <step> styling from lesson-plan.scss to here
+
+  padding: 5px;
+  border: 3px solid transparent;
 
   &.subdued {
     opacity: .5;
   }
   &.highlighted {
-    padding: 5px;
-    border: 3px solid #dfea2c;
+    border-color: #dfea2c;
     background-color: #dfea2c;
   }
   &.question {
-    padding: 5px;
-    border: 3px solid #dfea2c;
+    border-color: #EBB;
   }
   &.active-question {
-    border: 3px solid #EBB;
+    border-color: #EBB;
     background-color: #EBB;
   }
 }

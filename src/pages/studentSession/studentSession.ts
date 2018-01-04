@@ -1,16 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
-//import { Observable } from 'rxjs';
 
 import { Sessions } from 'api/collections';
 import { Session } from 'api/models';
 
-import { LandingPage } from '../landing/landing';
+import { LoginPage } from '../login/login';
 
-//import * as _ from 'lodash';
-// import * as moment from 'moment';
-// import * as shortid from 'shortid';
 
 @Component({
   selector: 'studentSession',
@@ -40,7 +36,7 @@ export class StudentSessionPage implements OnInit {
       MeteorObservable.autorun().subscribe(() => {
         this.session = Sessions.findOne({_id: this.studentSessionId});
         if (!this.session.active){
-          this.navCtrl.setRoot(LandingPage, {}, {
+          this.navCtrl.setRoot(LoginPage, {}, {
             animate: true
           });
         }

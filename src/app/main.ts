@@ -17,7 +17,7 @@ Meteor.startup(() => {
       return;
     }
 
-    setTimeout(() => subscription.unsubscribe());
+    setTimeout(() => { if (subscription) subscription.unsubscribe() });
     platformBrowserDynamic().bootstrapModule(AppModule);
   });
 });

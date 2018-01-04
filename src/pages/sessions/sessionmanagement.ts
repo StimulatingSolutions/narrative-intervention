@@ -70,7 +70,6 @@ export class SessionManagementPage implements OnInit {
   }
 
   addSession(): void {
-
     //CHECK EMPTYS
     if(this.addSessionId === undefined || this.addSessionSchoolId === undefined){
       const alert = this.alertCtrl.create({

@@ -12,7 +12,6 @@ import { MessagesPage } from '../pages/messages/messages';
 import { MessagesOptionsComponent } from '../pages/messages/messages-options';
 import { ProfilePage } from '../pages/profile/profile';
 import { VerificationPage } from '../pages/verification/verification';
-import { LandingPage } from '../pages/landing/landing';
 import { WelcomePage } from '../pages/landing/welcome';
 import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
 import { PhoneService } from '../services/phone';
@@ -42,7 +41,6 @@ require('smoothscroll-polyfill').polyfill();
     ChatsOptionsComponent,
     NewChatComponent,
     MessagesOptionsComponent,
-    LandingPage,
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
@@ -70,7 +68,6 @@ require('smoothscroll-polyfill').polyfill();
     ChatsOptionsComponent,
     NewChatComponent,
     MessagesOptionsComponent,
-    LandingPage,
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
