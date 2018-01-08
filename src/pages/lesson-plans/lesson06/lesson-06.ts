@@ -48,7 +48,7 @@ export class Lesson06 implements OnInit {
     this.gettingResponsesFor = this.session.questionStepId;
     this.inGetResponsesMode = this.session.readyForResponse;
     this.completedSteps = this.session.completedSteps;
-    this.suggestedStepId = ((_.max(this.completedSteps) || 0) + 1);
+    this.suggestedStepId = this.calculateSuggestedStep();
 
   }
 
@@ -76,7 +76,7 @@ export class Lesson06 implements OnInit {
       step.setDoneStatus(_.includes(this.session.completedSteps, step.stepId));
     });
 
-    this.suggestedStepId = ((_.max(this.session.completedSteps) || 0) + 1);
+    this.suggestedStepId = this.calculateSuggestedStep();
   }
 
   ngAfterViewChecked () {
@@ -169,6 +169,14 @@ export class Lesson06 implements OnInit {
       this.gettingResponsesFor = null;
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
+  }
+
+  calculateSuggestedStep (): number {
+    if (this.session.completedSteps.length === 0){
+      return 0;
+    }
+
+    return _.max(this.session.completedSteps) + 1;
   }
 
   toggleSessionActive(active: boolean): void {
