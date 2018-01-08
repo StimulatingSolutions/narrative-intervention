@@ -53,7 +53,7 @@
             <ion-radio value="admin"></ion-radio>
           </ion-item>
         </ion-list>
-        <ion-item>
+        <ion-item class="top-border">
           <ion-label floating>Name</ion-label>
           <ion-input [(ngModel)]="editUserName" type="text"></ion-input>
         </ion-item>
@@ -84,10 +84,31 @@
           <ion-label floating>Name</ion-label>
           <ion-input [(ngModel)]="addUserName" type="text"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="top-border">
           <ion-label floating>Email</ion-label>
           <ion-input [(ngModel)]="addUserEmail" type="email"></ion-input>
         </ion-item>
+        <ion-list radio-group [(ngModel)]="addUserAccountType">
+          <ion-list-header>
+            Account Type
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Teacher</ion-label>
+            <ion-radio value="teacher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Manager</ion-label>
+            <ion-radio value="manager"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Researcher</ion-label>
+            <ion-radio value="researcher"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Admin</ion-label>
+            <ion-radio value="admin"></ion-radio>
+          </ion-item>
+        </ion-list>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="addUser()">Add</button>

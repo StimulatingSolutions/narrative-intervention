@@ -1,22 +1,13 @@
-<ion-header>
-  <ion-navbar color="whatsapp">
-    <ion-title class="left">Lesson 6</ion-title>
-    <ion-title class="right">
-      Session Code: <u>{{session?.shortId}}</u>
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content class="teacher-session-page-content" >
+
+  <div *ngIf="session" class='side-bar-container'>
+    <sideBarInfo [session]='session' (onFindPlace)='handleFindPlace($event)'></sideBarInfo>
+  </div>
 
   <div padding class='session-container'>
     <div *ngIf="session" class='lessons-container'>
       <lessonplans [session]="session"></lessonplans>
     </div>
-  </div>
-
-  <div *ngIf="session" class='side-bar-container'>
-    <sideBarInfo [session]='session' (onFindPlace)='handleFindPlace($event)'></sideBarInfo>
   </div>
 
 </ion-content>

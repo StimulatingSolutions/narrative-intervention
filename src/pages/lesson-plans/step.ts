@@ -19,6 +19,7 @@ export class Step implements OnInit {
   @Input() correctAnswer?: string;  // sometimes, a question will not have a correct answer
   @Input() highlightedStepId: number;
   @Input() currentQuestionStepId: number;
+  @Input() defaultResponse: string;
 
   @Output() onGetResponses = new EventEmitter<number>();
   @Output() onCompleteNonQuestion = new EventEmitter<number>();
