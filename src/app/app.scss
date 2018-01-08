@@ -69,3 +69,14 @@ ion-navbar, ion-header, ion-content {
 .right {
   float: right;
 }
+
+.top-border {
+  border-top: 1px solid #dedede;
+}
+
+ion-list-header {
+  font-size: large !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+

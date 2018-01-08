@@ -16,7 +16,7 @@ const nonEmptyString = Match.Where((str) => {
 
 Meteor.methods({
 
-  createNewUser(email: string, name: string): void {
+  createNewUser(email: string, name: string, role: string): void {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
@@ -35,9 +35,17 @@ Meteor.methods({
       }
     });
 
+    const validRoles = ['active'];
+    Roles.getAllRoles().forEach( testRole => {
+      console.log('role', testRole);
+      if(testRole.name === role) {
+        validRoles.push(role);
+      }
+    });
+
     const newUser: MongoObject = Accounts.findUserByEmail(email);
     Accounts.sendEnrollmentEmail(newUser._id, email);
-    Roles.setUserRoles(newUser._id, ['active']);
+    Roles.setUserRoles(newUser._id, validRoles);
   },
 
   sendResetUserPasswordEmail(email: string): void {

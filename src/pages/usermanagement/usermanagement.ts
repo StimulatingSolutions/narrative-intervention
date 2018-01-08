@@ -20,6 +20,7 @@ export class UserManagementPage implements OnInit {
   addUserVisible: boolean;
   addUserName: string;
   addUserEmail: string;
+  addUserAccountType: string = 'teacher';
 
   editUserVisible: boolean;
   editUserName: string;
@@ -70,7 +71,7 @@ export class UserManagementPage implements OnInit {
       return
     }
 
-    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserName).subscribe({
+    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserName, this.addUserAccountType).subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -79,15 +80,15 @@ export class UserManagementPage implements OnInit {
         });
         alert.present();
 
-        this.addUserVisible = false;
         this.addUserEmail = '';
+        this.addUserAccountType = 'teacher';
       },
       error: (e: Error) => {
         this.handleError(e);
       }
     });
 
-    //this.addUserVisible = false;
+    this.addUserVisible = false;
   }
 
   resetUserPassword(): void {

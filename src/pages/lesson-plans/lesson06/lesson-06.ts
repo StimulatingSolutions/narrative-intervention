@@ -84,12 +84,17 @@ export class Lesson06 implements OnInit {
     if (questionDiv) {
       const offset = questionDiv.offsetTop;
       const scrollDiv = document.getElementsByClassName('session-container')[0];
-      scrollDiv.scrollTo({top: offset - 100, left: 0, behavior: "smooth"});
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ lesson: "+offset);
+      if (!offset) {
+        return;
+      }
+      scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
       scrollDiv.classList.add("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("active-question");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];
       scrollDiv.classList.remove("block-scroll");
+      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     }
   }
 

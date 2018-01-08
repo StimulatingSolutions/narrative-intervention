@@ -1,30 +1,46 @@
 <ion-content class="side-bar-info-content">
   <ion-card>
-    <ion-card-header *ngIf="session?.readyForResponse">
-      Waiting For: {{waitCount}}
-    </ion-card-header>
-    <ion-card-header *ngIf="!session?.readyForResponse">
-      Students: {{session?.activeUsers.length || 0}}
+    <ion-card-header>
+      <div class="student-count" *ngIf="!session?.readyForResponse">
+        Students: {{session?.activeUsers.length || 0}}
+      </div>
+      <div class="student-count" *ngIf="session?.readyForResponse">
+        Waiting For: {{waitCount}}
+      </div>
+      <div class="session-id">
+        Session Code: <b>{{session?.shortId}}</b>
+      </div>
+      <ion-buttons class='button-container'>
+        <button ion-button (click)="closeQuestion()" [class.hidden]="!session?.readyForResponse" >Done!</button>
+        <button ion-button color="secondary" (click)="findMyPlace()" [class.hidden]="session?.readyForResponse" >Find My Place</button>
+        <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
+      </ion-buttons>
     </ion-card-header>
     <ion-card-content>
-      <div *ngFor="let user of session?.activeUsers">
+      <div class="student" *ngFor="let user of session?.activeUsers">
         {{user}}
+      </div>
+      <!--
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      <div class="student">12345</div>
+      -->
+      <div *ngIf="session?.activeUsers.length === 0">
+        <i>No students have connected to this session yet.</i>
       </div>
     </ion-card-content>
   </ion-card>
-
-  <ion-buttons class='button-container'>
-    <button ion-button (click)="findMyPlace()" [class.hidden]="session?.readyForResponse" >Find My Place</button>
-    <button ion-button (click)="closeQuestion()" [class.hidden]="!session?.readyForResponse" >Done!</button>
-  </ion-buttons>
-
-  <div class='bottom-buttons'>
-    <ion-buttons class='button-container'>
-      <!-- <button ion-button [class.hidden]="!session?.active" color='danger' (click)="toggleSessionActive(false)">Deactivate</button> -->
-      <!-- <button ion-button [class.hidden]=" session?.active" (click)="toggleSessionActive(true)">Activate</button> -->
-      <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
-    </ion-buttons>
-  </div>
-
-
 </ion-content>
