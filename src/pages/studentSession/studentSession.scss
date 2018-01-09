@@ -2,6 +2,11 @@
 
   max-height: 600px;
   max-width: 1024px;
+  background-color: black;
+
+  &.active-response {
+    background-color: white;
+  }
 
   ion-navbar, ion-header, ion-content {
     max-width: 1024px;
@@ -38,7 +43,7 @@
     background-image: url(../assets/imgs/outcome-yes.png);
   }
 
-  .active {
+  .selected-card {
     -webkit-box-shadow: 0 0 8px 12px #FF4;
     -moz-box-shadow: 0 0 8px 12px #FF4;
     box-shadow: 0 0 8px 12px #FF4;
