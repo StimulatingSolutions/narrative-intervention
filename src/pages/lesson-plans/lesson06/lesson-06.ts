@@ -31,7 +31,6 @@ export class Lesson06 implements OnInit {
   suggestedStepId: number;
   gettingResponsesFor: number;
   inGetResponsesMode: boolean;
-  completedSteps: number[];
 
   constructor(
     private alertCtrl: AlertController
@@ -47,8 +46,7 @@ export class Lesson06 implements OnInit {
 
     this.gettingResponsesFor = this.session.questionStepId;
     this.inGetResponsesMode = this.session.readyForResponse;
-    this.completedSteps = this.session.completedSteps;
-    this.suggestedStepId = ((_.max(this.completedSteps) || 0) + 1);
+    this.suggestedStepId = this.calculateSuggestedStep();
 
   }
 
@@ -76,7 +74,11 @@ export class Lesson06 implements OnInit {
       step.setDoneStatus(_.includes(this.session.completedSteps, step.stepId));
     });
 
-    this.suggestedStepId = ((_.max(this.session.completedSteps) || 0) + 1);
+    const newStepId = this.calculateSuggestedStep();
+    if (newStepId !== this.suggestedStepId){
+        console.log('New suggested Step', newStepId);
+        this.suggestedStepId = newStepId;
+    }
   }
 
   ngAfterViewChecked () {
@@ -99,8 +101,10 @@ export class Lesson06 implements OnInit {
   }
 
   stepClicked(stepId) {
+    console.log('Clicked step: ', stepId)
     //If on question dont proceed
     if (this.gettingResponsesFor && this.gettingResponsesFor > -1){
+      console.log('Clicked Step while in response mode.')
       return
     }
 
@@ -110,27 +114,26 @@ export class Lesson06 implements OnInit {
   toggleStep (stepId) {
     //can only complete question type by side bar
     if (!this.steps[stepId].questionType) {
-
       //locat state b/c its faster than waiting for session update
-      if (!this.steps[stepId].done){
-        this.completedSteps.push(stepId);
-        if (stepId < this.steps.length - 1 && this.steps[stepId + 1].questionType && this.suggestedStepId === stepId){
-          this.setReadyForResponse(stepId + 1);
-        }
-      } else {
-        this.completedSteps.splice(this.completedSteps.indexOf(stepId), 1);
+      console.log('TESTING NEXT STEP FOR QUESTION')
+      console.log('stepId < this.steps.length - 1', (stepId < this.steps.length - 1))
+      console.log('this.steps[stepId + 1].questionType', (this.steps[stepId + 1].questionType))
+      console.log('this.suggestedStepId <= stepId', (this.suggestedStepId <= stepId))
+      console.log('!this.steps[stepId].done', (!this.steps[stepId].done))
+      if (stepId < this.steps.length - 1 && this.steps[stepId + 1].questionType && this.suggestedStepId <= stepId && !this.steps[stepId].done){
+        console.log('Activating question: ', stepId + 1)
+        this.setReadyForResponse(stepId + 1);
       }
       //(sessionId: string, add: boolean, stepId: number){
       Meteor.call('updateCompletedStepList', this.session._id, !this.steps[stepId].done, stepId, (error, result) => {
         console.log('updated step done', result);
       });
     } else {
-      //clicked a question while not in response mode
-      this.completedSteps.splice(this.completedSteps.indexOf(stepId), 1);
+      console.log('Activating question from direct click')
       this.setReadyForResponse(stepId);
     }
 
-    if ((_.max(this.completedSteps) + 1) === this.steps.length){
+    if (stepId + 1 === this.steps.length){
       if (this.session.active){
         this.toggleSessionActive(false);
       }
@@ -145,6 +148,7 @@ export class Lesson06 implements OnInit {
     Meteor.call('updateCompletedStepList', this.session._id, false, stepId, (error, result) => {
       console.log('updated step done', result);
     });
+    console.log('Activating response mode: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, (error, result) => {
       if (error){
         this.handleError(error);
@@ -159,7 +163,7 @@ export class Lesson06 implements OnInit {
     Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
       console.log('updated step done', result);
     });
-    this.completedSteps.push(this.gettingResponsesFor);
+    console.log('Completing Question: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
       if (error){
         this.handleError(error);
@@ -169,6 +173,14 @@ export class Lesson06 implements OnInit {
       this.gettingResponsesFor = null;
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
+  }
+
+  calculateSuggestedStep (): number {
+    if (this.session.completedSteps.length === 0){
+      return 0;
+    }
+
+    return _.max(this.session.completedSteps) + 1;
   }
 
   toggleSessionActive(active: boolean): void {

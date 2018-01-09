@@ -366,6 +366,8 @@ Meteor.methods({
   },
 
   updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId){
+
+    console.log('Updating Session Ready for response', stepId, ready);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -405,6 +407,8 @@ Meteor.methods({
   },
 
   updateCompletedStepList(sessionId: string, add: boolean, stepId: number){
+
+    console.log("Updated Completed List", stepId, add);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
