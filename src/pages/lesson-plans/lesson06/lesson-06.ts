@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Step } from '../step';
@@ -33,6 +33,7 @@ export class Lesson06 implements OnInit {
   inGetResponsesMode: boolean;
 
   constructor(
+    private ref: ChangeDetectorRef,
     private alertCtrl: AlertController
   ) {
 
@@ -79,6 +80,7 @@ export class Lesson06 implements OnInit {
         console.log('New suggested Step', newStepId);
         this.suggestedStepId = newStepId;
     }
+    this.ref.detectChanges();
   }
 
   ngAfterViewChecked () {
@@ -173,6 +175,8 @@ export class Lesson06 implements OnInit {
       }
       this.inGetResponsesMode = false;
       this.gettingResponsesFor = null;
+      console.log("------------ finished updateSessionReadyForResponse");
+      this.ref.detectChanges();
     });
   }
 
