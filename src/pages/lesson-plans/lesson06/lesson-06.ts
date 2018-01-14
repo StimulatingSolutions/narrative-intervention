@@ -48,7 +48,7 @@ export class Lesson06 implements OnInit {
   }
 
   ngOnChanges (changes) {
-    console.log('changes', changes);
+    //console.log('changes', changes);
     if (changes.session.previousValue && changes.session.previousValue.readyForResponse && changes.session.previousValue.readyForResponse !== this.gettingResponsesFor){
       //QUESTION CLOSED IN SIDEBAR
       if (this.inGetResponsesMode && !this.session.readyForResponse){
@@ -67,13 +67,17 @@ export class Lesson06 implements OnInit {
   }
 
   ngDoCheck () {
+    this.updateSuggestedStep();
+  }
+
+  updateSuggestedStep () {
     this.steps.forEach( step => {
       step.setDoneStatus(_.includes(this.session.completedSteps, step.stepId));
     });
 
     const newStepId = this.calculateSuggestedStep();
     if (newStepId !== this.suggestedStepId){
-        console.log('New suggested Step', newStepId);
+        //console.log('New suggested Step', newStepId);
         this.suggestedStepId = newStepId;
     }
   }
@@ -87,12 +91,12 @@ export class Lesson06 implements OnInit {
         return;
       }
       scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
+      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
       scrollDiv.classList.add("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("response-mode");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REMOVING block-scroll ("+this.inGetResponsesMode+")");
+      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REMOVING block-scroll ("+this.inGetResponsesMode+")");
       scrollDiv.classList.remove("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("response-mode");
     }
@@ -103,10 +107,10 @@ export class Lesson06 implements OnInit {
   }
 
   stepClicked(stepId) {
-    console.log('Clicked step: ', stepId)
+    //console.log('Clicked step: ', stepId)
     //If on question dont proceed
     if (this.gettingResponsesFor && this.gettingResponsesFor > -1){
-      console.log('Clicked Step while in response mode.')
+      //console.log('Clicked Step while in response mode.')
       return
     }
 
@@ -117,21 +121,21 @@ export class Lesson06 implements OnInit {
     //can only complete question type by side bar
     if (!this.steps[stepId].questionType) {
       //locat state b/c its faster than waiting for session update
-      console.log('TESTING NEXT STEP FOR QUESTION')
-      console.log('stepId < this.steps.length - 1', (stepId < this.steps.length - 1))
-      console.log('this.steps[stepId + 1].questionType', (this.steps[stepId + 1].questionType))
-      console.log('this.suggestedStepId <= stepId', (this.suggestedStepId <= stepId))
-      console.log('!this.steps[stepId].done', (!this.steps[stepId].done))
+      //console.log('TESTING NEXT STEP FOR QUESTION')
+      //console.log('stepId < this.steps.length - 1', (stepId < this.steps.length - 1))
+      //console.log('this.steps[stepId + 1].questionType', (this.steps[stepId + 1].questionType))
+      //console.log('this.suggestedStepId <= stepId', (this.suggestedStepId <= stepId))
+      //console.log('!this.steps[stepId].done', (!this.steps[stepId].done))
       if (stepId < this.steps.length - 1 && this.steps[stepId + 1].questionType && this.suggestedStepId <= stepId && !this.steps[stepId].done){
-        console.log('Activating question: ', stepId + 1)
+        //console.log('Activating question: ', stepId + 1)
         this.setReadyForResponse(stepId + 1);
       }
       //(sessionId: string, add: boolean, stepId: number){
       Meteor.call('updateCompletedStepList', this.session._id, !this.steps[stepId].done, stepId, (error, result) => {
-        console.log('updated step done', result);
+        //console.log('updated step done', result);
       });
     } else {
-      console.log('Activating question from direct click')
+      //console.log('Activating question from direct click')
       this.setReadyForResponse(stepId);
     }
 
@@ -148,9 +152,9 @@ export class Lesson06 implements OnInit {
 
   setReadyForResponse (stepId) {
     Meteor.call('updateCompletedStepList', this.session._id, false, stepId, (error, result) => {
-      console.log('updated step done', result);
+      //console.log('updated step done', result);
     });
-    console.log('Activating response mode: ', stepId)
+    //console.log('Activating response mode: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, (error, result) => {
       if (error){
         this.handleError(error);
@@ -163,18 +167,22 @@ export class Lesson06 implements OnInit {
 
   completeReadyForResponse (stepId) {
     Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
-      console.log('updated step done', result);
-    });
-    console.log('Completing Question: ', stepId)
-    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
-      if (error){
-        this.handleError(error);
-        return;
-      }
-      this.inGetResponsesMode = false;
-      this.gettingResponsesFor = null;
-      console.log("-------------------- completeReadyForResponse done");
-      this.handleResponseModeStuff();
+      //console.log('updated step done', result);
+      //console.log('Completing Question: ', stepId);
+      Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
+        if (error){
+          this.handleError(error);
+          return;
+        }
+        this.inGetResponsesMode = false;
+        this.gettingResponsesFor = null;
+        //console.log("-------------------- completeReadyForResponse done");
+        this.handleResponseModeStuff();
+        this.updateSuggestedStep();
+        if (this.steps[this.suggestedStepId].questionType) {
+          this.setReadyForResponse(this.suggestedStepId);
+        }
+      });
     });
   }
 
