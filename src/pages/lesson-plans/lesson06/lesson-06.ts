@@ -80,10 +80,9 @@ export class Lesson06 implements OnInit {
 
   handleResponseModeStuff () {
     const questionDiv = <HTMLElement>document.getElementsByClassName('active-question')[0];
-    if (questionDiv) {
+    if (this.inGetResponsesMode && questionDiv) {
       const offset = questionDiv.offsetTop;
       const scrollDiv = document.getElementsByClassName('session-container')[0];
-      console.log("-------------------- lesson: "+offset);
       if (!offset) {
         return;
       }
@@ -174,6 +173,7 @@ export class Lesson06 implements OnInit {
       }
       this.inGetResponsesMode = false;
       this.gettingResponsesFor = null;
+      console.log("-------------------- completeReadyForResponse done");
       this.handleResponseModeStuff();
     });
   }

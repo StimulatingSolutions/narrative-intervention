@@ -559,7 +559,7 @@
           </step>
         </li>
         <li>
-          <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+          <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="goal" correctAnswer="yes" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
             <p>Ask, “How do I record an outcome yes on the Velcro board?”</p>
             <p>[Write what happened on an outcome yes card.]</p>
           </step>
