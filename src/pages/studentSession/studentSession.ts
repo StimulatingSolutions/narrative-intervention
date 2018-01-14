@@ -7,7 +7,7 @@ import { Session } from 'api/models';
 
 import { LoginPage } from '../login/login';
 
-
+import * as _ from 'lodash';
 @Component({
   selector: 'studentSession',
   templateUrl: 'studentSession.html'
@@ -18,7 +18,6 @@ export class StudentSessionPage implements OnInit {
   userId: string;
   session: Session;
   selectedCard: string;
-  inGetResponsesMode: boolean;
 
   constructor(
     //private navCtrl: NavController
@@ -29,15 +28,12 @@ export class StudentSessionPage implements OnInit {
   ) {
     this.studentSessionId = this.navParams.get('sessionId');
     this.userId = this.navParams.get('userId');
-    console.log('incoming id', this.studentSessionId)
-    this.inGetResponsesMode = false;
   }
 
   ngOnInit(): void {
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
         this.session = Sessions.findOne({_id: this.studentSessionId});
-        //this.inGetResponsesMode = this.session.readyForResponse;
         this.ref.detectChanges();
         if (!this.session.active){
           this.navCtrl.setRoot(LoginPage, {}, {
@@ -45,6 +41,18 @@ export class StudentSessionPage implements OnInit {
           });
         }
       });
+
+      const session = Sessions.findOne({_id: this.studentSessionId});
+      if (session.readyForResponse) {
+        // IF STARTING UP IN RESPONSE MODE SET SELECTED CARD
+        const thisStepsResponses = session.responses.filter( response => {
+          return response.step = session.questionStepId;
+        });
+        const latestResponse = _.maxBy(thisStepsResponses, (o) => {
+          return o.date;
+        });
+        this.selectedCard = latestResponse.response;
+      }
     });
     Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
       if (error){
@@ -52,11 +60,12 @@ export class StudentSessionPage implements OnInit {
         return;
       }
     })
+
+    console.log('session?', Sessions.findOne({_id: this.studentSessionId}))
   }
 
   ngDoCheck () {
     //console.log(this.session)
-    console.log('in response mode', this.inGetResponsesMode);
   }
 
 
@@ -72,6 +81,7 @@ export class StudentSessionPage implements OnInit {
   selectCard(cardName: string): void {
     this.selectedCard = cardName;
     if (this.session && this.session.readyForResponse) {
+      this.selectedCard = cardName;
       const date = new Date();
       Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
         if (error){
@@ -79,6 +89,8 @@ export class StudentSessionPage implements OnInit {
           return;
         }
       })
+    } else {
+      this.selectedCard = null;
     }
 
     this.ref.detectChanges();
