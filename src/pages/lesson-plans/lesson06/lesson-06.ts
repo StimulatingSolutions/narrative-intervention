@@ -1,14 +1,11 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Step } from '../step';
-//import { Observable } from 'rxjs';
 import { Session } from 'api/models';
 
 
 import * as _ from 'lodash';
-// import * as moment from 'moment';
-// import * as shortid from 'shortid';
 
 @Component({
   selector: 'lesson06',
@@ -33,7 +30,6 @@ export class Lesson06 implements OnInit {
   inGetResponsesMode: boolean;
 
   constructor(
-    private ref: ChangeDetectorRef,
     private alertCtrl: AlertController
   ) {
 
@@ -80,10 +76,9 @@ export class Lesson06 implements OnInit {
         console.log('New suggested Step', newStepId);
         this.suggestedStepId = newStepId;
     }
-    this.ref.detectChanges();
   }
 
-  ngAfterViewChecked () {
+  handleResponseModeStuff () {
     const questionDiv = <HTMLElement>document.getElementsByClassName('active-question')[0];
     if (questionDiv) {
       const offset = questionDiv.offsetTop;
@@ -102,6 +97,10 @@ export class Lesson06 implements OnInit {
       scrollDiv.classList.remove("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("response-mode");
     }
+  }
+
+  ngAfterViewChecked () {
+    this.handleResponseModeStuff();
   }
 
   stepClicked(stepId) {
@@ -175,8 +174,7 @@ export class Lesson06 implements OnInit {
       }
       this.inGetResponsesMode = false;
       this.gettingResponsesFor = null;
-      console.log("------------ finished updateSessionReadyForResponse");
-      this.ref.detectChanges();
+      this.handleResponseModeStuff();
     });
   }
 
