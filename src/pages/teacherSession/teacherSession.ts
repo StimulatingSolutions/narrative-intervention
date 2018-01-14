@@ -46,6 +46,7 @@ export class TeacherSessionPage implements OnInit {
     if (highlightedDiv) {
       const offset = highlightedDiv.offsetTop;
       const scrollDiv = document.getElementsByClassName('session-container')[0];
+      console.log("-------------------- teacherSession: "+offset);
       scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
     }
   }
