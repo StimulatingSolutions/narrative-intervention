@@ -51,7 +51,6 @@ export class Lesson06 implements OnInit {
   }
 
   ngOnChanges (changes) {
-    console.log('changes', changes);
     if (changes.session.previousValue && changes.session.previousValue.readyForResponse && changes.session.previousValue.readyForResponse !== this.gettingResponsesFor){
       //QUESTION CLOSED IN SIDEBAR
       if (this.inGetResponsesMode && !this.session.readyForResponse){
@@ -76,7 +75,6 @@ export class Lesson06 implements OnInit {
 
     const newStepId = this.calculateSuggestedStep();
     if (newStepId !== this.suggestedStepId){
-        console.log('New suggested Step', newStepId);
         this.suggestedStepId = newStepId;
     }
   }
@@ -86,7 +84,6 @@ export class Lesson06 implements OnInit {
     if (questionDiv) {
       const offset = questionDiv.offsetTop;
       const scrollDiv = document.getElementsByClassName('session-container')[0];
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ lesson: "+offset);
       if (!offset) {
         return;
       }
@@ -101,10 +98,8 @@ export class Lesson06 implements OnInit {
   }
 
   stepClicked(stepId) {
-    console.log('Clicked step: ', stepId)
     //If on question dont proceed
     if (this.gettingResponsesFor && this.gettingResponsesFor > -1){
-      console.log('Clicked Step while in response mode.')
       return
     }
 
@@ -115,21 +110,13 @@ export class Lesson06 implements OnInit {
     //can only complete question type by side bar
     if (!this.steps[stepId].questionType) {
       //locat state b/c its faster than waiting for session update
-      console.log('TESTING NEXT STEP FOR QUESTION')
-      console.log('stepId < this.steps.length - 1', (stepId < this.steps.length - 1))
-      console.log('this.steps[stepId + 1].questionType', (this.steps[stepId + 1].questionType))
-      console.log('this.suggestedStepId <= stepId', (this.suggestedStepId <= stepId))
-      console.log('!this.steps[stepId].done', (!this.steps[stepId].done))
       if (stepId < this.steps.length - 1 && this.steps[stepId + 1].questionType && this.suggestedStepId <= stepId && !this.steps[stepId].done){
-        console.log('Activating question: ', stepId + 1)
         this.setReadyForResponse(stepId + 1);
       }
       //(sessionId: string, add: boolean, stepId: number){
       Meteor.call('updateCompletedStepList', this.session._id, !this.steps[stepId].done, stepId, (error, result) => {
-        console.log('updated step done', result);
       });
     } else {
-      console.log('Activating question from direct click')
       this.setReadyForResponse(stepId);
     }
 
@@ -146,9 +133,7 @@ export class Lesson06 implements OnInit {
 
   setReadyForResponse (stepId) {
     Meteor.call('updateCompletedStepList', this.session._id, false, stepId, (error, result) => {
-      console.log('updated step done', result);
     });
-    console.log('Activating response mode: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, (error, result) => {
       if (error){
         this.handleError(error);
@@ -161,9 +146,7 @@ export class Lesson06 implements OnInit {
 
   completeReadyForResponse (stepId) {
     Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
-      console.log('updated step done', result);
     });
-    console.log('Completing Question: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
       if (error){
         this.handleError(error);

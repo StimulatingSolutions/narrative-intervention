@@ -18,7 +18,7 @@ export class StudentSessionPage implements OnInit {
   userId: string;
   session: Session;
   selectedCard: string;
-  inGetResponsesMode; boolean;
+  inGetResponsesMode: boolean;
 
   constructor(
     //private navCtrl: NavController
@@ -30,13 +30,15 @@ export class StudentSessionPage implements OnInit {
     this.studentSessionId = this.navParams.get('sessionId');
     this.userId = this.navParams.get('userId');
     console.log('incoming id', this.studentSessionId)
+    this.inGetResponsesMode = false;
   }
 
   ngOnInit(): void {
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
         this.session = Sessions.findOne({_id: this.studentSessionId});
-        this.inGetResponsesMode = this.session.readyForResponse;
+        //this.inGetResponsesMode = this.session.readyForResponse;
+        this.ref.detectChanges();
         if (!this.session.active){
           this.navCtrl.setRoot(LoginPage, {}, {
             animate: true
@@ -54,7 +56,7 @@ export class StudentSessionPage implements OnInit {
 
   ngDoCheck () {
     //console.log(this.session)
-    console.log('in response mode', this.session);
+    console.log('in response mode', this.inGetResponsesMode);
   }
 
 

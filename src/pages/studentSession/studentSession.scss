@@ -4,8 +4,8 @@
   max-width: 1024px;
   background-color: black;
 
-  &.active-response {
-    background-color: white;
+  &.active {
+    background-color: white !important;
   }
 
   ion-navbar, ion-header, ion-content {
