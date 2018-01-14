@@ -91,12 +91,12 @@ export class Lesson06 implements OnInit {
         return;
       }
       scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll");
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
       scrollDiv.classList.add("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("response-mode");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REMOVING block-scroll");
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REMOVING block-scroll ("+this.inGetResponsesMode+")");
       scrollDiv.classList.remove("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("response-mode");
     }
@@ -173,7 +173,6 @@ export class Lesson06 implements OnInit {
       }
       this.inGetResponsesMode = false;
       this.gettingResponsesFor = null;
-      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
   }
 
