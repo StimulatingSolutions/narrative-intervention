@@ -1,4 +1,4 @@
-<ion-content padding class="student-session-page-content">
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse">
     <div class='card-row'>
       <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
       <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
