@@ -36,7 +36,6 @@ export class Lesson06 implements OnInit {
   }
 
   ngOnChanges (changes) {
-    //console.log('changes', changes);
     if (changes.session.previousValue && changes.session.previousValue.readyForResponse && changes.session.previousValue.readyForResponse !== this.gettingResponsesFor){
       //QUESTION CLOSED IN SIDEBAR
       if (this.inGetResponsesMode && !this.session.readyForResponse){

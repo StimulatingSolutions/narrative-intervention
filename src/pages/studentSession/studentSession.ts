@@ -7,7 +7,7 @@ import { Session } from 'api/models';
 
 import { LoginPage } from '../login/login';
 
-
+import * as _ from 'lodash';
 @Component({
   selector: 'studentSession',
   templateUrl: 'studentSession.html'
@@ -18,7 +18,6 @@ export class StudentSessionPage implements OnInit {
   userId: string;
   session: Session;
   selectedCard: string;
-  inGetResponsesMode; boolean;
 
   constructor(
     //private navCtrl: NavController
@@ -29,20 +28,37 @@ export class StudentSessionPage implements OnInit {
   ) {
     this.studentSessionId = this.navParams.get('sessionId');
     this.userId = this.navParams.get('userId');
-    console.log('incoming id', this.studentSessionId)
   }
 
   ngOnInit(): void {
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
-        this.session = Sessions.findOne({_id: this.studentSessionId});
-        this.inGetResponsesMode = this.session.readyForResponse;
+
+        const updatedSession = Sessions.findOne({_id: this.studentSessionId});
+        this.updateSessionChanges(this.session, updatedSession);
+        this.session = updatedSession;
+
+        this.ref.detectChanges();
         if (!this.session.active){
           this.navCtrl.setRoot(LoginPage, {}, {
             animate: true
           });
         }
       });
+
+      const session = Sessions.findOne({_id: this.studentSessionId});
+      if (session.readyForResponse) {
+        // IF STARTING UP IN RESPONSE MODE SET SELECTED CARD
+        const thisStepsResponses = session.responses.filter( response => {
+          return response.step === session.questionStepId && response.studentId === this.userId;
+        });
+        const latestResponse = _.maxBy(thisStepsResponses, (o) => {
+          return o.date;
+        });
+        if (latestResponse){
+          this.selectedCard = latestResponse.response;
+        }
+      }
     });
     Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
       if (error){
@@ -50,13 +66,32 @@ export class StudentSessionPage implements OnInit {
         return;
       }
     })
+
+    console.log('session?', Sessions.findOne({_id: this.studentSessionId}))
   }
 
-  ngDoCheck () {
-    //console.log(this.session)
-    console.log('in response mode', this.session);
-  }
+  updateSessionChanges (oldSession: Session, newSession: Session): void {
+    if (oldSession === undefined || newSession === undefined){
+      return;
+    }
 
+    if(!oldSession.readyForResponse && newSession.readyForResponse){
+      const thisStepsResponses = newSession.responses.filter( response => {
+        return response.step === newSession.questionStepId && response.studentId === this.userId;
+      });
+      const latestResponse = _.maxBy(thisStepsResponses, (o) => {
+        return o.date;
+      });
+      if (latestResponse){
+        this.selectedCard = latestResponse.response;
+      }
+
+    }
+
+    if (!newSession.readyForResponse){
+      this.selectedCard = null;
+    }
+  }
 
   ngOnDestroy(): void {
     Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
@@ -70,6 +105,7 @@ export class StudentSessionPage implements OnInit {
   selectCard(cardName: string): void {
     this.selectedCard = cardName;
     if (this.session && this.session.readyForResponse) {
+      this.selectedCard = cardName;
       const date = new Date();
       Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
         if (error){
@@ -77,6 +113,8 @@ export class StudentSessionPage implements OnInit {
           return;
         }
       })
+    } else {
+      this.selectedCard = null;
     }
 
     this.ref.detectChanges();

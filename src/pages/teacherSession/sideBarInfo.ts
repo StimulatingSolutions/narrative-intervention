@@ -20,6 +20,8 @@ export class SideBarInfo {
   @Output() onFindPlace =  new EventEmitter<void>();
 
   waitCount: number;
+  idsWithAnswer: number[];
+  currentResponses: {};
   currentStep: number;
 
   constructor(
@@ -28,20 +30,33 @@ export class SideBarInfo {
     public navCtrl: NavController,
   ) {
     this.waitCount = 0;
+    this.idsWithAnswer = [];
+    this.currentResponses = {};
   }
 
   ngDoCheck () {
     //QUESTION CLOSED IN SIDEBAR
-    if (this.session.readyForResponse){
 
-      const stepResponses = this.session.responses.filter( response => {
-        return response.step === this.session.questionStepId;
-      });
-      const ids = stepResponses.map( response => {
-        return response.studentId;
-      });
-      this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
-    }
+    const stepResponses = this.session.responses.filter( response => {
+      return response.step === this.session.questionStepId;
+    });
+
+    stepResponses.forEach( response => {
+      if (!this.currentResponses.hasOwnProperty(response.studentId)){
+        this.currentResponses[response.studentId] = {
+          response: response.response,
+          date: response.date
+        }
+      } else if (response.date > this.currentResponses[response.studentId].date){
+        this.currentResponses[response.studentId] = response;
+      }
+    })
+    const ids = stepResponses.map( response => {
+      return response.studentId;
+    });
+    this.idsWithAnswer = _.uniq(ids);
+    this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
+
     this.currentStep = ((_.max(this.session.completedSteps) || 0) + 1);
   }
 
