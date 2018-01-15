@@ -22,9 +22,9 @@ getStdin().then((s: string) => {
       ${fs.readFileSync('./src/pages/lesson-plans/step.scss')}
       </STYLE>
     </HEAD>
-    <BODY>
+    <BODY>`
   );
-  
+
   console.log(s);
 
   // trailing markup
