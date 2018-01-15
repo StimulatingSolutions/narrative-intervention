@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Step } from '../step';
@@ -30,6 +30,7 @@ export class Lesson06 implements OnInit {
   inGetResponsesMode: boolean;
 
   constructor(
+    private ref: ChangeDetectorRef,
     private alertCtrl: AlertController
   ) {
 
@@ -162,6 +163,7 @@ export class Lesson06 implements OnInit {
       }
       this.inGetResponsesMode = true;
       this.gettingResponsesFor = stepId;
+      this.ref.detectChanges();
     });
   }
 
@@ -176,6 +178,7 @@ export class Lesson06 implements OnInit {
         }
         this.inGetResponsesMode = false;
         this.gettingResponsesFor = null;
+        this.ref.detectChanges();
         //console.log("-------------------- completeReadyForResponse done");
         this.handleResponseModeStuff();
         this.updateSuggestedStep();
@@ -214,6 +217,5 @@ export class Lesson06 implements OnInit {
 
     alert.present();
   }
-
 
 }
