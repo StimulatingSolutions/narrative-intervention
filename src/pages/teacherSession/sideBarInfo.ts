@@ -41,16 +41,19 @@ export class SideBarInfo {
       return response.step === this.session.questionStepId;
     });
 
+    const newResponses = {}
     stepResponses.forEach( response => {
-      if (!this.currentResponses.hasOwnProperty(response.studentId)){
-        this.currentResponses[response.studentId] = {
+      if (!newResponses.hasOwnProperty(response.studentId)){
+        newResponses[response.studentId] = {
           response: response.response,
           date: response.date
         }
-      } else if (response.date > this.currentResponses[response.studentId].date){
-        this.currentResponses[response.studentId] = response;
+      }
+      if (response.date > newResponses[response.studentId].date){
+        newResponses[response.studentId] = response;
       }
     })
+    this.currentResponses = newResponses;
     const ids = stepResponses.map( response => {
       return response.studentId;
     });
