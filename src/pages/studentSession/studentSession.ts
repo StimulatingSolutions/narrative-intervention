@@ -18,6 +18,7 @@ export class StudentSessionPage implements OnInit {
   userId: string;
   session: Session;
   selectedCard: string;
+  questionType: string;
 
   constructor(
     //private navCtrl: NavController
@@ -28,6 +29,12 @@ export class StudentSessionPage implements OnInit {
   ) {
     this.studentSessionId = this.navParams.get('sessionId');
     this.userId = this.navParams.get('userId');
+    this.questionType = '';
+  }
+
+  ngDoCheck(): void {
+    //need to know what to display
+    console.log('SESSION QUESTION!', this.session);
   }
 
   ngOnInit(): void {
@@ -37,6 +44,7 @@ export class StudentSessionPage implements OnInit {
         const updatedSession = Sessions.findOne({_id: this.studentSessionId});
         this.updateSessionChanges(this.session, updatedSession);
         this.session = updatedSession;
+        this.questionType = this.session.questionType;
 
         this.ref.detectChanges();
         if (!this.session.active){

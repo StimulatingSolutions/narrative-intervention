@@ -365,7 +365,7 @@ Meteor.methods({
     });
   },
 
-  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId){
+  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId: number, questionType: string){
 
     console.log('Updating Session Ready for response', stepId, ready);
     const session = Sessions.findOne({_id: sessionId});
@@ -377,7 +377,8 @@ Meteor.methods({
     Sessions.update(sessionId, {
       $set: {
         readyForResponse: ready,
-        questionStepId: stepId
+        questionStepId: stepId,
+        questionType: questionType
       }
     });
   },
@@ -428,5 +429,18 @@ Meteor.methods({
         multi: true
       });
     }
+  },
+
+  updateQuestionType(sessionId: string, questionType: string){
+    console.log("Updated Question Type", questionType);
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    Sessions.update(sessionId, {
+      $set: {
+        questionType: questionType
+      }
+    });
   }
 });

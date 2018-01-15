@@ -45,6 +45,7 @@ export interface Session {
   active: boolean;
   activeUsers: string[];
   questionStepId: number;
+  questionType: string;
   readyForResponse: boolean;
   responses: any[];
   completedSteps: number[]
