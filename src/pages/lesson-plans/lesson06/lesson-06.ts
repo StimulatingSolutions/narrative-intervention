@@ -13,15 +13,6 @@ import * as _ from 'lodash';
 })
 export class Lesson06 implements OnInit {
 
-  // allSteps: any[];  // there might be a better way of doing this
-  // questionType?: string;
-  // correctAnswer?: string;  // sometimes, a question will not have a correct answer
-  // highlightedStepId: number;
-  // currentQuestionStepId: number;
-
-  // clicking toggles complete/incomplete regardless (unless question: requires done)
-  // current is always last completed +1
-
   @Input() session: Session;
 
   steps: Step[];
@@ -38,10 +29,6 @@ export class Lesson06 implements OnInit {
 
   ngOnInit() {
     this.steps = [];
-
-    //TODO: UPDATE THESE
-    //this.suggestedStepId = this.session.currentStep;
-
     this.gettingResponsesFor = this.session.questionStepId;
     this.inGetResponsesMode = this.session.readyForResponse;
     this.suggestedStepId = this.calculateSuggestedStep();
