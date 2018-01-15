@@ -1,3 +1,18 @@
+step {
+  //background-color: #FFE;
+  //border: 1px dotted lightgrey;
+  padding: .01in .5in .01in .85in;
+  margin: 0 -.5in 0 -.75in;
+  display: block;
+  &[questiontype] {
+    padding-top: .1in;
+    padding-bottom: .1in;
+  }
+}
+li li step {
+  padding-left: 1.35in;
+  margin-left: -1.25in;
+}
 .step-content {
 
   padding: 5px;

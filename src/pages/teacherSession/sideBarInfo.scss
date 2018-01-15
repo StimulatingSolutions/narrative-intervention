@@ -8,14 +8,15 @@
   .waitingforanswer {
     color: red;
     display: flex;
+    background-color: #FFEAEA;
 
     &.answered {
       color: green;
+      background-color: #FFF;
     }
 
     .answered-icon {
-      margin-top: 2px;
-      margin-right: 5px;
+      margin: 2px 5px 0;
     }
 
     .student-response {

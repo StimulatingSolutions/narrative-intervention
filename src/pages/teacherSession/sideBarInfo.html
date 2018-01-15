@@ -28,9 +28,11 @@
           <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
             <ion-icon name="checkmark"></ion-icon>
           </div>
-          {{user}}
-          <div class='student-response' *ngIf="session?.readyForResponse && currentResponses[user]">
-            {{currentResponses[user].response}}
+          <span [class.bold]="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
+            {{user}}
+          </span>
+          <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
+            {{currentResponses[user].response.replace('utcome', '')}}
           </div>
         </div>
       </div>
