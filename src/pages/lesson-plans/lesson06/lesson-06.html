@@ -1223,7 +1223,104 @@
     </div>
   </div>
   <p>4. Student Evaluation #1</p>
-  __EVALUATION_TEMPLATE__
+
+  <ol>
+    <li>
+      <p><strong>Read the following directions to students:</strong></p>
+      <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now that we have finished the activity I want you to think about how hard it was for you, how much you liked it, and how much you think you learned.  I will ask you a question, and I want you to hold up the marker that best shows what you think.”</p>
+      </step>
+    </li>
+    <li>
+      <p><strong>Difficulty of the Activity</strong></p>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “First, I want you to think about how hard you thought the activity was.”</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you thought what we did just now was really hard I want you to put your chip in the really hard square.  If you thought what we did just now was hard put your chip in the hard square.  If you thought what we did just now was okay put your chip in the okay square.  If you thought what we did right now was easy put your chip in the easy square.  If you thought what we did just now was really easy put your chip in the really easy square.”</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="difficulty" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+        <li>
+          <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="difficulty" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>Learning how to make inferences was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Appeal/Satisfaction</strong></p>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now we are going to think about how much we liked the activity we just did.”</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you thought what we did just now was not fun at all I want you to hold up this not fun at all marker.  If you thought what we did just now was not really fun hold up this not really fun marker.  If you thought what we did just now was okay hold up this okay marker.  If you thought what we did right now was fun hold up this fun marker.  If you thought what we did just now was really fun hold up this really fun marker.”</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="appeal" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+        <li>
+          <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="appeal" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>Learning how to make inferences was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Efficacy</strong></p>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now we are going to think about how well you think you can make inferences in a story.”</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you think you couldn’t do it, I want you to hold up this I couldn’t do it marker.  If you think you could do it with a little help, hold up this I could do it with help marker.  If you think you could do it all by yourself, hold up this I could do it all by myself marker.“</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="efficacy" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>If someone asked me to make an inference in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
   <hr class="page-break" />
   <div class="triple-border-1">
     <div class="triple-border-2">
@@ -1516,7 +1613,7 @@
           </step>
           <ol>
             <li>
-              <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="goal" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+              <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
                 <p>Continue watching until students hold up a try card. Then, pause video.</p>
               </step>
             </li>
@@ -1640,7 +1737,104 @@
     </div>
   </div>
   <p>7. Student Evaluation #2</p>
-  __EVALUATION_TEMPLATE__
+
+  <ol>
+    <li>
+      <p><strong>Read the following directions to students:</strong></p>
+      <step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now that we have finished the activity I want you to think about how hard it was for you, how much you liked it, and how much you think you learned.  I will ask you a question, and I want you to hold up the marker that best shows what you think.”</p>
+      </step>
+    </li>
+    <li>
+      <p><strong>Difficulty of the Activity</strong></p>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “First, I want you to think about how hard you thought the activity was.”</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you thought what we did just now was really hard I want you to put your chip in the really hard square.  If you thought what we did just now was hard put your chip in the hard square.  If you thought what we did just now was okay put your chip in the okay square.  If you thought what we did right now was easy put your chip in the easy square.  If you thought what we did just now was really easy put your chip in the really easy square.”</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="difficulty" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+        <li>
+          <step [defaultResponse]="'difficulty'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="difficulty" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>Learning how to make inferences was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Appeal/Satisfaction</strong></p>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now we are going to think about how much we liked the activity we just did.”</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you thought what we did just now was not fun at all I want you to hold up this not fun at all marker.  If you thought what we did just now was not really fun hold up this not really fun marker.  If you thought what we did just now was okay hold up this okay marker.  If you thought what we did right now was fun hold up this fun marker.  If you thought what we did just now was really fun hold up this really fun marker.”</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="appeal" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+        <li>
+          <step [defaultResponse]="'appeal'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="appeal" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>Learning how to make inferences was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Efficacy</strong></p>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “Now we are going to think about how well you think you can make inferences in a story.”</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Hold up each marker and say] “If you think you couldn’t do it, I want you to hold up this I couldn’t do it marker.  If you think you could do it with a little help, hold up this I could do it with help marker.  If you think you could do it all by yourself, hold up this I could do it all by myself marker.“</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
+        <p>[Answer any questions]</p>
+      </step>
+      <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+        <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
+      </step>
+      <ol>
+        <li>
+          <step [defaultResponse]="'efficacy'" (onStepClicked)="stepClicked($event)" (onGetResponses)="getResponses($event)" questionType="efficacy" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">
+            <p>If someone asked me to make an inference in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
+          </step>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
   <hr class="page-break" />
   <div class="triple-border-1">
     <div class="triple-border-2">
@@ -1687,3 +1881,5 @@
     </li>
   </ol>
 </div>
+
+
