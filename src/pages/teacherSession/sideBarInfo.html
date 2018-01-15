@@ -5,7 +5,9 @@
         Students: {{session?.activeUsers.length || 0}}
       </div>
       <div class="student-count" *ngIf="session?.readyForResponse">
-        Waiting For: {{waitCount}}
+        <div>
+          Waiting For: {{waitCount}}
+        </div>
       </div>
       <div class="session-id">
         Session Code: <b>{{session?.shortId}}</b>
@@ -18,7 +20,19 @@
     </ion-card-header>
     <ion-card-content>
       <div class="student" *ngFor="let user of session?.activeUsers">
-        {{user}}
+
+        <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1">
+          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
+            <ion-icon name="close"></ion-icon>
+          </div>
+          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
+            <ion-icon name="checkmark"></ion-icon>
+          </div>
+          {{user}}
+          <div class='student-response' *ngIf="session?.readyForResponse && currentResponses[user]">
+            {{currentResponses[user].response}}
+          </div>
+        </div>
       </div>
       <!--
       <div class="student">12345</div>

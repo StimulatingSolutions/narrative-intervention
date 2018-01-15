@@ -33,7 +33,11 @@ export class StudentSessionPage implements OnInit {
   ngOnInit(): void {
     MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
       MeteorObservable.autorun().subscribe(() => {
-        this.session = Sessions.findOne({_id: this.studentSessionId});
+
+        const updatedSession = Sessions.findOne({_id: this.studentSessionId});
+        this.updateSessionChanges(this.session, updatedSession);
+        this.session = updatedSession;
+
         this.ref.detectChanges();
         if (!this.session.active){
           this.navCtrl.setRoot(LoginPage, {}, {
@@ -46,12 +50,14 @@ export class StudentSessionPage implements OnInit {
       if (session.readyForResponse) {
         // IF STARTING UP IN RESPONSE MODE SET SELECTED CARD
         const thisStepsResponses = session.responses.filter( response => {
-          return response.step = session.questionStepId;
+          return response.step === session.questionStepId && response.studentId === this.userId;
         });
         const latestResponse = _.maxBy(thisStepsResponses, (o) => {
           return o.date;
         });
-        this.selectedCard = latestResponse.response;
+        if (latestResponse){
+          this.selectedCard = latestResponse.response;
+        }
       }
     });
     Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
@@ -64,10 +70,28 @@ export class StudentSessionPage implements OnInit {
     console.log('session?', Sessions.findOne({_id: this.studentSessionId}))
   }
 
-  ngDoCheck () {
-    //console.log(this.session)
-  }
+  updateSessionChanges (oldSession: Session, newSession: Session): void {
+    if (oldSession === undefined || newSession === undefined){
+      return;
+    }
 
+    if(!oldSession.readyForResponse && newSession.readyForResponse){
+      const thisStepsResponses = newSession.responses.filter( response => {
+        return response.step === newSession.questionStepId && response.studentId === this.userId;
+      });
+      const latestResponse = _.maxBy(thisStepsResponses, (o) => {
+        return o.date;
+      });
+      if (latestResponse){
+        this.selectedCard = latestResponse.response;
+      }
+
+    }
+
+    if (!newSession.readyForResponse){
+      this.selectedCard = null;
+    }
+  }
 
   ngOnDestroy(): void {
     Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
