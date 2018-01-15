@@ -12,19 +12,8 @@ getStdin().then((s: string) => {
   // [^<]*(?:<(?!strong>)[^<]*)*
 
   // initial markup
-  console.log(
-    `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-    <HTML>
-    <HEAD>
-      <script type="text/javascript" src="https://raw.githack.com/myrcutio/browser-scss/master/dist/browser-scss.min.js"></script>
-      <STYLE TYPE="text/scss">
-      ${fs.readFileSync('./src/pages/lesson-plans/lesson-plan.scss')}
-      </STYLE>
-    </HEAD>
-    <BODY>
-    <div class="lesson-plan-wrapper">
-    <lesson-plan [lessonNumber]="${process.argv[2].replace(new RegExp('^0*'), '')}">\n`
-  );
+  console.log(`<div class="lesson-plan-wrapper">\n<lesson-plan [lessonNumber]="${lessonNumber}">\n`);
+
 
   // rebuilding
   s = s.replace(new RegExp('<p>([^<]*)</p>', 'i'), '<h2>$1</h2>');
@@ -101,7 +90,7 @@ getStdin().then((s: string) => {
 
 
   // trailing markup
-  console.log('</ol>\n</lesson-plan>\n</div>\n</BODY></HTML>');
+  console.log('</ol>\n</lesson-plan>\n</div>');
 
   process.exit(0);
 });

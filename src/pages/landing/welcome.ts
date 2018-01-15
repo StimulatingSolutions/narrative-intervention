@@ -10,6 +10,7 @@ import { Session } from 'api/models';
 import { UserManagementPage } from '../usermanagement/usermanagement';
 import { SchoolManagementPage } from '../schools/schoolmanagement';
 import { SessionManagementPage } from '../sessions/sessionmanagement';
+import { availableLessons } from './availableLessons';
 
 import * as _ from 'lodash';
 import {TeacherSessionPage} from "../teacherSession/teacherSession";
@@ -54,7 +55,7 @@ export class WelcomePage implements OnInit {
     this.showUserManagement = false;
     this.showSchoolManagement = false;
     this.showSessionManagement = false;
-    this.allSessionIds = ['6'];
+    this.allSessionIds = availableLessons;
 
     MeteorObservable.call<string[]>('getUserRoles').subscribe({
       next: (result: string[]) => {
