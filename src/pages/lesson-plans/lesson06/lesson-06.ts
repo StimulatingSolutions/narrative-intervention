@@ -175,7 +175,7 @@ export class Lesson06 implements OnInit {
         //console.log("-------------------- completeReadyForResponse done");
         //this.handleResponseModeStuff();
         //this.updateSuggestedStep();
-        if (this.steps[stepId + 1] && this.steps[stepId + 1].questionType) {
+        if (this.steps[stepId + 1] && this.steps[stepId + 1].questionType && !this.steps[stepId + 1].done) {
           this.setReadyForResponse(stepId + 1);
         }
       });
