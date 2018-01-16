@@ -8,10 +8,10 @@ import { Session } from 'api/models';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'lesson06',
-  templateUrl: 'lesson-06.html',
+  selector: 'lesson__LESSON_NUM__',
+  templateUrl: 'lesson-__LESSON_NUM__.html',
 })
-export class Lesson06 implements OnInit {
+export class Lesson__LESSON_NUM__ implements OnInit {
 
   @Input() session: Session;
 

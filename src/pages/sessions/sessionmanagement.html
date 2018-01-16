@@ -58,7 +58,7 @@
         </ion-list>
         <ion-item>
           <ion-label>Lesson Number</ion-label>
-          <ion-select [(ngModel)]="addSessionId">
+          <ion-select [(ngModel)]="addSessionLessonNumber">
             <ion-option *ngFor="let sessionId of allSessionIds" [value]="sessionId">{{sessionId}}</ion-option>
           </ion-select>
         </ion-item>
