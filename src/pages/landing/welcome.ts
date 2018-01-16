@@ -31,7 +31,7 @@ export class WelcomePage implements OnInit {
   addSessionVisible: boolean;
   addSessionName: string;
   addSessionSchoolId: string;
-  addSessionId: number;
+  addSessionLessonNumber: number;
 
   joinSessionVisible: boolean;
   joinSessionCode: string;
@@ -130,7 +130,7 @@ export class WelcomePage implements OnInit {
 
   addSession(): void {
     //CHECK EMPTYS
-    if(this.addSessionId === undefined || this.addSessionSchoolId === undefined){
+    if(this.addSessionLessonNumber === undefined || this.addSessionSchoolId === undefined){
       const alert = this.alertCtrl.create({
         title: 'Oops!',
         message: 'All fields are required.',
@@ -141,7 +141,7 @@ export class WelcomePage implements OnInit {
     }
 
     const newSession: Session = {
-      name: this.addSessionSchoolId + ", Session " + this.addSessionId + ", " + moment().format('YYYY/MM/DD'),
+      name: this.addSessionSchoolId + ", Lesson " + this.addSessionLessonNumber + ", " + moment().format('YYYY/MM/DD'),
       //date: moment().utc().toDate(),
       shortId: generateNumId(),
       creatersId: '',
@@ -151,13 +151,16 @@ export class WelcomePage implements OnInit {
       questionStepId: null,
       readyForResponse: false,
       responses: [],
-      completedSteps: []
+      completedSteps: [],
+      lesson: this.addSessionLessonNumber
     };
     MeteorObservable.call('createNewSession', newSession).subscribe({
       next: (result) => {
 
         this.addSessionVisible = false;
         this.addSessionName = '';
+        this.addSessionSchoolId = '';
+        this.addSessionLessonNumber = null;
 
         const newId = Sessions.findOne({shortId: newSession.shortId})._id;
         this.navCtrl.push(TeacherSessionPage, {sessionId: newId});

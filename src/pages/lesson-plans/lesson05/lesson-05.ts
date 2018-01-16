@@ -8,10 +8,10 @@ import { Session } from 'api/models';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'lesson__LESSON_NUM__',
-  templateUrl: 'lesson-__LESSON_NUM__.html',
+  selector: 'lesson05',
+  templateUrl: 'lesson-05.html',
 })
-export class Lesson__LESSON_NUM__ implements OnInit {
+export class Lesson05 implements OnInit {
 
   @Input() session: Session;
 
@@ -77,9 +77,11 @@ export class Lesson__LESSON_NUM__ implements OnInit {
       if (!offset) {
         return;
       }
-      scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
-      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
-      scrollDiv.classList.add("block-scroll");
+      if (this.steps[this.gettingResponsesFor].correctAnswer) {
+        scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
+        //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
+        scrollDiv.classList.add("block-scroll");
+      }
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("response-mode");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];

@@ -14,6 +14,8 @@ getStdin().then((s: string) => {
 
 
   // rebuilding
+  s = s.replace(new RegExp('<!--\\s*-->', 'gi'), '');
+  s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
   s = s.replace(new RegExp('<p>([^<]*)</p>', 'i'), '<h2>$1</h2>');
   s = s.replace(new RegExp('(<p>(?:[^<]*(?:<(?!/p>)[^<]*)*)Materials Needed(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)', 'i'), '<p><br/></p>\n$1');
   s = s.replace(new RegExp('<p>(?:[^<]*(?:<(?!/p>)[^<]*)*)Lesson Overview(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>', 'i'), '');
@@ -25,12 +27,15 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('</li>\\s*</li>', 'gi'), '</li>');
   s = s.replace(new RegExp('</ul>\\s*<ul>', 'gi'), '');
   s = s.replace(new RegExp('<li>\\s*</li>', 'gi'), '');
+  s = s.replace(new RegExp('<li>\\s*([^<]+)</li>', 'gi'), '<li><p>$1</p></li>');
   s = s.replace(new RegExp('</ul>\\s*<blockquote>\\s*<p>([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*</blockquote>\\s*<ul>', 'gi'), '</ul>\n<hr/>\n<p class="v-padding">$1</p><ul>');
   s = s.replace(new RegExp('<blockquote>\\s*<p>([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*</blockquote>', 'i'), '<p class="v-padding">$1</p>');
+  s = s.replace(new RegExp('<span[^>]*></span>', 'gi'), '');
 
   s = s.replace(new RegExp('<table>[^<]*(?:<(?!em>)[^<]*)*<em>([^<]*(?:<(?!/em>)[^<]*)*)</em>', 'i'), '</ol>\n<hr class="page-break"/>\n<div class="triple-border-1"><div class="triple-border-2"><div class="triple-border-3">\n<p class="v-padding"><em>$1</em>');
   s = s.replace(new RegExp('</th>[^<]*(?:<(?!/th>)[^<]*)*</thead>', 'i'), '</div></div></div>\n<table>');
   s = s.replace(new RegExp('<th>[\\s_]*</th>', 'gi'), '');
+  s = s.replace(new RegExp('<p>[\\s_]*</p>', 'gi'), '');
   s = s.replace(new RegExp('<td>[\\s_]*</td>', 'gi'), '');
   s = s.replace(new RegExp('<tr ?[^>]*>[\\s_]*</tr>', 'gi'), '');
 
@@ -82,7 +87,9 @@ getStdin().then((s: string) => {
     sub = sub.replace(new RegExp('<p>[a-z]\\.\\s*', 'gi'), '<p>');
     return `<li>\n<step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">\n${p1}</step></li>\n<li><step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" [allSteps]="steps" [highlightedStepId]="suggestedStepId" [currentQuestionStepId]="gettingResponsesFor">\n${sub}</step>\n`;
   });
-  s = s.replace(new RegExp('</([-\\w]*)><(\\1[^>]*)>', 'gi'), '</$1>\\n<$2>');
+  s = s.replace(new RegExp('</([-\\w]*)><(\\1[^>]*)>', 'gi'), '</$1>\n<$2>');
+  s = s.replace(new RegExp('<step[^<]*>2. Magician Narrative: Part II Teacher Modeling/Guided Practice\\s*</step>\\s*</li>', 'gi'), '<p>2. Magician Narrative: Part II Teacher Modeling/Guided Practice</p>\n<ol>');
+  s = s.replace(new RegExp('<step([^<]*)>([^<]+)</step>', 'gi'), '<step$1><p>$2</p></step>');
 
   console.log(s);
 
