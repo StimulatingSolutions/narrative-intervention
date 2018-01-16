@@ -3,7 +3,7 @@
 - fix `<ol>` stuff in `8. Closure`
 - remove `<step>` before `Students may try to get up`
 - ratings
-- remove `CCSS.ELA-Literacy.SL.4.4` anchor span
+- remove `CCSS.ELA-Literacy.SL.4.4` anchor span  ???
 
 ```angular2html
 <step

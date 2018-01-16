@@ -1,6 +1,19 @@
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse">
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 1">
+</ion-content>
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 2">
+  <div class='card-row'>
+    <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+  </div>
+</ion-content>
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 3">
+  <div class='card-row'>
+    <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+    <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+  </div>
+</ion-content>
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson >= 4">
   <div *ngIf="session?.questionType === 'goal'">
-    <div class='card-row'>
+    <div class='card-row' >
       <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
       <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
     </div>

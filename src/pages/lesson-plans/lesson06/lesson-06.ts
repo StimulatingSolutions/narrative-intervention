@@ -84,9 +84,11 @@ export class Lesson06 implements OnInit {
       if (!offset) {
         return;
       }
-      scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
-      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
-      scrollDiv.classList.add("block-scroll");
+      if (this.steps[this.gettingResponsesFor].correctAnswer) {
+        scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
+        //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
+        scrollDiv.classList.add("block-scroll");
+      }
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("response-mode");
     } else {
       const scrollDiv = document.getElementsByClassName('session-container')[0];

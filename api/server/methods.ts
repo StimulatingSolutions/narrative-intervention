@@ -1,9 +1,7 @@
 import { Accounts } from 'meteor/accounts-base';
-import { Chats } from './collections/chats';
-import { Messages } from './collections/messages';
 import { Schools } from './collections/schools';
 import { Sessions } from './collections/sessions';
-import { MessageType, Profile, User, School, Session } from './models';
+import { Profile, User, School, Session } from './models';
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -130,51 +128,6 @@ Meteor.methods({
     return roles;
   },
 
-  addChat(receiverId: string): void {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized',
-        'User must be logged-in to create a new chat');
-    }
-
-    check(receiverId, nonEmptyString);
-
-    if (receiverId === this.userId) {
-      throw new Meteor.Error('illegal-receiver',
-        'Receiver must be different than the current logged in user');
-    }
-
-    const chatExists = !!Chats.collection.find({
-      memberIds: { $all: [this.userId, receiverId] }
-    }).count();
-
-    if (chatExists) {
-      throw new Meteor.Error('chat-exists',
-        'Chat already exists');
-    }
-
-    const chat = {
-      memberIds: [this.userId, receiverId]
-    };
-
-    Chats.insert(chat);
-  },
-  removeChat(chatId: string): void {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized',
-        'User must be logged-in to remove chat');
-    }
-
-    check(chatId, nonEmptyString);
-
-    const chatExists = !!Chats.collection.find(chatId).count();
-
-    if (!chatExists) {
-      throw new Meteor.Error('chat-not-exists',
-        'Chat doesn\'t exist');
-    }
-
-    Chats.remove(chatId);
-  },
 
   updateProfile(user: User, profile: Profile): void {
     if (!this.userId) {
@@ -184,30 +137,6 @@ Meteor.methods({
     Meteor.users.update(user._id, {
       $set: {profile}
     });
-  },
-  addMessage(type: MessageType, chatId: string, content: string) {
-    if (!this.userId) throw new Meteor.Error('unauthorized',
-      'User must be logged-in to create a new chat');
-
-    check(chatId, nonEmptyString);
-    check(content, nonEmptyString);
-
-    const chatExists = !!Chats.collection.find(chatId).count();
-
-    if (!chatExists) {
-      throw new Meteor.Error('chat-not-exists',
-        'Chat doesn\'t exist');
-    }
-
-    return {
-      messageId: Messages.collection.insert({
-        chatId: chatId,
-        senderId: this.userId,
-        content: content,
-        createdAt: new Date(),
-        type: type
-      })
-    };
   },
 
   //SCHOOOLS
