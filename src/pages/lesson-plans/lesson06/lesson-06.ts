@@ -68,7 +68,6 @@ export class Lesson06 implements OnInit {
         this.suggestedStepId = newStepId;
     }
     if (this.steps[newStepId] && this.steps[newStepId].questionType !== this.session.questionType){
-      console.log("UPPPDATE SHIT");
       let questionType = this.steps[newStepId].defaultResponse;
       if(this.steps[newStepId].hasOwnProperty('questionType')){
         questionType = this.steps[newStepId].questionType;
