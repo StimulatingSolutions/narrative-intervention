@@ -32,7 +32,6 @@ export class Lesson06 implements OnInit {
     this.gettingResponsesFor = this.session.questionStepId;
     this.inGetResponsesMode = this.session.readyForResponse;
     this.suggestedStepId = this.calculateSuggestedStep();
-
   }
 
   ngOnChanges (changes) {
