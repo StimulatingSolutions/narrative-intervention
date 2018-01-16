@@ -166,10 +166,10 @@ export class Lesson05 implements OnInit {
         this.gettingResponsesFor = null;
         this.ref.detectChanges();
         //console.log("-------------------- completeReadyForResponse done");
-        this.handleResponseModeStuff();
-        this.updateSuggestedStep();
-        if (this.steps[this.suggestedStepId].questionType) {
-          this.setReadyForResponse(this.suggestedStepId);
+        //this.handleResponseModeStuff();
+        //this.updateSuggestedStep();
+        if (this.steps[stepId + 1] && this.steps[stepId + 1].questionType && !this.steps[stepId + 1].done) {
+          this.setReadyForResponse(stepId + 1);
         }
       });
     });
