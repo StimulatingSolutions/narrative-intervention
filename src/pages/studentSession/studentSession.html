@@ -1,23 +1,137 @@
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 1">
-</ion-content>
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 2">
-  <div class='card-row'>
-    <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse">
+  <div *ngIf="session?.questionType === 'goal'">
+    <div *ngIf="session?.lesson == 1">
+    </div>
+    <div *ngIf="session?.lesson == 2">
+      <div class='card-row'>
+        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+      </div>
+    </div>
+    <div *ngIf="session?.lesson == 3">
+      <div class='card-row'>
+        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+        <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+      </div>
+    </div>
+    <div *ngIf="session?.lesson >= 4">
+      <div class='card-row' >
+        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+        <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+      </div>
+      <div class='card-row'>
+        <div [class.selected-card]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
+        <div [class.selected-card]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
+      </div>
+    </div>
   </div>
-</ion-content>
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson == 3">
-  <div class='card-row'>
-    <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-    <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+  <div class='rating-cards-container' *ngIf="session?.questionType === 'difficulty'">
+    <div class='rating-card difficulty' [class.selected-card]="selectedCard == 'difficulty-1'" (click)="selectCard('difficulty-1')" (touchstart)="selectCard('difficulty-1')">
+      <div class='number-value'>
+        1
+      </div>
+      <div class='text-value'>
+        Really Hard
+      </div>
+    </div>
+    <div class='rating-card difficulty' [class.selected-card]="selectedCard == 'difficulty-2'" (click)="selectCard('difficulty-2')" (touchstart)="selectCard('difficulty-2')">
+      <div class='number-value'>
+        2
+      </div>
+      <div class='text-value'>
+        Hard
+      </div>
+    </div>
+    <div class='rating-card difficulty' [class.selected-card]="selectedCard == 'difficulty-3'" (click)="selectCard('difficulty-3')" (touchstart)="selectCard('difficulty-3')">
+      <div class='number-value'>
+        3
+      </div>
+      <div class='text-value'>
+        Okay
+      </div>
+    </div>
+    <div class='rating-card difficulty' [class.selected-card]="selectedCard == 'difficulty-4'" (click)="selectCard('difficulty-4')" (touchstart)="selectCard('difficulty-4')">
+      <div class='number-value'>
+        4
+      </div>
+      <div class='text-value'>
+        Easy
+      </div>
+    </div>
+    <div class='rating-card difficulty' [class.selected-card]="selectedCard == 'difficulty-5'" (click)="selectCard('difficulty-5')" (touchstart)="selectCard('difficulty-5')">
+      <div class='number-value'>
+        5
+      </div>
+      <div class='text-value'>
+        Really Easy
+      </div>
+    </div>
   </div>
-</ion-content>
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" *ngIf="session?.lesson >= 4">
-  <div class='card-row'>
-    <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-    <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+  <div class='rating-cards-container' *ngIf="session?.questionType === 'appeal'">
+    <div class='rating-card appeal' [class.selected-card]="selectedCard == 'appeal-1'" (click)="selectCard('appeal-1')" (touchstart)="selectCard('appeal-1')">
+      <div class='number-value'>
+        1
+      </div>
+      <div class='text-value'>
+        Not Fun at All
+      </div>
+    </div>
+    <div class='rating-card appeal' [class.selected-card]="selectedCard == 'appeal-2'" (click)="selectCard('appeal-2')" (touchstart)="selectCard('appeal-2')">
+      <div class='number-value'>
+        2
+      </div>
+      <div class='text-value'>
+        Not Really Fun
+      </div>
+    </div>
+    <div class='rating-card appeal' [class.selected-card]="selectedCard == 'appeal-3'" (click)="selectCard('appeal-3')" (touchstart)="selectCard('appeal-3')">
+      <div class='number-value'>
+        3
+      </div>
+      <div class='text-value'>
+        Okay
+      </div>
+    </div>
+    <div class='rating-card appeal' [class.selected-card]="selectedCard == 'appeal-4'" (click)="selectCard('appeal-4')" (touchstart)="selectCard('appeal-4')">
+      <div class='number-value'>
+        4
+      </div>
+      <div class='text-value'>
+        Fun
+      </div>
+    </div>
+    <div class='rating-card appeal' [class.selected-card]="selectedCard == 'appeal-5'" (click)="selectCard('appeal-5')" (touchstart)="selectCard('appeal-5')">
+      <div class='number-value'>
+        5
+      </div>
+      <div class='text-value'>
+        Really Fun
+      </div>
+    </div>
   </div>
-  <div class='card-row'>
-    <div [class.selected-card]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
-    <div [class.selected-card]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
+  <div class='rating-cards-container' *ngIf="session?.questionType === 'efficacy'">
+    <div class='rating-card efficacy' [class.selected-card]="selectedCard == 'efficacy-1'" (click)="selectCard('efficacy-1')" (touchstart)="selectCard('efficacy-1')">
+      <div class='number-value'>
+        1
+      </div>
+      <div class='text-value'>
+        I Couldn’t Do it
+      </div>
+    </div>
+    <div class='rating-card efficacy' [class.selected-card]="selectedCard == 'efficacy-2'" (click)="selectCard('efficacy-2')" (touchstart)="selectCard('efficacy-2')">
+      <div class='number-value'>
+        2
+      </div>
+      <div class='text-value'>
+        I Could Do it With Help
+      </div>
+    </div>
+    <div class='rating-card efficacy' [class.selected-card]="selectedCard == 'efficacy-3'" (click)="selectCard('efficacy-3')" (touchstart)="selectCard('efficacy-3')">
+      <div class='number-value'>
+        3
+      </div>
+      <div class='text-value'>
+        I Could Do it By Myself
+      </div>
+    </div>
   </div>
 </ion-content>
