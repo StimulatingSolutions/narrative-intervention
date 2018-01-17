@@ -35,15 +35,15 @@ export class VerificationPage implements OnInit {
       });
     })
     .catch((e) => {
-      this.handleError(e);
+      this.handleError(e, 1);
     });
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

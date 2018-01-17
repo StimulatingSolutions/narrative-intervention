@@ -72,12 +72,7 @@ export class SessionManagementPage implements OnInit {
   addSession(): void {
     //CHECK EMPTYS
     if(this.addSessionLessonNumber === undefined || this.addSessionSchoolId === undefined){
-      const alert = this.alertCtrl.create({
-        title: 'Oops!',
-        message: 'All fields are required.',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.handleError(new Error("All fields are required."), 29);
       return
     }
 
@@ -115,7 +110,7 @@ export class SessionManagementPage implements OnInit {
         this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 15);
       }
     });
 
@@ -153,7 +148,7 @@ export class SessionManagementPage implements OnInit {
         this.editSessionName = '';
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 16);
       }
     });
   }
@@ -180,7 +175,7 @@ export class SessionManagementPage implements OnInit {
         this.editSessionActive = false;
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 17);
       }
     });
   }
@@ -189,11 +184,11 @@ export class SessionManagementPage implements OnInit {
     this.navCtrl.push(TeacherSessionPage, {sessionId: session._id});
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

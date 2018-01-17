@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 
 import { Sessions } from 'api/collections';
@@ -21,8 +21,6 @@ export class StudentSessionPage implements OnInit {
   questionType: string;
 
   constructor(
-    //private navCtrl: NavController
-    private alertCtrl: AlertController,
     private navParams: NavParams,
     public navCtrl: NavController,
     private ref: ChangeDetectorRef,
@@ -70,7 +68,7 @@ export class StudentSessionPage implements OnInit {
     });
     Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
       if (error){
-        this.handleError(error);
+        this.handleError(error, 18);
         return;
       }
     })
@@ -103,8 +101,8 @@ export class StudentSessionPage implements OnInit {
 
   ngOnDestroy(): void {
     Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
-      if (error){
-        this.handleError(error);
+      if (error && error.reason != "Session does not exist"){
+        this.handleError(error, 19);
         return;
       }
     })
@@ -117,7 +115,7 @@ export class StudentSessionPage implements OnInit {
       const date = new Date();
       Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
         if (error){
-          this.handleError(error);
+          this.handleError(error, 20);
           return;
         }
       })
@@ -128,16 +126,9 @@ export class StudentSessionPage implements OnInit {
     this.ref.detectChanges();
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: 'Oops!',
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
+    //  don't show an alert on the student tablets, too confusing for them
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
@@ -147,21 +138,3 @@ export class StudentSessionPage implements OnInit {
   }
 
 }
-
-/*
-<ion-content padding class="student-session-page-content">
-  <div [class.hidden]="!session?.readyForResponse">
-    <div class='card-row'>
-      <div [class.active]="selectedCard == 'goal' || selectedCard == undefined" class="img-button goal" (click)="selectCard('goal')"></div>
-      <div [class.active]="selectedCard == 'try' || selectedCard == undefined" class="img-button try" (click)="selectCard('try')"></div>
-    </div>
-    <div class='card-row'>
-      <div [class.active]="selectedCard == 'outcome-yes' || selectedCard == undefined" class="img-button outcome-yes" (click)="selectCard('outcome-yes')"></div>
-      <div [class.active]="selectedCard == 'outcome-fail' || selectedCard == undefined" class="img-button outcome-fail" (click)="selectCard('outcome-fail')"></div>
-    </div>
-  </div>
-  <div [class.hidden]="session?.readyForResponse">
-    Waiting for question?
-  </div>
-</ion-content>
-*/

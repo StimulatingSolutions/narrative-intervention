@@ -151,7 +151,7 @@ export class Lesson06 implements OnInit {
     //console.log('Activating response mode: ', stepId)
     Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, this.steps[stepId].questionType, (error, result) => {
       if (error){
-        this.handleError(error);
+        this.handleError(error, 6);
         return;
       }
       this.inGetResponsesMode = true;
@@ -166,7 +166,7 @@ export class Lesson06 implements OnInit {
       //console.log('Completing Question: ', stepId);
       Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, 'defaultResponse', (error, result) => {
         if (error){
-          this.handleError(error);
+          this.handleError(error, 7);
           return;
         }
         this.inGetResponsesMode = false;
@@ -194,16 +194,16 @@ export class Lesson06 implements OnInit {
     MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
       next: () => {},
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 8);
       }
     });
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

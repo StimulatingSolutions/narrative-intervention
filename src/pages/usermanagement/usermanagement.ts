@@ -62,12 +62,7 @@ export class UserManagementPage implements OnInit {
     //CHECK EMPTYS
     const validEmail = this.addUserEmail.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if(this.addUserEmail === '' || !validEmail){
-      const alert = this.alertCtrl.create({
-        title: 'Oops!',
-        message: 'Valid Email and password required.',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.handleError(new Error("Valid Email and password required."), 30);
       return
     }
 
@@ -84,7 +79,7 @@ export class UserManagementPage implements OnInit {
         this.addUserAccountType = 'teacher';
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 23);
       }
     });
 
@@ -104,7 +99,7 @@ export class UserManagementPage implements OnInit {
         alert.present();
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 24);
       }
     });
   }
@@ -131,7 +126,7 @@ export class UserManagementPage implements OnInit {
         })
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 25);
       }
     });
 
@@ -170,7 +165,7 @@ export class UserManagementPage implements OnInit {
         this.editUserAccountType = '';
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 26);
       }
     });
   }
@@ -179,11 +174,11 @@ export class UserManagementPage implements OnInit {
 
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

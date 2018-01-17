@@ -78,7 +78,7 @@ export class SideBarInfo {
         alert.present();
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 21);
       }
     });
   }
@@ -86,7 +86,7 @@ export class SideBarInfo {
   closeQuestion (): void {
     Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
       if (error){
-        this.handleError(error);
+        this.handleError(error, 22);
         return;
       }
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
@@ -97,11 +97,11 @@ export class SideBarInfo {
     this.navCtrl.pop();
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

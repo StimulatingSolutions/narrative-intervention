@@ -67,7 +67,7 @@ export class WelcomePage implements OnInit {
         console.log('tools', this.showUserManagement, this.showSchoolManagement, this.showSessionManagement)
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 2);
       }
     });
   }
@@ -109,7 +109,7 @@ export class WelcomePage implements OnInit {
     MeteorObservable.call('setSessionActive', session._id, false).subscribe({
       next: () => {},
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 3);
       }
     });
   }
@@ -131,12 +131,7 @@ export class WelcomePage implements OnInit {
   addSession(): void {
     //CHECK EMPTYS
     if(this.addSessionLessonNumber === undefined || this.addSessionSchoolId === undefined){
-      const alert = this.alertCtrl.create({
-        title: 'Oops!',
-        message: 'All fields are required.',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.handleError(new Error("All fields are required."), 27);
       return
     }
 
@@ -167,7 +162,7 @@ export class WelcomePage implements OnInit {
         this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 4);
       }
     });
 
@@ -177,18 +172,18 @@ export class WelcomePage implements OnInit {
   joinSession(): void {
     Meteor.call('findSessionByShortId', this.joinSessionCode, (error, result) => {
       if (error) {
-        this.handleError(error);
+        this.handleError(error, 5);
         return;
       }
       this.navCtrl.push(TeacherSessionPage, {sessionId: result});
     });
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

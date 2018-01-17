@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'api/models';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 
 @Component({
@@ -26,16 +26,16 @@ export class ProfilePage implements OnInit {
       next: () => {
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 12);
       }
     });
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

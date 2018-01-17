@@ -32,7 +32,7 @@
             {{user}}
           </span>
           <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
-            {{currentResponses[user].response.replace('utcome', '')}}
+            {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+'-' : ''}}{{currentResponses[user].response.replace('utcome', '')}}
           </div>
         </div>
       </div>
