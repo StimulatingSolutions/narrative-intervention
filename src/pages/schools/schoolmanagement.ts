@@ -48,12 +48,7 @@ export class SchoolManagementPage implements OnInit {
 
     //CHECK EMPTYS
     if(this.addSchoolName === ''){
-      const alert = this.alertCtrl.create({
-        title: 'Oops!',
-        message: 'Valid School Name isrequired.',
-        buttons: ['OK']
-      });
-      alert.present();
+      this.handleError(new Error("Valid School Name is required."), 28);
       return
     }
 
@@ -73,7 +68,7 @@ export class SchoolManagementPage implements OnInit {
         this.addSchoolName = '';
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 13);
       }
     });
 
@@ -109,7 +104,7 @@ export class SchoolManagementPage implements OnInit {
         this.editSchoolName = '';
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 14);
       }
     });
   }
@@ -119,11 +114,11 @@ export class SchoolManagementPage implements OnInit {
     this.ref.detectChanges();
   }
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });

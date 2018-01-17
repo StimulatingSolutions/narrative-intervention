@@ -34,7 +34,7 @@ export class LoginPage {
         animate: true
       });
     }).catch((e) => {
-      this.handleError(e);
+      this.handleError(e, 9);
     })
   }
 
@@ -49,7 +49,7 @@ export class LoginPage {
         return alert.present();
       },
       error: (e: Error) => {
-        this.handleError(e);
+        this.handleError(e, 10);
       }
     });
   }
@@ -66,7 +66,7 @@ export class LoginPage {
 
     Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
       if (error){
-        this.handleError(error);
+        this.handleError(error, 11);
         return;
       }
       return this.navCtrl.push(StudentSessionPage, {
@@ -77,11 +77,11 @@ export class LoginPage {
   }
 
 
-  handleError(e: Error): void {
+  handleError(e: Error, id: number): void {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      title: `Oops! (#${ id })`,
       message: e.message,
       buttons: ['OK']
     });
