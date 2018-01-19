@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { EmailService } from '../../services/email';
 import { WelcomePage } from '../landing/welcome';
@@ -13,7 +13,7 @@ declare var KioskPlugin: any;
   selector: 'login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   private loginEmail = '';
   private loginPassword = '';
   private loginSession = '';
@@ -25,7 +25,16 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private emailService: EmailService,
     private navCtrl: NavController
-  ) {}
+  ) {
+  }
+
+  ngOnInit():void {
+    document.addEventListener("deviceready", () => {
+      if (typeof(KioskPlugin) != "undefined") {
+        KioskPlugin.setAllowedKeys([ 24, 25, 26, 4 ]);
+      }
+    }, false);
+  }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
     if (keyCode === 13) {
@@ -98,18 +107,21 @@ export class LoginPage {
     this.counter++;
     if (this.counter == 3) {
       this.events.push("TEST MODE ON");
-      document.addEventListener("deviceready", () => { this.events.push("deviceready") }, false);
-      document.addEventListener("pause", () => { this.events.push("pause") }, false);
-      document.addEventListener("resume", () => { this.events.push("resume") }, false);
-      document.addEventListener("backbutton", () => { this.events.push("backbutton") }, false);
-      document.addEventListener("menubutton", () => { this.events.push("menubutton") }, false);
-      document.addEventListener("searchbutton", () => { this.events.push("searchbutton") }, false);
-      document.addEventListener("volumedownbutton", () => { this.events.push("volumedownbutton") }, false);
-      document.addEventListener("volumeupbutton", () => { this.events.push("volumeupbutton") }, false);
-    } else if (this.counter == 6) {
+      console.log(this.events[this.events.length-1]);
+      document.addEventListener("deviceready", () => { this.events.push("deviceready"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("pause", () => { this.events.push("pause"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("resume", () => { this.events.push("resume"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("backbutton", () => { this.events.push("backbutton"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("menubutton", () => { this.events.push("menubutton"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("searchbutton", () => { this.events.push("searchbutton"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("volumedownbutton", () => { this.events.push("volumedownbutton"); console.log(this.events[this.events.length-1]) }, false);
+      document.addEventListener("volumeupbutton", () => { this.events.push("volumeupbutton"); console.log(this.events[this.events.length-1]) }, false);
+    } else if (this.counter == 6 && typeof(KioskPlugin) != "undefined") {
       KioskPlugin.isInKiosk((isInKiosk) => {
         this.events.push("KIOSK MODE: "+isInKiosk);
+        console.log(this.events[this.events.length-1]);
         if (isInKiosk) {
+          console.log("EXITING!!!");
           KioskPlugin.exitKiosk();
         }
       });
