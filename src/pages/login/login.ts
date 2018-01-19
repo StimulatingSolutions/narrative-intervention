@@ -6,6 +6,9 @@ import { MeteorObservable } from 'meteor-rxjs';
 
 import { StudentSessionPage } from '../studentSession/studentSession';
 
+declare var KioskPlugin: any;
+
+
 @Component({
   selector: 'login',
   templateUrl: 'login.html'
@@ -15,6 +18,8 @@ export class LoginPage {
   private loginPassword = '';
   private loginSession = '';
   private sessionUserId = '';
+  private events = [];
+  private counter = 0;
 
   constructor(
     private alertCtrl: AlertController,
@@ -90,6 +95,25 @@ export class LoginPage {
   }
 
   info(): void {
+    this.counter++;
+    if (this.counter == 3) {
+      this.events.push("TEST MODE ON");
+      document.addEventListener("deviceready", () => { this.events.push("deviceready") }, false);
+      document.addEventListener("pause", () => { this.events.push("pause") }, false);
+      document.addEventListener("resume", () => { this.events.push("resume") }, false);
+      document.addEventListener("backbutton", () => { this.events.push("backbutton") }, false);
+      document.addEventListener("menubutton", () => { this.events.push("menubutton") }, false);
+      document.addEventListener("searchbutton", () => { this.events.push("searchbutton") }, false);
+      document.addEventListener("volumedownbutton", () => { this.events.push("volumedownbutton") }, false);
+      document.addEventListener("volumeupbutton", () => { this.events.push("volumeupbutton") }, false);
+    } else if (this.counter == 6) {
+      KioskPlugin.isInKiosk((isInKiosk) => {
+        this.events.push("KIOSK MODE: "+isInKiosk);
+        if (isInKiosk) {
+          KioskPlugin.exitKiosk();
+        }
+      });
+    }
     // go to info page
     //this.navCtrl.push(LoginPage, {});
   }

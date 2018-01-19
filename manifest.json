@@ -20,6 +20,12 @@
     "https://narrative-intervention.herokuapp.com/*",
     "wss://narrative-intervention.stimulating-solutions.com/*"
   ],
+  "mjs_api_access": [
+    { "match": "*//narrative-intervention.stimulating-solutions.com/*", "access": "cordova", "platform": "android" }
+  ],
+  "mjs_cordova": {
+    "plugin_mode": "client"
+  },
   "display": "fullscreen",
   "background_color": "#4e8ef7",
   "theme_color": "#4e8ef7"
