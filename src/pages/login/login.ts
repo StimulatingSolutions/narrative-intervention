@@ -106,7 +106,7 @@ export class LoginPage implements OnInit {
   info(): void {
     this.counter++;
     if (this.counter == 3) {
-      this.events.push("TEST MODE ON");
+      this.events.push(`TEST MODE ON: ${window.screen.width}x${window.screen.height}`);
       console.log(this.events[this.events.length-1]);
       document.addEventListener("deviceready", () => { this.events.push("deviceready"); console.log(this.events[this.events.length-1]) }, false);
       document.addEventListener("pause", () => { this.events.push("pause"); console.log(this.events[this.events.length-1]) }, false);
