@@ -49,5 +49,6 @@
         <button ion-button color="danger" (click)="info()">Click here for information</button>
       </ion-buttons>
     </ion-item>
+    <ion-item *ngFor="let event of events">{{event}}</ion-item>
   </ion-list>
 </ion-content>
