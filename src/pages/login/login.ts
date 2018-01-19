@@ -13,27 +13,17 @@ declare var KioskPlugin: any;
   selector: 'login',
   templateUrl: 'login.html'
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   private loginEmail = '';
   private loginPassword = '';
   private loginSession = '';
   private sessionUserId = '';
-  private events = [];
-  private counter = 0;
 
   constructor(
     private alertCtrl: AlertController,
     private emailService: EmailService,
     private navCtrl: NavController
   ) {
-  }
-
-  ngOnInit():void {
-    document.addEventListener("deviceready", () => {
-      if (typeof(KioskPlugin) != "undefined") {
-        KioskPlugin.setAllowedKeys([ 24, 25, 26, 4 ]);
-      }
-    }, false);
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
@@ -104,29 +94,19 @@ export class LoginPage implements OnInit {
   }
 
   info(): void {
-    this.counter++;
-    if (this.counter == 3) {
-      this.events.push(`TEST MODE ON: ${window.screen.width}x${window.screen.height}`);
-      console.log(this.events[this.events.length-1]);
-      document.addEventListener("deviceready", () => { this.events.push("deviceready"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("pause", () => { this.events.push("pause"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("resume", () => { this.events.push("resume"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("backbutton", () => { this.events.push("backbutton"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("menubutton", () => { this.events.push("menubutton"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("searchbutton", () => { this.events.push("searchbutton"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("volumedownbutton", () => { this.events.push("volumedownbutton"); console.log(this.events[this.events.length-1]) }, false);
-      document.addEventListener("volumeupbutton", () => { this.events.push("volumeupbutton"); console.log(this.events[this.events.length-1]) }, false);
-    } else if (this.counter == 6 && typeof(KioskPlugin) != "undefined") {
-      KioskPlugin.isInKiosk((isInKiosk) => {
-        this.events.push("KIOSK MODE: "+isInKiosk);
-        console.log(this.events[this.events.length-1]);
-        if (isInKiosk) {
-          console.log("EXITING!!!");
-          KioskPlugin.exitKiosk();
-        }
-      });
-    }
     // go to info page
     //this.navCtrl.push(LoginPage, {});
   }
+
+  /*
+    var uknsi_dims = ''+window.screen.width+'x'+window.screen.height;
+  if (uknsi_dims === '1024x600') {
+    console.log("======== Student device detected.");
+  } else if (uknsi_dims === '800x1280') {
+    console.log("======== Teacher device detected.");
+  } else {
+    console.log("======== Web browser detected.");
+    return;
+  }
+   */
 }
