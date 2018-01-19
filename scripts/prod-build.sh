@@ -17,8 +17,6 @@ then
   ionic cordova build android
   mv ./platforms/android/build/outputs/apk/android-debug.apk ./src/assets/narrative-intervention.apk
   cp ./src/assets/narrative-intervention.apk ./www/assets/
-  cp ./src/assets/cordova.js ./www/assets/
-  cp ./src/assets/cordova_plugins.js ./www/assets/
 fi
 
 echo "creating deployment tarball"
