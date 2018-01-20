@@ -278,23 +278,7 @@ Meteor.methods({
     });
   },
 
-  updateSessionQuestionStepId (sessionId: string, stepNumber: number){
-    const session = Sessions.findOne({_id: sessionId});
-    if (!session){
-      throw new Meteor.Error('Session Error', 'Session does not exist');
-    }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
-    }
-
-    Sessions.update(sessionId, {
-      $set: {
-        questionStepId: stepNumber
-      }
-    });
-  },
-
-  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId: number, questionType: string){
+  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId: number, questionType: string, correctAnswer: string){
 
     console.log('Updating Session Ready for response', stepId, ready);
     const session = Sessions.findOne({_id: sessionId});
@@ -307,7 +291,8 @@ Meteor.methods({
       $set: {
         readyForResponse: ready,
         questionStepId: stepId,
-        questionType: questionType
+        questionType: questionType,
+        correctAnswer: correctAnswer
       }
     });
   },

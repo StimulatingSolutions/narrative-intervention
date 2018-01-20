@@ -84,7 +84,7 @@ export class SideBarInfo {
   }
 
   closeQuestion (): void {
-    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, (error, result) => {
+    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, null, (error, result) => {
       if (error){
         this.handleError(error, 22);
         return;

@@ -79,19 +79,14 @@ export class Lesson05 implements OnInit {
   handleResponseModeStuff () {
     const questionDiv = <HTMLElement>document.getElementsByClassName('active-question')[0];
     if (this.inGetResponsesMode && questionDiv) {
-      const offset = questionDiv.offsetTop;
-      const scrollDiv = document.getElementsByClassName('session-container')[0];
-      if (!offset) {
-        return;
-      }
-      scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
-      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADDING block-scroll ("+this.inGetResponsesMode+")");
-      scrollDiv.classList.add("block-scroll");
+      // const offset = questionDiv.offsetTop;
+      // const scrollDiv = document.getElementsByClassName('session-container')[0];
+      // if (!offset) {
+      //   return;
+      // }
+      // scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
       document.getElementsByClassName("side-bar-info-content")[0].classList.add("response-mode");
     } else {
-      const scrollDiv = document.getElementsByClassName('session-container')[0];
-      //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ REMOVING block-scroll ("+this.inGetResponsesMode+")");
-      scrollDiv.classList.remove("block-scroll");
       document.getElementsByClassName("side-bar-info-content")[0].classList.remove("response-mode");
     }
   }
@@ -140,7 +135,7 @@ export class Lesson05 implements OnInit {
       //console.log('updated step done', result);
     });
     //console.log('Activating response mode: ', stepId)
-    Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, this.steps[stepId].questionType, (error, result) => {
+    Meteor.call('updateSessionReadyForResponse', this.session._id, true, stepId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, (error, result) => {
       if (error){
         this.handleError(error, 6);
         return;
@@ -155,7 +150,7 @@ export class Lesson05 implements OnInit {
     Meteor.call('updateCompletedStepList', this.session._id, true, stepId, (error, result) => {
       //console.log('updated step done', result);
       //console.log('Completing Question: ', stepId);
-      Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, 'defaultResponse', (error, result) => {
+      Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, 'defaultResponse', null, (error, result) => {
         if (error){
           this.handleError(error, 7);
           return;

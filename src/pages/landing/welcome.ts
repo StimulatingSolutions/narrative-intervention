@@ -144,6 +144,7 @@ export class WelcomePage implements OnInit {
       active: true,
       activeUsers: [],
       questionStepId: null,
+      correctAnswer: null,
       questionType: 'defaultResponse',
       readyForResponse: false,
       responses: [],

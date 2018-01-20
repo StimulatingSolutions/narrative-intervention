@@ -23,6 +23,7 @@ export interface Session {
   active: boolean;
   activeUsers: string[];
   questionStepId: number;
+  correctAnswer: string;
   questionType: string;
   readyForResponse: boolean;
   responses: any[];

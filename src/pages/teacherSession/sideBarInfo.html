@@ -6,7 +6,7 @@
       </div>
       <div class="student-count" *ngIf="session?.readyForResponse">
         <div>
-          Waiting For: {{waitCount}}
+          Waiting For: {{waitCount}} <span *ngIf="session?.correctAnswer">(correct answer: <b>{{session?.correctAnswer}}</b>)</span>
         </div>
       </div>
       <div class="session-id">
@@ -21,14 +21,17 @@
     <ion-card-content>
       <div class="student" *ngFor="let user of session?.activeUsers">
 
-        <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1">
+        <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[user]?.response">
           <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
-            <ion-icon name="close"></ion-icon>
+            <ion-icon name="radio-button-off"></ion-icon>
           </div>
-          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
-            <ion-icon name="checkmark"></ion-icon>
+          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[user]?.response)">
+            <ion-icon name="checkmark-circle"></ion-icon>
           </div>
-          <span [class.bold]="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
+          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response">
+            <ion-icon name="close-circle"></ion-icon>
+          </div>
+          <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(user) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response))">
             {{user}}
           </span>
           <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
