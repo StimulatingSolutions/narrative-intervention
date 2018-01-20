@@ -17,7 +17,7 @@ export class StudentSessionPage implements OnInit {
   studentSessionId: string;
   userId: string;
   session: Session;
-  selectedCard: string;
+  selectedCard: string = null;
   questionType: string;
 
   constructor(
