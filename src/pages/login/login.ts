@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { EmailService } from '../../services/email';
 import { WelcomePage } from '../landing/welcome';
 import { MeteorObservable } from 'meteor-rxjs';
 
 import { StudentSessionPage } from '../studentSession/studentSession';
-
-declare var KioskPlugin: any;
 
 
 @Component({
