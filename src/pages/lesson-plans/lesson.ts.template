@@ -127,20 +127,11 @@ export class Lesson__LESSON_NUM__ implements OnInit {
       //(sessionId: string, add: boolean, stepId: number){
       Meteor.call('updateCompletedStepList', this.session._id, !this.steps[stepId].done, stepId, (error, result) => {
         //console.log('updated step done', result);
+        this.ref.detectChanges();
       });
     } else {
       //console.log('Activating question from direct click')
       this.setReadyForResponse(stepId);
-    }
-
-    if (stepId + 1 === this.steps.length){
-      if (this.session.active){
-        this.toggleSessionActive(false);
-      }
-    } else {
-      if (!this.session.active){
-        this.toggleSessionActive(true);
-      }
     }
   }
 
@@ -188,15 +179,6 @@ export class Lesson__LESSON_NUM__ implements OnInit {
     }
 
     return _.max(this.session.completedSteps) + 1;
-  }
-
-  toggleSessionActive(active: boolean): void {
-    MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
-      next: () => {},
-      error: (e: Error) => {
-        this.handleError(e, 8);
-      }
-    });
   }
 
   handleError(e: Error, id: number): void {

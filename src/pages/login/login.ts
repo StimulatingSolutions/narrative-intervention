@@ -18,12 +18,25 @@ export class LoginPage {
   private loginPassword = '';
   private loginSession = '';
   private sessionUserId = '';
+  private device;
 
   constructor(
     private alertCtrl: AlertController,
     private emailService: EmailService,
     private navCtrl: NavController
   ) {
+    if (window.location.search.length > 1) {
+      this.device = window.location.search.substring(1);
+      return;
+    }
+    let dims = ''+window.screen.width+'x'+window.screen.height;
+    if (dims === '1024x600') {
+      this.device = 'student';
+    } else if (dims === '800x1280') {
+      this.device = 'teacher';
+    } else {
+      this.device = 'web';
+    }
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
@@ -66,6 +79,7 @@ export class LoginPage {
         buttons: ['OK']
       });
       alert.present();
+      return;
     }
 
     Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
@@ -98,15 +112,4 @@ export class LoginPage {
     //this.navCtrl.push(LoginPage, {});
   }
 
-  /*
-    var uknsi_dims = ''+window.screen.width+'x'+window.screen.height;
-  if (uknsi_dims === '1024x600') {
-    console.log("======== Student device detected.");
-  } else if (uknsi_dims === '800x1280') {
-    console.log("======== Teacher device detected.");
-  } else {
-    console.log("======== Web browser detected.");
-    return;
-  }
-   */
 }

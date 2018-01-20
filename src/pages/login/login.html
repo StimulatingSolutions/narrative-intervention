@@ -5,8 +5,24 @@
 </ion-header>
 
 <ion-content padding class="login-page-content">
-  <ion-list>
-    <ion-list-header class="form-header">Teachers:</ion-list-header>
+  <ion-list class="bottom-margin" *ngIf="device === 'student' || device === 'web'">
+    <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
+    <ion-item>
+      <ion-label floating>Session Code</ion-label>
+      <ion-input [(ngModel)]="loginSession" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Student Id</ion-label>
+      <ion-input [(ngModel)]="sessionUserId" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="joinSession()">Join Session</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <ion-list class="bottom-margin" *ngIf="device === 'teacher' || device === 'web'">
+    <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers:</ion-list-header>
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input [(ngModel)]="loginEmail" type="text"></ion-input>
@@ -22,27 +38,7 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
-  <br/>
-  <br/>
-  <ion-list>
-    <ion-list-header class="form-header">Students:</ion-list-header>
-    <ion-item>
-      <ion-label floating>Session Code</ion-label>
-      <ion-input [(ngModel)]="loginSession" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student Id</ion-label>
-      <ion-input [(ngModel)]="sessionUserId" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-buttons class='action-buttons'>
-        <button ion-button (click)="joinSession()">Join Session</button>
-      </ion-buttons>
-    </ion-item>
-  </ion-list>
-  <br/>
-  <br/>
-  <ion-list>
+  <ion-list class="bottom-margin" *ngIf="device === 'teacher' || device === 'web'">
     <ion-list-header class="form-header">Questions?</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>

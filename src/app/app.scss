@@ -74,6 +74,10 @@ ion-navbar, ion-header, ion-content {
   border-top: 1px solid #dedede;
 }
 
+.bottom-margin {
+  margin-bottom: 50px;
+}
+
 ion-list-header {
   font-size: large !important;
   margin-bottom: 0 !important;
@@ -82,4 +86,12 @@ ion-list-header {
 
 .bold {
   font-weight: bold;
+}
+
+ion-header {
+  border-top: 25px solid black;
+}
+
+html {
+  //font-size: 80%;
 }

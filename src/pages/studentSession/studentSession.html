@@ -1,27 +1,40 @@
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse">
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" [class.no-selection]="!selectedCard">
   <div *ngIf="session?.questionType === 'goal'">
-    <div *ngIf="session?.lesson == 1">
+    <div class='img-card-container' *ngIf="session?.lesson == 1">
     </div>
-    <div *ngIf="session?.lesson == 2">
-      <div class='card-row'>
-        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-      </div>
+    <div class='img-card-container flex-fully-centered' *ngIf="session?.lesson == 2">
+      <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
     </div>
-    <div *ngIf="session?.lesson == 3">
-      <div class='card-row'>
-        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-        <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
-      </div>
+    <div class='img-card-container flex-fully-centered' *ngIf="session?.lesson == 3">
+      <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+      <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
     </div>
-    <div *ngIf="session?.lesson >= 4">
-      <div class='card-row' >
-        <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-        <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
-      </div>
-      <div class='card-row'>
-        <div [class.selected-card]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
-        <div [class.selected-card]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
-      </div>
+    <div class='img-card-container' *ngIf="session?.lesson >= 4">
+      <table
+        [class.stick-top]="selectedCard == 'outcome-yes' || selectedCard == 'outcome-fail'"
+        [class.stick-bottom]="selectedCard == 'goal' || selectedCard == 'try'"
+        [class.stick-left]="selectedCard == 'try' || selectedCard == 'outcome-fail'"
+        [class.stick-right]="selectedCard == 'goal' || selectedCard == 'outcome-yes'"
+      >
+        <tbody>
+        <tr class="card-row">
+          <td class="card-cell">
+            <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+          </td>
+          <td class="card-cell">
+            <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+          </td>
+        </tr>
+        <tr class="card-row">
+          <td class="card-cell">
+            <div [class.selected-card]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
+          </td>
+          <td class="card-cell">
+            <div [class.selected-card]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class='rating-cards-container' *ngIf="session?.questionType === 'difficulty'">

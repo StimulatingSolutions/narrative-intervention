@@ -4,6 +4,10 @@
   max-width: 1024px;
   background-color: black;
 
+  .scroll-content {
+    padding-top: 25px !important;
+  }
+
   &.active {
     background-color: white !important;
   }
@@ -16,15 +20,76 @@
     display: none;
   }
 
+  &.no-selection .img-card-container table {
+    left: 175px;
+    right: 174px;
+  }
+
+  .img-card-container {
+    width: 897px;
+    height: 568px;
+    position: relative;
+    table {
+      position: absolute;
+      &.stick-top {
+        top: 0;
+      }
+      &.stick-bottom {
+        bottom: 0;
+      }
+      &.stick-left {
+        left: 175px;
+      }
+      &.stick-right {
+        right: 174px;
+      }
+    }
+    &.flex-fully-centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .card-row:first-child .card-cell {
+    vertical-align: bottom;
+  }
+
+  .card-row:first-child + .card-row .card-cell {
+    vertical-align: top;
+  }
+
+  .card-row .card-cell:first-child {
+    .img-button {
+      margin-left: auto;
+    }
+  }
+
+  .card-row .card-cell:first-child + .card-cell {
+    .img-button {
+      margin-right: auto;
+    }
+  }
+
   .img-button {
-    flex: 0 0 auto;
     margin: 10px;
-    height: 264px;
-    width: 264px;
+    height: 176px;
+    width: 176px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 1px;
+    transition: width .7s ease, height .7s ease;
+
+    &.selected-card {
+      height: 352px;
+      width: 352px;
+    }
+  }
+
+  &.no-selection .img-button {
+    height: 264px;
+    width: 264px;
   }
 
   .goal {
@@ -44,32 +109,51 @@
   }
 
   .selected-card {
-    -webkit-box-shadow: 0 0 8px 12px #FF4;
-    -moz-box-shadow: 0 0 8px 12px #FF4;
-    box-shadow: 0 0 8px 12px #FF4;
-  }
-
-  .card-row {
-    height: 284px;
-    display: flex;
-    justify-content: center;
+    -webkit-box-shadow: 0 0 8px 12px #FF0;
+    -moz-box-shadow: 0 0 8px 12px #FF0;
+    box-shadow: 0 0 8px 12px #FF0;
   }
 
   .rating-cards-container {
-
     display: flex;
-    justify-content: space-evenly;
-    height: 100%;
+    justify-content: center;
     align-items: center;
+    height: 100%;
 
     .rating-card {
 
       height: 200px;
+      margin: 10px;
+      transition: height .7s ease;
+
+      .number-value,
+      .text-value {
+        transition: height .7s ease, line-height .7s ease;
+        height: 100px;
+        line-height: 100px;
+        display: block;
+        text-align: center;
+      }
+
+      &.selected-card {
+        height: 400px;
+        .number-value,
+        .text-value {
+          height: 200px;
+          line-height: 200px;
+          font-weight: bolder;
+        }
+      }
 
       &.difficulty {
         width: 18%;
         .number-value {
           background-color: #FF0;
+        }
+        &.selected-card {
+          -webkit-box-shadow: 0 0 8px 12px rgba(0, 136, 0, .7);
+          -moz-box-shadow: 0 0 8px 12px rgba(0, 136, 0, .7);
+          box-shadow: 0 0 8px 12px rgba(0, 136, 0, .7);
         }
       }
 
@@ -87,14 +171,6 @@
         }
       }
 
-
-      .number-value,
-      .text-value {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 50%;
-      }
 
       .number-value{
         border: 2px solid black;
