@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 //import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import * as _ from 'lodash';
   selector: 'sideBarInfo',
   templateUrl: 'sideBarInfo.html'
 })
-export class SideBarInfo {
+export class SideBarInfo implements OnInit {
 
   @Input() session: Session;
 
@@ -22,6 +22,7 @@ export class SideBarInfo {
   waitCount: number;
   idsWithAnswer: number[];
   currentResponses: {};
+  headTeacher: boolean;
 
   constructor(
     //private navCtrl: NavController
@@ -31,6 +32,10 @@ export class SideBarInfo {
     this.waitCount = 0;
     this.idsWithAnswer = [];
     this.currentResponses = {};
+  }
+
+  ngOnInit() {
+    this.headTeacher = (Meteor.userId() == this.session.creatersId);
   }
 
   ngDoCheck () {
