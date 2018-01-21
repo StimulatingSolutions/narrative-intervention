@@ -37,12 +37,16 @@ export class TeacherSessionPage implements OnInit {
   }
 
   handleFindPlace (): void {
-    let highlightedDiv = <HTMLElement>document.getElementsByClassName('step-content highlighted')[0];
-
-    if (!highlightedDiv) {
-      let steps = document.getElementsByTagName('step');
-      highlightedDiv = <HTMLElement>steps[steps.length-1];
+    let currentStep:number;
+    if (this.session.currentStepId != null) {
+      currentStep = this.session.currentStepId;
+    } else if (!this.session.completedSteps.length) {
+      currentStep = 0;
+    } else {
+      currentStep = this.session.completedSteps.reduce((a, b) => { return Math.max(a, b) });
     }
+    let steps = document.getElementsByTagName('step');
+    let highlightedDiv: HTMLElement = <HTMLElement>steps[currentStep];
     if (highlightedDiv) {
       const offset = highlightedDiv.offsetTop;
       const scrollDiv = document.getElementsByClassName('session-container')[0];

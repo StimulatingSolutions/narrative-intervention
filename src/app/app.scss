@@ -70,8 +70,12 @@ ion-navbar, ion-header, ion-content {
   border-top: 1px solid #dedede;
 }
 
-.bottom-margin {
-  margin-bottom: 50px;
+.top-margin-2 {
+  margin-top: 100px;
+}
+
+.top-margin {
+  margin-top: 50px;
 }
 
 ion-list-header {
@@ -90,4 +94,9 @@ ion-header {
 
 html {
   //font-size: 80%;
+}
+
+.scroll-content {
+  padding-top: 41px !important;
+  overflow-y: auto !important;
 }

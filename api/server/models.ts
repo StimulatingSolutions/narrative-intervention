@@ -25,6 +25,7 @@ export interface Session {
   questionStepId: number;
   correctAnswer: string;
   questionType: string;
+  currentStepId: number;
   readyForResponse: boolean;
   responses: any[];
   completedSteps: number[];

@@ -1,4 +1,4 @@
-<ion-content class="side-bar-info-content">
+<ion-content class="side-bar-info-content" [class.response-mode]="session?.readyForResponse">
   <ion-card>
     <ion-card-header>
       <div class="student-count" *ngIf="!session?.readyForResponse">
@@ -14,7 +14,7 @@
       </div>
       <ion-buttons class='button-container'>
         <button ion-button (click)="closeQuestion()" [class.hidden]="!session?.readyForResponse" >Done!</button>
-        <button ion-button color="secondary" (click)="findMyPlace()" [class.hidden]="session?.readyForResponse" >Find My Place</button>
+        <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
         <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
       </ion-buttons>
     </ion-card-header>

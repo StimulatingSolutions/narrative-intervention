@@ -278,21 +278,45 @@ Meteor.methods({
     });
   },
 
-  updateSessionReadyForResponse(sessionId: string, ready: boolean, stepId: number, questionType: string, correctAnswer: string){
-
-    console.log('Updating Session Ready for response', stepId, ready);
+  startQuestion(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string, correctAnswer: string){
+    console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    console.log('ready for response!', ready, stepId);
-    Sessions.update(sessionId, {
+    let update = {
       $set: {
-        readyForResponse: ready,
+        readyForResponse: true,
         questionStepId: stepId,
         questionType: questionType,
-        correctAnswer: correctAnswer
+        correctAnswer: correctAnswer,
+        currentStepId: stepId
+      }
+    };
+    if (!alreadyAdded) {
+      update["$push"] = {
+        completedSteps: stepId
+      };
+    }
+    Sessions.update(sessionId, update);
+  },
+
+  finishQuestion(sessionId: string){
+    console.log('finishing question');
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+
+    Sessions.update(sessionId, {
+      $set: {
+        readyForResponse: false,
+        questionStepId: null,
+        correctAnswer: null
+      },
+      $push: {
+        completedSteps: session.currentStepId
       }
     });
   },
@@ -311,7 +335,7 @@ Meteor.methods({
       studentId: studentId,
       response: selectedCard,
       date: date
-    }
+    };
     console.log('Recording Response', newResponse);
 
     Sessions.update(sessionId, {
@@ -321,40 +345,23 @@ Meteor.methods({
     });
   },
 
-  updateCompletedStepList(sessionId: string, add: boolean, stepId: number){
-
-    console.log("Updated Completed List", stepId, add);
+  setCurrentStep(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string) {
+    console.log('setting current step: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
-    if (!session){
+    if (!session) {
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
-    if(add){
-      Sessions.update(sessionId, {
-        $push: {
-          completedSteps: stepId
-        }
-      });
-    } else {
-      Sessions.update(sessionId, {
-        $pull: {
-          completedSteps: stepId
-        }
-      }, {
-        multi: true
-      });
-    }
-  },
-
-  updateQuestionType(sessionId: string, questionType: string){
-    console.log("Updated Question Type", questionType);
-    const session = Sessions.findOne({_id: sessionId});
-    if (!session){
-      throw new Meteor.Error('Session Error', 'Session does not exist');
-    }
-    Sessions.update(sessionId, {
+    let update = {
       $set: {
-        questionType: questionType
+        questionType: questionType,
+        currentStepId: stepId
       }
-    });
+    };
+    if (!alreadyAdded) {
+      update["$push"] = {
+        completedSteps: stepId
+      };
+    }
+    Sessions.update(sessionId, update);
   }
 });

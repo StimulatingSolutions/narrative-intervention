@@ -12,7 +12,6 @@ export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
-  done: boolean = false;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
@@ -20,10 +19,9 @@ export class Step implements OnInit {
   @Input() highlightedStepId: number;
   @Input() currentQuestionStepId: number;
   @Input() defaultResponse: string;
+  @Input() completedStatuses: any;
 
   @Output() onGetResponses = new EventEmitter<number>();
-  @Output() onCompleteNonQuestion = new EventEmitter<number>();
-
   @Output() onStepClicked =  new EventEmitter<number>();
 
   constructor() {
@@ -38,37 +36,13 @@ export class Step implements OnInit {
     this.allSteps[this.stepId] = this;
   }
 
-  ngDoCheck(): void {
-    //console.log('current step', this.currentQuestionStepId)
-    //console.log('steps', this.allSteps);
-    //console.log('highlighted', this.highlightedStepId)
-
-
-  }
-
   ngOnDestroy(): void {
     nextStepId = 0;
     nextQuestionId = 0;
   }
 
-
   clickStep() {
-
     this.onStepClicked.emit(this.stepId);
-
-    // if (this.questionType) {
-    //   this.done = !this.done;
-    //   if(this.done){
-    //     this.onCompleteNonQuestion.emit(this.stepId);
-    //   }
-    //   return;
-    // }
-    //
-    // this.onGetResponses.emit(this.stepId);
-  }
-
-  setDoneStatus(done){
-    this.done = done;
   }
 
 }

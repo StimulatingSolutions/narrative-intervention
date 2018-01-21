@@ -22,7 +22,6 @@ export class SideBarInfo {
   waitCount: number;
   idsWithAnswer: number[];
   currentResponses: {};
-  currentStep: number;
 
   constructor(
     //private navCtrl: NavController
@@ -41,7 +40,7 @@ export class SideBarInfo {
       return response.step === this.session.questionStepId;
     });
 
-    const newResponses = {}
+    const newResponses = {};
     stepResponses.forEach( response => {
       if (!newResponses.hasOwnProperty(response.studentId)){
         newResponses[response.studentId] = {
@@ -52,15 +51,13 @@ export class SideBarInfo {
       if (response.date > newResponses[response.studentId].date){
         newResponses[response.studentId] = response;
       }
-    })
+    });
     this.currentResponses = newResponses;
     const ids = stepResponses.map( response => {
       return response.studentId;
     });
     this.idsWithAnswer = _.uniq(ids);
     this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
-
-    this.currentStep = ((_.max(this.session.completedSteps) || 0) + 1);
   }
 
   findMyPlace (): void {
@@ -84,12 +81,11 @@ export class SideBarInfo {
   }
 
   closeQuestion (): void {
-    Meteor.call('updateSessionReadyForResponse', this.session._id, false, -1, null, (error, result) => {
+    Meteor.call('finishQuestion', this.session._id, (error, result) => {
       if (error){
         this.handleError(error, 22);
         return;
       }
-      document.getElementsByClassName("side-bar-info-content")[0].classList.remove("active-question");
     });
   }
 
