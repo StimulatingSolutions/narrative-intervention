@@ -5,11 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LoginPage } from '../pages/login/login';
 import { MomentModule } from 'angular2-moment';
-import { ProfilePage } from '../pages/profile/profile';
-import { VerificationPage } from '../pages/verification/verification';
 import { WelcomePage } from '../pages/landing/welcome';
 import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
-import { PhoneService } from '../services/phone';
 import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
 import { SessionManagementPage } from '../pages/sessions/sessionmanagement';
@@ -21,6 +18,7 @@ import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
 import { Lesson05 } from '../pages/lesson-plans/lesson05/lesson-05';
 import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
+import {ErrorAlert} from "../services/errorAlert";
 
 
 require('raf');
@@ -31,8 +29,6 @@ require('smoothscroll-polyfill').polyfill();
   declarations: [
     MyApp,
     LoginPage,
-    VerificationPage,
-    ProfilePage,
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
@@ -55,8 +51,6 @@ require('smoothscroll-polyfill').polyfill();
   entryComponents: [
     MyApp,
     LoginPage,
-    VerificationPage,
-    ProfilePage,
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
@@ -74,8 +68,8 @@ require('smoothscroll-polyfill').polyfill();
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PhoneService,
-    EmailService
+    EmailService,
+    ErrorAlert
   ]
 })
 export class AppModule {}

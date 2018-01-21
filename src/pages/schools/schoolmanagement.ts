@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 
 import { Schools } from 'api/collections';
 import { School } from 'api/models';
+import {ErrorAlert} from "../../services/errorAlert";
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
 //import * as _ from 'lodash';
 
@@ -12,7 +14,7 @@ import { School } from 'api/models';
   selector: 'schoolmanagement',
   templateUrl: 'schoolmanagement.html'
 })
-export class SchoolManagementPage implements OnInit {
+export class SchoolManagementPage extends DestructionAwareComponent implements OnInit {
 
   addSchoolVisible: boolean;
   addSchoolName: string;
@@ -24,14 +26,20 @@ export class SchoolManagementPage implements OnInit {
   allSchools: Observable<School[]>;
 
   constructor(
-    //private navCtrl: NavController
+    private errorAlert: ErrorAlert,
     private alertCtrl: AlertController,
     private ref: ChangeDetectorRef,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('schools').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('schools')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.allSchools = this.findSchools();
       });
     });
@@ -48,14 +56,16 @@ export class SchoolManagementPage implements OnInit {
 
     //CHECK EMPTYS
     if(this.addSchoolName === ''){
-      this.handleError(new Error("Valid School Name is required."), 28);
+      this.errorAlert.present(new Error("Valid School Name is required."), 28);
       return
     }
 
     const newSchool = {
       name: this.addSchoolName
     };
-    MeteorObservable.call('createNewSchool', newSchool).subscribe({
+    MeteorObservable.call('createNewSchool', newSchool)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -67,9 +77,7 @@ export class SchoolManagementPage implements OnInit {
         this.addSchoolVisible = false;
         this.addSchoolName = '';
       },
-      error: (e: Error) => {
-        this.handleError(e, 13);
-      }
+      error: this.errorAlert.presenter(13)
     });
 
     //this.addSchoolVisible = false;
@@ -91,7 +99,9 @@ export class SchoolManagementPage implements OnInit {
     let updates = {
       name: this.editSchoolName
     };
-    MeteorObservable.call('updateSchool', this.schoolToEdit, updates).subscribe({
+    MeteorObservable.call('updateSchool', this.schoolToEdit, updates)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -103,9 +113,7 @@ export class SchoolManagementPage implements OnInit {
         this.editSchoolVisible = false;
         this.editSchoolName = '';
       },
-      error: (e: Error) => {
-        this.handleError(e, 14);
-      }
+      error: this.errorAlert.presenter(14)
     });
   }
 
@@ -113,23 +121,4 @@ export class SchoolManagementPage implements OnInit {
     this.addSchoolVisible = visible;
     this.ref.detectChanges();
   }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      //this.addSchool();
-    }
-  }
-
 }

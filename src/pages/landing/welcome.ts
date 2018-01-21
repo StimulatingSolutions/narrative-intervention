@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Meteor } from 'meteor/meteor'
 import { LoginPage } from '../login/login';
@@ -15,6 +15,8 @@ import { availableLessons } from './availableLessons';
 import * as _ from 'lodash';
 import {TeacherSessionPage} from "../teacherSession/teacherSession";
 import * as moment from "moment";
+import {ErrorAlert} from "../../services/errorAlert";
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
 function generateNumId() {
   const min = 0;
@@ -26,7 +28,7 @@ function generateNumId() {
   selector: 'welcome',
   templateUrl: 'welcome.html'
 })
-export class WelcomePage implements OnInit {
+export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
   addSessionVisible: boolean;
   addSessionName: string;
@@ -48,16 +50,19 @@ export class WelcomePage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private alertCtrl: AlertController,
+    private errorAlert: ErrorAlert,
     private ref: ChangeDetectorRef,
   ) {
+    super();
     this.roles = [];
     this.showUserManagement = false;
     this.showSchoolManagement = false;
     this.showSessionManagement = false;
     this.allSessionIds = availableLessons;
 
-    MeteorObservable.call<string[]>('getUserRoles').subscribe({
+    MeteorObservable.call<string[]>('getUserRoles')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result: string[]) => {
         this.roles = result;
         this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
@@ -66,20 +71,26 @@ export class WelcomePage implements OnInit {
 
         console.log('tools', this.showUserManagement, this.showSchoolManagement, this.showSessionManagement)
       },
-      error: (e: Error) => {
-        this.handleError(e, 2);
-      }
+      error: this.errorAlert.presenter(2)
     });
   }
 
   ngOnInit() {
-    MeteorObservable.subscribe('sessions').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('sessions')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.unfinishedSessions = Sessions.find({active: true, creatersId: Meteor.user()._id});
       });
     });
-    MeteorObservable.subscribe('schools').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('schools')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.allSchools = Schools.find({});
       });
     });
@@ -106,11 +117,11 @@ export class WelcomePage implements OnInit {
   }
 
   finishSession(session: Session): void {
-    MeteorObservable.call('setSessionActive', session._id, false).subscribe({
+    MeteorObservable.call('setSessionActive', session._id, false)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {},
-      error: (e: Error) => {
-        this.handleError(e, 3);
-      }
+      error: this.errorAlert.presenter(3)
     });
   }
 
@@ -131,7 +142,7 @@ export class WelcomePage implements OnInit {
   addSession(): void {
     //CHECK EMPTYS
     if(this.addSessionLessonNumber === undefined || this.addSessionSchoolId === undefined){
-      this.handleError(new Error("All fields are required."), 27);
+      this.errorAlert.present(new Error("All fields are required."), 27);
       return
     }
 
@@ -147,12 +158,16 @@ export class WelcomePage implements OnInit {
       correctAnswer: null,
       currentStepId: null,
       questionType: 'defaultResponse',
+      backupQuestionType: null,
       readyForResponse: false,
+      openResponse: false,
       responses: [],
       completedSteps: [],
       lesson: this.addSessionLessonNumber
     };
-    MeteorObservable.call('createNewSession', newSession).subscribe({
+    MeteorObservable.call('createNewSession', newSession)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result) => {
 
         this.addSessionVisible = false;
@@ -163,9 +178,7 @@ export class WelcomePage implements OnInit {
         const newId = Sessions.findOne({shortId: newSession.shortId})._id;
         this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
       },
-      error: (e: Error) => {
-        this.handleError(e, 4);
-      }
+      error: this.errorAlert.presenter(4)
     });
 
     //this.addSessionVisible = false;
@@ -174,23 +187,11 @@ export class WelcomePage implements OnInit {
   joinSession(): void {
     Meteor.call('findSessionByShortId', this.joinSessionCode, (error, result) => {
       if (error) {
-        this.handleError(error, 5);
+        this.errorAlert.present(error, 5);
         return;
       }
       this.navCtrl.push(TeacherSessionPage, {sessionId: result});
     });
-  }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
   }
 
 }

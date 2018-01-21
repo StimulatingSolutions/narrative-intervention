@@ -1,40 +1,45 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { AlertController, NavParams, NavController } from 'ionic-angular';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { NavParams } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
-//import { Observable } from 'rxjs';
 
 import { Sessions } from 'api/collections';
 import { Session } from 'api/models';
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
+import {Step} from "../lesson-plans/step";
 
-//import * as _ from 'lodash';
-// import * as moment from 'moment';
-// import * as shortid from 'shortid';
 
 @Component({
   selector: 'teacherSession',
   templateUrl: 'teacherSession.html'
 })
-export class TeacherSessionPage implements OnInit {
+export class TeacherSessionPage extends DestructionAwareComponent implements OnInit, OnDestroy {
 
   incomingSessionId: string;
   session: Session;
 
   constructor(
-    private alertCtrl: AlertController,
     private navParams: NavParams,
-    public navCtrl: NavController,
     private ref: ChangeDetectorRef
   ) {
+    super();
     this.incomingSessionId = this.navParams.get('sessionId');
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('activeSession', this.incomingSessionId).subscribe((result) => {
-      MeteorObservable.autorun().subscribe((result1) => {
+    MeteorObservable.subscribe('activeSession', this.incomingSessionId)
+    .subscribe((result) => {
+      MeteorObservable.autorun()
+      .subscribe((result1) => {
         this.session = Sessions.findOne({_id: this.incomingSessionId});
-        this.ref.detectChanges();
+        if (!this.ref['destroyed']) {
+          this.ref.detectChanges();
+        }
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    Step.resetIds();
   }
 
   handleFindPlace (): void {
@@ -54,23 +59,4 @@ export class TeacherSessionPage implements OnInit {
       scrollDiv.scrollTo({top: offset - 250, left: 0, behavior: "smooth"});
     }
   }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      //this.addSession();
-    }
-  }
-
 }

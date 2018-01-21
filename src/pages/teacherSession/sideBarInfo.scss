@@ -29,8 +29,13 @@
   }
 
 
-  &.response-mode ion-card-header {
-    background: #EBB;
+  &.response-mode {
+    ion-card-header {
+      background: #EBB;
+    }
+    &.open-response ion-card-header {
+      background: #BEB;
+    }
   }
 
   .hidden {

@@ -8,11 +8,12 @@ import { Session } from 'api/models';
 import { LoginPage } from '../login/login';
 
 import * as _ from 'lodash';
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 @Component({
   selector: 'studentSession',
   templateUrl: 'studentSession.html'
 })
-export class StudentSessionPage implements OnInit {
+export class StudentSessionPage extends DestructionAwareComponent implements OnInit {
 
   studentSessionId: string;
   userId: string;
@@ -25,6 +26,7 @@ export class StudentSessionPage implements OnInit {
     public navCtrl: NavController,
     private ref: ChangeDetectorRef,
   ) {
+    super();
     this.studentSessionId = this.navParams.get('sessionId');
     this.userId = this.navParams.get('userId');
     this.questionType = '';
@@ -36,8 +38,12 @@ export class StudentSessionPage implements OnInit {
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('activeSession', this.studentSessionId).subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('activeSession', this.studentSessionId)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
 
         const updatedSession = Sessions.findOne({_id: this.studentSessionId});
         this.updateSessionChanges(this.session, updatedSession);
@@ -129,12 +135,6 @@ export class StudentSessionPage implements OnInit {
   handleError(e: Error, id: number): void {
     console.error(e);
     //  don't show an alert on the student tablets, too confusing for them
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      //this.addSession();
-    }
   }
 
 }

@@ -5,13 +5,15 @@ import { WelcomePage } from '../landing/welcome';
 import { MeteorObservable } from 'meteor-rxjs';
 
 import { StudentSessionPage } from '../studentSession/studentSession';
+import {ErrorAlert} from "../../services/errorAlert";
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
 
 @Component({
   selector: 'login',
   templateUrl: 'login.html'
 })
-export class LoginPage {
+export class LoginPage extends DestructionAwareComponent {
   private loginEmail = '';
   private loginPassword = '';
   private loginSession = '';
@@ -20,9 +22,11 @@ export class LoginPage {
 
   constructor(
     private alertCtrl: AlertController,
+    private errorAlert: ErrorAlert,
     private emailService: EmailService,
     private navCtrl: NavController
   ) {
+    super();
     if (window.location.search.length > 1) {
       this.device = window.location.search.substring(1);
       return;
@@ -48,13 +52,13 @@ export class LoginPage {
       return this.navCtrl.setRoot(WelcomePage, {}, {
         animate: true
       });
-    }).catch((e) => {
-      this.handleError(e, 9);
-    })
+    }).catch(this.errorAlert.presenter(9));
   }
 
   resetUserPassword(): void {
-    MeteorObservable.call('sendResetUserPasswordEmail', this.loginEmail.trim()).subscribe({
+    MeteorObservable.call('sendResetUserPasswordEmail', this.loginEmail.trim())
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Password Reset!',
@@ -63,9 +67,7 @@ export class LoginPage {
         });
         return alert.present();
       },
-      error: (e: Error) => {
-        this.handleError(e, 10);
-      }
+      error: this.errorAlert.presenter(10)
     });
   }
 
@@ -82,7 +84,7 @@ export class LoginPage {
 
     Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
       if (error){
-        this.handleError(error, 11);
+        this.errorAlert.present(error, 11);
         return;
       }
       return this.navCtrl.push(StudentSessionPage, {
@@ -90,19 +92,6 @@ export class LoginPage {
         userId: this.sessionUserId
       });
     })
-  }
-
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
   }
 
   info(): void {

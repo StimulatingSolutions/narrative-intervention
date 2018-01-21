@@ -1,4 +1,4 @@
-<ion-content class="side-bar-info-content" [class.response-mode]="session?.readyForResponse">
+<ion-content class="side-bar-info-content" [class.response-mode]="session?.readyForResponse" [class.open-response]="session?.openResponse">
   <ion-card>
     <ion-card-header>
       <div class="student-count" *ngIf="!session?.readyForResponse">

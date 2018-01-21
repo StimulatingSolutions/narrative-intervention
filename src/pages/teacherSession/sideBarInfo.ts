@@ -1,13 +1,11 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
-import { MeteorObservable } from 'meteor-rxjs';
-//import { Observable } from 'rxjs';
+import { NavController } from 'ionic-angular';
 
 import { Session } from 'api/models';
 
 import * as _ from 'lodash';
-// import * as moment from 'moment';
-// import * as shortid from 'shortid';
+import {ErrorAlert} from "../../services/errorAlert";
+
 
 @Component({
   selector: 'sideBarInfo',
@@ -25,8 +23,7 @@ export class SideBarInfo implements OnInit {
   headTeacher: boolean;
 
   constructor(
-    //private navCtrl: NavController
-    private alertCtrl: AlertController,
+    private errorAlert: ErrorAlert,
     public navCtrl: NavController,
   ) {
     this.waitCount = 0;
@@ -69,26 +66,10 @@ export class SideBarInfo implements OnInit {
     this.onFindPlace.emit();
   }
 
-  toggleSessionActive(active: boolean): void {
-    MeteorObservable.call('setSessionActive', this.session._id, active).subscribe({
-      next: () => {
-        const alert = this.alertCtrl.create({
-          title: 'Success!',
-          message: "Session: " + this.session + ' has been ' + (active ? 'activated.' : 'deactivated'),
-          buttons: ['OK']
-        });
-        alert.present();
-      },
-      error: (e: Error) => {
-        this.handleError(e, 21);
-      }
-    });
-  }
-
   closeQuestion (): void {
     Meteor.call('finishQuestion', this.session._id, (error, result) => {
       if (error){
-        this.handleError(error, 22);
+        this.errorAlert.present(error, 22);
         return;
       }
     });
@@ -97,23 +78,4 @@ export class SideBarInfo implements OnInit {
   exitCurrentSession (): void {
     this.navCtrl.pop();
   }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      //this.addSession();
-    }
-  }
-
 }

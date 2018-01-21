@@ -1,7 +1,7 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import {Component, Input, OnInit} from '@angular/core';
 import { Step } from '../step';
 import { Session } from 'api/models';
+import {ErrorAlert} from "../../../services/errorAlert";
 
 
 @Component({
@@ -17,8 +17,7 @@ export class Lesson__LESSON_NUM__ implements OnInit {
   headTeacher: boolean;
 
   constructor(
-    private alertCtrl: AlertController,
-    private ref: ChangeDetectorRef
+    private errorAlert: ErrorAlert
   ) {
     this.steps = [];
     this.completedStatuses = {};
@@ -31,58 +30,43 @@ export class Lesson__LESSON_NUM__ implements OnInit {
       return;
     }
 
-    let tmpCompletedStatuses: any = {};
     for (let completedStep of this.session.completedSteps) {
-      tmpCompletedStatuses[completedStep] = true;
+      this.completedStatuses[completedStep] = true;
     }
-    this.completedStatuses = tmpCompletedStatuses;
-    this.ref.detectChanges();
+  }
+
+  stepReady(step: Step) {
+    this.steps[step.stepId] = step;
+    step.done = !!this.completedStatuses[step.stepId];
   }
 
   stepClicked(stepId) {
     if (!this.headTeacher) {
-      this.completedStatuses[stepId] = !this.completedStatuses[stepId];
-      this.ref.detectChanges();
+      this.steps[stepId].setDone(!this.steps[stepId].done);
       return;
     }
 
-    //If on question dont proceed
-    if (this.session.questionStepId){
-      //console.log('Clicked Step while in response mode.')
-      return
-    }
-
-    let alreadyDone: boolean = !!this.completedStatuses[stepId];
-    this.completedStatuses[stepId] = true;
-
-    if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, alreadyDone, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, (error, result) => {
-        if (error){
-          this.handleError(error, 6);
-          return;
-        }
-      });
-      return;
-    }
-
-    Meteor.call('setCurrentStep', this.session._id, stepId, alreadyDone, this.steps[stepId].defaultResponse, (error, result) => {
-      if (error){
-        this.handleError(error, 7);
+    if (this.session.openResponse) {
+      // in open response mode, we only block clicking on questions
+      if (this.steps[stepId].questionType) {
         return;
       }
-    });
-  }
+    } else {
+      // in regular question mode, we block clicking on any step
+      if (this.session.questionStepId) {
+        return
+      }
+    }
 
-  handleError(e: Error, id: number): void {
-    console.error(e);
+    let alreadyDone: boolean = this.steps[stepId].done;
+    this.steps[stepId].done = true;
 
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
+    if (this.steps[stepId].questionType) {
+      Meteor.call('startQuestion', this.session._id, stepId, alreadyDone, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+      return;
+    }
 
-    alert.present();
+    Meteor.call('setCurrentStep', this.session._id, stepId, alreadyDone, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
   }
 
 }

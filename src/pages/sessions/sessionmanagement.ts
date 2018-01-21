@@ -11,6 +11,8 @@ import { TeacherSessionPage } from '../teacherSession/teacherSession';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {ErrorAlert} from "../../services/errorAlert";
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 //import * as shortid from 'shortid';
 
 function generateNumId() {
@@ -23,7 +25,7 @@ function generateNumId() {
   selector: 'sessionmanagement',
   templateUrl: 'sessionmanagement.html'
 })
-export class SessionManagementPage implements OnInit {
+export class SessionManagementPage extends DestructionAwareComponent implements OnInit {
 
   addSessionVisible: boolean;
   addSessionName: string;
@@ -42,20 +44,30 @@ export class SessionManagementPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
+    private errorAlert: ErrorAlert,
     private alertCtrl: AlertController,
     private ref: ChangeDetectorRef,
   ) {
+    super();
     this.allSessionIds = ['6'];
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('sessions').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('sessions')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.allSessions = this.findSessions();
       });
     });
-    MeteorObservable.subscribe('schools').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('schools')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.allSchools = this.findSchools();
       });
     });
@@ -72,7 +84,7 @@ export class SessionManagementPage implements OnInit {
   addSession(): void {
     //CHECK EMPTYS
     if(this.addSessionLessonNumber === undefined || this.addSessionSchoolId === undefined){
-      this.handleError(new Error("All fields are required."), 29);
+      this.errorAlert.present(new Error("All fields are required."), 29);
       return
     }
 
@@ -88,12 +100,16 @@ export class SessionManagementPage implements OnInit {
       correctAnswer: null,
       currentStepId: null,
       questionType: 'defaultResponse',
+      backupQuestionType: null,
       readyForResponse: false,
+      openResponse: false,
       responses: [],
       completedSteps: [],
       lesson: this.addSessionLessonNumber
     };
-    MeteorObservable.call('createNewSession', newSession).subscribe({
+    MeteorObservable.call('createNewSession', newSession)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result) => {
 
         const alert = this.alertCtrl.create({
@@ -111,9 +127,7 @@ export class SessionManagementPage implements OnInit {
         const newId = Sessions.findOne({shortId: newSession.shortId})._id;
         this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
       },
-      error: (e: Error) => {
-        this.handleError(e, 15);
-      }
+      error: this.errorAlert.presenter(15)
     });
 
     //this.addSessionVisible = false;
@@ -137,7 +151,9 @@ export class SessionManagementPage implements OnInit {
       name: this.editSessionName,
       schoolId: this.editSessionSchoolId
     };
-    MeteorObservable.call('updateSession', this.sessionToEdit, updates).subscribe({
+    MeteorObservable.call('updateSession', this.sessionToEdit, updates)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -149,9 +165,7 @@ export class SessionManagementPage implements OnInit {
         this.editSessionVisible = false;
         this.editSessionName = '';
       },
-      error: (e: Error) => {
-        this.handleError(e, 16);
-      }
+      error: this.errorAlert.presenter(16)
     });
   }
 
@@ -162,7 +176,9 @@ export class SessionManagementPage implements OnInit {
   }
 
   toggleSessionActive(active: boolean): void {
-    MeteorObservable.call('setSessionActive', this.sessionToEdit._id, active).subscribe({
+    MeteorObservable.call('setSessionActive', this.sessionToEdit._id, active)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -176,32 +192,11 @@ export class SessionManagementPage implements OnInit {
         this.editSessionSchoolId = '';
         this.editSessionActive = false;
       },
-      error: (e: Error) => {
-        this.handleError(e, 17);
-      }
+      error: this.errorAlert.presenter(17)
     });
   }
 
   viewSession(session: Session): void {
     this.navCtrl.push(TeacherSessionPage, {sessionId: session._id});
   }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      //this.addSession();
-    }
-  }
-
 }

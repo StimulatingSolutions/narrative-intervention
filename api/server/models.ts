@@ -25,9 +25,11 @@ export interface Session {
   questionStepId: number;
   correctAnswer: string;
   questionType: string;
+  backupQuestionType: string;
   currentStepId: number;
   readyForResponse: boolean;
   responses: any[];
   completedSteps: number[];
   lesson: number;
+  openResponse: boolean;
 }
