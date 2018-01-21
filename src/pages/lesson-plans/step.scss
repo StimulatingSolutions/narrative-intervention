@@ -7,12 +7,28 @@ step {
   &[questiontype] {
     padding-top: .1in;
     padding-bottom: .1in;
+    .done-checkbox {
+      padding-top: .1in;
+    }
   }
   cursor: pointer;
+  position: relative;
+
+  .done-checkbox {
+    position: absolute;
+    left: .25in;
+    top: 10px;
+    font-size: 28px;
+    color: #00F;
+    ion-icon[name="checkbox-outline"] {
+      color: #000;
+      opacity: .6;
+    }
+  }
 }
 li li step {
-  padding-left: 1.35in;
-  margin-left: -1.25in;
+  padding-left: 1.26in;
+  margin-left: -1.16in;
 }
 .step-content {
 
@@ -20,7 +36,7 @@ li li step {
   border: 3px solid transparent;
 
   &.subdued {
-    opacity: .6;
+    opacity: .7;
   }
   &.highlighted {
     border-color: #EE1;

@@ -1,4 +1,8 @@
 <div (click)="clickStep()">
+  <div class="done-checkbox">
+    <ion-icon name="checkbox-outline" *ngIf="completedStatuses && completedStatuses[stepId]"></ion-icon>
+    <ion-icon name="square-outline" *ngIf="!completedStatuses || !completedStatuses[stepId]"></ion-icon>
+  </div>
   <div
     class="step-content"
     [ngClass]="{

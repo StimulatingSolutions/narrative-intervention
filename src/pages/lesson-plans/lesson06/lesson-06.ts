@@ -14,6 +14,7 @@ export class Lesson06 implements OnInit {
 
   steps: Step[];
   completedStatuses: any;
+  headTeacher: boolean;
 
   constructor(
     private alertCtrl: AlertController,
@@ -24,6 +25,12 @@ export class Lesson06 implements OnInit {
   }
 
   ngOnInit():void {
+    this.headTeacher = (Meteor.userId() == this.session.creatersId);
+
+    if (!this.headTeacher) {
+      return;
+    }
+
     let tmpCompletedStatuses: any = {};
     for (let completedStep of this.session.completedSteps) {
       tmpCompletedStatuses[completedStep] = true;
@@ -33,7 +40,12 @@ export class Lesson06 implements OnInit {
   }
 
   stepClicked(stepId) {
-    //console.log('Clicked step: ', stepId)
+    if (!this.headTeacher) {
+      this.completedStatuses[stepId] = !this.completedStatuses[stepId];
+      this.ref.detectChanges();
+      return;
+    }
+
     //If on question dont proceed
     if (this.session.questionStepId){
       //console.log('Clicked Step while in response mode.')

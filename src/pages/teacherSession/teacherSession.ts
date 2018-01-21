@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AlertController, NavParams, NavController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 //import { Observable } from 'rxjs';
@@ -20,10 +20,10 @@ export class TeacherSessionPage implements OnInit {
   session: Session;
 
   constructor(
-    //private navCtrl: NavController
     private alertCtrl: AlertController,
     private navParams: NavParams,
     public navCtrl: NavController,
+    private ref: ChangeDetectorRef
   ) {
     this.incomingSessionId = this.navParams.get('sessionId');
   }
@@ -32,6 +32,7 @@ export class TeacherSessionPage implements OnInit {
     MeteorObservable.subscribe('activeSession', this.incomingSessionId).subscribe((result) => {
       MeteorObservable.autorun().subscribe((result1) => {
         this.session = Sessions.findOne({_id: this.incomingSessionId});
+        this.ref.detectChanges();
       });
     });
   }
