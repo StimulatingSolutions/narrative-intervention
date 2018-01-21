@@ -11,7 +11,7 @@
   correctAnswer=""
   (onGetResponses)="getResponses($event)"
   
-  [allSteps]="steps"
+  (onReady)="stepReady($event)"
   [highlightedStepId]="suggestedStepId"
   [currentQuestionStepId]="gettingResponsesFor">
 </step>

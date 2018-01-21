@@ -7,12 +7,14 @@ import { Users } from 'api/collections';
 import { User } from 'api/models';
 
 import * as _ from 'lodash';
+import {ErrorAlert} from "../../services/errorAlert";
+import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
 @Component({
   selector: 'usermanagement',
   templateUrl: 'usermanagement.html'
 })
-export class UserManagementPage implements OnInit {
+export class UserManagementPage extends DestructionAwareComponent implements OnInit {
 
   private accountTypeRoles = ['admin', 'researcher', 'teacher'];
   private accountActiveRoles = ['active', 'deactive'];
@@ -32,17 +34,22 @@ export class UserManagementPage implements OnInit {
   allUsers;
 
   constructor(
-    //private navCtrl: NavController
+    private errorAlert: ErrorAlert,
     private alertCtrl: AlertController,
     private ref: ChangeDetectorRef,
   ) {
+    super();
     this.addUserVisible = false;
     this.editUserVisible = false;
   }
 
   ngOnInit(): void {
-    MeteorObservable.subscribe('users').subscribe(() => {
-      MeteorObservable.autorun().subscribe(() => {
+    MeteorObservable.subscribe('users')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
         this.allUsers = this.findUsers();
       });
     });
@@ -62,11 +69,13 @@ export class UserManagementPage implements OnInit {
     //CHECK EMPTYS
     const validEmail = this.addUserEmail.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if(this.addUserEmail === '' || !validEmail){
-      this.handleError(new Error("Valid Email and password required."), 30);
+      this.errorAlert.present(new Error("Valid Email and password required."), 30);
       return
     }
 
-    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserName, this.addUserAccountType).subscribe({
+    MeteorObservable.call('createNewUser', this.addUserEmail, this.addUserName, this.addUserAccountType)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -78,9 +87,7 @@ export class UserManagementPage implements OnInit {
         this.addUserEmail = '';
         this.addUserAccountType = 'teacher';
       },
-      error: (e: Error) => {
-        this.handleError(e, 23);
-      }
+      error: this.errorAlert.presenter(23)
     });
 
     this.addUserVisible = false;
@@ -89,7 +96,9 @@ export class UserManagementPage implements OnInit {
   resetUserPassword(): void {
     console.log('USER!: ', this.userToEdit);
 
-    MeteorObservable.call('sendResetUserPasswordEmailFromId', this.userToEdit._id).subscribe({
+    MeteorObservable.call('sendResetUserPasswordEmailFromId', this.userToEdit._id)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result) => {
         const alert = this.alertCtrl.create({
           title: 'Password Reset Sent',
@@ -98,9 +107,7 @@ export class UserManagementPage implements OnInit {
         });
         alert.present();
       },
-      error: (e: Error) => {
-        this.handleError(e, 24);
-      }
+      error: this.errorAlert.presenter(24)
     });
   }
 
@@ -112,7 +119,9 @@ export class UserManagementPage implements OnInit {
     this.editUserAccountType = null;
     this.editUserAccountActive = null;
 
-    MeteorObservable.call<string[]>('getUserRoles', user._id).subscribe({
+    MeteorObservable.call<string[]>('getUserRoles', user._id)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: (result: string[]) => {
         this.accountTypeRoles.forEach( accountTypeRole => {
           if (_.includes(result, accountTypeRole)){
@@ -125,9 +134,7 @@ export class UserManagementPage implements OnInit {
           }
         })
       },
-      error: (e: Error) => {
-        this.handleError(e, 25);
-      }
+      error: this.errorAlert.presenter(25)
     });
 
 
@@ -149,7 +156,9 @@ export class UserManagementPage implements OnInit {
 
     const accountRoles = [this.editUserAccountActive, this.editUserAccountType];
 
-    MeteorObservable.call('updateUser', this.userToEdit, profile, accountRoles).subscribe({
+    MeteorObservable.call('updateUser', this.userToEdit, profile, accountRoles)
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
       next: () => {
         const alert = this.alertCtrl.create({
           title: 'Success!',
@@ -164,32 +173,7 @@ export class UserManagementPage implements OnInit {
         this.editUserAccountActive = '';
         this.editUserAccountType = '';
       },
-      error: (e: Error) => {
-        this.handleError(e, 26);
-      }
+      error: this.errorAlert.presenter(26)
     });
   }
-
-  removeUser(): void {
-
-  }
-
-  handleError(e: Error, id: number): void {
-    console.error(e);
-
-    const alert = this.alertCtrl.create({
-      title: `Oops! (#${ id })`,
-      message: e.message,
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
-  onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode === 13) {
-      this.addUser();
-    }
-  }
-
 }

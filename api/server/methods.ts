@@ -278,7 +278,7 @@ Meteor.methods({
     });
   },
 
-  startQuestion(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string, correctAnswer: string){
+  startQuestion(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string, correctAnswer: string, openResponse: boolean){
     console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
@@ -291,7 +291,8 @@ Meteor.methods({
         questionStepId: stepId,
         questionType: questionType,
         correctAnswer: correctAnswer,
-        currentStepId: stepId
+        currentStepId: stepId,
+        openResponse: openResponse
       }
     };
     if (!alreadyAdded) {
@@ -309,16 +310,22 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    Sessions.update(sessionId, {
+    let update: any = {
       $set: {
         readyForResponse: false,
         questionStepId: null,
-        correctAnswer: null
+        correctAnswer: null,
+        openResponse: false,
+        backupQuestionType: null
       },
       $push: {
         completedSteps: session.currentStepId
       }
-    });
+    };
+    if (session.backupQuestionType) {
+      update.$set.questionType = session.backupQuestionType;
+    }
+    Sessions.update(sessionId, update);
   },
 
   sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string, date: Date){
@@ -351,12 +358,16 @@ Meteor.methods({
     if (!session) {
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
-    let update = {
+    let update: any = {
       $set: {
-        questionType: questionType,
         currentStepId: stepId
       }
     };
+    if (session.openResponse) {
+      update.$set.backupQuestionType = questionType;
+    } else {
+      update.$set.questionType = questionType;
+    }
     if (!alreadyAdded) {
       update["$push"] = {
         completedSteps: stepId

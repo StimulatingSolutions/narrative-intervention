@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef} from "@angular/core";
 
 
 let nextStepId: number = 0;
@@ -12,6 +12,7 @@ export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
+  public done: boolean = false;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
@@ -19,12 +20,14 @@ export class Step implements OnInit {
   @Input() highlightedStepId: number;
   @Input() currentQuestionStepId: number;
   @Input() defaultResponse: string;
-  @Input() completedStatuses: any;
+  @Input() openResponse: boolean;
 
-  @Output() onGetResponses = new EventEmitter<number>();
   @Output() onStepClicked =  new EventEmitter<number>();
+  @Output() onReady =  new EventEmitter<Step>();
 
-  constructor() {
+  constructor(
+    private ref: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit(): void {
@@ -33,16 +36,21 @@ export class Step implements OnInit {
       // not all steps are questions
       this.questionId = nextQuestionId++;
     }
-    this.allSteps[this.stepId] = this;
+    this.onReady.emit(this);
   }
 
-  ngOnDestroy(): void {
+  public static resetIds(): void {
     nextStepId = 0;
     nextQuestionId = 0;
   }
 
   clickStep() {
     this.onStepClicked.emit(this.stepId);
+  }
+
+  public setDone(status: boolean) {
+    this.done = status;
+    this.ref.detectChanges();
   }
 
 }

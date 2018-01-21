@@ -17,7 +17,7 @@ step {
   .done-checkbox {
     position: absolute;
     left: .25in;
-    top: 10px;
+    top: 4px;
     font-size: 28px;
     color: #00F;
     ion-icon[name="checkbox-outline"] {
@@ -29,6 +29,10 @@ step {
 li li step {
   padding-left: 1.26in;
   margin-left: -1.16in;
+}
+.instructions step {
+  padding-left: .69in;
+  margin-left: -.59in;
 }
 .step-content {
 
@@ -44,9 +48,16 @@ li li step {
   }
   &.question {
     border-color: #EBB;
+    &.open-response {
+      border-color: #BEB;
+    }
   }
   &.active-question {
     border-color: #EBB;
     background-color: #EBB;
+    &.open-response {
+      border-color: #BEB;
+      background-color: #BEB;
+    }
   }
 }
