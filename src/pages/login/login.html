@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding class="login-page-content">
-  <ion-list class="bottom-margin" *ngIf="device === 'student' || device === 'web'">
+  <ion-list class="top-margin" *ngIf="device === 'student' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
     <ion-item>
       <ion-label floating>Session Code</ion-label>
@@ -21,11 +21,11 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
-  <ion-list class="bottom-margin" *ngIf="device === 'teacher' || device === 'web'">
+  <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers:</ion-list-header>
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input [(ngModel)]="loginEmail" type="text"></ion-input>
+      <ion-input [(ngModel)]="loginEmail" type="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Password</ion-label>
@@ -38,7 +38,7 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
-  <ion-list class="bottom-margin" *ngIf="device === 'teacher' || device === 'web'">
+  <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
     <ion-list-header class="form-header">Questions?</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>

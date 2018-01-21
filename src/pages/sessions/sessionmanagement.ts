@@ -86,6 +86,7 @@ export class SessionManagementPage implements OnInit {
       activeUsers: [],
       questionStepId: null,
       correctAnswer: null,
+      currentStepId: null,
       questionType: 'defaultResponse',
       readyForResponse: false,
       responses: [],

@@ -1,5 +1,9 @@
 .teacher-session-page-content {
 
+  .scroll-content {
+    padding-top: 0 !important;
+  }
+
   .session-container {
     height: calc(100% - 196px);
     overflow-y: auto;

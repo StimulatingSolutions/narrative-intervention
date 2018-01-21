@@ -1,12 +1,13 @@
-<div
-  class="step-content"
-  [ngClass]="{
-    subdued:  (done),
-    highlighted: (highlightedStepId === stepId),
-    'active-question': (currentQuestionStepId === stepId),
-    question: (questionType !== undefined)
-  }"
-  (click)="clickStep()"
->
-  <ng-content></ng-content>
+<div (click)="clickStep()">
+  <div
+    class="step-content"
+    [ngClass]="{
+      subdued: (highlightedStepId !== stepId && completedStatuses && completedStatuses[stepId]),
+      highlighted: (highlightedStepId === stepId),
+      'active-question': (currentQuestionStepId === stepId),
+      question: (questionType !== undefined)
+    }"
+  >
+    <ng-content></ng-content>
+  </div>
 </div>

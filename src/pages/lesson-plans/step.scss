@@ -8,6 +8,7 @@ step {
     padding-top: .1in;
     padding-bottom: .1in;
   }
+  cursor: pointer;
 }
 li li step {
   padding-left: 1.35in;
@@ -19,11 +20,11 @@ li li step {
   border: 3px solid transparent;
 
   &.subdued {
-    opacity: .5;
+    opacity: .6;
   }
   &.highlighted {
-    border-color: #dfea2c;
-    background-color: #dfea2c;
+    border-color: #EE1;
+    background-color: #EE1;
   }
   &.question {
     border-color: #EBB;
