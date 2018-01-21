@@ -39,6 +39,7 @@ export class LoginPage extends DestructionAwareComponent {
     } else {
       this.device = 'web';
     }
+    console.log(`=========== ${this.device} device detected`);
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {

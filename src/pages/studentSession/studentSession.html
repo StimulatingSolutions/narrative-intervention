@@ -1,5 +1,5 @@
 <ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" [class.no-selection]="!selectedCard">
-  <div *ngIf="session?.questionType === 'goal'">
+  <div *ngIf="session?.questionType === 'goal' || !session?.questionType">
     <div class='img-card-container' *ngIf="session?.lesson == 1">
     </div>
     <div class='img-card-container flex-fully-centered' *ngIf="session?.lesson == 2">
