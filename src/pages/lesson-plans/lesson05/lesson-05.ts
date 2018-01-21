@@ -41,9 +41,11 @@ export class Lesson05 implements OnInit {
       return
     }
 
+    let alreadyDone: boolean = !!this.completedStatuses[stepId];
+    this.completedStatuses[stepId] = true;
+
     if (this.steps[stepId].questionType) {
-      this.completedStatuses[stepId] = false;
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, (error, result) => {
+      Meteor.call('startQuestion', this.session._id, stepId, alreadyDone, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, (error, result) => {
         if (error){
           this.handleError(error, 6);
           return;
@@ -52,8 +54,6 @@ export class Lesson05 implements OnInit {
       return;
     }
 
-    let alreadyDone: boolean = !!this.completedStatuses[stepId];
-    this.completedStatuses[stepId] = true;
     Meteor.call('setCurrentStep', this.session._id, stepId, alreadyDone, this.steps[stepId].defaultResponse, (error, result) => {
       if (error){
         this.handleError(error, 7);
