@@ -9,7 +9,6 @@ import { WelcomePage } from '../pages/landing/welcome';
 import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
 import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
-import { SessionManagementPage } from '../pages/sessions/sessionmanagement';
 import { TeacherSessionPage } from '../pages/teacherSession/teacherSession';
 import { StudentSessionPage } from '../pages/studentSession/studentSession';
 import { SideBarInfo } from '../pages/teacherSession/sideBarInfo';
@@ -32,7 +31,6 @@ require('smoothscroll-polyfill').polyfill();
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
-    SessionManagementPage,
     TeacherSessionPage,
     StudentSessionPage,
     SideBarInfo,
@@ -54,7 +52,6 @@ require('smoothscroll-polyfill').polyfill();
     WelcomePage,
     UserManagementPage,
     SchoolManagementPage,
-    SessionManagementPage,
     TeacherSessionPage,
     StudentSessionPage,
     SideBarInfo,

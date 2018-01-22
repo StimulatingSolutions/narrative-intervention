@@ -18,7 +18,6 @@ export class ErrorAlert {
       content.message = ((typeof e) === 'string') ? e : JSON.stringify(e);
     }
     const alert = this.alertCtrl.create(content);
-
     alert.present();
   }
 

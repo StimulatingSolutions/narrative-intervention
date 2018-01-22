@@ -96,7 +96,21 @@ html {
   //font-size: 80%;
 }
 
+.hidden {
+  display: none;
+}
+
 .scroll-content {
   padding-top: 41px !important;
   overflow-y: auto !important;
+}
+
+.wide-input {
+  .alert-wrapper {
+    max-width: 80% !important;
+  }
+}
+
+button[ion-button] {
+  font-size: 1.9rem !important;
 }

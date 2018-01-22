@@ -32,7 +32,7 @@ export class SideBarInfo implements OnInit {
   }
 
   ngOnInit() {
-    this.headTeacher = (Meteor.userId() == this.session.creatersId);
+    this.headTeacher = (Meteor.userId() == this.session.creatorsId);
   }
 
   ngDoCheck () {

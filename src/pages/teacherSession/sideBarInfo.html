@@ -1,64 +1,52 @@
 <ion-content class="side-bar-info-content" [class.response-mode]="session?.readyForResponse" [class.open-response]="session?.openResponse">
   <ion-card>
     <ion-card-header>
-      <div class="student-count" *ngIf="!session?.readyForResponse">
-        Students: {{session?.activeUsers.length || 0}}
-      </div>
-      <div class="student-count" *ngIf="session?.readyForResponse">
-        <div>
-          Waiting For: {{waitCount}} <span *ngIf="session?.correctAnswer">(correct answer: <b>{{session?.correctAnswer}}</b>)</span>
-        </div>
-      </div>
-      <div class="session-id">
-        Session Code: <b>{{session?.shortId}}</b>
-      </div>
-      <ion-buttons class='button-container'>
-        <button ion-button (click)="closeQuestion()" *ngIf="headTeacher && session?.readyForResponse">Done!</button>
+      <ion-buttons class='button-container find-place'>
         <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
+      </ion-buttons>
+      <ion-buttons class='button-container exit'>
         <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
       </ion-buttons>
     </ion-card-header>
     <ion-card-content>
-      <div class="student" *ngFor="let user of session?.activeUsers">
+      <div class="student-list">
+        <div class="student" *ngFor="let user of session?.activeUsers">
 
-        <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[user]?.response">
-          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
-            <ion-icon name="radio-button-off"></ion-icon>
-          </div>
-          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[user]?.response)">
-            <ion-icon name="checkmark-circle"></ion-icon>
-          </div>
-          <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response">
-            <ion-icon name="close-circle"></ion-icon>
-          </div>
-          <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(user) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response))">
-            {{user}}
-          </span>
-          <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
-            {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+'-' : ''}}{{currentResponses[user].response.replace('utcome', '')}}
+          <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[user]?.response">
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
+              <ion-icon name="radio-button-off"></ion-icon>
+            </div>
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[user]?.response)">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response">
+              <ion-icon name="close-circle"></ion-icon>
+            </div>
+            <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(user) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response))">
+              {{user}}
+            </span>
+            <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
+              {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+'-' : ''}}{{currentResponses[user].response}}
+            </div>
           </div>
         </div>
+        <div *ngIf="session?.activeUsers.length === 0 && session?.active">
+          <i>No students have connected to this session yet.</i>
+        </div>
+        <div *ngIf="!session?.active">
+          <i>This session has been marked as finished by the head teacher.</i>
+        </div>
       </div>
-      <!--
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      <div class="student">12345</div>
-      -->
-      <div *ngIf="session?.activeUsers.length === 0">
-        <i>No students have connected to this session yet.</i>
+      <div class="student-count">
+        <div *ngIf="!session?.readyForResponse">
+          There are <b>{{session?.activeUsers.length || 0}}</b> students in this session.
+        </div>
+        <div *ngIf="session?.readyForResponse">
+          Waiting for <b>{{waitCount}}</b> students to respond.<br/><span *ngIf="session?.correctAnswer">Correct answer: <b>{{session?.correctAnswer}}</b></span>
+        </div>
+        <ion-buttons class="button-container done">
+          <button ion-button (click)="closeQuestion()" *ngIf="headTeacher && session?.readyForResponse">Done!</button>
+        </ion-buttons>
       </div>
     </ion-card-content>
   </ion-card>

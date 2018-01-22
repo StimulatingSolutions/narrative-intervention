@@ -19,7 +19,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   userId: string;
   session: Session;
   selectedCard: string = null;
-  questionType: string;
+  questionType: string = null;
 
   constructor(
     private navParams: NavParams,
@@ -27,9 +27,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     private ref: ChangeDetectorRef,
   ) {
     super();
-    this.studentSessionId = this.navParams.get('sessionId');
-    this.userId = this.navParams.get('userId');
-    this.questionType = '';
   }
 
   ngDoCheck(): void {
@@ -38,6 +35,9 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   }
 
   ngOnInit(): void {
+    this.studentSessionId = this.navParams.get('sessionId');
+    this.userId = this.navParams.get('userId');
+
     MeteorObservable.subscribe('activeSession', this.studentSessionId)
     .takeUntil(this.componentDestroyed$)
     .subscribe(() => {
@@ -46,9 +46,9 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
       .subscribe(() => {
 
         const updatedSession = Sessions.findOne({_id: this.studentSessionId});
+        console.log(updatedSession);
         this.updateSessionChanges(this.session, updatedSession);
         this.session = updatedSession;
-        this.questionType = this.session.questionType;
 
         this.ref.detectChanges();
         if (!this.session.active){
@@ -72,14 +72,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
         }
       }
     });
-    Meteor.call('joinSession', this.studentSessionId, this.userId, (error, result) => {
-      if (error){
-        this.handleError(error, 18);
-        return;
-      }
-    })
-
-    console.log('session?', Sessions.findOne({_id: this.studentSessionId}))
   }
 
   updateSessionChanges (oldSession: Session, newSession: Session): void {
@@ -103,6 +95,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     if (!newSession.readyForResponse){
       this.selectedCard = null;
     }
+    this.questionType = newSession.questionType;
   }
 
   ngOnDestroy(): void {

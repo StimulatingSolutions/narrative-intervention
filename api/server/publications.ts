@@ -23,9 +23,7 @@ Meteor.publish('schools', function(): Mongo.Cursor<School> {
     return;
   }
 
-  return Schools.collection.find({}, {
-    fields: { name: 1}
-  });
+  return Schools.collection.find({}, {});
 });
 
 Meteor.publish('sessions', function(): Mongo.Cursor<Session> {
@@ -33,14 +31,7 @@ Meteor.publish('sessions', function(): Mongo.Cursor<Session> {
     return;
   }
 
-  if (Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
-    return Sessions.collection.find({});
-  } else {
-    return Sessions.collection.find({ creatersId: this.userId });
-  }
-
-  //return Schools.collection.find({}, {});
-
+  return Sessions.collection.find({}, {});
 });
 
 Meteor.publish('activeSession', function(sessionId): Mongo.Cursor<Session> {

@@ -8,11 +8,7 @@
   <ion-list class="top-margin" *ngIf="device === 'student' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
     <ion-item>
-      <ion-label floating>Session Code</ion-label>
-      <ion-input [(ngModel)]="loginSession" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student Id</ion-label>
+      <ion-label floating>Student Id (group number followed by student number)</ion-label>
       <ion-input [(ngModel)]="sessionUserId" type="number"></ion-input>
     </ion-item>
     <ion-item>
