@@ -16,7 +16,6 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 export class LoginPage extends DestructionAwareComponent {
   private loginEmail = '';
   private loginPassword = '';
-  private loginSession = '';
   private sessionUserId = '';
   private device;
 
@@ -75,15 +74,15 @@ export class LoginPage extends DestructionAwareComponent {
   joinSession(): void {
     if (this.sessionUserId === ''){
       const alert = this.alertCtrl.create({
-        title: 'Join Session',
-        message: 'User Id is required.',
+        title: 'Oops!',
+        message: 'Student Id is required (group number followed by student number)',
         buttons: ['OK']
       });
       alert.present();
       return;
     }
 
-    Meteor.call('findSessionByShortId', this.loginSession, this.sessionUserId, (error, result) => {
+    Meteor.call('joinSession', this.sessionUserId, (error, result) => {
       if (error){
         this.errorAlert.present(error, 11);
         return;

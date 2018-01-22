@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
-import { Observable } from 'rxjs';
 
 import { Users } from 'api/collections';
 import { User } from 'api/models';
@@ -50,13 +49,9 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
       MeteorObservable.autorun()
       .takeUntil(this.componentDestroyed$)
       .subscribe(() => {
-        this.allUsers = this.findUsers();
+        this.allUsers = Users.find({ 'profile.email': { $exists: true }});
       });
     });
-  }
-
-  findUsers(): Observable<User[]> {
-    return Users.find({ 'profile.email': { $exists: true }});
   }
 
   showAddUser(visible: boolean): void {

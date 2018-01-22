@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="navbar-bg">
-    <ion-title>School Management</ion-title>
+    <ion-title>Group Management</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,45 +9,53 @@
   <ion-list no-lines>
     <div class='school-update-list' *ngFor="let school of allSchools | async">
       <ion-icon name="md-settings" class='school-edit-button' (click)="selectSchoolToEdit(school)"></ion-icon>
-      <div>{{school.name}}</div>
+      <div>Group {{school.idNumber}} (at {{school.name}})</div>
     </div>
   </ion-list>
 
   <div *ngIf="editSchoolVisible" class='edit-school-section'>
     <ion-card>
       <ion-card-header>
-        Edit School
+        Edit Group
       </ion-card-header>
       <ion-card-content>
+        <ion-item>
+          <ion-label floating>Group Number</ion-label>
+          <ion-input [(ngModel)]="editSchoolNumber" type="number"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label floating>School Name</ion-label>
           <ion-input [(ngModel)]="editSchoolName" type="text"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
-        <button ion-button (click)="updateSchool()">Update School</button>
+        <button ion-button (click)="updateSchool()">Update Group</button>
         <button ion-button (click)="hideSchoolEdit()">Cancel</button>
       </ion-buttons>
     </ion-card>
   </div>
 
   <ion-buttons>
-    <button ion-button (click)="showAddSchool(true)">Add School</button>
+    <button ion-button (click)="showAddSchool(true)">Add New Group</button>
   </ion-buttons>
 
   <div *ngIf="addSchoolVisible" class='add-school-section'>
     <ion-card>
       <ion-card-header>
-        Add School
+        Add Group
       </ion-card-header>
       <ion-card-content>
+        <ion-item>
+          <ion-label floating>Group Number</ion-label>
+          <ion-input [(ngModel)]="addSchoolNumber" type="number"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label floating>School Name</ion-label>
           <ion-input [(ngModel)]="addSchoolName" type="text"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
-        <button ion-button (click)="addSchool()">Add</button>
+        <button ion-button (click)="addSchool()">Add Group</button>
         <button ion-button (click)="showAddSchool(false)">Cancel</button>
       </ion-buttons>
     </ion-card>

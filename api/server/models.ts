@@ -12,14 +12,16 @@ export interface User extends Meteor.User {
 export interface School {
   _id?: string;
   name: string;
+  idNumber: number;
 }
 
 export interface Session {
   _id?: string;
-  name: string;
   shortId: string;
-  creatersId: string;
-  schoolId: string;
+  creatorsId: string;
+  creationDate: string;
+  schoolNumber: number;
+  schoolName: string;
   active: boolean;
   activeUsers: string[];
   questionStepId: number;

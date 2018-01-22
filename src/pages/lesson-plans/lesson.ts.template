@@ -24,7 +24,7 @@ export class Lesson__LESSON_NUM__ implements OnInit {
   }
 
   ngOnInit():void {
-    this.headTeacher = (Meteor.userId() == this.session.creatersId);
+    this.headTeacher = (Meteor.userId() == this.session.creatorsId);
 
     if (!this.headTeacher) {
       return;

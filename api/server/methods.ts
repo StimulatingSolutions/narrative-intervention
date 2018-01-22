@@ -124,8 +124,7 @@ Meteor.methods({
       throw new Meteor.Error('unauthorized',
         'User must be logged-in to create a new chat');
     }
-    var roles = Roles.getRolesForUser(id);
-    return roles;
+    return Roles.getRolesForUser(id);
   },
 
 
@@ -139,33 +138,44 @@ Meteor.methods({
     });
   },
 
-  //SCHOOOLS
+  //SCHOOLS
   createNewSchool(school: School): void {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager'])){
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
+    }
+
+    let conflict = Schools.findOne({idNumber: school.idNumber});
+    if (conflict) {
+      throw new Meteor.Error('conflict', `Another Group with the id number ${school.idNumber} already exists.`)
     }
 
     Schools.insert(school);
   },
 
-  updateSchool(school: School, updates: any){
+  updateSchool(schoolId: string, updates: any){
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager'])){
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
 
-    Schools.update(school._id, {
+    let conflict = Schools.findOne({idNumber: updates.idNumber});
+    if (conflict && conflict._id != schoolId) {
+      throw new Meteor.Error('conflict', `Another Group with the id number ${updates.idNumber} already exists.`)
+    }
+
+    Schools.update(schoolId, {
       $set: {
-        name: updates.name
+        name: updates.name,
+        idNumber: updates.idNumber
       }
     });
   },
@@ -176,41 +186,25 @@ Meteor.methods({
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager', 'teacher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'teacher'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
 
-    session.creatersId = this.userId;
+    let conflict = Sessions.findOne({schoolNumber: session.schoolNumber, active: true});
+    if (conflict) {
+      throw new Meteor.Error('conflict', `There is an existing, unfinished session for group ${session.schoolNumber}, created on ${session.creationDate}`);
+    }
 
-    console.log('creating session: ', session)
+    session.creatorsId = this.userId;
+
     Sessions.insert(session);
-  },
-
-  updateSession(session: Session, updates: any){
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
-    }
-
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'manager'])){
-      throw new Meteor.Error('unauthorized',
-        'User does not have permission');
-    }
-
-    Sessions.update(session._id, {
-      $set: {
-        name: updates.name,
-        schoolId: updates.schoolId,
-        active: updates.active
-      }
-    });
   },
 
   setSessionActive(id: string, active: boolean){
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
     }
-    console.log('updating active:', active)
     if (!active){
       Sessions.update(id, {
         $set: {
@@ -236,27 +230,25 @@ Meteor.methods({
     return session._id;
   },
 
-  joinSession(sessionId: string, userId: string){
-    console.log('join session', sessionId, userId);
-    const session = Sessions.findOne({_id: sessionId});
-    console.log(session);
-    if (!session){
-      throw new Meteor.Error('Session Error', 'Session does not exist');
+  joinSession(userId: string){
+    if (parseInt(userId.slice(-1)) > 6) {
+      throw new Meteor.Error('invalid', `${userId} is not a valid student id; it should consist of the group number, followed by the student number`);
     }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
+    const session = Sessions.findOne({schoolNumber: userId.slice(0, -1), active: true});
+    if (!session){
+      throw new Meteor.Error('not found', `Group ${userId.slice(0, -1)} has no active sessions.`);
     }
     if (_.includes(session.activeUsers, userId)){
-      return;
+      return session._id;
     }
     const newUsers = session.activeUsers.slice();
     newUsers.push(userId);
-    Sessions.update(sessionId, {
+    Sessions.update(session._id, {
       $set: {
         activeUsers: newUsers
       }
     });
-
+    return session._id;
   },
 
   leaveSession(sessionId: string, userId: string){

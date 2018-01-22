@@ -8,10 +8,13 @@
   .waitingforanswer {
     display: flex;
     color: #AA0;
+    background-color: rgba(170, 170, 0, .1);
     border-radius: 3px;
+    margin: 0 -6px;
 
     &.answered {
       color: green;
+      background-color: #FFF;
       &.incorrect {
         color: red;
         background-color: #FFEAEA;
@@ -30,19 +33,15 @@
 
 
   &.response-mode {
-    ion-card-header {
+    ion-card-content {
       background: #EBB;
     }
-    &.open-response ion-card-header {
+    &.open-response ion-card-content {
       background: #BEB;
     }
   }
 
-  .hidden {
-    display: none;
-  }
-
-  .button-container {
+  .button-container.exit {
     padding: 4px;
     position: absolute;
     right: 0;
@@ -50,28 +49,46 @@
     bottom: 0;
   }
 
+  .button-container.find-place {
+    padding: 4px;
+    margin-left: 275px;
+  }
+
   .student-count {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    padding: 18px 10px;
+    padding: 4px 10px;
+    margin-left: 275px;
+    font-size: large;
+    height: 139px;
+    position: relative;
   }
 
   ion-card-header {
     position: relative;
     border-bottom: 1px solid #EEE;
-    display: flex;
-    justify-content: center;
-    padding: 18px;
+    padding: 4px;
     border-top: 25px solid black;
   }
 
-  .student {
-    display: inline-block;
-    width: 24%;
-    padding: 2px;
-    font-size: large;
+  .student-list {
+    width: 275px;
+    top: 25px;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    background: white;
+    border-right: 1px solid #EEE;
+
+    .student {
+      padding: 2px 8px;
+      font-size: large;
+      height: 33px;
+    }
+  }
+
+  .button-container.done {
+    position: absolute;
+    left: 0;
+    bottom: 0;
   }
 
   ion-card-content {
@@ -80,5 +97,7 @@
 
   ion-card {
     margin-top: 0;
+    overflow: visible;
+    position: relative;
   }
 }

@@ -24,7 +24,7 @@ export class Lesson06 implements OnInit {
   }
 
   ngOnInit():void {
-    this.headTeacher = (Meteor.userId() == this.session.creatersId);
+    this.headTeacher = (Meteor.userId() == this.session.creatorsId);
 
     if (!this.headTeacher) {
       return;

@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { AlertController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
 
@@ -18,16 +17,17 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
 
   addSchoolVisible: boolean;
   addSchoolName: string;
+  addSchoolNumber: number;
 
   editSchoolVisible: boolean;
   editSchoolName: string;
+  editSchoolNumber: number;
   schoolToEdit: School;
 
   allSchools: Observable<School[]>;
 
   constructor(
     private errorAlert: ErrorAlert,
-    private alertCtrl: AlertController,
     private ref: ChangeDetectorRef,
   ) {
     super();
@@ -40,53 +40,40 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
       MeteorObservable.autorun()
       .takeUntil(this.componentDestroyed$)
       .subscribe(() => {
-        this.allSchools = this.findSchools();
+        this.allSchools = Schools.find({});
       });
     });
-  }
-
-  findSchools(): Observable<School[]> {
-    Schools.find({}).forEach( school => {
-      console.log('school! ', school);
-    });
-    return Schools.find({});
   }
 
   addSchool(): void {
 
     //CHECK EMPTYS
-    if(this.addSchoolName === ''){
-      this.errorAlert.present(new Error("Valid School Name is required."), 28);
+    if(!this.addSchoolName || !this.addSchoolNumber){
+      this.errorAlert.present(new Error("Group Number and School Name are required."), 28);
       return
     }
 
     const newSchool = {
-      name: this.addSchoolName
+      name: this.addSchoolName,
+      idNumber: this.addSchoolNumber
     };
     MeteorObservable.call('createNewSchool', newSchool)
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: (result) => {
-        const alert = this.alertCtrl.create({
-          title: 'Success!',
-          message: "School: " + this.addSchoolName,
-          buttons: ['OK']
-        });
-        alert.present();
-
         this.addSchoolVisible = false;
-        this.addSchoolName = '';
+        this.addSchoolName = null;
+        this.addSchoolNumber = null;
       },
       error: this.errorAlert.presenter(13)
     });
-
-    //this.addSchoolVisible = false;
   }
 
   selectSchoolToEdit(school): void {
     console.log('selected school: ', school);
     this.schoolToEdit = school;
     this.editSchoolName = school.name;
+    this.editSchoolNumber = school.idNumber;
     this.editSchoolVisible = true;
   }
 
@@ -97,21 +84,16 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   updateSchool(school): void {
 
     let updates = {
-      name: this.editSchoolName
+      name: this.editSchoolName,
+      idNumber: this.editSchoolNumber
     };
-    MeteorObservable.call('updateSchool', this.schoolToEdit, updates)
+    MeteorObservable.call('updateSchool', this.schoolToEdit._id, updates)
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: () => {
-        const alert = this.alertCtrl.create({
-          title: 'Success!',
-          message: "School: " + this.editSchoolName,
-          buttons: ['OK']
-        });
-        alert.present();
-
         this.editSchoolVisible = false;
-        this.editSchoolName = '';
+        this.editSchoolName = null;
+        this.editSchoolNumber = null;
       },
       error: this.errorAlert.presenter(14)
     });
