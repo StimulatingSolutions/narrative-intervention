@@ -85,7 +85,7 @@ getStdin().then((s: string) => {
     let sub = p2;
     sub = sub.replace(new RegExp('</p>\\s*<p>[a-z]\\.\\s*', 'gi'), '</p></step></li>\n<li><step [defaultResponse]="\'goal\'" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.readyForResponse" [currentQuestionStepId]="session.questionStepId"><p>');
     sub = sub.replace(new RegExp('<p>[a-z]\\.\\s*', 'gi'), '<p>');
-    return `<li>\n<step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.readyForResponse" [currentQuestionStepId]="session.questionStepId">\n${p1}</step></li>\n<li><step [defaultResponse]="'goal'" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.readyForResponse" [currentQuestionStepId]="session.questionStepId">\n${sub}</step>\n`;
+    return `<li>\n<step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.readyForResponse" [currentQuestionStepId]="session.questionStepId">\n${p1}</step></li>\n<li><step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.readyForResponse" [currentQuestionStepId]="session.questionStepId">\n${sub}</step>\n`;
   });
   s = s.replace(new RegExp('</([-\\w]*)><(\\1[^>]*)>', 'gi'), '</$1>\n<$2>');
   s = s.replace(new RegExp('<step[^<]*>2. Magician Narrative: Part II Teacher Modeling/Guided Practice\\s*</step>\\s*</li>', 'gi'), '<p>2. Magician Narrative: Part II Teacher Modeling/Guided Practice</p>\n<ol>');
