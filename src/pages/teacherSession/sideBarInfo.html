@@ -51,7 +51,7 @@
           <p *ngIf="session?.correctAnswer">
             The correct answer is: <b>{{session?.correctAnswer}}</b>.
           </p>
-          <p>
+          <p class="done-instructions" *ngIf="headTeacher">
             When you are ready to continue to the next step, click the blue DONE button.
           </p>
         </div>
@@ -60,14 +60,14 @@
             This is an <b>Open Response</b> section.
           </p>
           <p>
-            You can continue to complete steps, and students can freely respond.
+            <span *ngIf="headTeacher">You</span><span *ngIf="!headTeacher">The head teacher</span> can continue to complete steps, and students can freely respond.
           </p>
-          <p>
+          <p class="done-instructions" *ngIf="headTeacher">
             When you have finished the Open Response section, click the blue DONE button.
           </p>
         </div>
-        <ion-buttons class="button-container done">
-          <button ion-button (click)="closeQuestion()" *ngIf="headTeacher && session?.readyForResponse">Done</button>
+        <ion-buttons class="button-container done" *ngIf="headTeacher && session?.readyForResponse">
+          <button ion-button (click)="closeQuestion()">Done</button>
         </ion-buttons>
       </div>
     </ion-card-content>
