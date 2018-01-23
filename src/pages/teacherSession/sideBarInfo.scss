@@ -55,11 +55,30 @@
   }
 
   .student-count {
-    padding: 4px 10px;
+    padding: 4px 2px;
     margin-left: 275px;
     font-size: large;
     height: 139px;
     position: relative;
+
+    p {
+      line-height: 1.1;
+      font-size: large;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        max-width: 375px;
+      }
+    }
+  }
+
+  .button-container.done {
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 
   ion-card-header {
@@ -71,24 +90,19 @@
 
   .student-list {
     width: 275px;
+    height: 206px;
     top: 25px;
     left: 0;
     padding: 4px;
     position: absolute;
     background: white;
     border-right: 1px solid #EEE;
+    font-size: large;
 
     .student {
       padding: 2px 8px;
-      font-size: large;
       height: 33px;
     }
-  }
-
-  .button-container.done {
-    position: absolute;
-    left: 0;
-    bottom: 0;
   }
 
   ion-card-content {

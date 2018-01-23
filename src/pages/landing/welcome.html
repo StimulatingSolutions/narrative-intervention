@@ -12,9 +12,9 @@
   <ion-list *ngIf="(unfinishedSessions | async)?.length > 0">
     <ion-list-header>Your in-progress sessions:</ion-list-header>
     <ion-item *ngFor="let session of unfinishedSessions | async">
-      <div class="session-name">Group {{session.schoolNumber}} (at {{session.schoolName}}), Lesson {{session.lesson}} &mdash; created on {{session.creationDate}}</div>
-      <ion-buttons class='action-buttons'>
-        <button ion-button (click)="viewSession(session)">Re-Join Session</button>
+      <ion-buttons>
+        <div class="button-label">Group {{session.schoolNumber}} (at {{session.schoolName}}), Lesson {{session.lesson}} &mdash; created on {{session.creationDate}} at {{session.creationTime}}</div>
+        <button ion-button (click)="joinSession(session._id)">Re-Join Session</button>
         <button ion-button color="danger" (click)="finishSession(session)">Mark Session Finished</button>
       </ion-buttons>
     </ion-item>
@@ -27,32 +27,16 @@
     <ion-item>
       <ion-buttons class='action-buttons'>
         <div class="button-label">Head Teacher:</div>
-        <button ion-button (click)="forceClick('school-select')">Create New Session</button>
+        <button ion-button (click)="chooseSchool('create')">Create New Session</button>
       </ion-buttons>
     </ion-item>
     <ion-item>
       <ion-buttons class='action-buttons'>
         <div class="button-label">Co-Teacher:</div>
-        <button ion-button (click)="forceClick('school-select-join')">Join Someone Else's Session</button>
+        <button ion-button (click)="chooseSchool('join')">Join Someone Else's Session</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
-
-
-  <div class='hidden'>
-    <ion-select id="school-select" (ionChange)="forceClick('lesson-number-select')" (ionCancel)="resetCreateSessionFlow()" [selectOptions]="{title: 'Choose Group:', cssClass: 'wide-input'}" [(ngModel)]="inputVars['school-select']">
-      <ion-option *ngFor="let school of allSchools | async" [value]="school.idNumber">Group {{school.idNumber}} (at {{school.name}})</ion-option>
-    </ion-select>
-    <ion-select id="lesson-number-select" (ionChange)="addSession()" (ionCancel)="resetCreateSessionFlow()" [selectOptions]="{title: 'Choose Lesson:', cssClass: 'wide-input'}" [(ngModel)]="inputVars['lesson-number-select']">
-      <ion-option *ngFor="let sessionId of allSessionIds" [value]="sessionId">Lesson {{sessionId}}</ion-option>
-    </ion-select>
-    <ion-select id="school-select-join" (ionChange)="maybeAutoJoinSession()" (ionCancel)="resetJoinSessionFlow()" [selectOptions]="{title: 'Choose Group:', cssClass: 'wide-input'}" [(ngModel)]="inputVars['school-select-join']">
-      <ion-option *ngFor="let school of allSchools | async" [value]="school.idNumber">Group {{school.idNumber}} (at {{school.name}})</ion-option>
-    </ion-select>
-    <ion-select id="session-select" (ionChange)="joinSession()" (ionCancel)="resetJoinSessionFlow()" [selectOptions]="{title: 'Choose Session:', cssClass: 'wide-input'}" [(ngModel)]="inputVars['session-select']">
-      <ion-option *ngFor="let session of activeSessionsForGroup" [value]="session._id">Lesson {{session.lesson}}, created on {{session.creationDate}}</ion-option>
-    </ion-select>
-  </div>
 
   <br/>
   <br/>

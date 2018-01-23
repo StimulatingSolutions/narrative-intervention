@@ -18,6 +18,7 @@ export class SideBarInfo implements OnInit {
   @Output() onFindPlace =  new EventEmitter<void>();
 
   waitCount: number;
+  incorrectCount: number;
   idsWithAnswer: number[];
   currentResponses: {};
   headTeacher: boolean;
@@ -27,6 +28,7 @@ export class SideBarInfo implements OnInit {
     public navCtrl: NavController,
   ) {
     this.waitCount = 0;
+    this.incorrectCount = 0;
     this.idsWithAnswer = [];
     this.currentResponses = {};
   }
@@ -60,6 +62,14 @@ export class SideBarInfo implements OnInit {
     });
     this.idsWithAnswer = _.uniq(ids);
     this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
+    if (this.session.correctAnswer) {
+      this.incorrectCount = 0;
+      for (let responseId of this.idsWithAnswer) {
+        if (this.currentResponses[responseId].response != this.session.correctAnswer) {
+          this.incorrectCount++;
+        }
+      }
+    }
   }
 
   findMyPlace (): void {

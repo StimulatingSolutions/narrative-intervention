@@ -107,10 +107,19 @@ html {
 
 .wide-input {
   .alert-wrapper {
-    max-width: 80% !important;
+    max-width: 400px !important;
+  }
+  .alert-message {
+    font-size: large;
   }
 }
 
 button[ion-button] {
   font-size: 1.9rem !important;
+}
+
+.error-alert {
+  .alert-message {
+    font-size: large;
+  }
 }

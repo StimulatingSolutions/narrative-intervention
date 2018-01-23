@@ -41,11 +41,33 @@
         <div *ngIf="!session?.readyForResponse">
           There are <b>{{session?.activeUsers.length || 0}}</b> students in this session.
         </div>
-        <div *ngIf="session?.readyForResponse">
-          Waiting for <b>{{waitCount}}</b> students to respond.<br/><span *ngIf="session?.correctAnswer">Correct answer: <b>{{session?.correctAnswer}}</b></span>
+        <div *ngIf="session?.readyForResponse && !session?.openResponse">
+          <p>
+            <b>{{waitCount}}</b> students have not responded yet.
+          </p>
+          <p *ngIf="session?.correctAnswer">
+            <b>{{incorrectCount}}</b> students have an incorrect answer selected.
+          </p>
+          <p *ngIf="session?.correctAnswer">
+            The correct answer is: <b>{{session?.correctAnswer}}</b>.
+          </p>
+          <p>
+            When you are ready to continue to the next step, click the blue DONE button.
+          </p>
+        </div>
+        <div *ngIf="session?.readyForResponse && session?.openResponse">
+          <p>
+            This is an <b>Open Response</b> section.
+          </p>
+          <p>
+            You can continue to complete steps, and students can freely respond.
+          </p>
+          <p>
+            When you have finished the Open Response section, click the blue DONE button.
+          </p>
         </div>
         <ion-buttons class="button-container done">
-          <button ion-button (click)="closeQuestion()" *ngIf="headTeacher && session?.readyForResponse">Done!</button>
+          <button ion-button (click)="closeQuestion()" *ngIf="headTeacher && session?.readyForResponse">Done</button>
         </ion-buttons>
       </div>
     </ion-card-content>

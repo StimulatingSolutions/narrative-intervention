@@ -10,7 +10,8 @@ export class ErrorAlert {
 
     let content:any = {
       title: `Oops! (#${ id })`,
-      buttons: ['OK']
+      buttons: ['OK'],
+      cssClass: 'error-alert'
     };
     if (e && e.message) {
       content.message = e.message;

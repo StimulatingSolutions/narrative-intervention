@@ -529,7 +529,7 @@
           </step>
         </li>
         <li>
-          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="fail" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
             <p>Ask, “When we see an outcome fail, what card do we hold up?”</p>
 
 
@@ -551,7 +551,7 @@
           </step>
         </li>
         <li>
-          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="yes" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="outcome-yes" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
             <p>Ask, “When we see an outcome yes, what card do we hold up?”</p>
 
 
@@ -559,7 +559,7 @@
           </step>
         </li>
         <li>
-          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="yes" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" questionType="goal" correctAnswer="outcome-yes" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
             <p>Ask, “How do I record an outcome yes on the Velcro board?”</p>
             <p>[Write what happened on an outcome yes card.]</p>
           </step>
