@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Meteor } from 'meteor/meteor'
 import { LoginPage } from '../login/login';
 
 import {Schools, Sessions} from 'api/collections';
-import { Session } from 'api/models';
+import {School, Session} from 'api/models';
 
 import { UserManagementPage } from '../usermanagement/usermanagement';
 import { SchoolManagementPage } from '../schools/schoolmanagement';
@@ -29,32 +29,23 @@ function generateNumId() {
 })
 export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
-  inputVars: any = {};
-
-  joinSessionVisible: boolean;
-  joinSessionCode: string;
-
   public roles: string[];
   public showUserManagement: boolean;
   public showSchoolManagement: boolean;
 
   public unfinishedSessions;
   public allSchools;
-  public allSessionIds: string[];
-  public activeSessionsForGroup: Session[];
 
 
   constructor(
     private navCtrl: NavController,
     private errorAlert: ErrorAlert,
-    private ref: ChangeDetectorRef,
     private alertCtrl: AlertController
   ) {
     super();
     this.roles = [];
     this.showUserManagement = false;
     this.showSchoolManagement = false;
-    this.allSessionIds = availableLessons;
 
     MeteorObservable.call<string[]>('getUserRoles')
     .takeUntil(this.componentDestroyed$)
@@ -114,34 +105,13 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     });
   }
 
-  viewSession(session: Session): void {
-    this.navCtrl.push(TeacherSessionPage, {sessionId: session._id});
-  }
-
-  showJoinSession(visible: boolean): void {
-    this.joinSessionVisible = visible;
-    this.ref.detectChanges();
-  }
-
-  addSession(): void {
-    //CHECK EMPTYS
-    if(!this.inputVars['school-select'] || !this.inputVars['lesson-number-select']){
-      return
-    }
-
-    let schoolName;
-    this.allSchools.forEach((school) => {
-      if (school.idNumber === this.inputVars['school-select']) {
-        schoolName = school.name;
-      }
-    });
+  addSession(school: School, lesson: number): void {
     const newSession: Session = {
       creationDate: moment().format('YYYY/MM/DD'),
-      //date: moment().utc().toDate(),
       shortId: generateNumId(),
       creatorsId: '',
-      schoolNumber: this.inputVars['school-select'],
-      schoolName: schoolName,
+      schoolNumber: school.idNumber,
+      schoolName: school.name,
       active: true,
       activeUsers: [],
       questionStepId: null,
@@ -153,61 +123,113 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       openResponse: false,
       responses: [],
       completedSteps: [],
-      lesson: this.inputVars['lesson-number-select']
+      lesson: lesson
     };
-    this.resetCreateSessionFlow();
     MeteorObservable.call('createNewSession', newSession)
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: (result) => {
         const newId = Sessions.findOne({shortId: newSession.shortId})._id;
-        this.navCtrl.push(TeacherSessionPage, {sessionId: newId});
+        this.joinSession(newId);
       },
       error: this.errorAlert.presenter(4)
     });
   }
 
-  maybeAutoJoinSession() {
-    let schoolNum = this.inputVars['school-select-join'];
-    if (!schoolNum) {
-      return;
-    }
-    this.activeSessionsForGroup = Sessions.find({schoolNumber: schoolNum, active: true}).fetch();
-    if (this.activeSessionsForGroup.length == 0) {
-      this.resetJoinSessionFlow();
-      this.alertCtrl.create({title: 'Oops!', message: `Group ${schoolNum} has no active sessions right now.`, buttons: ['OK']}).present();
-    } else if (this.activeSessionsForGroup.length == 1) {
-      this.resetJoinSessionFlow();
-      this.navCtrl.push(TeacherSessionPage, {sessionId: this.activeSessionsForGroup[0]._id});
+  joinSessionByGroup(school: School) {
+    let activeSessionsForGroup: Session[] = Sessions.find({schoolNumber: school.idNumber, active: true}).fetch();
+    if (activeSessionsForGroup.length == 0) {
+      this.errorAlert.present(new Error(`Group ${school.idNumber} has no active sessions right now.`), 1);
+    } else if (activeSessionsForGroup.length == 1) {
+      this.joinSession(activeSessionsForGroup[0]._id);
     } else {
-      this.inputVars['session-select'] = null;
-      this.ref.detectChanges();
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@ "+JSON.stringify(this.inputVars));
-      this.forceClick('session-select');
+      let sessionAlert = this.alertCtrl.create();
+      sessionAlert.setCssClass('wide-input');
+      sessionAlert.setTitle('Choose Session:');
+      activeSessionsForGroup.forEach((session: Session) => {
+        sessionAlert.addInput({
+          type: 'radio',
+          label: `Lesson ${session.lesson}, created on ${session.creationDate}`,
+          value: session._id
+        });
+      });
+      sessionAlert.addButton('Cancel');
+      sessionAlert.addButton({
+        text: 'Ok',
+        handler: (sessionId: string) => {
+          this.joinSession(sessionId);
+        }
+      });
+      sessionAlert.present();
     }
   }
 
-  resetCreateSessionFlow() {
-    this.inputVars['school-select'] = null;
-    this.inputVars['lesson-number-select'] = null;
-  }
-
-  resetJoinSessionFlow() {
-    this.inputVars['school-select-join'] = null;
-    this.inputVars['session-select'] = null;
-  }
-
-  forceClick(selectId: string): void {
-    this.inputVars[selectId] = null;
-    document.getElementById(selectId).click();
-  }
-
-  joinSession(): void {
-    if (!this.inputVars['session-select']) {
+  joinSession(sessionId: string): void {
+    if (!sessionId) {
       return;
     }
-    console.log("========================= "+JSON.stringify(this.inputVars));
-    this.resetJoinSessionFlow();
-    this.navCtrl.push(TeacherSessionPage, {sessionId: this.inputVars['session-select']});
+    this.navCtrl.push(TeacherSessionPage, {sessionId: sessionId});
+  }
+
+  chooseSchool(intent: string) {
+    let schoolAlert = this.alertCtrl.create();
+    schoolAlert.setCssClass('wide-input');
+    schoolAlert.setTitle('Choose Group:');
+    this.allSchools.forEach((school: School) => {
+      schoolAlert.addInput({
+        type: 'radio',
+        label: `Group ${school.idNumber} (at ${school.name})`,
+        value: school.idNumber.toString()
+      });
+    });
+    schoolAlert.addButton('Cancel');
+    schoolAlert.addButton({
+      text: 'Ok',
+      handler: (schoolId: string) => {
+        let selectedSchool: School;
+        this.allSchools.forEach((school) => {
+          if (school.idNumber == schoolId) {
+            selectedSchool = school;
+          }
+        });
+        if (intent === 'create') {
+          let activeSessionsForGroup: Session[] = Sessions.find({schoolNumber: selectedSchool.idNumber, active: true}).fetch();
+          let today: string = moment().format('YYYY/MM/DD');
+          for (let session of activeSessionsForGroup) {
+            if (session.creationDate < today) {
+              this.finishSession(session);
+            } else {
+              this.errorAlert.present(new Error(`Group ${selectedSchool.idNumber} already has an active session: lesson ${session.lesson}, created on ${session.creationDate}`), 5);
+              return;
+            }
+          }
+          this.chooseLesson(selectedSchool);
+        } else {
+          this.joinSessionByGroup(selectedSchool);
+        }
+      }
+    });
+    schoolAlert.present();
+  }
+
+  chooseLesson(school: School) {
+    let lessonAlert = this.alertCtrl.create();
+    lessonAlert.setCssClass('wide-input');
+    lessonAlert.setTitle('Choose Lesson:');
+    availableLessons.forEach((lesson: string) => {
+      lessonAlert.addInput({
+        type: 'radio',
+        label: `Lesson ${lesson}`,
+        value: lesson
+      });
+    });
+    lessonAlert.addButton('Cancel');
+    lessonAlert.addButton({
+      text: 'Ok',
+      handler: (lessonNumber: string) => {
+        this.addSession(school, parseInt(lessonNumber));
+      }
+    });
+    lessonAlert.present();
   }
 }
