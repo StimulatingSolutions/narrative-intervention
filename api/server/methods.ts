@@ -6,6 +6,7 @@ import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 import * as _ from 'lodash';
+import moment = require("moment");
 
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -193,10 +194,13 @@ Meteor.methods({
 
     let conflict = Sessions.findOne({schoolNumber: session.schoolNumber, active: true});
     if (conflict) {
-      throw new Meteor.Error('conflict', `There is an existing, unfinished session for group ${session.schoolNumber}, created on ${session.creationDate}`);
+      throw new Meteor.Error('conflict', `There is an existing, unfinished session in the database for group ${session.schoolNumber}, created on ${session.creationDate} at ${session.creationTime}. Please wait a few seconds, then try again.`);
     }
 
     session.creatorsId = this.userId;
+    let now = moment().format('YYYY/MM/DD[#]h:mm:ss a').split('#');
+    session.creationDate = now[0];
+    session.creationTime = now[1];
 
     Sessions.insert(session);
   },

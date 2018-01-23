@@ -20,6 +20,7 @@ export interface Session {
   shortId: string;
   creatorsId: string;
   creationDate: string;
+  creationTime: string;
   schoolNumber: number;
   schoolName: string;
   active: boolean;

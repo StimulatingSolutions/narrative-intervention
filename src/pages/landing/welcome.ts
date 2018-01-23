@@ -96,18 +96,19 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     });
   }
 
-  finishSession(session: Session): void {
+  finishSession(session: Session, next?): void {
     MeteorObservable.call('setSessionActive', session._id, false)
     .takeUntil(this.componentDestroyed$)
     .subscribe({
-      next: () => {},
+      next: (next ? next : () => {}),
       error: this.errorAlert.presenter(3)
     });
   }
 
   addSession(school: School, lesson: number): void {
     const newSession: Session = {
-      creationDate: moment().format('YYYY/MM/DD'),
+      creationDate: '',
+      creationTime: '',
       shortId: generateNumId(),
       creatorsId: '',
       schoolNumber: school.idNumber,
@@ -193,23 +194,38 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
           }
         });
         if (intent === 'create') {
-          let activeSessionsForGroup: Session[] = Sessions.find({schoolNumber: selectedSchool.idNumber, active: true}).fetch();
-          let today: string = moment().format('YYYY/MM/DD');
-          for (let session of activeSessionsForGroup) {
-            if (session.creationDate < today) {
-              this.finishSession(session);
-            } else {
-              this.errorAlert.present(new Error(`Group ${selectedSchool.idNumber} already has an active session: lesson ${session.lesson}, created on ${session.creationDate}`), 5);
-              return;
-            }
-          }
-          this.chooseLesson(selectedSchool);
+          this.checkForConflictSession(selectedSchool);
         } else {
           this.joinSessionByGroup(selectedSchool);
         }
       }
     });
     schoolAlert.present();
+  }
+
+  checkForConflictSession(school: School) {
+    let activeSessionsForGroup: Session[] = Sessions.find({schoolNumber: school.idNumber, active: true}).fetch();
+    let today: string = moment().format('YYYY/MM/DD');
+    for (let session of activeSessionsForGroup) {
+      if (session.creationDate < today) {
+        this.finishSession(session);
+      } else {
+        let conflictAlert = this.alertCtrl.create();
+        conflictAlert.setCssClass('wide-input');
+        conflictAlert.setTitle('Oops! Session Conflict!');
+        conflictAlert.setMessage(`Group ${school.idNumber} already has an active session: lesson ${session.lesson}, created on ${session.creationDate} at ${session.creationTime}. If you continue, that session will be marked as finished.`);
+        conflictAlert.addButton('Cancel');
+        conflictAlert.addButton({
+          text: 'Ok',
+          handler: () => {
+            this.finishSession(session, () => {this.checkForConflictSession(school)});
+          }
+        });
+        conflictAlert.present();
+        return;
+      }
+    }
+    this.chooseLesson(school);
   }
 
   chooseLesson(school: School) {

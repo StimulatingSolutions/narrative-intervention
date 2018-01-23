@@ -107,7 +107,10 @@ html {
 
 .wide-input {
   .alert-wrapper {
-    max-width: 80% !important;
+    max-width: 400px !important;
+  }
+  .alert-message {
+    font-size: large;
   }
 }
 
