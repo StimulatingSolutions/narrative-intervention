@@ -1,9 +1,7 @@
 .side-bar-info-content {
-  background: #075E54;
   display: flex;
   flex-direction: row;
-  box-shadow: 0 0 10px 3px rgba(0,0,0,0.5);
-  border-radius: 5px;
+  box-shadow: 0 0 10px 3px rgba(0,0,0,0.7);
 
   .waitingforanswer {
     display: flex;
@@ -43,42 +41,73 @@
 
   .button-container.exit {
     padding: 4px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    float: right;
+    margin-right: 0;
+    button {
+      margin-right: 0;
+    }
   }
 
   .button-container.find-place {
     padding: 4px;
-    margin-left: 275px;
+    margin-left: 178px;
+    display: inline-block;
   }
 
   .student-count {
     padding: 4px 2px;
-    margin-left: 275px;
+    margin-left: 180px;
     font-size: large;
-    height: 139px;
+    height: 143px;
     position: relative;
+
+    .final-instructions {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+
+      p {
+        &.clear-instructions {
+          margin-bottom: 5px;
+        }
+        &.done-instructions {
+          margin-bottom: -1px;
+          margin-right: 100px;
+          &.open-response {
+            margin-left: 108px;
+          }
+        }
+      }
+    }
+
+    .response-actions {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+      
+      .button-container {
+        position: absolute;
+        bottom: 0;
+        margin: 0 !important;
+        &.done {
+          right: 0;
+        }
+        &.clear {
+          left: 0;
+        }
+        button {
+          margin: 0;
+        }
+      }
+    }
 
     p {
       line-height: 1.1;
       font-size: large;
       margin-bottom: 10px;
-      &.done-instructions {
-        margin-bottom: 0;
-        position: absolute;
-        left: 0;
-        bottom: 4px;
-        max-width: 375px;
-      }
     }
-  }
-
-  .button-container.done {
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
 
   ion-card-header {
@@ -89,7 +118,7 @@
   }
 
   .student-list {
-    width: 275px;
+    width: 180px;
     height: 206px;
     top: 25px;
     left: 0;
@@ -109,8 +138,13 @@
     padding: 2px 8px 4px !important;
   }
 
+  ion-card-header {
+    padding: 2px 4px !important;
+  }
+
   ion-card {
-    margin-top: 0;
+    margin: 0;
+    width: 100%;
     overflow: visible;
     position: relative;
   }

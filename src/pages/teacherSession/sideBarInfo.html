@@ -51,9 +51,11 @@
           <p *ngIf="session?.correctAnswer">
             The correct answer is: <b>{{session?.correctAnswer}}</b>.
           </p>
-          <p class="done-instructions" *ngIf="headTeacher">
-            When you are ready to continue to the next step, click the blue DONE button.
-          </p>
+          <div class="final-instructions" *ngIf="headTeacher">
+            <p class="done-instructions">
+              When you are ready to continue to the next step, tap the blue DONE button.
+            </p>
+          </div>
         </div>
         <div *ngIf="session?.readyForResponse && session?.openResponse">
           <p>
@@ -62,13 +64,23 @@
           <p>
             <span *ngIf="headTeacher">You</span><span *ngIf="!headTeacher">The head teacher</span> can continue to complete steps, and students can freely respond.
           </p>
-          <p class="done-instructions" *ngIf="headTeacher">
-            When you have finished the Open Response section, click the blue DONE button.
-          </p>
+          <div class="final-instructions" *ngIf="headTeacher">
+            <p class="clear-instructions">
+              To clear students' current responses, tap the orange CLEAR button.
+            </p>
+            <p class="done-instructions open-response">
+              When you have finished the Open Response section, tap the blue DONE button.
+            </p>
+          </div>
         </div>
-        <ion-buttons class="button-container done" *ngIf="headTeacher && session?.readyForResponse">
-          <button ion-button (click)="closeQuestion()">Done</button>
-        </ion-buttons>
+        <div class="response-actions">
+          <ion-buttons class="button-container clear" *ngIf="headTeacher && session?.readyForResponse && session?.openResponse">
+            <button ion-button color="warning" (click)="closeQuestion()">Clear</button>
+          </ion-buttons>
+          <ion-buttons class="button-container done" *ngIf="headTeacher && session?.readyForResponse">
+            <button ion-button (click)="closeQuestion()">Done</button>
+          </ion-buttons>
+        </div>
       </div>
     </ion-card-content>
   </ion-card>
