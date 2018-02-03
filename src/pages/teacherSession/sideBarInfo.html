@@ -9,7 +9,12 @@
       </ion-buttons>
     </ion-card-header>
     <ion-card-content>
-      <div class="student-list">
+      <div class="student-list" *ngIf="session?.review">
+        <div class="note">
+          <i>This is a lesson plan review. No students can connect, and nothing you do will be saved.</i>
+        </div>
+      </div>
+      <div class="student-list" *ngIf="!session?.review">
         <div *ngIf="!session?.openResponse">
           <div class="student" *ngFor="let user of session?.activeUsers">
 
@@ -32,10 +37,10 @@
             </div>
           </div>
         </div>
-        <div *ngIf="session?.activeUsers.length === 0 && session?.active">
+        <div class="note" *ngIf="session?.activeUsers.length === 0 && session?.active">
           <i>No students have connected to this session yet.</i>
         </div>
-        <div *ngIf="!session?.active">
+        <div class="note" *ngIf="!session?.active">
           <i>This session has been marked as finished by the head teacher.</i>
         </div>
       </div>
@@ -61,6 +66,9 @@
           </p>
           <p *ngIf="session?.correctAnswer">
             The correct answer is: <b>{{session?.correctAnswer}}</b>.
+          </p>
+          <p *ngIf="!session?.correctAnswer && session?.review">
+            This question does not have a designated correct answer.
           </p>
           <div class="final-instructions" *ngIf="headTeacher">
             <p class="done-instructions">

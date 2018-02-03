@@ -15,6 +15,7 @@ import {Step} from "../lesson-plans/step";
 export class TeacherSessionPage extends DestructionAwareComponent implements OnInit, OnDestroy {
 
   incomingSessionId: string;
+  reviewLesson: number;
   session: Session;
 
   constructor(
@@ -23,9 +24,20 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
   ) {
     super();
     this.incomingSessionId = this.navParams.get('sessionId');
+    this.reviewLesson = this.navParams.get('reviewLesson');
   }
 
   ngOnInit(): void {
+    if (this.reviewLesson) {
+      this.session = {
+        lesson: this.reviewLesson,
+        review: true,
+        responses: [],
+        completedSteps: [],
+        activeUsers: []
+      };
+      return;
+    }
     MeteorObservable.subscribe('activeSession', this.incomingSessionId)
     .subscribe((result) => {
       MeteorObservable.autorun()

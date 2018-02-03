@@ -17,22 +17,23 @@ export interface School {
 
 export interface Session {
   _id?: string;
-  shortId: string;
-  creatorsId: string;
-  creationDate: string;
-  creationTime: string;
-  schoolNumber: number;
-  schoolName: string;
-  active: boolean;
+  shortId?: string;
+  creatorsId?: string;
+  creationDate?: string;
+  creationTime?: string;
+  schoolNumber?: number;
+  schoolName?: string;
+  active?: boolean;
   activeUsers: string[];
-  questionStepId: number;
-  correctAnswer: string;
-  questionType: string;
-  backupQuestionType: string;
-  currentStepId: number;
-  readyForResponse: boolean;
+  questionStepId?: number;
+  correctAnswer?: string;
+  questionType?: string;
+  backupQuestionType?: string;
+  currentStepId?: number;
+  readyForResponse?: boolean;
   responses: any[];
   completedSteps: number[];
   lesson: number;
-  openResponse: boolean;
+  openResponse?: boolean;
+  review?: boolean;
 }
