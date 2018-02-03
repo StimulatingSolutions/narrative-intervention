@@ -74,9 +74,6 @@
         &.done-instructions {
           margin-bottom: -1px;
           margin-right: 100px;
-          &.open-response {
-            margin-left: 108px;
-          }
         }
       }
     }
@@ -86,7 +83,7 @@
       left: 0;
       right: 0;
       bottom: 4px;
-      
+
       .button-container {
         position: absolute;
         bottom: 0;
@@ -119,10 +116,10 @@
 
   .student-list {
     width: 180px;
-    height: 206px;
+    height: 202px;
     top: 25px;
     left: 0;
-    padding: 4px;
+    padding: 2px 4px;
     position: absolute;
     background: white;
     border-right: 1px solid #EEE;
@@ -139,7 +136,7 @@
   }
 
   ion-card-header {
-    padding: 2px 4px !important;
+    padding: 0 4px !important;
   }
 
   ion-card {

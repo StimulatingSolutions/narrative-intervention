@@ -106,9 +106,10 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   }
 
   addSession(school: School, lesson: number): void {
+    let now = moment().format('YYYY/MM/DD[#]h:mm a').split('#');
     const newSession: Session = {
-      creationDate: '',
-      creationTime: '',
+      creationDate: now[0],
+      creationTime: now[1],
       shortId: generateNumId(),
       creatorsId: '',
       schoolNumber: school.idNumber,
