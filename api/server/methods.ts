@@ -6,7 +6,6 @@ import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 import * as _ from 'lodash';
-import moment = require("moment");
 
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -198,10 +197,6 @@ Meteor.methods({
     }
 
     session.creatorsId = this.userId;
-    let now = moment().format('YYYY/MM/DD[#]h:mm:ss a').split('#');
-    session.creationDate = now[0];
-    session.creationTime = now[1];
-
     Sessions.insert(session);
   },
 

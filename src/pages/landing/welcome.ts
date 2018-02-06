@@ -106,9 +106,10 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   }
 
   addSession(school: School, lesson: number): void {
+    let now = moment().format('YYYY/MM/DD[#]h:mm a').split('#');
     const newSession: Session = {
-      creationDate: '',
-      creationTime: '',
+      creationDate: now[0],
+      creationTime: now[1],
       shortId: generateNumId(),
       creatorsId: '',
       schoolNumber: school.idNumber,
@@ -228,7 +229,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     this.chooseLesson(school);
   }
 
-  chooseLesson(school: School) {
+  chooseLesson(school ?: School) {
     let lessonAlert = this.alertCtrl.create();
     lessonAlert.setCssClass('wide-input');
     lessonAlert.setTitle('Choose Lesson:');
@@ -243,9 +244,17 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     lessonAlert.addButton({
       text: 'Ok',
       handler: (lessonNumber: string) => {
-        this.addSession(school, parseInt(lessonNumber));
+        if (school) {
+          this.addSession(school, parseInt(lessonNumber));
+        } else {
+          this.review(parseInt(lessonNumber));
+        }
       }
     });
     lessonAlert.present();
+  }
+
+  review(lesson: number) {
+    this.navCtrl.push(TeacherSessionPage, {reviewLesson: lesson});
   }
 }

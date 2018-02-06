@@ -26,8 +26,14 @@
     <ion-list-header>Session Options:</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>
+        <div class="button-label">to prepare for a lesson:</div>
+        <button ion-button (click)="chooseLesson()">Review a Lesson Plan</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
         <div class="button-label">as Head Teacher:</div>
-        <button ion-button (click)="chooseSchool('create')">Create New Session</button>
+        <button ion-button (click)="chooseSchool('create')">Create a New Session</button>
       </ion-buttons>
     </ion-item>
     <ion-item>
