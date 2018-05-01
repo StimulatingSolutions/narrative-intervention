@@ -233,9 +233,9 @@ Meteor.methods({
     if (parseInt(userId.slice(-1)) > 6) {
       throw new Meteor.Error('invalid', `${userId} is not a valid student id; it should consist of the group number, followed by the student number`);
     }
-    const session = Sessions.findOne({schoolNumber: userId.slice(0, -1), active: true});
+    const session = Sessions.findOne({schoolNumber: parseInt(userId.slice(0, -1)), active: true});
     if (!session){
-      throw new Meteor.Error('not found', `Group ${userId.slice(0, -1)} has no active sessions.`);
+      throw new Meteor.Error('not found', `Group ${parseInt(userId.slice(0, -1))} has no active sessions.`);
     }
     if (_.includes(session.activeUsers, userId)){
       return session._id;

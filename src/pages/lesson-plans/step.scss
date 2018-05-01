@@ -16,7 +16,7 @@ step {
 
   .done-checkbox {
     position: absolute;
-    left: .25in;
+    left: .31in;
     top: 4px;
     font-size: 28px;
     color: #00F;
@@ -60,4 +60,8 @@ li li step {
       background-color: #BEB;
     }
   }
+}
+
+.lesson-review step .done-checkbox {
+  display: none;
 }

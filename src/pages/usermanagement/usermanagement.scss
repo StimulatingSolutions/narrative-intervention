@@ -4,7 +4,8 @@
     display: flex;
 
     .user-edit-button {
-      cursor: pointer;
+      display: inline-block;
+      margin-right: 20px;
     }
     .account-active {
       width: 200px;

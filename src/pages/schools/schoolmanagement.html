@@ -7,9 +7,9 @@
 <ion-content padding class="school-management-page-content">
 
   <ion-list no-lines>
-    <div class='school-update-list' *ngFor="let school of allSchools | async">
-      <ion-icon name="md-settings" class='school-edit-button' (click)="selectSchoolToEdit(school)"></ion-icon>
-      <div>Group {{school.idNumber}} (at {{school.name}})</div>
+    <div class='school-update-list management-item' *ngFor="let school of allSchools | async">
+      <button class="management-edit-button button-md" ion-button color="secondary" (click)="selectSchoolToEdit(school)">Edit Group</button>
+      <span class="management-edit-label">Group {{school.idNumber}} (at {{school.name}})</span>
     </div>
   </ion-list>
 

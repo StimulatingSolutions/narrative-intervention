@@ -20,6 +20,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   session: Session;
   selectedCard: string = null;
   questionType: string = null;
+  preloads: any = {};
 
   constructor(
     private navParams: NavParams,
@@ -27,6 +28,22 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     private ref: ChangeDetectorRef,
   ) {
     super();
+    this.preloadImage('try', 500);
+    this.preloadImage('goal', 500);
+    this.preloadImage('outcome-fail', 500);
+    this.preloadImage('outcome-yes', 500);
+  }
+
+  preloadImage(name: string, delay: number) {
+    let img: HTMLImageElement = new Image();
+    this.preloads[name] = img;
+    img.onerror = () => {
+      img.onerror = null;
+      img.onabort = null;
+      setTimeout(this.preloadImage.bind(this, name, Math.min(delay+100, 5000)), delay);
+    };
+    img.onabort = <(UIError)=>any> img.onerror;
+    img.src = `/assets/imgs/${name}.png`;
   }
 
   ngDoCheck(): void {
