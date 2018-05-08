@@ -22,6 +22,8 @@ export class SideBarInfo implements OnInit {
   idsWithAnswer: number[];
   currentResponses: {};
   headTeacher: boolean;
+  activeUsersKey: string = '';
+  activeUsersSorted: string[] = [];
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -87,5 +89,12 @@ export class SideBarInfo implements OnInit {
 
   exitCurrentSession (): void {
     this.navCtrl.pop();
+  }
+
+  getActiveUsers (): string[] {
+    if (this.session && JSON.stringify(this.session.activeUsers) != this.activeUsersKey) {
+      this.activeUsersSorted = this.session.activeUsers.slice().sort();
+    }
+    return this.activeUsersSorted;
   }
 }

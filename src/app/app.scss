@@ -136,3 +136,22 @@ button[ion-button] {
 .management-edit-label {
   line-height: 36px;
 }
+
+.logout-button {
+  color: #FFF !important;
+  border-color: #f53d3d !important;
+  background: #f53d3d !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.item-input.input-has-focus .item-inner {
+  border-bottom-color: #488AFF !important;
+}
+
+.item-input .item-inner {
+  border-bottom: 1px solid lightgray !important;
+  box-shadow: none !important;
+}

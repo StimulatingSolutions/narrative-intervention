@@ -36,4 +36,5 @@ export interface Session {
   lesson: number;
   openResponse?: boolean;
   review?: boolean;
+  questionIteration?: number;
 }

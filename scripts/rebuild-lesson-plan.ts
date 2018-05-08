@@ -10,7 +10,7 @@ getStdin().then((s: string) => {
   // [^<]*(?:<(?!strong>)[^<]*)*
 
   // initial markup
-  console.log('<div class="lesson-plan-wrapper">');
+  console.log('<div [ngClass]="{\'lesson-plan-wrapper\': true, \'lesson-review\': session.review}">');
 
 
   // rebuilding

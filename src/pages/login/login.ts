@@ -16,7 +16,8 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 export class LoginPage extends DestructionAwareComponent {
   private loginEmail = '';
   private loginPassword = '';
-  private sessionUserId = '';
+  private sessionGroupNumber = '';
+  private sessionStudentNumber = '';
   private device;
 
   constructor(
@@ -72,24 +73,26 @@ export class LoginPage extends DestructionAwareComponent {
   }
 
   joinSession(): void {
-    if (this.sessionUserId === ''){
+    if (this.sessionGroupNumber === '' || this.sessionStudentNumber === ''){
       const alert = this.alertCtrl.create({
         title: 'Oops!',
-        message: 'Student Id is required (group number followed by student number)',
+        message: `${this.sessionGroupNumber === '' ? 'Group Number' : 'Student Number'} is required`,
         buttons: ['OK']
       });
       alert.present();
       return;
     }
 
-    Meteor.call('joinSession', this.sessionUserId, (error, result) => {
+    let userId: string = `${this.sessionGroupNumber}-${this.sessionStudentNumber}`;
+
+    Meteor.call('joinSession', userId, (error, result) => {
       if (error){
         this.errorAlert.present(error, 11);
         return;
       }
       return this.navCtrl.push(StudentSessionPage, {
         sessionId: result,
-        userId: this.sessionUserId
+        userId: userId
       });
     })
   }

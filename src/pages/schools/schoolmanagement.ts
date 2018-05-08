@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { MeteorObservable } from 'meteor-rxjs';
-import { Observable } from 'rxjs';
+import {MeteorObservable} from 'meteor-rxjs';
 
 import { Schools } from 'api/collections';
 import { School } from 'api/models';
@@ -24,7 +23,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   editSchoolNumber: number;
   schoolToEdit: School;
 
-  allSchools: Observable<School[]>;
+  allSchools;
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -45,12 +44,19 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
     });
   }
 
-  addSchool(): void {
+  addSchool(retry: boolean = false): void {
 
     //CHECK EMPTYS
     if(!this.addSchoolName || !this.addSchoolNumber){
-      this.errorAlert.present(new Error("Group Number and School Name are required."), 28);
-      return
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+JSON.stringify({addSchoolName: this.addSchoolName, addSchoolNumber: this.addSchoolNumber}));
+      if (!retry) {
+        this.ref.detectChanges();
+        setTimeout(()=>{
+          this.addSchool(true);
+        }, 0);
+      } else {
+        this.errorAlert.present(new Error("Group Number and School Name are required."), 28);
+      }
     }
 
     const newSchool = {

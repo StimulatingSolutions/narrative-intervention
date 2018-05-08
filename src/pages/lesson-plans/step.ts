@@ -13,6 +13,7 @@ export class Step implements OnInit {
   stepId: number;
   questionId?: number;
   public done: boolean = false;
+  public iteration: number = 0;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;

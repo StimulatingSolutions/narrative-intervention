@@ -8,6 +8,7 @@ step {
     padding-top: .1in;
     padding-bottom: .1in;
     .done-checkbox {
+      top: 0;
       padding-top: .1in;
     }
   }
@@ -16,9 +17,9 @@ step {
 
   .done-checkbox {
     position: absolute;
-    left: .31in;
-    top: 4px;
-    font-size: 28px;
+    left: .28in;
+    font-size: 32px;
+    top: 2px;
     color: #00F;
     ion-icon[name="checkbox-outline"] {
       color: #000;

@@ -230,28 +230,25 @@ Meteor.methods({
   },
 
   joinSession(userId: string){
-    if (parseInt(userId.slice(-1)) > 6) {
-      throw new Meteor.Error('invalid', `${userId} is not a valid student id; it should consist of the group number, followed by the student number`);
-    }
-    let groupNumber = parseInt(userId.slice(0, -1)).toString();
+    let parts = userId.split('-');
+    let groupNumber = parseInt(parts[0]).toString();
+    let studentNumber = parseInt(parts[1]).toString();
     const session = Sessions.findOne({schoolNumber: groupNumber, active: true});
     if (!session){
       throw new Meteor.Error('not found', `Group ${groupNumber} has no active sessions.`);
     }
-    if (_.includes(session.activeUsers, userId)){
-      return session._id;
-    }
-    const newUsers = session.activeUsers.slice();
-    newUsers.push(userId);
     Sessions.update(session._id, {
-      $set: {
-        activeUsers: newUsers
+      $addToSet: {
+        activeUsers: `${groupNumber}-${studentNumber}`
       }
     });
     return session._id;
   },
 
   leaveSession(sessionId: string, userId: string){
+    let parts = userId.split('-');
+    let groupNumber = parseInt(parts[0]).toString();
+    let studentNumber = parseInt(parts[1]).toString();
     const session = Sessions.findOne({shortId: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -259,18 +256,14 @@ Meteor.methods({
     if (!session.active){
       throw new Meteor.Error('Session Error', 'Session is not active');
     }
-    let newUsers = session.activeUsers.slice();
-    newUsers = _.remove(newUsers, n => {
-      return n === userId;
-    });
-    Sessions.update(sessionId, {
-      $set: {
-        activeUsers: newUsers
+    Sessions.update(session._id, {
+      $pull: {
+        activeUsers: `${groupNumber}-${studentNumber}`
       }
     });
   },
 
-  startQuestion(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string, correctAnswer: string, openResponse: boolean){
+  startQuestion(sessionId: string, stepId: number, iteration: number, questionType: string, correctAnswer: string, openResponse: boolean){
     console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
@@ -284,14 +277,13 @@ Meteor.methods({
         questionType: questionType,
         correctAnswer: correctAnswer,
         currentStepId: stepId,
-        openResponse: openResponse
+        openResponse: openResponse,
+        questionIteration: iteration
+      },
+      $addToSet: {
+        completedSteps: stepId
       }
     };
-    if (!alreadyAdded) {
-      update["$push"] = {
-        completedSteps: stepId
-      };
-    }
     Sessions.update(sessionId, update);
   },
 
@@ -308,9 +300,10 @@ Meteor.methods({
         questionStepId: null,
         correctAnswer: null,
         openResponse: false,
-        backupQuestionType: null
+        backupQuestionType: null,
+        questionIteration: null
       },
-      $push: {
+      $addToSet: {
         completedSteps: session.currentStepId
       }
     };
@@ -338,13 +331,13 @@ Meteor.methods({
     console.log('Recording Response', newResponse);
 
     Sessions.update(sessionId, {
-      $push: {
+      $addToSet: {
         responses: newResponse
       }
     });
   },
 
-  setCurrentStep(sessionId: string, stepId: number, alreadyAdded: boolean, questionType: string) {
+  setCurrentStep(sessionId: string, stepId: number, iteration: number, questionType: string) {
     console.log('setting current step: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session) {
@@ -352,18 +345,17 @@ Meteor.methods({
     }
     let update: any = {
       $set: {
-        currentStepId: stepId
+        currentStepId: stepId,
+        questionIteration: iteration
+      },
+      $addToSet: {
+        completedSteps: stepId
       }
     };
     if (session.openResponse) {
       update.$set.backupQuestionType = questionType;
     } else {
       update.$set.questionType = questionType;
-    }
-    if (!alreadyAdded) {
-      update["$push"] = {
-        completedSteps: stepId
-      };
     }
     Sessions.update(sessionId, update);
   }
