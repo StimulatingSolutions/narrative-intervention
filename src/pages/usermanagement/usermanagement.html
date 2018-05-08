@@ -9,7 +9,7 @@
   <ion-list no-lines>
     <div class='user-update-list management-item' *ngFor="let user of allUsers | async">
       <button class="management-edit-button button-md" ion-button color="secondary" (click)="selectUserToEdit(user)">Edit User</button>
-      <span class="management-edit-label">{{user.profile.email}}</span>
+      <span class="management-edit-label">{{user.profile.email}} <span *ngIf=""></span></span>
     </div>
   </ion-list>
 

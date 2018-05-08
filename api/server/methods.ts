@@ -175,7 +175,8 @@ Meteor.methods({
     Schools.update(schoolId, {
       $set: {
         name: updates.name,
-        idNumber: updates.idNumber
+        idNumber: updates.idNumber,
+        cohort: updates.cohort
       }
     });
   },

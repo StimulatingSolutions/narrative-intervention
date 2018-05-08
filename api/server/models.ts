@@ -13,6 +13,7 @@ export interface School {
   _id?: string;
   name: string;
   idNumber: number;
+  cohort?: number;
 }
 
 export interface Session {

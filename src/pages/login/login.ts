@@ -27,10 +27,6 @@ export class LoginPage extends DestructionAwareComponent {
     private navCtrl: NavController
   ) {
     super();
-    if (window.location.search.length > 1) {
-      this.device = window.location.search.substring(1);
-      return;
-    }
     let dims = ''+window.screen.width+'x'+window.screen.height;
     if (dims === '1024x600') {
       this.device = 'student';

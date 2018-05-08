@@ -9,7 +9,7 @@
   <ion-list no-lines>
     <div class='school-update-list management-item' *ngFor="let school of allSchools | async">
       <button class="management-edit-button button-md" ion-button color="secondary" (click)="selectSchoolToEdit(school)">Edit Group</button>
-      <span class="management-edit-label">Group {{school.idNumber}} (at {{school.name}})</span>
+      <span class="management-edit-label">{{school.name}}, Group {{school.idNumber}} (Cohort {{school.cohort}})</span>
     </div>
   </ion-list>
 
@@ -20,12 +20,16 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
+          <ion-label floating>School Name</ion-label>
+          <ion-input [(ngModel)]="editSchoolName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label floating>Group Number</ion-label>
           <ion-input [(ngModel)]="editSchoolNumber" type="number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>School Name</ion-label>
-          <ion-input [(ngModel)]="editSchoolName" type="text"></ion-input>
+          <ion-label floating>Cohort</ion-label>
+          <ion-input [(ngModel)]="editSchoolCohort" type="number"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
@@ -46,12 +50,16 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
+          <ion-label floating>School Name</ion-label>
+          <ion-input [(ngModel)]="addSchoolName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label floating>Group Number</ion-label>
           <ion-input [(ngModel)]="addSchoolNumber" type="number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>School Name</ion-label>
-          <ion-input [(ngModel)]="addSchoolName" type="text"></ion-input>
+          <ion-label floating>Cohort</ion-label>
+          <ion-input [(ngModel)]="addSchoolCohort" type="number"></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-buttons class='action-buttons'>

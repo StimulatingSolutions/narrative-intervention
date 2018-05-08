@@ -13,7 +13,7 @@
     <ion-list-header>Your in-progress sessions:</ion-list-header>
     <ion-item *ngFor="let session of unfinishedSessions | async">
       <ion-buttons>
-        <div class="button-label">Group {{session.schoolNumber}} (at {{session.schoolName}}), Lesson {{session.lesson}} &mdash; created on {{session.creationDate}} at {{session.creationTime}}</div>
+        <div class="button-label">[ {{session.schoolName}}, Group {{session.schoolNumber}} ]: &nbsp; Lesson {{session.lesson}} &mdash; created on {{session.creationDate}} at {{session.creationTime}}</div>
         <button ion-button (click)="joinSession(session._id)">Re-Join Session</button>
         <button ion-button color="danger" (click)="finishSession(session)">Mark Session Finished</button>
       </ion-buttons>

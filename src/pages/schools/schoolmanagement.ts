@@ -17,10 +17,12 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   addSchoolVisible: boolean;
   addSchoolName: string;
   addSchoolNumber: number;
+  addSchoolCohort: number;
 
   editSchoolVisible: boolean;
   editSchoolName: string;
   editSchoolNumber: number;
+  editSchoolCohort: number;
   schoolToEdit: School;
 
   allSchools;
@@ -47,21 +49,22 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   addSchool(retry: boolean = false): void {
 
     //CHECK EMPTYS
-    if(!this.addSchoolName || !this.addSchoolNumber){
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+JSON.stringify({addSchoolName: this.addSchoolName, addSchoolNumber: this.addSchoolNumber}));
+    if(!this.addSchoolName || !this.addSchoolNumber || !this.addSchoolCohort){
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+JSON.stringify({addSchoolName: this.addSchoolName, addSchoolNumber: this.addSchoolNumber, addSchoolCohort: this.addSchoolCohort}));
       if (!retry) {
         this.ref.detectChanges();
         setTimeout(()=>{
           this.addSchool(true);
         }, 0);
       } else {
-        this.errorAlert.present(new Error("Group Number and School Name are required."), 28);
+        this.errorAlert.present(new Error("Group Number, School Name, and Cohort are required."), 28);
       }
     }
 
     const newSchool = {
       name: this.addSchoolName,
-      idNumber: this.addSchoolNumber
+      idNumber: this.addSchoolNumber,
+      cohort: this.addSchoolCohort
     };
     MeteorObservable.call('createNewSchool', newSchool)
     .takeUntil(this.componentDestroyed$)
@@ -70,6 +73,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
         this.addSchoolVisible = false;
         this.addSchoolName = null;
         this.addSchoolNumber = null;
+        this.addSchoolCohort = null;
       },
       error: this.errorAlert.presenter(13)
     });
@@ -81,6 +85,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
     this.editSchoolName = school.name;
     this.editSchoolNumber = school.idNumber;
     this.editSchoolVisible = true;
+    this.editSchoolCohort = school.cohort;
   }
 
   hideSchoolEdit(): void {
@@ -91,7 +96,8 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
 
     let updates = {
       name: this.editSchoolName,
-      idNumber: this.editSchoolNumber
+      idNumber: this.editSchoolNumber,
+      cohort: this.editSchoolCohort
     };
     MeteorObservable.call('updateSchool', this.schoolToEdit._id, updates)
     .takeUntil(this.componentDestroyed$)
@@ -100,6 +106,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
         this.editSchoolVisible = false;
         this.editSchoolName = null;
         this.editSchoolNumber = null;
+        this.editSchoolCohort = null;
       },
       error: this.errorAlert.presenter(14)
     });

@@ -12,7 +12,6 @@ import {LocationStrategy} from "@angular/common";
 })
 export class MyApp {
   rootPage: any;
-  location: LocationStrategy;
   backBusterCount: number = 1;
 
   constructor(location: LocationStrategy, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
