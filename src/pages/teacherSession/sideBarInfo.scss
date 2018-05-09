@@ -52,7 +52,7 @@
     padding: 4px;
     display: inline-block;
     position: relative;
-    left: 50px;
+    left: 65px;
   }
 
   .button-container.find-place {
@@ -80,7 +80,7 @@
         }
         &.done-instructions {
           margin-bottom: -1px;
-          margin-right: 100px;
+          margin-right: 135px;
         }
       }
     }
@@ -97,6 +97,29 @@
         margin: 0 !important;
         &.done {
           right: 0;
+          button[ion-button] {
+            font-size: 2.8rem !important;
+            padding: 3px 28px 0;
+            height: 4.5rem;
+            position: relative;
+            top: 0;
+            transition: top .2s;
+            transition-timing-function: ease-out;
+            &.show-warning {
+              background-color: #FF0;
+              -webkit-box-shadow: 0 0 24px 28px #FF0;
+              -moz-box-shadow: 0 0 24px 28px #FF0;
+              box-shadow: 0 0 24px 28px #FF0;
+              color: #000;
+              border: 3px solid #000;
+              margin: 0 -3px;
+              top: -50px;
+              &.down {
+                transition-timing-function: ease-in;
+                top: 0;
+              }
+            }
+          }
         }
         &.clear {
           left: 0;

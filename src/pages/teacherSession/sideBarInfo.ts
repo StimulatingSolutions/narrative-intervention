@@ -24,6 +24,7 @@ export class SideBarInfo implements OnInit {
   headTeacher: boolean;
   activeUsersKey: string = '';
   activeUsersSorted: string[] = [];
+  showReset: number = 0;
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -72,6 +73,10 @@ export class SideBarInfo implements OnInit {
         }
       }
     }
+  }
+
+  disableReset (): void {
+    this.showReset = this.session.questionIteration;
   }
 
   findMyPlace (): void {

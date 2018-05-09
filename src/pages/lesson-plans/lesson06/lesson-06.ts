@@ -85,18 +85,49 @@ export class Lesson06 implements OnInit {
     } else {
       // in regular question mode, we block clicking on any step
       if (this.session.questionStepId) {
+        this.doneAdd('show-warning');
+        setTimeout(() => {
+          this.doneAdd('down');
+          setTimeout(() => {
+            this.doneRemove('down');
+            setTimeout(() => {
+              this.doneAdd('down');
+              setTimeout(() => {
+                this.doneRemove('down');
+                this.doneRemove('show-warning');
+              }, 400);
+            }, 200);
+          }, 200);
+        }, 200);
         return
       }
     }
 
     this.steps[stepId].done = true;
+    this.steps[stepId].iteration++;
 
     if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
       return;
     }
 
-    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+  }
+
+  doneAdd(c) {
+    let button = window.document.getElementById('done-button');
+    if (!button) {
+      return;
+    }
+    button.classList.add(c);
+  }
+
+  doneRemove(c) {
+    let button = window.document.getElementById('done-button');
+    if (!button) {
+      return;
+    }
+    button.classList.remove(c);
   }
 
 }

@@ -83,6 +83,20 @@ export class Lesson05 implements OnInit {
     } else {
       // in regular question mode, we block clicking on any step
       if (this.session.questionStepId) {
+        this.doneAdd('show-warning');
+        setTimeout(() => {
+          this.doneAdd('down');
+          setTimeout(() => {
+            this.doneRemove('down');
+            setTimeout(() => {
+              this.doneAdd('down');
+              setTimeout(() => {
+                this.doneRemove('down');
+                this.doneRemove('show-warning');
+              }, 300);
+            }, 200);
+          }, 200);
+        }, 200);
         return
       }
     }
@@ -96,6 +110,22 @@ export class Lesson05 implements OnInit {
     }
 
     Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+  }
+
+  doneAdd(c) {
+    let button = window.document.getElementById('done-button');
+    if (!button) {
+      return;
+    }
+    button.classList.add(c);
+  }
+
+  doneRemove(c) {
+    let button = window.document.getElementById('done-button');
+    if (!button) {
+      return;
+    }
+    button.classList.remove(c);
   }
 
 }
