@@ -12,8 +12,7 @@
   (onGetResponses)="getResponses($event)"
   
   (onReady)="stepReady($event)"
-  [highlightedStepId]="suggestedStepId"
-  [currentQuestionStepId]="gettingResponsesFor">
+  [session]="session"
 </step>
 ```
 

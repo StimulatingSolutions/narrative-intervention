@@ -58,8 +58,6 @@ export class Lesson06 implements OnInit {
         return;
       }
 
-      this.steps[stepId].iteration++;
-      this.session.questionIteration = this.steps[stepId].iteration;
       this.session.currentStepId = stepId;
       this.session.readyForResponse = false;
       this.session.questionStepId = null;
@@ -95,7 +93,7 @@ export class Lesson06 implements OnInit {
               setTimeout(() => {
                 this.doneRemove('down');
                 this.doneRemove('show-warning');
-              }, 400);
+              }, 300);
             }, 200);
           }, 200);
         }, 200);
@@ -104,14 +102,13 @@ export class Lesson06 implements OnInit {
     }
 
     this.steps[stepId].done = true;
-    this.steps[stepId].iteration++;
 
     if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
       return;
     }
 
-    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
   }
 
   doneAdd(c) {

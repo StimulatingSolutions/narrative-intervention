@@ -4,7 +4,7 @@
       <ion-buttons class='button-container find-place'>
         <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
       </ion-buttons>
-      <ion-buttons class='button-container reset' (click)="disableReset()" *ngIf="session?.questionIteration > 1 && showReset != session?.questionIteration">
+      <ion-buttons class='button-container reset' (click)="doReset()" *ngIf="headTeacher && session?.readyForResponse && session?.questionIteration > 1 && !session?.didReset">
         <button ion-button color="warning">Reset Timer</button>
       </ion-buttons>
       <ion-buttons class='button-container exit'>

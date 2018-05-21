@@ -250,16 +250,16 @@
   <ol>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Review rules chart
+            [session]="session"><p>Review rules chart
         and behavior management system.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask students to share any places they have seen goals, tries, or outcomes since our last lesson and ask them
           why they had those goals/made those tries/got those outcomes.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Say, “Yesterday, I had the goal of finding a snack to eat. For my first try, I looked in the pantry.
           Unfortunately, there were no snacks in the pantry. So that try didn’t work. It was an outcome fail. My second
           try was the refrigerator where I found carrots! I love carrots! This was an outcome yes, because my try worked
@@ -268,11 +268,11 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Explain to students
+            [session]="session"><p>Explain to students
         that we will now be switching to “<strong>I Do/You Help.</strong>”</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>“We are now going to switch to ‘<strong>I Do/You Help</strong>.’</p>
         <p>[<em>Place these roles onto the Roles Board</em>.]</p>
         <p> Sometimes when we are working together, once I think that you are getting the hang of it, I will give you a
@@ -281,7 +281,7 @@
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>“When it is time for ‘I Do/You Help,’ I will still be teaching, but you will be able to participate by
           offering your ideas or helping me figure out the answers. You should still be listening with your ears,</p>
         <p>[point to ears]</p>
@@ -299,7 +299,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Remind students that
+            [session]="session"><p>Remind students that
         in the last session we learned to identify outcomes. Explain that today we will continue to learn how to
         identify goals, tries, and outcomes. We will still be remembering to ask our why questions to understand what
         caused a character to do something.</p>
@@ -307,14 +307,14 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Use the script below
+            [session]="session"><p>Use the script below
         to remind students about declarative, procedural, and conditional knowledge associated with events, causes,
         goals, tries and outcomes and the GTO manipulatives, and review the Magician Narrative from Lesson 4.</p>
       </step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Review simple causal
+            [session]="session"><p>Review simple causal
         connections. Say, “Let’s review what we have learned so far about <strong>EVENTS, CAUSES, GOALS, TRIES, and
           OUTCOMES</strong>:</p>
 
@@ -330,7 +330,7 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “What question do we ask ourselves to help find the events in a story?”</p>
 
 
@@ -341,13 +341,13 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask, “Sometimes
+                [session]="session"><p>Ask, “Sometimes
             some events cause other events to happen. What is a cause?”</p>
             <p>[A cause explains why something happened in a story.]</p></step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask, “What
+                [session]="session"><p>Ask, “What
             question do we ask ourselves to find the cause?”</p>
             <p>[Why did this happen?]</p>
             <p>[Make “why” gesture]</p>
@@ -355,7 +355,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask, “How do we
+                [session]="session"><p>Ask, “How do we
             show causal connections on our Velcro board?”</p>
             <p>[We show a causal connection using a Because String]</p>
           </step>
@@ -365,7 +365,7 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “What is a goal?”</p>
 
 
@@ -374,21 +374,21 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “When do we find a goal in a story?”</p>
             <p>[The beginning of the story.]</p>
           </step>
         </li>
         <li>
           <step questionType="goal" defaultResponse="goal" correctAnswer="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “When we find a goal, what card do we hold up?”</p>
             <p>[Hold up your goal card]</p>
           </step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “How do we record the goal on our Velcro board?”</p>
 
 
@@ -400,7 +400,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Why do we need to
+                [session]="session"><p>Why do we need to
             find a goal in a story?</p>
             <p>[Because a goal is the important part of a story. Knowing a goal in a story helps us to remember and
               understand the story better.]</p></step>
@@ -409,7 +409,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Review how to find
+            [session]="session"><p>Review how to find
         the initiating event using the <strong>Because Card</strong>. Say,</p>
 
         <ul>
@@ -426,21 +426,21 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>“Once we have
+                [session]="session"><p>“Once we have
             figured out what caused the character to have their goal, what do we write it on?”.</p>
             <p>[Students respond: A blue Because Card]</p>
           </step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>“After I write
+                [session]="session"><p>“After I write
             the CAUSE on the blue Because card I put it where?</p>
             <p>[Students respond. On the Velcro board next to the goal.]</p>
           </step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>“This will remind
+                [session]="session"><p>“This will remind
             us of what CAUSED the character to have the goal. We place this Because Card on the Velcro board,</p>
             <p>[hold up the blue Because Card]</p>
             <p> and we put it right up here next to the goal.”</p>
@@ -449,7 +449,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>“Since this is a
+                [session]="session"><p>“Since this is a
             CAUSE, we can connect the blue Because card to what it CAUSED. So, we can use a Because String to connect
             the blue Because card to the goal.”</p>
             <p>[Point to wikki stick connecting the Because card to a thought bubble.]</p>
@@ -457,7 +457,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>We can retell the
+                [session]="session"><p>We can retell the
             story by saying, “I want to...” and tell what the goal is, and then say <em>“because”</em> and know WHY the
             character wanted to do that..</p>
             <p>[Trace finger along the Because String while saying because]</p>
@@ -468,13 +468,13 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask the students,
+                [session]="session"><p>Ask the students,
             “Once we know what a character’s goal is, what do we look for next?”<br/>
             [What a character did to try to get their goal.]</p></step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “What is a try?”</p>
 
 
@@ -483,7 +483,7 @@
         </li>
         <li>
           <step questionType="goal" defaultResponse="goal" correctAnswer="try" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “When we see a try in the story, what card do we hold up?”</p>
 
 
@@ -492,7 +492,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “How do I record the tries on the Velcro board?”</p>
 
 
@@ -501,7 +501,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “What question do we need to ask ourselves after we find a try?”</p>
 
 
@@ -512,7 +512,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>When we think
+                [session]="session"><p>When we think
             about WHY we TRIED something, it means there is a causal connection. What do we use to connect what the
             character TRIED and WHY they tried it?</p>
             <p>[A Because string]</p>
@@ -523,13 +523,13 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask the students,
+                [session]="session"><p>Ask the students,
             “After we find a try, what do we look for next?”<br/>
             [What was the outcome of the try.]</p></step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “What is an outcome?”</p>
 
 
@@ -538,7 +538,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask: “What is an outcome fail?”</p>
 
 
@@ -547,7 +547,7 @@
         </li>
         <li>
           <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “When we see an outcome fail, what card do we hold up?”</p>
 
 
@@ -556,7 +556,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “How do I record an outcome fail on the Velcro board?”</p>
 
 
@@ -565,7 +565,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “What is an outcome yes?”</p>
 
 
@@ -574,7 +574,7 @@
         </li>
         <li>
           <step questionType="goal" correctAnswer="outcome-yes" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “When we see an outcome yes, what card do we hold up?”</p>
 
 
@@ -583,13 +583,13 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask, “How do I
+                [session]="session"><p>Ask, “How do I
             record an outcome yes on the Velcro board?”</p>
             <p>[Write what happened on an outcome yes card.]</p></step>
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Ask, “What
+                [session]="session"><p>Ask, “What
             question do we need to ask ourselves after we find an outcome?”</p>
             <p>[Why did this outcome happen?]</p>
             <p> [Make “why” gesture]</p>
@@ -598,7 +598,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>When we think
+                [session]="session"><p>When we think
             about WHY we had an OUTCOME, we are looking for a causal connection. What do we use to connect what the
             character’s OUTCOME was and WHY they had this OUTCOME?</p>
             <p>[A Because string]</p>
@@ -606,7 +606,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+                [session]="session">
             <p>Ask, “Once we have found a try and outcome, what question do we ask next?”</p>
 
 
@@ -617,7 +617,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Refer students to
+            [session]="session"><p>Refer students to
         procedural knowledge cards. “These cards will help us to remember how to find causal connections, and goals,
         tries, and outcomes in a story. If you need a reminder at any time, you can look at the card and see the steps.”
         Review the steps of finding goals/tries/outcomes with the students using procedural knowledge card.</p>
@@ -625,14 +625,14 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Review using the
+            [session]="session"><p>Review using the
         Velcro board. Say, “Remember, the Velcro board can help us to retell a story. We record all the important things
         in a story, the goals, tries, and outcomes, and then we can look back at them to tell the story again.”</p>
       </step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Quickly review the
+            [session]="session"><p>Quickly review the
         Magician Narrative with students.</p>
         <p>[adjust the scripted review as needed to fit the actual TRIES that you made in your school]</p>
 
@@ -641,7 +641,7 @@
         <p> [Point to the yellow thought bubble as you review.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Why did we have that goal?</p>
         <p>[Make “why” gesture]</p>
 
@@ -649,13 +649,13 @@
         <p> [Point to the blue because card as you review.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Use Because string to model causal connections on the Velcro board. [Connect the goal to the blue because
           card and quickly repeat causal connections. We had to take the balloons to Alex the Magician BECAUSE [Make
           finger move] she needs them to practice her trick for the party.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>We tried several things to try to get the balloons to her.”</p>
         <p>Our FIRST TRY was to go.</p>
         <p>[TRY 1]</p>
@@ -664,27 +664,27 @@
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Why did we try this?</p>
         <p>[Make “why” gesture]</p>
         <p> [Because we needed to take the balloons to Alex. Use the Because string to show causal connections on the
           Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>After our try, we have to think about what was the outcome of our try. What happened when we tried to go [TRY
           1]?</p>
         <p>[Make “what happened” gesture]</p>
         <p> [A big painting blocked the hallway.]</p>
       </step>
       <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, did we achieve our goal?</p>
         <p>[No, we couldn’t walk on the painting. So, that was an OUTCOME FAIL]</p>
         <p> (hold up outcome fail sign and encourage students to do the same).</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Why did this outcome happen?</p>
         <p>[Make “why” gesture]</p>
         <p> [Because we couldn’t walk on the painting. So, we didn’t achieve our goal. We couldn’t get through to take
@@ -694,11 +694,11 @@
           finger move] this to be an outcome fail.”</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, was our goal still the same? Yes, we still wanted to get the balloons to Alex the Magician.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Our SECOND TRY was to.</p>
         <p>[TRY 2]</p>
 
@@ -706,7 +706,7 @@
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Why did we try this?</p>
         <p>[Make “why” gesture]</p>
 
@@ -714,20 +714,20 @@
         <p> Use the Because string to show causal connections on the Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>After our try we have to think about what was the outcome of this try. What happened when we tried this [TRY
           2]?</p>
         <p>[TRY 2 was blocked by caution tape.]</p>
 
       </step>
       <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, did we achieve our goal?</p>
         <p>[No, we couldn’t go through the caution tape. So, that was another OUTCOME FAIL]</p>
         <p> (hold up outcome fail sign and encourage students to do the same).</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Why did this outcome happen?</p>
         <p>[Make “why” gesture]</p>
         <p> [Because [TRY 2] was blocked by caution tape. So, we didn’t achieve our goal. We couldn’t get through to
@@ -739,7 +739,7 @@
           to be an outcome fail.”</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, was our goal still the same? Yes, we still need to take the balloons to Alex the Magician, so we kept
           them safe in the room until we could decide how to get them to her.</p>
       </step>
@@ -768,7 +768,7 @@
   <ol>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Explain to students
+            [session]="session"><p>Explain to students
         that we will now be switching to “<strong>I Do/You Help.</strong>”</p>
         <p>“We are now going to switch to ‘<strong>I Do/You Help</strong>.’</p>
         <p>[<em>Place these roles onto the Roles Board</em>.]</p>
@@ -788,7 +788,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>When we left off, we
+            [session]="session"><p>When we left off, we
         had to leave our balloons in the room because we could not get them to Alex the Magician. Now, the balloons
         aren’t there. In their place, you find the note telling you that the balloons have been moved.</p>
         <p>“Oh no! Someone moved our balloons. That isn’t a problem, but the part of the note that says where they moved
@@ -796,27 +796,27 @@
           we’ll just have to go look for them.”</p>
       </step>
       <step questionType="goal" correctAnswer="goal" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Guide students to determine what our goal is and use goal manipulatives.</p>
         <p>[Students should hold up goal cards. Show the new little goal on a thought bubble and place it on the Velcro
           board under the other thought bubble.]</p>
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “What is our goal?”</p>
         <p>[To find all 8 of the balloons]</p>
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>“Why do we have this goal?”</p>
         <p>[Make “why” gesture]</p>
         <p> [Because Alex the Magician needs them to practice her trick for the party.] Use the Because string to show
           causal connections on the Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Explain that now that we have a new goal, we have to make a try at achieving that goal. So, our goal is that
           we want to find our balloons.</p>
       </step>
@@ -827,14 +827,14 @@
           did it.</p>
       </div>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>“I guess that means we will have to go on a journey to find our balloons somewhere in the school. Remind
           students that, if we are going to go out of the room we will need to make sure we stay together and do not run
           or be disruptive in the hallway.” Explain that the same rules that are in effect in our classroom will be used
           in the hallway. That means that we will walk. We will also keep quiet in case other groups are working.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Explain that we will take our Velcro board with us so that we can chart out our tries and outcomes as we
           go.</p>
         <p>[Take Velcro board and manipulatives to use along the way]</p>
@@ -858,7 +858,7 @@
     </li>
     <li>
       <step questionType="goal" correctAnswer="try" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>LOCATION 1</p>
+            [session]="session"><p>LOCATION 1</p>
         <p>“Let’s try to find our balloons in.</p>
         <p>[Location 1]</p>
 
@@ -868,14 +868,14 @@
         <p> Have co-teacher record on card and place on Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why are we trying this?”</p>
         <p>[Make “why” gesture]</p>
         <p> [Because (Make finger move) We want to find all 8 balloons] Use the Because string to show causal
           connections on Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>In Location 1, you find 3 paper mâché balloons. “Oh no! Here are three of our balloons, but they look like
           they have become someone’s craft project. They are covered in paper mâché!”</p>
         <p>What was the outcome of our first try? What happened?</p>
@@ -884,26 +884,26 @@
           use them.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why did this outcome happen?”</p>
         <p>[Make “why” gesture]</p>
         <p> [Because we looked in Location 1, which caused (Make finger move) us to see that they had been covered with
           paper mâché.] Refer to the Because string to make the causal connections on the Velcro board.</p>
       </step>
       <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, did we achieve our goal?. [Well kind of. We found 3 of the 8 balloons, but the balloons were covered in
           paper mâché and Alex the Magician won’t be able to use them. So, this is an Outcome Fail [Hold up
           manipulative]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Is our goal still the same? Yes. We still need to find all 8 balloons and get them to Alex the Magician.</p>
       </step>
     </li>
     <li>
       <step questionType="goal" correctAnswer="try" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>LOCATION 2</p>
+            [session]="session"><p>LOCATION 2</p>
 
         <p>“Let’s see if we can find any more of our balloons in.</p>
         <p>[Location 2]</p>
@@ -914,14 +914,14 @@
         <p> Have co-teacher record on card and place on Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why do we need to try this?”</p>
         <p>[Make “why” gesture]</p>
         <p> [Because we did not find all 8 balloons last time/Because our goal is to find all 8 of the balloons] Refer
           to the Because string to make the causal connections on the Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>In Location 2 you find 3 balloons used as a science experiment. “Not again! These balloons look like they
           have been used in someone’s science experiment. We can’t take these to Alex the Magician.”</p>
         <p>What was the outcome of our second try? What happened?</p>
@@ -930,7 +930,7 @@
           able to use them.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why did this outcome happen?”</p>
         <p>[Make “why” gesture]</p>
         <p> [Because we looked in Location 2, which caused (Make finger move) us to see that the balloons were used in
@@ -938,19 +938,19 @@
           board.</p>
       </step>
       <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>So, did we achieve our goal this time?. [Well kind of. We found a few more of our balloons, but they were
           used in a science experiment. Alex the Magician won’t be able to use them to do her trick. This is an Outcome
           Fail [Hold up Outcome Fail manipulative]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Is our goal still the same? Yes. We still need to find a way to get the balloons to Alex the Magician.</p>
       </step>
     </li>
     <li>
       <step questionType="goal" correctAnswer="try" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>LOCATION 3</p>
+            [session]="session"><p>LOCATION 3</p>
         <p>“Let’s try looking in.</p>
         <p>[Location 3]</p>
 
@@ -959,27 +959,27 @@
         <p>[Looking in Location 3]</p>
         <p> Have co-teacher record on card and place on Velcro board.</p></step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why are we trying
         this?” [Make “why” gesture] [Because we did not find all 8 balloons last time/Because our goal is to find all 8
         of the balloons.] Refer to the Because string to make the causal connections on the Velcro board.</p>
       </step>
       <step questionType="goal" correctAnswer="outcome-fail" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>In the Location 3, you find 2 laminated balloons. “These are the last of our balloons and they have been
           laminated. These won’t work..</p>
         <p>[Hold up Outcome Fail card]</p>
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “What was the outcome of this try? What happened?”</p>
         <p>[Make “what happened” gesture]</p>
         <p> [We found 2 more of the 8 balloons, but they were laminated. Alex the Magician won’t be able to use them in
           her trick.]</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Why did this outcome happen?”</p>
         <p>[Make “why” gesture]</p>
         <p>, [Because we tried to find the balloons by checking in [Location 3] which caused (make finger move) us to
@@ -987,7 +987,7 @@
           Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Ask, “Did we achieve our goal?”</p>
         <p>[No, we didn’t achieve our goal of getting the balloons to Alex the Magician because she can’t use
           these.]</p>
@@ -999,7 +999,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Explain that we need
+            [session]="session"><p>Explain that we need
         to call Alex the Magician and let her know what happened.</p>
         <p>Teacher calls magician and says, “Hey Alex. We are really sorry. We went looking for your balloons today. We
           found them, but they were ruined. You won’t be able to use them for a trick… Okay… That’s fine… Okay. Again,
@@ -1010,25 +1010,25 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Explain that we can
+            [session]="session"><p>Explain that we can
         use our Velcro board to help us retell the new part of the story.</p>
         <p>Model retelling the story. Begin with a non-example, retelling the story using by only reading the cards.</p>
       </step>
       <div class="instructions">
         <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-              [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p><strong>Teaching
+              [session]="session"><p><strong>Teaching
           Modeling:</strong> [Speak in a boring voice and add NO detail to the story.] “Goal. Find balloons. First try.
           Room one. Outcome fail. Next try. Room two. Outcome fail. Last try. Room three. Outcome fail.”</p></step>
       </div>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Explain to students that this is not a good retelling because I just read from the board and did not add any
           details to make it sound like an actual story, it just sounded like reading from the board.</p>
         <p>Next, model retelling the story appropriately, adding in details and not reading from the board.</p>
       </step>
       <div class="instructions">
         <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-              [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p><strong>Teacher
+              [session]="session"><p><strong>Teacher
           Modeling:</strong> [Use expression and add detail to the story. Include causal connections and finger move.]
           “When we came in today, we found a note that said our balloons were moved. We couldn’t read where they were
           moved, WHICH CAUSED (make finger move) us to have the goal of wanting to find the balloons. We decided to look
@@ -1040,7 +1040,7 @@
         </step>
       </div>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Explain to students throughout how you are making it sound like a story, by using the board only as a guide,
           instead of reading from it.</p>
       </step>
@@ -1072,36 +1072,36 @@
   <ol>
     <li>
       <p><strong>Read the following directions to students:</strong></p>
-      <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now that we have finished the activity I want you to think about how hard it was for you, how much you liked it, and how much you think you learned.  I will ask you a question, and I want you to hold up the marker that best shows what you think.”</p>
       </step>
     </li>
     <li>
       <p><strong>Difficulty of the Activity</strong></p>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “First, I want you to think about how hard you thought the activity was.”</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you thought what we did just now was really hard I want you to put your chip in the really hard square.  If you thought what we did just now was hard put your chip in the hard square.  If you thought what we did just now was okay put your chip in the okay square.  If you thought what we did right now was easy put your chip in the easy square.  If you thought what we did just now was really easy put your chip in the really easy square.”</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
             <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
             <p>Learning how to identify goals, tries, and outcomes was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1109,30 +1109,30 @@
     </li>
     <li>
       <p><strong>Appeal/Satisfaction</strong></p>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now we are going to think about how much we liked the activity we just did.”</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you thought what we did just now was not fun at all I want you to hold up this not fun at all marker.  If you thought what we did just now was not really fun hold up this not really fun marker.  If you thought what we did just now was okay hold up this okay marker.  If you thought what we did right now was fun hold up this fun marker.  If you thought what we did just now was really fun hold up this really fun marker.”</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [session]="session">
             <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [session]="session">
             <p>Learning how to identify goals, tries, and outcomes was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1140,35 +1140,35 @@
     </li>
     <li>
       <p><strong>Efficacy</strong></p>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now we are going to think about how well you think you can identify goals, tries, and outcomes in a story.”</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you think you couldn’t do it, I want you to hold up this I couldn’t do it marker.  If you think you could do it with a little help, hold up this I could do it with help marker.  If you think you could do it all by yourself, hold up this I could do it all by myself marker.“</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify a goal in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify what a character does to try to get their goal in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify the outcome in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1192,17 +1192,17 @@
   <ol>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>The co-teacher will lead a directed movement break.</p></step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>After movement break have students come back to the classroom to refocus as a group.</p></step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Say, “Today we have
+            [session]="session"><p>Say, “Today we have
         been practicing looking for goals, tries, and outcomes in stories. Remember, a GOAL is what a character wants to
         do or get. TRIES are actions—things that the character does to get their goal. OUTCOMES are the result of a try.
         If the character gets their goal it is an outcome yes, and if they do not get their goal it is an outcome fail.
@@ -1242,7 +1242,7 @@
   <ol>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Explain to the
+            [session]="session"><p>Explain to the
         students that, “You have been doing a great job of finding goals, tries, outcomes, and causal connections. Now,
         you’re going to get a chance to practice finding them with a small group in a new story called <em>Apple
           Trouble!</em></p>
@@ -1253,7 +1253,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Before we get
+            [session]="session"><p>Before we get
         started, let’s remind ourselves of what we need to look for, and what we need to do when we are reading a story.
         You can use your procedure card to help you remember what the steps are as you are working.</p>
         <p>[Hold up procedure card.]</p>
@@ -1262,12 +1262,12 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Now that we have
+            [session]="session"><p>Now that we have
         reviewed, you should be ready to work with your small group to find goals, tries, outcomes, and causal
         connections together.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Explain to students that we will now be switching to “<strong>I Help/You Do Together.</strong>”</p>
         <p>“We are now going to switch to ‘<strong>I Help/You Do Together</strong>.’</p>
         <p>[<em>Place these roles onto the Roles Board</em>.]</p>
@@ -1276,7 +1276,7 @@
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>“When it is time for ‘I Help/You Do Together,’ you will be talking with each other. You will all work
           together to figure out the answers. It is important that you talk with one another and tell each other what
           you are thinking. It is ok not to always agree on the answer, but you will have to talk to figure out the
@@ -1294,7 +1294,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Say, “Before we get
+            [session]="session"><p>Say, “Before we get
         started though, we are going to demonstrate what we mean by “working together with a small group.”</p>
         <p>[Use the Improvised Modeling for Working Together during Paired Practice script on pp. 14-15 of the Base
           Appendix for this part]</p>
@@ -1305,7 +1305,7 @@
       <ul>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Show the students
+                [session]="session"><p>Show the students
             the “Collaboration Cards” of 2 people trying to carry something heavy and awkward together. Several of the
             images will be them not working together effectively (one person is doing all the work; no one is doing any
             work, and not working together) and another will have them succeeding. Explain that they will have to
@@ -1313,7 +1313,7 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Lead- and
+                [session]="session"><p>Lead- and
             Co-Teacher will improvise how to work together as they read the beginning of <em>Ghost with the Halloween
               Hiccups</em>. Demonstrate how you talk effectively with one another and how you might politely disagree
             with one another. After you collaboratively identify the goal and place it on the Velcro Board. Then be sure
@@ -1324,14 +1324,14 @@
         </li>
         <li>
           <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-                [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Teachers can also
+                [session]="session"><p>Teachers can also
             demonstrate what not working together effectively looks like.</p></step>
         </li>
       </ul>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Break students into
+            [session]="session"><p>Break students into
         small groups and into different rooms.</p>
       </step>
       <div class="hint"><p><em><strong>Teacher’s Role During Small Group</strong></em></p>
@@ -1368,7 +1368,7 @@
     </li>
     <li>
       <step [openResponse]="true" [questionType]="'goal'" defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Begin reading story
+            [session]="session"><p>Begin reading story
         with plain hedgehog. Ask students to hold the goal, try and outcome cards up when they see the goal, try, or
         outcome and talk with one another about what they notice. Encourage the use of the manipulatives and thinking
         aloud. Only stop reading when students hold up marker and have them discuss.</p>
@@ -1407,21 +1407,21 @@
           and go into the retelling if time permits.</p>
       </div>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Once students hold up goal manipulative your prompts would be, “Did you see a GOAL? Talk about it with your
           group and once you agree let’s write it on an index card and put it on the board where it belongs.”</p>
         <p>[Have students discuss and place cards on board]</p>
         <p> Continue reading.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>As the students hold up try manipulatives, your prompt would be, “Did you see a TRY? Talk about it with your
           group and once you agree let’s write it on an index card and put it on the board where it belongs.”</p>
         <p>[Have students place cards on board]</p>
 
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>If needed, after students identify a TRY, say “Talk with your group about what you should look for next.”
           (NOTE: This question is not needed if students identify the outcome without prompting). Students should
           respond that they will look for the OUTCOME. If they do not, then direct them to look at their procedure card
@@ -1429,7 +1429,7 @@
           continue reading.</p>
       </step>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>As the students hold up outcome manipulatives, your prompt would be, “Did you see an OUTCOME? Talk about it
           with your group and once you agree let’s write it on an index card and put it on the board where it
           belongs.”</p>
@@ -1441,7 +1441,7 @@
           to guide students.</p>
       </div>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Repeat the same procedure for every try and outcome:</p>
 
         <ol>
@@ -1463,14 +1463,14 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Remind students of
+            [session]="session"><p>Remind students of
         how to use the organizer to retell the story. Have students retell story at the end using the completed
         organizer if time permits.</p>
       </step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Provide evaluative
+            [session]="session"><p>Provide evaluative
         feedback on the students’ performance and behavior.</p>
       </step>
     </li>
@@ -1501,36 +1501,36 @@
   <ol>
     <li>
       <p><strong>Read the following directions to students:</strong></p>
-      <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now that we have finished the activity I want you to think about how hard it was for you, how much you liked it, and how much you think you learned.  I will ask you a question, and I want you to hold up the marker that best shows what you think.”</p>
       </step>
     </li>
     <li>
       <p><strong>Difficulty of the Activity</strong></p>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “First, I want you to think about how hard you thought the activity was.”</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you thought what we did just now was really hard I want you to put your chip in the really hard square.  If you thought what we did just now was hard put your chip in the hard square.  If you thought what we did just now was okay put your chip in the okay square.  If you thought what we did right now was easy put your chip in the easy square.  If you thought what we did just now was really easy put your chip in the really easy square.”</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
             <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="difficulty" (onStepClicked)="stepClicked($event)" questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
             <p>Learning how to identify goals, tries, and outcomes was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1538,30 +1538,30 @@
     </li>
     <li>
       <p><strong>Appeal/Satisfaction</strong></p>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now we are going to think about how much we liked the activity we just did.”</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you thought what we did just now was not fun at all I want you to hold up this not fun at all marker.  If you thought what we did just now was not really fun hold up this not really fun marker.  If you thought what we did just now was okay hold up this okay marker.  If you thought what we did right now was fun hold up this fun marker.  If you thought what we did just now was really fun hold up this really fun marker.”</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [session]="session">
             <p>What we did just now was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="appeal" (onStepClicked)="stepClicked($event)" questionType="appeal" (onReady)="stepReady($event)" [session]="session">
             <p>Learning how to identify goals, tries, and outcomes was <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1569,35 +1569,35 @@
     </li>
     <li>
       <p><strong>Efficacy</strong></p>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “Now we are going to think about how well you think you can identify goals, tries, and outcomes in a story.”</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say] “We are going to use these strips to show what you think about the activity we just did.“</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Hold up each marker and say] “If you think you couldn’t do it, I want you to hold up this I couldn’t do it marker.  If you think you could do it with a little help, hold up this I could do it with help marker.  If you think you could do it all by yourself, hold up this I could do it all by myself marker.“</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “I will ask you a question and when I say the magic words ‘Think, Ready, Respond’ you will put your chip in the square that best shows what you think about that question.  Do you have any questions?”</p>
         <p>[Answer any questions]</p>
       </step>
-      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+      <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)" [session]="session">
         <p>[Say]  “Now I will pass out the strips and the chips and we will begin.”</p>
       </step>
       <ol>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify a goal in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify what a character does to try to get their goal in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
         <li>
-          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+          <step defaultResponse="efficacy" (onStepClicked)="stepClicked($event)" questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
             <p>If someone asked me to identify the outcome in a story <u>&nbsp;&nbsp;&nbsp;&nbsp;Think, Ready, Respond&nbsp;&nbsp;&nbsp;&nbsp;</u>.</p>
           </step>
         </li>
@@ -1625,13 +1625,13 @@
   <ol>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId">
+            [session]="session">
         <p>Pass out refrigerator sheets to students and have them follow along as you review the information.</p>
       </step>
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Say, “Today we
+            [session]="session"><p>Say, “Today we
         practiced looking for goals, tries, and outcomes in stories. Remember, a GOAL is what a character wants to do or
         get. TRIES are actions—things that the character does to get their goal. OUTCOMES are the result of a try. If
         the
@@ -1646,7 +1646,7 @@
     </li>
     <li>
       <step defaultResponse="goal" (onStepClicked)="stepClicked($event)" (onReady)="stepReady($event)"
-            [highlightedStepId]="session.currentStepId" [currentQuestionStepId]="session.questionStepId"><p>Tell students to try
+            [session]="session"><p>Tell students to try
         to
         recognize goals, tries, outcomes, and causal connections when they are reading, watching television, playing
         games, etc.</p>

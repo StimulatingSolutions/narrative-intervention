@@ -37,5 +37,43 @@ export interface Session {
   lesson: number;
   openResponse?: boolean;
   review?: boolean;
+  questionIterations: { [s: number]: number };
   questionIteration?: number;
+  questionId?: number;
+  didReset?: true;
+  cohortNumber: number;
+}
+
+export interface LoggedEvent {
+  type: string,
+  timestamp: Date,
+  "Session ID": string
+  "Question Number": number,
+  "Question Iteration": number,
+  questionType?: string,
+  correctResponse?: string
+}
+
+export interface StudentResponse extends LoggedEvent {
+  "Student ID": string,
+  "Student Response": string,
+  "Response Count": number,
+}
+
+export interface DownloadedEvent extends StudentResponse {
+  "Head Teacher ID": string,
+  "Head Teacher Name": string,
+  "School Name": string,
+  "Group Number": number,
+  "Cohort Number": number,
+  "Lesson": number,
+  "Session Date": string,
+  "Question Type ID": number,
+  "Question Type": string,
+  "Correct Response": string,
+  "Correct Response ID": number,
+  "Student Response ID": number,
+  "Correct": number,
+  "Response Time": number,
+  "Invalidated": number
 }

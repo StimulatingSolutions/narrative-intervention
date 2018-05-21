@@ -125,7 +125,8 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       openResponse: false,
       responses: [],
       completedSteps: [],
-      lesson: lesson
+      lesson: lesson,
+      questionIterations: {}
     };
     MeteorObservable.call('createNewSession', newSession)
     .takeUntil(this.componentDestroyed$)

@@ -6,9 +6,9 @@
   <div
     class="step-content"
     [ngClass]="{
-      subdued: (highlightedStepId !== stepId && currentQuestionStepId !== stepId && done),
-      highlighted: (highlightedStepId === stepId),
-      'active-question': (currentQuestionStepId === stepId),
+      subdued: (session.currentStepId !== stepId && session.questionStepId !== stepId && done),
+      highlighted: (session.currentStepId === stepId),
+      'active-question': (session.questionStepId === stepId),
       question: (questionType !== undefined),
       'open-response': openResponse
     }"

@@ -24,7 +24,6 @@ export class SideBarInfo implements OnInit {
   headTeacher: boolean;
   activeUsersKey: string = '';
   activeUsersSorted: string[] = [];
-  showReset: number = 0;
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -75,8 +74,13 @@ export class SideBarInfo implements OnInit {
     }
   }
 
-  disableReset (): void {
-    this.showReset = this.session.questionIteration;
+  doReset (): void {
+    Meteor.call('resetTimer', this.session._id, (error, result) => {
+      if (error){
+        this.errorAlert.present(error, 5);
+        return;
+      }
+    });
   }
 
   findMyPlace (): void {

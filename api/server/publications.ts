@@ -1,7 +1,5 @@
 import { User, School, Session } from './models';
-import { Users } from './collections/users';
-import { Schools } from './collections/schools';
-import { Sessions } from './collections/sessions';
+import { Users, Schools, Sessions } from './collections';
 
 import { Roles } from 'meteor/alanning:roles';
 

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef} from "@angular/core";
+import {Session} from "api/models";
 
 
 let nextStepId: number = 0;
@@ -13,13 +14,11 @@ export class Step implements OnInit {
   stepId: number;
   questionId?: number;
   public done: boolean = false;
-  public iteration: number = 0;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
   @Input() correctAnswer?: string;  // sometimes, a question will not have a correct answer
-  @Input() highlightedStepId: number;
-  @Input() currentQuestionStepId: number;
+  @Input() session: Session;
   @Input() defaultResponse: string;
   @Input() openResponse: boolean;
 
@@ -42,7 +41,7 @@ export class Step implements OnInit {
 
   public static resetIds(): void {
     nextStepId = 0;
-    nextQuestionId = 0;
+    nextQuestionId = 1;
   }
 
   clickStep() {

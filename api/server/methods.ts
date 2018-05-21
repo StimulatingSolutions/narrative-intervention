@@ -1,7 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
-import { Schools } from './collections/schools';
-import { Sessions } from './collections/sessions';
-import { Profile, User, School, Session } from './models';
+import { Schools, Sessions, LoggedEvents } from './collections';
+import {Profile, User, School, Session, LoggedEvent, StudentResponse} from './models';
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -264,14 +263,15 @@ Meteor.methods({
     });
   },
 
-  startQuestion(sessionId: string, stepId: number, iteration: number, questionType: string, correctAnswer: string, openResponse: boolean){
+  startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean){
     console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    let update = {
+    let iteration = (session.questionIterations[questionId] || 0) + 1;
+    let update: any = {
       $set: {
         readyForResponse: true,
         questionStepId: stepId,
@@ -279,13 +279,51 @@ Meteor.methods({
         correctAnswer: correctAnswer,
         currentStepId: stepId,
         openResponse: openResponse,
-        questionIteration: iteration
+        questionIteration: iteration,
+        didReset: false
       },
       $addToSet: {
         completedSteps: stepId
+      },
+    };
+    update.$set[`questionIterations.${questionId}`] = update.$set.questionIteration;
+    Sessions.update(sessionId, update);
+
+    let event: LoggedEvent = {
+      type: "question-start",
+      timestamp: new Date(),
+      "Session ID": sessionId,
+      "Question Number": questionId,
+      "Question Iteration": iteration,
+      questionType: questionType,
+      correctResponse: correctAnswer
+    };
+    LoggedEvents.insert(event);
+  },
+
+  timerReset(sessionId: string){
+    console.log('timer reset');
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session){
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+
+    let event: LoggedEvent = {
+      type: "timer-reset",
+      timestamp: new Date(),
+      "Session ID": sessionId,
+      "Question Number": session.questionId,
+      "Question Iteration": session.questionIteration
+    };
+
+    let update: any = {
+      $set: {
+        didReset: true
       }
     };
     Sessions.update(sessionId, update);
+
+    LoggedEvents.insert(event);
   },
 
   finishQuestion(sessionId: string){
@@ -295,6 +333,16 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
+    let event: LoggedEvent = {
+      type: "question-end",
+      timestamp: new Date(),
+      "Session ID": sessionId,
+      "Question Number": session.questionId,
+      "Question Iteration": session.questionIteration,
+      questionType: session.questionType,
+      correctResponse: session.correctAnswer
+    };
+
     let update: any = {
       $set: {
         readyForResponse: false,
@@ -302,7 +350,9 @@ Meteor.methods({
         correctAnswer: null,
         openResponse: false,
         backupQuestionType: null,
-        questionIteration: null
+        questionIteration: null,
+        questionId: null,
+        didReset: null
       },
       $addToSet: {
         completedSteps: session.currentStepId
@@ -312,9 +362,11 @@ Meteor.methods({
       update.$set.questionType = session.backupQuestionType;
     }
     Sessions.update(sessionId, update);
+
+    LoggedEvents.insert(event);
   },
 
-  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string, date: Date){
+  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string, date: Date, count: number){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -336,9 +388,21 @@ Meteor.methods({
         responses: newResponse
       }
     });
+
+    let event: StudentResponse = {
+      type: "student-response",
+      timestamp: new Date(),
+      "Session ID": sessionId,
+      "Question Number": session.questionId,
+      "Question Iteration": session.questionIteration,
+      "Student ID": studentId,
+      "Student Response": selectedCard,
+      "Response Count": count
+    };
+    LoggedEvents.insert(event);
   },
 
-  setCurrentStep(sessionId: string, stepId: number, iteration: number, questionType: string) {
+  setCurrentStep(sessionId: string, stepId: number, questionType: string) {
     console.log('setting current step: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session) {
@@ -346,8 +410,7 @@ Meteor.methods({
     }
     let update: any = {
       $set: {
-        currentStepId: stepId,
-        questionIteration: iteration
+        currentStepId: stepId
       },
       $addToSet: {
         completedSteps: stepId

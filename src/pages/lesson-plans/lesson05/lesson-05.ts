@@ -102,14 +102,13 @@ export class Lesson05 implements OnInit {
     }
 
     this.steps[stepId].done = true;
-    this.steps[stepId].iteration++;
 
     if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
       return;
     }
 
-    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].iteration, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
   }
 
   doneAdd(c) {
