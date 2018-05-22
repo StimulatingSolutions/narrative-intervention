@@ -25,7 +25,7 @@ export interface Session {
   schoolNumber?: number;
   schoolName?: string;
   active?: boolean;
-  activeUsers: string[];
+  activeStudents: number[];
   questionStepId?: number;
   correctAnswer?: string;
   questionType?: string;
@@ -47,33 +47,34 @@ export interface Session {
 export interface LoggedEvent {
   type: string,
   timestamp: Date,
-  "Session ID": string
-  "Question Number": number,
-  "Question Iteration": number,
   questionType?: string,
-  correctResponse?: string
+  correctResponse?: string,
+  SessionID: string,
+  QuestionNumber: number,
+  QuestionIteration: number,
+  openResponse?: boolean
 }
 
 export interface StudentResponse extends LoggedEvent {
-  "Student ID": string,
-  "Student Response": string,
-  "Response Count": number,
+  StudentID: string,
+  StudentResponse: string
 }
 
 export interface DownloadedEvent extends StudentResponse {
-  "Head Teacher ID": string,
-  "Head Teacher Name": string,
-  "School Name": string,
-  "Group Number": number,
-  "Cohort Number": number,
-  "Lesson": number,
-  "Session Date": string,
-  "Question Type ID": number,
-  "Question Type": string,
-  "Correct Response": string,
-  "Correct Response ID": number,
-  "Student Response ID": number,
-  "Correct": number,
-  "Response Time": number,
-  "Invalidated": number
+  HeadTeacherID: string,
+  HeadTeacherName: string,
+  SchoolName: string,
+  GroupNumber: number,
+  CohortNumber: number,
+  Lesson: number,
+  SessionDate: string,
+  QuestionTypeID: number,
+  QuestionType: string,
+  CorrectResponse: string,
+  CorrectResponseID: number,
+  StudentResponseID: number,
+  Correct: number,
+  ResponseTime: number,
+  Invalidated: number,
+  ResponseCount: number
 }

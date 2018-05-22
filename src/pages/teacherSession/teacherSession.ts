@@ -34,8 +34,9 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
         review: true,
         responses: [],
         completedSteps: [],
-        activeUsers: [],
-        questionIterations: {}
+        activeStudents: [],
+        questionIterations: {},
+        cohortNumber: 0
       };
       return;
     }

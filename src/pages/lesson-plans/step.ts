@@ -3,7 +3,7 @@ import {Session} from "api/models";
 
 
 let nextStepId: number = 0;
-let nextQuestionId: number = 0;
+let nextQuestionId: number = 1;
 
 @Component({
   selector: 'step',

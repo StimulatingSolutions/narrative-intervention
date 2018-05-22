@@ -22,8 +22,8 @@ export class SideBarInfo implements OnInit {
   idsWithAnswer: number[];
   currentResponses: {};
   headTeacher: boolean;
-  activeUsersKey: string = '';
-  activeUsersSorted: string[] = [];
+  activeStudentsKey: string = '';
+  activeStudentsSorted: number[] = [];
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -48,22 +48,22 @@ export class SideBarInfo implements OnInit {
 
     const newResponses = {};
     stepResponses.forEach( response => {
-      if (!newResponses.hasOwnProperty(response.studentId)){
-        newResponses[response.studentId] = {
+      if (!newResponses.hasOwnProperty(response.studentNumber)){
+        newResponses[response.studentNumber] = {
           response: response.response,
           date: response.date
         }
       }
-      if (response.date > newResponses[response.studentId].date){
-        newResponses[response.studentId] = response;
+      if (response.date > newResponses[response.studentNumber].date){
+        newResponses[response.studentNumber] = response;
       }
     });
     this.currentResponses = newResponses;
     const ids = stepResponses.map( response => {
-      return response.studentId;
+      return response.studentNumber;
     });
     this.idsWithAnswer = _.uniq(ids);
-    this.waitCount = this.session.activeUsers.length - _.uniq(ids).length;
+    this.waitCount = this.session.activeStudents.length - this.idsWithAnswer.length;
     if (this.session.correctAnswer) {
       this.incorrectCount = 0;
       for (let responseId of this.idsWithAnswer) {
@@ -75,7 +75,7 @@ export class SideBarInfo implements OnInit {
   }
 
   doReset (): void {
-    Meteor.call('resetTimer', this.session._id, (error, result) => {
+    Meteor.call('timerReset', this.session._id, (error, result) => {
       if (error){
         this.errorAlert.present(error, 5);
         return;
@@ -100,10 +100,12 @@ export class SideBarInfo implements OnInit {
     this.navCtrl.pop();
   }
 
-  getActiveUsers (): string[] {
-    if (this.session && JSON.stringify(this.session.activeUsers) != this.activeUsersKey) {
-      this.activeUsersSorted = this.session.activeUsers.slice().sort();
+  getActiveStudents (): number[] {
+    let activeStudentsKey: string = JSON.stringify(this.session.activeStudents);
+    if (this.session && activeStudentsKey != this.activeStudentsKey) {
+      this.activeStudentsSorted = this.session.activeStudents.slice().sort();
+      this.activeStudentsKey = activeStudentsKey;
     }
-    return this.activeUsersSorted;
+    return this.activeStudentsSorted;
   }
 }

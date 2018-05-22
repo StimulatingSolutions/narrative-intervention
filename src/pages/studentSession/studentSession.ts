@@ -16,7 +16,7 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 export class StudentSessionPage extends DestructionAwareComponent implements OnInit {
 
   studentSessionId: string;
-  userId: string;
+  studentNumber: number;
   session: Session;
   selectedCard: string = null;
   questionType: string = null;
@@ -61,7 +61,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
   ngOnInit(): void {
     this.studentSessionId = this.navParams.get('sessionId');
-    this.userId = this.navParams.get('userId');
+    this.studentNumber = this.navParams.get('studentNumber');
 
     MeteorObservable.subscribe('activeSession', this.studentSessionId)
     .takeUntil(this.componentDestroyed$)
@@ -87,7 +87,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
       if (session.readyForResponse) {
         // IF STARTING UP IN RESPONSE MODE SET SELECTED CARD
         const thisStepsResponses = session.responses.filter( response => {
-          return response.step === session.questionStepId && response.studentId === this.userId;
+          return response.step === session.questionStepId && response.studentNumber === this.studentNumber;
         });
         const latestResponse = _.maxBy(thisStepsResponses, (o) => {
           return o.date;
@@ -106,7 +106,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
     if(!oldSession.readyForResponse && newSession.readyForResponse){
       const thisStepsResponses = newSession.responses.filter( response => {
-        return response.step === newSession.questionStepId && response.studentId === this.userId;
+        return response.step === newSession.questionStepId && response.studentNumber === this.studentNumber;
       });
       const latestResponse = _.maxBy(thisStepsResponses, (o) => {
         return o.date;
@@ -124,7 +124,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   }
 
   ngOnDestroy(): void {
-    Meteor.call('leaveSession', this.studentSessionId, this.userId, (error, result) => {
+    Meteor.call('leaveSession', this.studentSessionId, this.studentNumber, (error, result) => {
       if (error && error.reason != "Session does not exist"){
         this.handleError(error, 19);
         return;
@@ -133,11 +133,12 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   }
 
   selectCard(cardName: string): void {
-    this.selectedCard = cardName;
     if (this.session && this.session.readyForResponse) {
+      if (this.selectedCard === cardName) {
+        return;
+      }
       this.selectedCard = cardName;
-      const date = new Date();
-      Meteor.call('sendQuestionResponse', this.session._id, this.userId, this.selectedCard, date, (error, result) => {
+      Meteor.call('sendQuestionResponse', this.session._id, this.studentNumber, this.selectedCard, (error, result) => {
         if (error){
           this.handleError(error, 20);
           return;

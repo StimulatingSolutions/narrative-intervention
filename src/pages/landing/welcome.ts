@@ -115,7 +115,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       schoolNumber: school.idNumber,
       schoolName: school.name,
       active: true,
-      activeUsers: [],
+      activeStudents: [],
       questionStepId: null,
       correctAnswer: null,
       currentStepId: null,
@@ -126,7 +126,8 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       responses: [],
       completedSteps: [],
       lesson: lesson,
-      questionIterations: {}
+      questionIterations: {},
+      cohortNumber: school.cohort
     };
     MeteorObservable.call('createNewSession', newSession)
     .takeUntil(this.componentDestroyed$)

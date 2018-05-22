@@ -207,7 +207,7 @@ Meteor.methods({
     if (!active){
       Sessions.update(id, {
         $set: {
-          activeUsers: []
+          activeStudents: []
         }
       });
     }
@@ -229,26 +229,20 @@ Meteor.methods({
     return session._id;
   },
 
-  joinSession(userId: string){
-    let parts = userId.split('-');
-    let groupNumber = parseInt(parts[0]).toString();
-    let studentNumber = parseInt(parts[1]).toString();
+  joinSession(groupNumber: number, studentNumber: number){
     const session = Sessions.findOne({schoolNumber: groupNumber, active: true});
     if (!session){
       throw new Meteor.Error('not found', `Group ${groupNumber} has no active sessions.`);
     }
     Sessions.update(session._id, {
       $addToSet: {
-        activeUsers: `${groupNumber}-${studentNumber}`
+        activeStudents: studentNumber
       }
     });
     return session._id;
   },
 
-  leaveSession(sessionId: string, userId: string){
-    let parts = userId.split('-');
-    let groupNumber = parseInt(parts[0]).toString();
-    let studentNumber = parseInt(parts[1]).toString();
+  leaveSession(sessionId: string, studentNumber: number){
     const session = Sessions.findOne({shortId: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -258,7 +252,7 @@ Meteor.methods({
     }
     Sessions.update(session._id, {
       $pull: {
-        activeUsers: `${groupNumber}-${studentNumber}`
+        activeStudents: studentNumber
       }
     });
   },
@@ -276,9 +270,10 @@ Meteor.methods({
         readyForResponse: true,
         questionStepId: stepId,
         questionType: questionType,
+        questionId: questionId,
         correctAnswer: correctAnswer,
         currentStepId: stepId,
-        openResponse: openResponse,
+        openResponse: !!openResponse,
         questionIteration: iteration,
         didReset: false
       },
@@ -292,11 +287,12 @@ Meteor.methods({
     let event: LoggedEvent = {
       type: "question-start",
       timestamp: new Date(),
-      "Session ID": sessionId,
-      "Question Number": questionId,
-      "Question Iteration": iteration,
       questionType: questionType,
-      correctResponse: correctAnswer
+      correctResponse: correctAnswer,
+      SessionID: sessionId,
+      QuestionNumber: questionId,
+      QuestionIteration: iteration,
+      openResponse: !!openResponse
     };
     LoggedEvents.insert(event);
   },
@@ -311,9 +307,9 @@ Meteor.methods({
     let event: LoggedEvent = {
       type: "timer-reset",
       timestamp: new Date(),
-      "Session ID": sessionId,
-      "Question Number": session.questionId,
-      "Question Iteration": session.questionIteration
+      SessionID: sessionId,
+      QuestionNumber: session.questionId,
+      QuestionIteration: session.questionIteration
     };
 
     let update: any = {
@@ -336,11 +332,11 @@ Meteor.methods({
     let event: LoggedEvent = {
       type: "question-end",
       timestamp: new Date(),
-      "Session ID": sessionId,
-      "Question Number": session.questionId,
-      "Question Iteration": session.questionIteration,
       questionType: session.questionType,
-      correctResponse: session.correctAnswer
+      correctResponse: session.correctAnswer,
+      SessionID: sessionId,
+      QuestionNumber: session.questionId,
+      QuestionIteration: session.questionIteration
     };
 
     let update: any = {
@@ -348,7 +344,7 @@ Meteor.methods({
         readyForResponse: false,
         questionStepId: null,
         correctAnswer: null,
-        openResponse: false,
+        openResponse: null,
         backupQuestionType: null,
         questionIteration: null,
         questionId: null,
@@ -366,7 +362,7 @@ Meteor.methods({
     LoggedEvents.insert(event);
   },
 
-  sendQuestionResponse(sessionId: string, studentId: string, selectedCard: string, date: Date, count: number){
+  sendQuestionResponse(sessionId: string, studentNumber: number, selectedCard: string){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -374,30 +370,31 @@ Meteor.methods({
     if (!session.readyForResponse){
       throw new Meteor.Error('Session Error', 'Session is not receiving responses');
     }
+    let studentId: string = `${session.schoolNumber}-${session.cohortNumber}-${studentNumber}`;
 
     const newResponse = {
       step: session.questionStepId,
-      studentId: studentId,
-      response: selectedCard,
-      date: date
+      studentNumber: studentNumber,
+      response: selectedCard
     };
     console.log('Recording Response', newResponse);
 
-    Sessions.update(sessionId, {
+    let update = {
       $addToSet: {
         responses: newResponse
       }
-    });
+    };
+    Sessions.update(sessionId, update);
 
     let event: StudentResponse = {
       type: "student-response",
       timestamp: new Date(),
-      "Session ID": sessionId,
-      "Question Number": session.questionId,
-      "Question Iteration": session.questionIteration,
-      "Student ID": studentId,
-      "Student Response": selectedCard,
-      "Response Count": count
+      SessionID: sessionId,
+      QuestionNumber: session.questionId,
+      QuestionIteration: session.questionIteration,
+      StudentID: studentId,
+      StudentResponse: selectedCard,
+      openResponse: !!session.openResponse
     };
     LoggedEvents.insert(event);
   },

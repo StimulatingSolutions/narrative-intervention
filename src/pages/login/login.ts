@@ -81,16 +81,15 @@ export class LoginPage extends DestructionAwareComponent {
 
     let groupNumber = parseInt(this.sessionGroupNumber).toString();
     let studentNumber = parseInt(this.sessionStudentNumber).toString();
-    let userId: string = `${groupNumber}-${studentNumber}`;
 
-    Meteor.call('joinSession', userId, (error, result) => {
+    Meteor.call('joinSession', groupNumber, studentNumber, (error, result) => {
       if (error){
         this.errorAlert.present(error, 11);
         return;
       }
       return this.navCtrl.push(StudentSessionPage, {
         sessionId: result,
-        userId: userId
+        studentNumber: studentNumber
       });
     })
   }

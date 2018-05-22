@@ -19,28 +19,28 @@
       </div>
       <div class="student-list" *ngIf="!session?.review">
         <div *ngIf="!session?.openResponse">
-          <div class="student" *ngFor="let user of getActiveUsers()">
+          <div class="student" *ngFor="let student of getActiveStudents()">
 
-            <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(user) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[user]?.response">
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) === -1">
+            <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[student]?.response">
+              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) === -1">
                 <ion-icon name="radio-button-off"></ion-icon>
               </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[user]?.response)">
+              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[student]?.response)">
                 <ion-icon name="checkmark-circle"></ion-icon>
               </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response">
+              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[student]?.response">
                 <ion-icon name="close-circle"></ion-icon>
               </div>
-              <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(user) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[user]?.response))">
-                {{user.split('-')[1]}}
+              <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(student) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[student]?.response))">
+                {{student}}
               </span>
-              <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(user) > -1">
-                {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{currentResponses[user].response}}
+              <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1">
+                {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{currentResponses[student].response}}
               </div>
             </div>
           </div>
         </div>
-        <div class="note" *ngIf="session?.activeUsers.length === 0 && session?.active">
+        <div class="note" *ngIf="session?.activeStudents.length === 0 && session?.active">
           <i>No students have connected to this session yet.</i>
         </div>
         <div class="note" *ngIf="!session?.active">
@@ -48,11 +48,11 @@
         </div>
       </div>
       <div class="student-count">
-        <div *ngIf="!session?.readyForResponse && session?.activeUsers.length === 1">
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 1">
           There is <b>1</b> student in this session.
         </div>
-        <div *ngIf="!session?.readyForResponse && session?.activeUsers.length !== 1">
-          There are <b>{{session?.activeUsers.length || 0}}</b> students in this session.
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length !== 1">
+          There are <b>{{session?.activeStudents.length || 0}}</b> students in this session.
         </div>
         <div *ngIf="session?.readyForResponse && !session?.openResponse">
           <p *ngIf="waitCount === 1">
