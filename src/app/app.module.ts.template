@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { LoginPage } from '../pages/login/login';
 import { MomentModule } from 'angular2-moment';
 import { WelcomePage } from '../pages/landing/welcome';
+import { ErrorAlert } from "../services/errorAlert";
+import { DataManagementPage } from "../pages/dataManagement/dataManagement";
 import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
 import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
@@ -26,6 +28,7 @@ require('smoothscroll-polyfill').polyfill();
     MyApp,
     LoginPage,
     WelcomePage,
+    DataManagementPage,
     UserManagementPage,
     SchoolManagementPage,
     TeacherSessionPage,
@@ -44,6 +47,7 @@ require('smoothscroll-polyfill').polyfill();
     MyApp,
     LoginPage,
     WelcomePage,
+    DataManagementPage,
     UserManagementPage,
     SchoolManagementPage,
     TeacherSessionPage,

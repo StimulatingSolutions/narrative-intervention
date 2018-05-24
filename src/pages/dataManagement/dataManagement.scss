@@ -1,0 +1,34 @@
+.data-download-page-content {
+
+  max-width: none;
+
+  .half-width {
+    display: inline-block;
+    width: 45%;
+    margin: 0 2.4%;
+  }
+
+  .session-list {
+    font-size: 1.6rem;
+    margin: 0 auto;
+
+    th, td {
+      padding: 8px;
+      border: 1px solid #444;
+    }
+
+    tbody tr {
+      cursor: pointer;
+    }
+
+    span.complete {
+      color: green;
+    }
+    span.incomplete {
+      color: red;
+      font-weight: bolder;
+    }
+
+  }
+
+}

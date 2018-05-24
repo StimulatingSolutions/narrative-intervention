@@ -19,9 +19,10 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
+
   <br/>
   <br/>
-  <br/>
+
   <ion-list>
     <ion-list-header>Session Options:</ion-list-header>
     <ion-item>
@@ -46,7 +47,6 @@
 
   <br/>
   <br/>
-  <br/>
 
   <ion-list [hidden]='!showUserManagement && !showSchoolManagement'>
     <ion-list-header>Management Options:</ion-list-header>
@@ -61,4 +61,17 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
+
+  <br/>
+  <br/>
+
+  <ion-list [hidden]='!showDataManagement'>
+    <ion-list-header>Data Management:</ion-list-header>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="warning" (click)="viewDataManagement()">Data Management</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

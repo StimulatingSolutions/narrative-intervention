@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar color="navbar-bg">
+    <ion-title>Data Management</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="data-download-page-content">
+
+  <br/>
+  <br/>
+
+  <table class="session-list">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Session Started</th>
+        <th>Group</th>
+        <th>School</th>
+        <th>Cohort</th>
+        <th>Lesson</th>
+        <th>Head Teacher</th>
+        <th>Completed?</th>
+        <th>Downloaded</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let session of allSessions | async" (click)="toggleCheckbox(session._id)">
+        <td><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
+        <td>{{session.creationDate}} at {{session.creationTime}}</td>
+        <td>{{session.schoolNumber}}</td>
+        <td>{{session.schoolName}}</td>
+        <td>{{session.cohortNumber}}</td>
+        <td>{{session.lesson}}</td>
+        <td>{{session.creatorsName}}</td>
+        <td><span *ngIf="!session.active" class="complete">yes</span><span *ngIf="session.active" class="incomplete">no</span></td>
+        <td>{{session.lastDownload}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <br/>
+  <br/>
+  <ion-list class="half-width">
+    <ion-list-header>Session Selection Shortcuts:</ion-list-header>
+    <ion-item>
+      <ion-buttons>
+        <button class="button-md" ion-button (click)="selectComplete()">Complete, Not Downloaded</button>
+        <br/>
+        <button class="button-md" ion-button (click)="selectDownloaded()">Already Downloaded</button>
+        <br/>
+        <button class="button-md" ion-button (click)="selectAll()">All Sessions</button>
+        <br/>
+        <button class="button-md" ion-button (click)="selectNone()">Nothing</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <ion-list class="half-width">
+    <ion-list-header>Actions:</ion-list-header>
+    <ion-item>
+      <ion-buttons>
+        <button class="button-md" ion-button color="secondary" (click)="download()">Download Selected Sessions</button>
+        <br/>
+        <br/>
+        <br/>
+        <button class="button-md" ion-button color="danger" (click)="clear()">Clear Selected Sessions</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

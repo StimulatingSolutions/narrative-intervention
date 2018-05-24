@@ -20,8 +20,10 @@ export interface Session {
   _id?: string;
   shortId?: string;
   creatorsId?: string;
+  creatorsName?: string;
   creationDate?: string;
   creationTime?: string;
+  creationTimestamp?: number;
   schoolNumber?: number;
   schoolName?: string;
   active?: boolean;
@@ -42,6 +44,7 @@ export interface Session {
   questionId?: number;
   didReset?: true;
   cohortNumber: number;
+  lastDownload?: string;
 }
 
 export interface LoggedEvent {

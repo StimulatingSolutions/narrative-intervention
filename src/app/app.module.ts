@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { LoginPage } from '../pages/login/login';
 import { MomentModule } from 'angular2-moment';
 import { WelcomePage } from '../pages/landing/welcome';
+import { ErrorAlert } from "../services/errorAlert";
+import { DataManagementPage } from "../pages/dataManagement/dataManagement";
 import { SchoolManagementPage } from '../pages/schools/schoolmanagement';
 import { EmailService } from '../services/email';
 import { UserManagementPage } from '../pages/usermanagement/usermanagement';
@@ -17,7 +19,6 @@ import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
 import { Lesson05 } from '../pages/lesson-plans/lesson05/lesson-05';
 import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
-import {ErrorAlert} from "../services/errorAlert";
 
 
 require('raf');
@@ -29,6 +30,7 @@ require('smoothscroll-polyfill').polyfill();
     MyApp,
     LoginPage,
     WelcomePage,
+    DataManagementPage,
     UserManagementPage,
     SchoolManagementPage,
     TeacherSessionPage,
@@ -50,6 +52,7 @@ require('smoothscroll-polyfill').polyfill();
     MyApp,
     LoginPage,
     WelcomePage,
+    DataManagementPage,
     UserManagementPage,
     SchoolManagementPage,
     TeacherSessionPage,

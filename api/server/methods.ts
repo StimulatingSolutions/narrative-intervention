@@ -1,10 +1,11 @@
 import { Accounts } from 'meteor/accounts-base';
-import { Schools, Sessions, LoggedEvents } from './collections';
+import {Schools, Sessions, LoggedEvents, Users} from './collections';
 import {Profile, User, School, Session, LoggedEvent, StudentResponse} from './models';
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 import * as _ from 'lodash';
+import moment = require("moment");
 
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -158,7 +159,7 @@ Meteor.methods({
 
   updateSchool(schoolId: string, updates: any){
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new school');
     }
 
     if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
@@ -196,7 +197,10 @@ Meteor.methods({
       throw new Meteor.Error('conflict', `There is an existing, unfinished session in the database for group ${session.schoolNumber}, created on ${session.creationDate} at ${session.creationTime}. Please wait a few seconds, then try again.`);
     }
 
+    const creator = Users.findOne({_id: this.userId});
     session.creatorsId = this.userId;
+    session.creatorsName = creator.profile.name;
+    session.creationTimestamp = Date.now();
     Sessions.insert(session);
   },
 
@@ -419,5 +423,33 @@ Meteor.methods({
       update.$set.questionType = questionType;
     }
     Sessions.update(sessionId, update);
+  },
+
+  download(sessionIds: string[]) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to download data');
+    }
+
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+      throw new Meteor.Error('unauthorized',
+        'User does not have permission to download data');
+    }
+
+    let now = moment().format('YYYY/MM/DD[ at ]h:mm a');
+    Sessions.update({_id: {$in: sessionIds}}, {$set: {lastDownload: now}}, {multi: true});
+  },
+
+  clear(sessionIds: string[]) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to download data');
+    }
+
+    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+      throw new Meteor.Error('unauthorized',
+        'User does not have permission to download data');
+    }
+
+    Sessions.remove({_id: {$in: sessionIds}});
+    LoggedEvents.remove({SessionID: {$in: sessionIds}});
   }
 });

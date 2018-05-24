@@ -16,6 +16,7 @@ import {TeacherSessionPage} from "../teacherSession/teacherSession";
 import * as moment from "moment";
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
+import {DataManagementPage} from "../dataManagement/dataManagement";
 
 function generateNumId() {
   const min = 0;
@@ -32,6 +33,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   public roles: string[];
   public showUserManagement: boolean;
   public showSchoolManagement: boolean;
+  public showDataManagement: boolean;
 
   public unfinishedSessions;
   public allSchools;
@@ -54,6 +56,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
         this.roles = result;
         this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
         this.showSchoolManagement = this.showUserManagement;
+        this.showDataManagement = this.showUserManagement;
       },
       error: this.errorAlert.presenter(2)
     });
@@ -86,6 +89,10 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
   viewSchoolManagement(): void {
     this.navCtrl.push(SchoolManagementPage, {});
+  }
+
+  viewDataManagement(): void {
+    this.navCtrl.push(DataManagementPage, {});
   }
 
   logout(): void {
