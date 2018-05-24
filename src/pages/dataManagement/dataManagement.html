@@ -9,34 +9,40 @@
   <br/>
   <br/>
 
-  <table class="session-list">
-    <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>Session Started</th>
-        <th>Group</th>
-        <th>School</th>
-        <th>Cohort</th>
-        <th>Lesson</th>
-        <th>Head Teacher</th>
-        <th>Completed?</th>
-        <th>Downloaded</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let session of allSessions | async" (click)="toggleCheckbox(session._id)">
-        <td><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
-        <td>{{session.creationDate}} at {{session.creationTime}}</td>
-        <td>{{session.schoolNumber}}</td>
-        <td>{{session.schoolName}}</td>
-        <td>{{session.cohortNumber}}</td>
-        <td>{{session.lesson}}</td>
-        <td>{{session.creatorsName}}</td>
-        <td><span *ngIf="!session.active" class="complete">yes</span><span *ngIf="session.active" class="incomplete">no</span></td>
-        <td>{{session.lastDownload}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="allSessions | async as sessions; else loading">
+    <div *ngIf="sessions.length; else empty">
+      <table class="session-list">
+        <thead>
+        <tr>
+          <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th>Session Started</th>
+          <th>Group</th>
+          <th>School</th>
+          <th>Cohort</th>
+          <th>Lesson</th>
+          <th>Head Teacher</th>
+          <th>Completed?</th>
+          <th>Downloaded</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let session of sessions" (click)="toggleCheckbox(session._id)">
+          <td><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
+          <td>{{session.creationDate}} at {{session.creationTime}}</td>
+          <td>{{session.schoolNumber}}</td>
+          <td>{{session.schoolName}}</td>
+          <td>{{session.cohortNumber}}</td>
+          <td>{{session.lesson}}</td>
+          <td>{{session.creatorsName}}</td>
+          <td><span *ngIf="!session.active" class="complete">yes</span><span *ngIf="session.active" class="incomplete">no</span></td>
+          <td>{{session.lastDownload}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #empty><div class="empty">No sessions available.</div></ng-template>
+  </div>
+  <ng-template #loading>Loading session data...</ng-template>
   <br/>
   <br/>
   <br/>
