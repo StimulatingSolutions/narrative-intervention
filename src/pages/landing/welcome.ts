@@ -18,12 +18,6 @@ import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {DataManagementPage} from "../dataManagement/dataManagement";
 
-function generateNumId() {
-  const min = 0;
-  const max = 999999;
-  return _.padStart(Math.floor(Math.random()*(max-min+1)+min).toString(), 6, '0');
-}
-
 @Component({
   selector: 'welcome',
   templateUrl: 'welcome.html'
