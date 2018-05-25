@@ -6,6 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 import * as _ from 'lodash';
 import moment = require("moment");
+import {buildCsv} from "./buildCsv";
 
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -194,7 +195,7 @@ Meteor.methods({
 
     let conflict = Sessions.findOne({schoolNumber: session.schoolNumber, active: true});
     if (conflict) {
-      throw new Meteor.Error('conflict', `There is an existing, unfinished session in the database for group ${session.schoolNumber}, created on ${session.creationDate} at ${session.creationTime}. Please wait a few seconds, then try again.`);
+      throw new Meteor.Error('conflict', `There is an existing, unfinished session in the database for group ${session.schoolNumber}, created on ${moment(session.creationTimestamp).format('YYYY/MM/DD[ at ]h:mm a')}. Please wait a few seconds, then try again.`);
     }
 
     const creator = Users.findOne({_id: this.userId});
@@ -435,8 +436,33 @@ Meteor.methods({
         'User does not have permission to download data');
     }
 
-    let now = moment().format('YYYY/MM/DD[ at ]h:mm a');
-    Sessions.update({_id: {$in: sessionIds}}, {$set: {lastDownload: now}}, {multi: true});
+    let columns: string[] = [
+      'SessionID',
+      'SessionDate',
+      'SessionTime',
+      'HeadTeacherID',
+      'HeadTeacherName',
+      'SchoolName',
+      'GroupNumber',
+      'CohortNumber',
+      'Lesson',
+      'QuestionNumber',
+      'QuestionIteration',
+      'QuestionTypeID',
+      'QuestionType',
+      'CorrectResponseID',
+      'CorrectResponse',
+      'StudentID',
+      'StudentResponseCount',
+      'StudentResponseID',
+      'StudentResponse',
+      'Correct',
+      'ResponseTime',
+      'Invalidated'
+    ];
+    let csv: string = buildCsv([], columns);
+    Sessions.update({_id: {$in: sessionIds}}, {$set: {lastDownload: Date.now()}}, {multi: true});
+    return csv;
   },
 
   clear(sessionIds: string[]) {

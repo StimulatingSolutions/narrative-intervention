@@ -26,6 +26,10 @@
       cursor: pointer;
     }
 
+    tr.selected {
+      background: #FFA;
+    }
+
     span.complete {
       color: green;
     }

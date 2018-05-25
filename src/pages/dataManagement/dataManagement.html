@@ -26,16 +26,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let session of sessions" (click)="toggleCheckbox(session._id)">
+        <tr *ngFor="let session of sessions" (click)="toggleCheckbox(session._id)" [ngClass]="{'selected': checkboxes[session._id]}">
           <td><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
-          <td>{{session.creationDate}} at {{session.creationTime}}</td>
+          <td>{{timeString(session.creationTimestamp)}}</td>
           <td>{{session.schoolNumber}}</td>
           <td>{{session.schoolName}}</td>
           <td>{{session.cohortNumber}}</td>
           <td>{{session.lesson}}</td>
           <td>{{session.creatorsName}}</td>
           <td><span *ngIf="!session.active" class="complete">yes</span><span *ngIf="session.active" class="incomplete">no</span></td>
-          <td>{{session.lastDownload}}</td>
+          <td>{{timeString(session.lastDownload)}}</td>
         </tr>
         </tbody>
       </table>
@@ -56,7 +56,7 @@
         <br/>
         <button class="button-md" ion-button (click)="selectAll()">All Sessions</button>
         <br/>
-        <button class="button-md" ion-button (click)="selectNone()">Nothing</button>
+        <button class="button-md" ion-button (click)="selectNone()">De-Select All</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
@@ -68,7 +68,7 @@
         <br/>
         <br/>
         <br/>
-        <button class="button-md" ion-button color="danger" (click)="clear()">Clear Selected Sessions</button>
+        <button *ngIf="isAdmin" class="button-md" ion-button color="danger" (click)="clear()">Clear Selected Sessions</button>
       </ion-buttons>
     </ion-item>
   </ion-list>

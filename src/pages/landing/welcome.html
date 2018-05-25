@@ -10,10 +10,10 @@
 
 <ion-content padding class="welcome-page-content">
   <ion-list *ngIf="(unfinishedSessions | async)?.length > 0">
-    <ion-list-header>Your in-progress sessions:</ion-list-header>
+    <ion-list-header>{{isAdmin ? 'All' : 'Your'}} in-progress sessions:</ion-list-header>
     <ion-item *ngFor="let session of unfinishedSessions | async">
       <ion-buttons>
-        <div class="button-label">[ <b>{{session.schoolName}}, Group {{session.schoolNumber}}</b> ]: &nbsp; Lesson {{session.lesson}} &mdash; created on {{session.creationDate}} at {{session.creationTime}}</div>
+        <div class="button-label">[ <b>{{session.schoolName}}, Group {{session.schoolNumber}}</b> ]: &nbsp; Lesson {{session.lesson}} &mdash; created on {{timeString(session.creationTimestamp)}}</div>
         <button ion-button (click)="joinSession(session._id)">Re-Join Session</button>
         <button ion-button color="danger" (click)="finishSession(session)">Mark Session Finished</button>
       </ion-buttons>

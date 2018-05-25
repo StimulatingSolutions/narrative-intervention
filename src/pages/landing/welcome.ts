@@ -30,10 +30,10 @@ function generateNumId() {
 })
 export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
-  public roles: string[];
   public showUserManagement: boolean;
   public showSchoolManagement: boolean;
   public showDataManagement: boolean;
+  public isAdmin: boolean;
 
   public unfinishedSessions;
   public allSchools;
@@ -45,7 +45,6 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     private alertCtrl: AlertController
   ) {
     super();
-    this.roles = [];
     this.showUserManagement = false;
     this.showSchoolManagement = false;
 
@@ -53,10 +52,10 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: (result: string[]) => {
-        this.roles = result;
         this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
         this.showSchoolManagement = this.showUserManagement;
         this.showDataManagement = this.showUserManagement;
+        this.isAdmin = result.indexOf('admin') !== -1;
       },
       error: this.errorAlert.presenter(2)
     });
@@ -69,7 +68,11 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       MeteorObservable.autorun()
       .takeUntil(this.componentDestroyed$)
       .subscribe(() => {
-        this.unfinishedSessions = Sessions.find({active: true, creatorsId: Meteor.user()._id});
+        let criteria: any = {active: true};
+        if (!this.isAdmin) {
+          criteria.creatorsId = Meteor.user()._id;
+        }
+        this.unfinishedSessions = Sessions.find(criteria);
       });
     });
     MeteorObservable.subscribe('schools')
@@ -113,10 +116,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   }
 
   addSession(school: School, lesson: number): void {
-    let now = moment().format('YYYY/MM/DD[#]h:mm a').split('#');
     const newSession: Session = {
-      creationDate: now[0],
-      creationTime: now[1],
       shortId: generateNumId(),
       creatorsId: '',
       schoolNumber: school.idNumber,
@@ -160,7 +160,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       activeSessionsForGroup.forEach((session: Session) => {
         sessionAlert.addInput({
           type: 'radio',
-          label: `Lesson ${session.lesson}, created on ${session.creationDate}`,
+          label: `Lesson ${session.lesson}, created on ${this.timeString(session.creationTimestamp)}`,
           value: session._id
         });
       });
@@ -217,13 +217,13 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     let activeSessionsForGroup: Session[] = Sessions.find({schoolNumber: school.idNumber, active: true}).fetch();
     let today: string = moment().format('YYYY/MM/DD');
     for (let session of activeSessionsForGroup) {
-      if (session.creationDate < today) {
+      if (moment(session.creationTimestamp).format('YYYY/MM/DD') < today) {
         this.finishSession(session);
       } else {
         let conflictAlert = this.alertCtrl.create();
         conflictAlert.setCssClass('wide-input');
         conflictAlert.setTitle('Oops! Session Conflict!');
-        conflictAlert.setMessage(`Group ${school.idNumber} already has an active session: lesson ${session.lesson}, created on ${session.creationDate} at ${session.creationTime}. If you continue, that session will be marked as finished.`);
+        conflictAlert.setMessage(`Group ${school.idNumber} already has an active session: lesson ${session.lesson}, created on ${this.timeString(session.creationTimestamp)}. If you continue, that session will be marked as finished.`);
         conflictAlert.addButton('Cancel');
         conflictAlert.addButton({
           text: 'Ok',
@@ -265,5 +265,12 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
   review(lesson: number) {
     this.navCtrl.push(TeacherSessionPage, {reviewLesson: lesson});
+  }
+
+  timeString(epoch: number) {
+    if (!epoch) {
+      return null;
+    }
+    return moment(epoch).format('YYYY/MM/DD[ at ]h:mm a');
   }
 }

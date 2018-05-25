@@ -8,6 +8,7 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
 import {Sessions} from "api/collections";
 import {Session} from "api/models";
+import moment = require("moment");
 
 @Component({
   selector: 'dataManagement',
@@ -17,6 +18,7 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
 
   allSessions;
   checkboxes: { [k: string]: boolean } = {};
+  isAdmin: boolean;
 
   constructor(
     private errorAlert: ErrorAlert,
@@ -24,6 +26,15 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
     //private ref: ChangeDetectorRef,
   ) {
     super();
+    this.isAdmin = false;
+    MeteorObservable.call<string[]>('getUserRoles')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe({
+      next: (result: string[]) => {
+        this.isAdmin = result.indexOf('admin') !== -1;
+      },
+      error: this.errorAlert.presenter(2)
+    });
   }
 
   ngOnInit(): void {
@@ -72,29 +83,55 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
 
   download() {
     let ids: string[] = [];
+    let incompleteCount = 0;
     let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1, } }).fetch();
     for (let session of sessions) {
       if (this.checkboxes[session._id]) {
         ids.push(session._id);
+        if (session.active) {
+          incompleteCount++;
+        }
       }
     }
-    Meteor.call('download', ids, (error, result) => {
-      if (error){
-        this.errorAlert.present(error, 31);
-        return;
-      }
-    })
+    let finish = () => {
+      Meteor.call('download', ids, (error, result) => {
+        if (error){
+          this.errorAlert.present(error, 31);
+          return;
+        }
+      })
+    };
+    if (incompleteCount) {
+      let sessionAlert = this.alertCtrl.create();
+      sessionAlert.setCssClass('wide-input');
+      sessionAlert.setTitle('Warning!');
+      let subtitle: string = `You are about to download data for ${incompleteCount} session${incompleteCount > 1 ? 's' : ''} that ${incompleteCount > 1 ? 'are' : 'is'} not marked as finished!`;
+      sessionAlert.setSubTitle(subtitle);
+      sessionAlert.setMessage('This could result in analyzing incomplete data, or redundant data if you download it again later. Are you sure?');
+      sessionAlert.addButton('Cancel');
+      sessionAlert.addButton({
+        text: 'Ok',
+        handler: finish
+      });
+      sessionAlert.present();
+    } else {
+      finish();
+    }
   }
 
   clear() {
     let ids: string[] = [];
     let noDownloadCount = 0;
+    let incompleteCount = 0;
     let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1, } }).fetch();
     for (let session of sessions) {
       if (this.checkboxes[session._id]) {
         ids.push(session._id);
         if (!session.lastDownload) {
           noDownloadCount++;
+        }
+        if (session.active) {
+          incompleteCount++;
         }
       }
     }
@@ -104,10 +141,15 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
       sessionAlert.setTitle('Oops!');
       let subtitle: string = `No available sessions are selected; please select the sessions you want to delete.`;
       sessionAlert.setSubTitle(subtitle);
-      sessionAlert.addButton('Ok');
+      sessionAlert.addButton('Cancel');
+    } else if (incompleteCount) {
+      sessionAlert.setTitle('Oops!');
+      let subtitle: string = `You have selected ${incompleteCount} session${incompleteCount > 1 ? 's' : ''} that ${incompleteCount > 1 ? 'are' : 'is'} not marked finished; if you want to delete this session, you must mark it as finished first.`;
+      sessionAlert.setSubTitle(subtitle);
+      sessionAlert.addButton('Cancel');
     } else {
       sessionAlert.setTitle('Warning!');
-      let subtitle: string = `You are about to delete data for ${ids.length} sessions`;
+      let subtitle: string = `You are about to delete data for ${ids.length} session${ids.length > 1 ? 's' : ''}`;
       if (noDownloadCount) {
         subtitle += `, and ${noDownloadCount} of them ${noDownloadCount === 1 ? 'has' : 'have'} never been downloaded`;
       }
@@ -128,6 +170,13 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
       });
     }
     sessionAlert.present();
+  }
+
+  timeString(epoch: number) {
+    if (!epoch) {
+      return null;
+    }
+    return moment(epoch).format('YYYY/MM/DD[ at ]h:mm a');
   }
 
 }

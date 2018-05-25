@@ -21,8 +21,6 @@ export interface Session {
   shortId?: string;
   creatorsId?: string;
   creatorsName?: string;
-  creationDate?: string;
-  creationTime?: string;
   creationTimestamp?: number;
   schoolNumber?: number;
   schoolName?: string;
@@ -44,7 +42,7 @@ export interface Session {
   questionId?: number;
   didReset?: true;
   cohortNumber: number;
-  lastDownload?: string;
+  lastDownload?: number;
 }
 
 export interface LoggedEvent {
@@ -71,13 +69,14 @@ export interface DownloadedEvent extends StudentResponse {
   CohortNumber: number,
   Lesson: number,
   SessionDate: string,
+  SessionTime: string,
   QuestionTypeID: number,
   QuestionType: string,
   CorrectResponse: string,
   CorrectResponseID: number,
   StudentResponseID: number,
-  Correct: number,
+  Correct: boolean,
   ResponseTime: number,
-  Invalidated: number,
-  ResponseCount: number
+  Invalidated: boolean,
+  StudentResponseCount: number
 }
