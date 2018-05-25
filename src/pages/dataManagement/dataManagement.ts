@@ -9,6 +9,7 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {Sessions} from "api/collections";
 import {Session} from "api/models";
 import moment = require("moment");
+import FileSaver = require('file-saver');
 
 @Component({
   selector: 'dataManagement',
@@ -99,6 +100,8 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
           this.errorAlert.present(error, 31);
           return;
         }
+        let blob = new Blob([result], {type: "text/csv;charset=utf-8"});
+        FileSaver.saveAs(blob, `NS-data-download__${moment().format('YYYY-MM-DD_HH-mm')}.csv`);
       })
     };
     if (incompleteCount) {

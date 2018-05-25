@@ -14,7 +14,7 @@ export const buildCsv = function (dataset: any[], columns?: string[]) {
       } else if (cell == null) {
         lineParts.push('');
       } else {
-        lineParts.push(cell.toString().replaceAll(/[",]/g, ''));
+        lineParts.push(cell.toString().replace(/[",]/g, ''));
       }
     }
     csv += lineParts.join(',')+'\r\n';
