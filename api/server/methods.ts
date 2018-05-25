@@ -1,12 +1,13 @@
 import { Accounts } from 'meteor/accounts-base';
-import {Schools, Sessions, LoggedEvents, Users} from './collections';
-import {Profile, User, School, Session, LoggedEvent, StudentResponse} from './models';
+import {Schools, Sessions, ResponseMetadata, Users, StudentResponses} from './collections';
+import {Profile, User, School, Session, LoggedEvent, StudentResponse, DownloadedEvent, MetadataEvent} from './models';
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 import * as _ from 'lodash';
-import moment = require("moment");
+import moment = require("moment-timezone");
 import {buildCsv} from "./buildCsv";
+import {getQuestionTypeId, getResponseId} from "./ids";
 
 const nonEmptyString = Match.Where((str) => {
   check(str, String);
@@ -223,17 +224,6 @@ Meteor.methods({
     });
   },
 
-  findSessionByShortId(sessionId: string){
-    const session = Sessions.findOne({shortId: sessionId});
-    if (!session){
-      throw new Meteor.Error('Session Error', 'Session does not exist');
-    }
-    if (!session.active){
-      throw new Meteor.Error('Session Error', 'Session is not active');
-    }
-    return session._id;
-  },
-
   joinSession(groupNumber: number, studentNumber: number){
     const session = Sessions.findOne({schoolNumber: groupNumber, active: true});
     if (!session){
@@ -248,7 +238,7 @@ Meteor.methods({
   },
 
   leaveSession(sessionId: string, studentNumber: number){
-    const session = Sessions.findOne({shortId: sessionId});
+    const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
@@ -289,7 +279,7 @@ Meteor.methods({
     update.$set[`questionIterations.${questionId}`] = update.$set.questionIteration;
     Sessions.update(sessionId, update);
 
-    let event: LoggedEvent = {
+    let event: MetadataEvent = {
       type: "question-start",
       timestamp: new Date(),
       questionType: questionType,
@@ -299,7 +289,7 @@ Meteor.methods({
       QuestionIteration: iteration,
       openResponse: !!openResponse
     };
-    LoggedEvents.insert(event);
+    ResponseMetadata.insert(event);
   },
 
   timerReset(sessionId: string){
@@ -309,7 +299,7 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    let event: LoggedEvent = {
+    let event: MetadataEvent = {
       type: "timer-reset",
       timestamp: new Date(),
       SessionID: sessionId,
@@ -324,7 +314,7 @@ Meteor.methods({
     };
     Sessions.update(sessionId, update);
 
-    LoggedEvents.insert(event);
+    ResponseMetadata.insert(event);
   },
 
   finishQuestion(sessionId: string){
@@ -334,11 +324,9 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    let event: LoggedEvent = {
+    let event: MetadataEvent = {
       type: "question-end",
       timestamp: new Date(),
-      questionType: session.questionType,
-      correctResponse: session.correctAnswer,
       SessionID: sessionId,
       QuestionNumber: session.questionId,
       QuestionIteration: session.questionIteration
@@ -364,7 +352,7 @@ Meteor.methods({
     }
     Sessions.update(sessionId, update);
 
-    LoggedEvents.insert(event);
+    ResponseMetadata.insert(event);
   },
 
   sendQuestionResponse(sessionId: string, studentNumber: number, selectedCard: string){
@@ -392,16 +380,14 @@ Meteor.methods({
     Sessions.update(sessionId, update);
 
     let event: StudentResponse = {
-      type: "student-response",
       timestamp: new Date(),
       SessionID: sessionId,
       QuestionNumber: session.questionId,
       QuestionIteration: session.questionIteration,
       StudentID: studentId,
-      StudentResponse: selectedCard,
-      openResponse: !!session.openResponse
+      StudentResponse: selectedCard
     };
-    LoggedEvents.insert(event);
+    StudentResponses.insert(event);
   },
 
   setCurrentStep(sessionId: string, stepId: number, questionType: string) {
@@ -460,7 +446,74 @@ Meteor.methods({
       'ResponseTime',
       'Invalidated'
     ];
-    let csv: string = buildCsv([], columns);
+    let dataset: DownloadedEvent[] = [];
+
+    let sessions: { [k:string]: Session } = {};
+    for (let session of Sessions.find({_id: {$in: sessionIds}}).fetch()) {
+      sessions[session._id] = session;
+    }
+    let metadata: MetadataEvent[] = ResponseMetadata.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
+    let questionMetadata: { [k: string]: MetadataEvent } = {};
+    let responseCounts: { [k: string]: number } = {};
+    for (let event of metadata) {
+      if (event.type === 'question-start') {
+        questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`] = event;
+      } else if (event.type === 'question-end') {
+        let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        md.duration = event.timestamp.getTime() - md.timestamp.getTime();
+      } else if (event.type === 'timer-reset') {
+        questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`].reset = true;
+      }
+    }
+
+    let responses: StudentResponse[] = StudentResponses.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
+    for (let response of responses) {
+      let md: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`];
+      if (md.openResponse) {
+        continue;
+      }
+      let data: DownloadedEvent = <DownloadedEvent>response;
+      data.HeadTeacherID = sessions[data.SessionID].creatorsId;
+      data.HeadTeacherName = sessions[data.SessionID].creatorsName;
+      data.SchoolName = sessions[data.SessionID].schoolName;
+      data.GroupNumber = sessions[data.SessionID].schoolNumber;
+      data.CohortNumber = sessions[data.SessionID].cohortNumber;
+      data.Lesson = sessions[data.SessionID].lesson;
+      let timestamp = moment(sessions[data.SessionID].creationTimestamp).tz('America/New_York');
+      data.SessionDate = timestamp.format('YYYY/MM/DD');
+      data.SessionTime = timestamp.format('HH:mm');
+      data.QuestionType = sessions[data.SessionID].questionType;
+      data.QuestionTypeID = getQuestionTypeId(sessions[data.SessionID].questionType);
+      data.CorrectResponse = md.correctResponse;
+      data.CorrectResponseID = getResponseId(md.correctResponse);
+      data.StudentResponseID = getResponseId(data.StudentResponse);
+      data.Correct = (data.CorrectResponse == null ? null : data.CorrectResponse === data.StudentResponse);
+      let duration = data.timestamp.getTime() - md.timestamp.getTime();
+      if (!md.reset) {
+        for (let i=data.QuestionIteration; i >= 1; i--) {
+          let md2: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`];
+          duration += md2.duration;
+          if (md2.reset) {
+            break;
+          }
+        }
+      }
+      data.ResponseTime = (duration/1000).toFixed();
+      data.Invalidated = false;
+      for (let i=data.QuestionIteration+1; questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`]; i++) {
+        let md2: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`];
+        if (md2.reset) {
+          data.Invalidated = true;
+          break;
+        }
+      }
+      responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] = (responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] || 0) +1;
+      data.StudentResponseCount = responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`];
+      
+      dataset.push(data);
+    }
+
+    let csv: string = buildCsv(dataset, columns);
     Sessions.update({_id: {$in: sessionIds}}, {$set: {lastDownload: Date.now()}}, {multi: true});
     return csv;
   },
@@ -475,7 +528,8 @@ Meteor.methods({
         'User does not have permission to download data');
     }
 
+    ResponseMetadata.remove({SessionID: {$in: sessionIds}});
+    StudentResponses.remove({SessionID: {$in: sessionIds}});
     Sessions.remove({_id: {$in: sessionIds}});
-    LoggedEvents.remove({SessionID: {$in: sessionIds}});
   }
 });

@@ -18,7 +18,6 @@ export interface School {
 
 export interface Session {
   _id?: string;
-  shortId?: string;
   creatorsId?: string;
   creatorsName?: string;
   creationTimestamp?: number;
@@ -46,14 +45,19 @@ export interface Session {
 }
 
 export interface LoggedEvent {
-  type: string,
   timestamp: Date,
-  questionType?: string,
-  correctResponse?: string,
   SessionID: string,
   QuestionNumber: number,
   QuestionIteration: number,
-  openResponse?: boolean
+}
+
+export interface MetadataEvent extends LoggedEvent {
+  type: string,
+  questionType?: string,
+  correctResponse?: string,
+  openResponse?: boolean,
+  duration?: number,
+  reset?: boolean
 }
 
 export interface StudentResponse extends LoggedEvent {
@@ -76,7 +80,7 @@ export interface DownloadedEvent extends StudentResponse {
   CorrectResponseID: number,
   StudentResponseID: number,
   Correct: boolean,
-  ResponseTime: number,
+  ResponseTime: string,
   Invalidated: boolean,
   StudentResponseCount: number
 }

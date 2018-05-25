@@ -11,6 +11,8 @@ export const buildCsv = function (dataset: any[], columns?: string[]) {
       let cell = row[column];
       if (typeof cell === 'boolean') {
         lineParts.push(cell ? '1' : '0');
+      } else if (cell == null) {
+        lineParts.push('');
       } else {
         lineParts.push(cell.toString().replaceAll(/[",]/g, ''));
       }

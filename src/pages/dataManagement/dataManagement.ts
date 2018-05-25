@@ -44,7 +44,7 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
       MeteorObservable.autorun()
       .takeUntil(this.componentDestroyed$)
       .subscribe(() => {
-        this.allSessions = Sessions.find({}, { sort: {creationTimestamp: 1, } });
+        this.allSessions = Sessions.find({}, { sort: {creationTimestamp: 1 } });
       });
     });
   }
@@ -54,14 +54,14 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
   }
 
   selectComplete() {
-    let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1, } }).fetch();
+    let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1 } }).fetch();
     for (let session of sessions) {
       this.checkboxes[session._id] = (!session.active && !session.lastDownload);
     }
   }
 
   selectDownloaded() {
-    let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1, } }).fetch();
+    let sessions: Session[] = Sessions.find({}, { sort: {creationTimestamp: 1 } }).fetch();
     for (let session of sessions) {
       this.checkboxes[session._id] = !!session.lastDownload;
     }

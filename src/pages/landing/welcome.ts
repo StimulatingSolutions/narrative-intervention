@@ -117,7 +117,6 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
 
   addSession(school: School, lesson: number): void {
     const newSession: Session = {
-      shortId: generateNumId(),
       creatorsId: '',
       schoolNumber: school.idNumber,
       schoolName: school.name,
@@ -140,7 +139,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: (result) => {
-        const newId = Sessions.findOne({shortId: newSession.shortId})._id;
+        const newId = Sessions.findOne({schoolNumber: newSession.schoolNumber, active: true})._id;
         this.joinSession(newId);
       },
       error: this.errorAlert.presenter(4)

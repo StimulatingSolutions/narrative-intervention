@@ -5,12 +5,9 @@ import initializeEmailTemplates from './emailTemplates';
 
 import * as _ from 'lodash';
 import {User} from "./models";
+import {ResponseMetadata, Schools, Sessions, StudentResponses} from "./collections";
 
 Meteor.startup(() => {
-
-  //VARIABLES
-  //BE SURE TO SET MAIL_RUL
-  //process.env.MAIL_URL
 
   //SETUP USER ROLES
   const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
@@ -40,6 +37,12 @@ Meteor.startup(() => {
     Accounts.sendEnrollmentEmail(newAdminUser._id, process.env.NAR_INN_ADMIN_EMAIL);
     Roles.setUserRoles(newAdminUser._id, ['admin', 'active']);
   }
+
+  // indexes
+  StudentResponses.rawCollection().createIndex({SessionID: 1, timestamp: 1});
+  ResponseMetadata.rawCollection().createIndex({SessionID: 1, timestamp: 1});
+  Schools.rawCollection().createIndex({idNumber: 1});
+  Sessions.rawCollection().createIndex({schoolNumber: 1, active: 1});
 
   Accounts.validateLoginAttempt( attempt => {
 
