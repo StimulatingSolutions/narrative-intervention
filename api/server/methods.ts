@@ -368,7 +368,8 @@ Meteor.methods({
     const newResponse = {
       step: session.questionStepId,
       studentNumber: studentNumber,
-      response: selectedCard
+      response: selectedCard,
+      date: Date.now()
     };
     console.log('Recording Response', newResponse);
 
@@ -509,7 +510,7 @@ Meteor.methods({
       }
       responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] = (responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] || 0) +1;
       data.StudentResponseCount = responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`];
-      
+
       dataset.push(data);
     }
 
