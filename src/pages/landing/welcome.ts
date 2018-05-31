@@ -123,10 +123,11 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       backupQuestionType: null,
       readyForResponse: false,
       openResponse: false,
-      responses: [],
-      completedSteps: [],
+      completedSteps: {},
       lesson: lesson,
       questionIterations: {},
+      questionResponses: {},
+      responses: {},
       cohortNumber: school.cohort
     };
     MeteorObservable.call('createNewSession', newSession)

@@ -32,10 +32,11 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
       this.session = {
         lesson: this.reviewLesson,
         review: true,
-        responses: [],
         completedSteps: [],
         activeStudents: [],
         questionIterations: {},
+        questionResponses: {},
+        responses: {},
         cohortNumber: 0
       };
       return;
@@ -60,10 +61,13 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
     let currentStep:number;
     if (this.session.currentStepId != null) {
       currentStep = this.session.currentStepId;
-    } else if (!this.session.completedSteps.length) {
-      currentStep = 0;
     } else {
-      currentStep = this.session.completedSteps.reduce((a, b) => { return Math.max(a, b) });
+      currentStep = 0;
+      for (let step in this.session.completedSteps) {
+        if (this.session.completedSteps[step]) {
+          currentStep = Math.max(currentStep, <any>step);
+        }
+      }
     }
     let steps = document.getElementsByTagName('step');
     let highlightedDiv: HTMLElement = <HTMLElement>steps[currentStep];

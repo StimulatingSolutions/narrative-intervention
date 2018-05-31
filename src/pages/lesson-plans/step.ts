@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef} from "@angular/core";
+import {Component, EventEmitter, Input, Output, OnInit} from "@angular/core";
 import {Session} from "api/models";
 
 
@@ -13,7 +13,6 @@ export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
-  public done: boolean = false;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
@@ -26,7 +25,6 @@ export class Step implements OnInit {
   @Output() onReady =  new EventEmitter<Step>();
 
   constructor(
-    private ref: ChangeDetectorRef
   ) {
   }
 
@@ -46,11 +44,6 @@ export class Step implements OnInit {
 
   clickStep() {
     this.onStepClicked.emit(this.stepId);
-  }
-
-  public setDone(status: boolean) {
-    this.done = status;
-    this.ref.detectChanges();
   }
 
 }

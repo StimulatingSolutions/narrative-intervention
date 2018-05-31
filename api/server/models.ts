@@ -31,15 +31,15 @@ export interface Session {
   backupQuestionType?: string;
   currentStepId?: number;
   readyForResponse?: boolean;
-  responses: any[];
-  completedSteps: number[];
   lesson: number;
   openResponse?: boolean;
   review?: boolean;
   questionIterations: { [s: number]: number };
   questionIteration?: number;
+  questionResponses: { [s: number]: { [s: number]: string } };
+  responses: { [s: number]: string },
+  completedSteps: { [s: number]: boolean };
   questionId?: number;
-  didReset?: true;
   cohortNumber: number;
   lastDownload?: number;
 }

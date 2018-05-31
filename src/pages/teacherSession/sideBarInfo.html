@@ -4,8 +4,8 @@
       <ion-buttons class='button-container find-place'>
         <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
       </ion-buttons>
-      <ion-buttons class='button-container reset' (click)="doReset()" *ngIf="headTeacher && session?.readyForResponse && session?.questionIteration > 1 && !session?.didReset">
-        <button ion-button color="warning">Reset Response Timer</button>
+      <ion-buttons class='button-container reset' (click)="doReset()" *ngIf="headTeacher && session?.readyForResponse">
+        <button ion-button color="warning">Redo Question?</button>
       </ion-buttons>
       <ion-buttons class='button-container exit'>
         <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>
@@ -21,21 +21,21 @@
         <div *ngIf="!session?.openResponse">
           <div class="student" *ngFor="let student of getActiveStudents()">
 
-            <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != currentResponses[student]?.response">
+            <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
               <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) === -1">
                 <ion-icon name="radio-button-off"></ion-icon>
               </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && (!session?.correctAnswer || session?.correctAnswer === currentResponses[student]?.response)">
+              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && (!session?.correctAnswer || session?.correctAnswer == session?.responses[student])">
                 <ion-icon name="checkmark-circle"></ion-icon>
               </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && session?.correctAnswer && session?.correctAnswer !== currentResponses[student]?.response">
+              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
                 <ion-icon name="close-circle"></ion-icon>
               </div>
-              <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(student) === -1 || (session?.correctAnswer && session?.correctAnswer !== currentResponses[student]?.response))">
+              <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(student) === -1 || (session?.correctAnswer && session?.correctAnswer != session?.responses[student]))">
                 {{student}}
               </span>
               <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1">
-                {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{currentResponses[student].response}}
+                {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{session?.responses[student]}}
               </div>
             </div>
           </div>

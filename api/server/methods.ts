@@ -269,14 +269,13 @@ Meteor.methods({
         correctAnswer: correctAnswer,
         currentStepId: stepId,
         openResponse: !!openResponse,
-        questionIteration: iteration,
-        didReset: false
-      },
-      $addToSet: {
-        completedSteps: stepId
-      },
+        responses: session.questionResponses[questionId] || {},
+        questionIteration: iteration
+      }
     };
-    update.$set[`questionIterations.${questionId}`] = update.$set.questionIteration;
+    update.$set[`completedSteps.${stepId}`] = true;
+    update.$set[`questionIterations.${questionId}`] = iteration;
+    update.$set[`questionResponses.${questionId}`] = update.$set.responses;
     Sessions.update(sessionId, update);
 
     let event: MetadataEvent = {
@@ -307,11 +306,15 @@ Meteor.methods({
       QuestionIteration: session.questionIteration
     };
 
+    let iteration = session.questionIteration + 1;
     let update: any = {
       $set: {
-        didReset: true
+        responses: {},
+        questionIteration: iteration,
       }
     };
+    update.$set[`questionIterations.${session.questionId}`] = iteration;
+    update.$set[`questionResponses.${session.questionId}`] = {};
     Sessions.update(sessionId, update);
 
     ResponseMetadata.insert(event);
@@ -340,11 +343,7 @@ Meteor.methods({
         openResponse: null,
         backupQuestionType: null,
         questionIteration: null,
-        questionId: null,
-        didReset: null
-      },
-      $addToSet: {
-        completedSteps: session.currentStepId
+        questionId: null
       }
     };
     if (session.backupQuestionType) {
@@ -365,19 +364,12 @@ Meteor.methods({
     }
     let studentId: string = `${session.schoolNumber}-${session.cohortNumber}-${studentNumber}`;
 
-    const newResponse = {
-      step: session.questionStepId,
-      studentNumber: studentNumber,
-      response: selectedCard,
-      date: Date.now()
-    };
-    console.log('Recording Response', newResponse);
-
     let update = {
-      $addToSet: {
-        responses: newResponse
-      }
+      $set: {}
     };
+    update.$set[`questionResponses.${session.questionId}.${studentNumber}`] = selectedCard;
+    update.$set[`responses.${studentNumber}`] = selectedCard;
+
     Sessions.update(sessionId, update);
 
     let event: StudentResponse = {
@@ -400,11 +392,9 @@ Meteor.methods({
     let update: any = {
       $set: {
         currentStepId: stepId
-      },
-      $addToSet: {
-        completedSteps: stepId
       }
     };
+    update.$set[`completedSteps.${stepId}`] = true;
     if (session.openResponse) {
       update.$set.backupQuestionType = questionType;
     } else {
@@ -455,7 +445,7 @@ Meteor.methods({
     }
     let metadata: MetadataEvent[] = ResponseMetadata.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
     let questionMetadata: { [k: string]: MetadataEvent } = {};
-    let responseCounts: { [k: string]: number } = {};
+    let responseCounts: { [k: string]: { [k: string]: number } } = {};
     for (let event of metadata) {
       if (event.type === 'question-start') {
         questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`] = event;
@@ -463,13 +453,20 @@ Meteor.methods({
         let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
         md.duration = event.timestamp.getTime() - md.timestamp.getTime();
       } else if (event.type === 'timer-reset') {
-        questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`].reset = true;
+        let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        let startEvent: MetadataEvent = _.extend({}, md);
+        startEvent.QuestionIteration++;
+        startEvent.timestamp = event.timestamp;
+        questionMetadata[`${startEvent.SessionID} / ${startEvent.QuestionNumber} / ${startEvent.QuestionIteration}`] = startEvent;
+        md.duration = event.timestamp.getTime() - md.timestamp.getTime();
+        md.reset = true;
       }
     }
 
     let responses: StudentResponse[] = StudentResponses.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
     for (let response of responses) {
       let md: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`];
+      let mdPrior: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration-1}`];
       if (md.openResponse) {
         continue;
       }
@@ -489,27 +486,28 @@ Meteor.methods({
       data.CorrectResponseID = getResponseId(md.correctResponse);
       data.StudentResponseID = getResponseId(data.StudentResponse);
       data.Correct = (data.CorrectResponse == null ? null : data.CorrectResponse === data.StudentResponse);
-      let duration = data.timestamp.getTime() - md.timestamp.getTime();
-      if (!md.reset) {
-        for (let i=data.QuestionIteration; i >= 1; i--) {
-          let md2: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`];
-          duration += md2.duration;
-          if (md2.reset) {
-            break;
-          }
-        }
+      if ((mdPrior && mdPrior.reset) || !responseCounts[`${response.SessionID} / ${response.QuestionNumber}`]) {
+        responseCounts[`${response.SessionID} / ${response.QuestionNumber}`] = {};
       }
-      data.ResponseTime = (duration/1000).toFixed();
+      let duration = data.timestamp.getTime() - md.timestamp.getTime();
+      for (let i=data.QuestionIteration-1; i >= 1; i--) {
+        let md2: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`];
+        if (md2.reset) {
+          break;
+        }
+        duration += md2.duration;
+      }
+      responseCounts[`${response.SessionID} / ${response.QuestionNumber}`][response.StudentID] = (responseCounts[`${response.SessionID} / ${response.QuestionNumber}`][response.StudentID] || 0) +1;
+      data.ResponseTime = (duration/1000).toFixed(3);
       data.Invalidated = false;
-      for (let i=data.QuestionIteration+1; questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`]; i++) {
+      for (let i=data.QuestionIteration; questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`]; i++) {
         let md2: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${i}`];
         if (md2.reset) {
           data.Invalidated = true;
           break;
         }
       }
-      responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] = (responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`] || 0) +1;
-      data.StudentResponseCount = responseCounts[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration} / ${response.StudentID}`];
+      data.StudentResponseCount = responseCounts[`${response.SessionID} / ${response.QuestionNumber}`][response.StudentID];
 
       dataset.push(data);
     }

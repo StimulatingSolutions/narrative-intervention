@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 
 import { Session } from 'api/models';
 
-import * as _ from 'lodash';
 import {ErrorAlert} from "../../services/errorAlert";
 
 
@@ -20,7 +19,6 @@ export class SideBarInfo implements OnInit {
   waitCount: number;
   incorrectCount: number;
   idsWithAnswer: number[];
-  currentResponses: {};
   headTeacher: boolean;
   activeStudentsKey: string = '';
   activeStudentsSorted: number[] = [];
@@ -32,7 +30,6 @@ export class SideBarInfo implements OnInit {
     this.waitCount = 0;
     this.incorrectCount = 0;
     this.idsWithAnswer = [];
-    this.currentResponses = {};
   }
 
   ngOnInit() {
@@ -42,32 +39,12 @@ export class SideBarInfo implements OnInit {
   ngDoCheck () {
     //QUESTION CLOSED IN SIDEBAR
 
-    const stepResponses = this.session.responses.filter( response => {
-      return response.step === this.session.questionStepId;
-    });
-
-    const newResponses = {};
-    stepResponses.forEach( response => {
-      if (!newResponses.hasOwnProperty(response.studentNumber)){
-        newResponses[response.studentNumber] = {
-          response: response.response,
-          date: response.date
-        }
-      }
-      if (response.date > newResponses[response.studentNumber].date){
-        newResponses[response.studentNumber] = response;
-      }
-    });
-    this.currentResponses = newResponses;
-    const ids = stepResponses.map( response => {
-      return response.studentNumber;
-    });
-    this.idsWithAnswer = _.uniq(ids);
+    this.idsWithAnswer = <any[]>Object.keys(this.session.responses);
     this.waitCount = this.session.activeStudents.length - this.idsWithAnswer.length;
     if (this.session.correctAnswer) {
       this.incorrectCount = 0;
       for (let responseId of this.idsWithAnswer) {
-        if (this.currentResponses[responseId].response != this.session.correctAnswer) {
+        if (this.session.responses[responseId] != this.session.correctAnswer) {
           this.incorrectCount++;
         }
       }
@@ -107,5 +84,9 @@ export class SideBarInfo implements OnInit {
       this.activeStudentsKey = activeStudentsKey;
     }
     return this.activeStudentsSorted;
+  }
+
+  json (obj): string {
+    return JSON.stringify(obj);
   }
 }

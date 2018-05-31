@@ -9,22 +9,34 @@ step {
     padding-bottom: .1in;
     .done-checkbox {
       top: 0;
-      padding-top: .1in;
+      padding-top: .1025in;
     }
   }
-  cursor: pointer;
   position: relative;
 
-  .done-checkbox {
+  .done-checkbox-buffer {
+    height: 65px;
+    width: 87px;
+    top: -.3in !important;
+  }
+
+  .done-checkbox, .done-checkbox-buffer {
+    cursor: pointer;
     position: absolute;
     left: .28in;
     font-size: 32px;
     top: 2px;
+    padding: .025in .3in .3in;
+    margin: -.025in -.3in -.3in;
     color: #00F;
     ion-icon[name="checkbox-outline"] {
       color: #000;
       opacity: .6;
     }
+  }
+
+  .done-checkbox {
+    z-index: 1;
   }
 }
 li li step {

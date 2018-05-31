@@ -7,7 +7,6 @@ import { Session } from 'api/models';
 
 import { LoginPage } from '../login/login';
 
-import * as _ from 'lodash';
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 @Component({
   selector: 'studentSession',
@@ -18,8 +17,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   studentSessionId: string;
   studentNumber: number;
   session: Session;
-  selectedCard: string = null;
-  questionType: string = null;
   preloads: any = {};
 
   constructor(
@@ -82,45 +79,10 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
           });
         }
       });
-
-      const session = Sessions.findOne({_id: this.studentSessionId});
-      if (session.readyForResponse) {
-        // IF STARTING UP IN RESPONSE MODE SET SELECTED CARD
-        const thisStepsResponses = session.responses.filter( response => {
-          return response.step === session.questionStepId && response.studentNumber === this.studentNumber;
-        });
-        const latestResponse = _.maxBy(thisStepsResponses, (o) => {
-          return o.date;
-        });
-        if (latestResponse){
-          this.selectedCard = latestResponse.response;
-        }
-      }
     });
   }
 
   updateSessionChanges (oldSession: Session, newSession: Session): void {
-    if (oldSession === undefined || newSession === undefined){
-      return;
-    }
-
-    if(!oldSession.readyForResponse && newSession.readyForResponse){
-      const thisStepsResponses = newSession.responses.filter( response => {
-        return response.step === newSession.questionStepId && response.studentNumber === this.studentNumber;
-      });
-      const latestResponse = _.maxBy(thisStepsResponses, (o) => {
-        return o.date;
-      });
-      if (latestResponse){
-        this.selectedCard = latestResponse.response;
-      }
-
-    }
-
-    if (!newSession.readyForResponse){
-      this.selectedCard = null;
-    }
-    this.questionType = newSession.questionType;
   }
 
   ngOnDestroy(): void {
@@ -134,18 +96,12 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
   selectCard(cardName: string): void {
     if (this.session && this.session.readyForResponse) {
-      if (this.selectedCard === cardName) {
-        return;
-      }
-      this.selectedCard = cardName;
-      Meteor.call('sendQuestionResponse', this.session._id, this.studentNumber, this.selectedCard, (error, result) => {
+      Meteor.call('sendQuestionResponse', this.session._id, this.studentNumber, cardName, (error, result) => {
         if (error){
           this.handleError(error, 20);
           return;
         }
       })
-    } else {
-      this.selectedCard = null;
     }
 
     this.ref.detectChanges();

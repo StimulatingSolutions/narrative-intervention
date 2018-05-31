@@ -1,36 +1,36 @@
-<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" [class.no-selection]="!selectedCard">
+<ion-content padding class="student-session-page-content" [class.active]="session?.readyForResponse" [class.no-selection]="!session?.responses || !session?.responses[studentNumber]">
   <div *ngIf="session?.questionType === 'goal' || !session?.questionType">
     <div class='img-card-container' *ngIf="session?.lesson == 1">
     </div>
     <div class='img-card-container flex-fully-centered' *ngIf="session?.lesson == 2">
-      <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+      <div [class.selected-card]="session?.responses[studentNumber] == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
     </div>
     <div class='img-card-container flex-fully-centered' *ngIf="session?.lesson == 3">
-      <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
-      <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+      <div [class.selected-card]="session?.responses[studentNumber] == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+      <div [class.selected-card]="session?.responses[studentNumber] == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
     </div>
     <div class='img-card-container' *ngIf="session?.lesson >= 4">
       <table
-        [class.stick-top]="selectedCard == 'outcome-yes' || selectedCard == 'outcome-fail'"
-        [class.stick-bottom]="selectedCard == 'goal' || selectedCard == 'try'"
-        [class.stick-left]="selectedCard == 'try' || selectedCard == 'outcome-fail'"
-        [class.stick-right]="selectedCard == 'goal' || selectedCard == 'outcome-yes'"
+        [class.stick-top]="session?.responses[studentNumber] == 'outcome-yes' || session?.responses[studentNumber] == 'outcome-fail'"
+        [class.stick-bottom]="session?.responses[studentNumber] == 'goal' || session?.responses[studentNumber] == 'try'"
+        [class.stick-left]="session?.responses[studentNumber] == 'try' || session?.responses[studentNumber] == 'outcome-fail'"
+        [class.stick-right]="session?.responses[studentNumber] == 'goal' || session?.responses[studentNumber] == 'outcome-yes'"
       >
         <tbody>
         <tr class="card-row">
           <td class="card-cell">
-            <div [class.selected-card]="selectedCard == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
+            <div [class.selected-card]="session?.responses[studentNumber] == 'goal'" class="img-button goal" (click)="selectCard('goal')" (touchstart)="selectCard('goal')"></div>
           </td>
           <td class="card-cell">
-            <div [class.selected-card]="selectedCard == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
+            <div [class.selected-card]="session?.responses[studentNumber] == 'try'" class="img-button try" (click)="selectCard('try')" (touchstart)="selectCard('try')"></div>
           </td>
         </tr>
         <tr class="card-row">
           <td class="card-cell">
-            <div [class.selected-card]="selectedCard == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
+            <div [class.selected-card]="session?.responses[studentNumber] == 'outcome-yes'" class="img-button outcome-yes" (click)="selectCard('outcome-yes')" (touchstart)="selectCard('outcome-yes')"></div>
           </td>
           <td class="card-cell">
-            <div [class.selected-card]="selectedCard == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
+            <div [class.selected-card]="session?.responses[studentNumber] == 'outcome-fail'" class="img-button outcome-fail" (click)="selectCard('outcome-fail')" (touchstart)="selectCard('outcome-fail')"></div>
           </td>
         </tr>
         </tbody>
@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class='rating-cards-container' *ngIf="session?.questionType === 'difficulty'">
-    <div class='rating-card difficulty' [class.selected-card]="selectedCard == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
+    <div class='rating-card difficulty' [class.selected-card]="session?.responses[studentNumber] == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
       <div class='number-value'>
         1
       </div>
@@ -46,7 +46,7 @@
         Really Hard
       </div>
     </div>
-    <div class='rating-card difficulty' [class.selected-card]="selectedCard == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
+    <div class='rating-card difficulty' [class.selected-card]="session?.responses[studentNumber] == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
       <div class='number-value'>
         2
       </div>
@@ -54,7 +54,7 @@
         Hard
       </div>
     </div>
-    <div class='rating-card difficulty' [class.selected-card]="selectedCard == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
+    <div class='rating-card difficulty' [class.selected-card]="session?.responses[studentNumber] == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
       <div class='number-value'>
         3
       </div>
@@ -62,7 +62,7 @@
         Okay
       </div>
     </div>
-    <div class='rating-card difficulty' [class.selected-card]="selectedCard == '4'" (click)="selectCard('4')" (touchstart)="selectCard('4')">
+    <div class='rating-card difficulty' [class.selected-card]="session?.responses[studentNumber] == '4'" (click)="selectCard('4')" (touchstart)="selectCard('4')">
       <div class='number-value'>
         4
       </div>
@@ -70,7 +70,7 @@
         Easy
       </div>
     </div>
-    <div class='rating-card difficulty' [class.selected-card]="selectedCard == '5'" (click)="selectCard('5')" (touchstart)="selectCard('5')">
+    <div class='rating-card difficulty' [class.selected-card]="session?.responses[studentNumber] == '5'" (click)="selectCard('5')" (touchstart)="selectCard('5')">
       <div class='number-value'>
         5
       </div>
@@ -80,7 +80,7 @@
     </div>
   </div>
   <div class='rating-cards-container' *ngIf="session?.questionType === 'appeal'">
-    <div class='rating-card appeal' [class.selected-card]="selectedCard == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
+    <div class='rating-card appeal' [class.selected-card]="session?.responses[studentNumber] == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
       <div class='number-value'>
         1
       </div>
@@ -88,7 +88,7 @@
         Not Fun at All
       </div>
     </div>
-    <div class='rating-card appeal' [class.selected-card]="selectedCard == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
+    <div class='rating-card appeal' [class.selected-card]="session?.responses[studentNumber] == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
       <div class='number-value'>
         2
       </div>
@@ -96,7 +96,7 @@
         Not Really Fun
       </div>
     </div>
-    <div class='rating-card appeal' [class.selected-card]="selectedCard == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
+    <div class='rating-card appeal' [class.selected-card]="session?.responses[studentNumber] == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
       <div class='number-value'>
         3
       </div>
@@ -104,7 +104,7 @@
         Okay
       </div>
     </div>
-    <div class='rating-card appeal' [class.selected-card]="selectedCard == '4'" (click)="selectCard('4')" (touchstart)="selectCard('4')">
+    <div class='rating-card appeal' [class.selected-card]="session?.responses[studentNumber] == '4'" (click)="selectCard('4')" (touchstart)="selectCard('4')">
       <div class='number-value'>
         4
       </div>
@@ -112,7 +112,7 @@
         Fun
       </div>
     </div>
-    <div class='rating-card appeal' [class.selected-card]="selectedCard == '5'" (click)="selectCard('5')" (touchstart)="selectCard('5')">
+    <div class='rating-card appeal' [class.selected-card]="session?.responses[studentNumber] == '5'" (click)="selectCard('5')" (touchstart)="selectCard('5')">
       <div class='number-value'>
         5
       </div>
@@ -122,7 +122,7 @@
     </div>
   </div>
   <div class='rating-cards-container' *ngIf="session?.questionType === 'efficacy'">
-    <div class='rating-card efficacy' [class.selected-card]="selectedCard == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
+    <div class='rating-card efficacy' [class.selected-card]="session?.responses[studentNumber] == '1'" (click)="selectCard('1')" (touchstart)="selectCard('1')">
       <div class='number-value'>
         1
       </div>
@@ -130,7 +130,7 @@
         I Couldn’t Do it
       </div>
     </div>
-    <div class='rating-card efficacy' [class.selected-card]="selectedCard == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
+    <div class='rating-card efficacy' [class.selected-card]="session?.responses[studentNumber] == '2'" (click)="selectCard('2')" (touchstart)="selectCard('2')">
       <div class='number-value'>
         2
       </div>
@@ -138,7 +138,7 @@
         I Could Do it With Help
       </div>
     </div>
-    <div class='rating-card efficacy' [class.selected-card]="selectedCard == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
+    <div class='rating-card efficacy' [class.selected-card]="session?.responses[studentNumber] == '3'" (click)="selectCard('3')" (touchstart)="selectCard('3')">
       <div class='number-value'>
         3
       </div>

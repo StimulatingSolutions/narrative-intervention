@@ -9,6 +9,8 @@
     overflow-y: auto;
     display: block;
     flex: 1 1 auto;
+    position: relative;
+    z-index: -1;
   }
 
   .side-bar-container {

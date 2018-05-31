@@ -1,12 +1,14 @@
-<div (click)="clickStep()">
-  <div class="done-checkbox">
-    <ion-icon name="checkbox-outline" *ngIf="done"></ion-icon>
-    <ion-icon name="square-outline" *ngIf="!done"></ion-icon>
+<div>
+  <div class="done-checkbox-buffer" (click)="clickStep()">
+  </div>
+  <div class="done-checkbox" (click)="clickStep()">
+    <ion-icon name="checkbox-outline" *ngIf="session.completedSteps[stepId]"></ion-icon>
+    <ion-icon name="square-outline" *ngIf="!session.completedSteps[stepId]"></ion-icon>
   </div>
   <div
     class="step-content"
     [ngClass]="{
-      subdued: (session.currentStepId !== stepId && session.questionStepId !== stepId && done),
+      subdued: (session.currentStepId !== stepId && session.questionStepId !== stepId && session.completedSteps[stepId]),
       highlighted: (session.currentStepId === stepId),
       'active-question': (session.questionStepId === stepId),
       question: (questionType !== undefined),
