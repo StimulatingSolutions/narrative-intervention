@@ -346,7 +346,8 @@ Meteor.methods({
         backupQuestionType: null,
         questionIteration: null,
         questionId: null,
-        practice: false
+        practice: false,
+        responses: {}
       }
     };
     if (session.backupQuestionType) {
