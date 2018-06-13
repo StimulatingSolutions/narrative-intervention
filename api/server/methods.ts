@@ -252,7 +252,7 @@ Meteor.methods({
     });
   },
 
-  startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean){
+  startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean, practice: boolean) {
     console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
@@ -270,13 +270,18 @@ Meteor.methods({
         currentStepId: stepId,
         openResponse: !!openResponse,
         responses: session.questionResponses[questionId] || {},
-        questionIteration: iteration
+        questionIteration: iteration,
+        practice: practice
       }
     };
     update.$set[`completedSteps.${stepId}`] = true;
     update.$set[`questionIterations.${questionId}`] = iteration;
     update.$set[`questionResponses.${questionId}`] = update.$set.responses;
     Sessions.update(sessionId, update);
+
+    if (practice) {
+      return;
+    }
 
     let event: MetadataEvent = {
       type: "question-start",
@@ -298,14 +303,7 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    let event: MetadataEvent = {
-      type: "timer-reset",
-      timestamp: new Date(),
-      SessionID: sessionId,
-      QuestionNumber: session.questionId,
-      QuestionIteration: session.questionIteration
-    };
-
+    let originalIteration = session.questionIteration;
     let iteration = session.questionIteration + 1;
     let update: any = {
       $set: {
@@ -317,6 +315,17 @@ Meteor.methods({
     update.$set[`questionResponses.${session.questionId}`] = {};
     Sessions.update(sessionId, update);
 
+    if (session.practice) {
+      return;
+    }
+
+    let event: MetadataEvent = {
+      type: "timer-reset",
+      timestamp: new Date(),
+      SessionID: sessionId,
+      QuestionNumber: session.questionId,
+      QuestionIteration: originalIteration
+    };
     ResponseMetadata.insert(event);
   },
 
@@ -327,14 +336,7 @@ Meteor.methods({
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
 
-    let event: MetadataEvent = {
-      type: "question-end",
-      timestamp: new Date(),
-      SessionID: sessionId,
-      QuestionNumber: session.questionId,
-      QuestionIteration: session.questionIteration
-    };
-
+    let originalIteration = session.questionIteration;
     let update: any = {
       $set: {
         readyForResponse: false,
@@ -343,7 +345,8 @@ Meteor.methods({
         openResponse: null,
         backupQuestionType: null,
         questionIteration: null,
-        questionId: null
+        questionId: null,
+        practice: false
       }
     };
     if (session.backupQuestionType) {
@@ -351,6 +354,17 @@ Meteor.methods({
     }
     Sessions.update(sessionId, update);
 
+    if (session.practice) {
+      return;
+    }
+
+    let event: MetadataEvent = {
+      type: "question-end",
+      timestamp: new Date(),
+      SessionID: sessionId,
+      QuestionNumber: session.questionId,
+      QuestionIteration: originalIteration
+    };
     ResponseMetadata.insert(event);
   },
 
@@ -371,6 +385,10 @@ Meteor.methods({
     update.$set[`responses.${studentNumber}`] = selectedCard;
 
     Sessions.update(sessionId, update);
+
+    if (session.practice) {
+      return;
+    }
 
     let event: StudentResponse = {
       timestamp: new Date(),
@@ -394,7 +412,7 @@ Meteor.methods({
         currentStepId: stepId
       }
     };
-    update.$set[`completedSteps.${stepId}`] = true;
+    update.$set[`completedSteps.${stepId}`] = !session.completedSteps[stepId];
     if (session.openResponse) {
       update.$set.backupQuestionType = questionType;
     } else {

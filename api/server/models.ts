@@ -42,6 +42,7 @@ export interface Session {
   questionId?: number;
   cohortNumber: number;
   lastDownload?: number;
+  practice?: boolean;
 }
 
 export interface LoggedEvent {

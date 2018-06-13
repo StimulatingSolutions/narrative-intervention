@@ -16,6 +16,7 @@ export class Step implements OnInit {
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
+  @Input() practice?: string;
   @Input() correctAnswer?: string;  // sometimes, a question will not have a correct answer
   @Input() session: Session;
   @Input() defaultResponse: string;

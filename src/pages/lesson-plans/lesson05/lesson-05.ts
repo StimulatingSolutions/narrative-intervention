@@ -86,7 +86,7 @@ export class Lesson05 implements OnInit {
     }
 
     if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.steps[stepId].practice==='true', this.errorAlert.handler(6));
       return;
     }
 
@@ -110,7 +110,13 @@ export class Lesson05 implements OnInit {
   }
 
   getCounts(): string {
-    return `${Object.keys(this.session.completedSteps).length} checked, out of ${this.steps.length}`
+    let count: number = 0;
+    for (let i=0; i<this.steps.length; i++) {
+      if (this.session.completedSteps[i]) {
+        count++;
+      }
+    }
+    return `${count} checked, out of ${this.steps.length}`
   }
 
 }

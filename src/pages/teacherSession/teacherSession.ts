@@ -32,7 +32,7 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
       this.session = {
         lesson: this.reviewLesson,
         review: true,
-        completedSteps: [],
+        completedSteps: {},
         activeStudents: [],
         questionIterations: {},
         questionResponses: {},
