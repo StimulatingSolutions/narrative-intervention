@@ -1,7 +1,7 @@
 <div>
-  <div class="done-checkbox-buffer" (click)="clickStep()">
+  <div class="done-checkbox-buffer" (click)="clickStep()" (touchstart)="clickStep()">
   </div>
-  <div class="done-checkbox" (click)="clickStep()">
+  <div class="done-checkbox" (click)="clickStep()" (touchstart)="clickStep()">
     <ion-icon name="checkbox-outline" *ngIf="session.completedSteps[stepId]"></ion-icon>
     <ion-icon name="square-outline" *ngIf="!session.completedSteps[stepId]"></ion-icon>
   </div>

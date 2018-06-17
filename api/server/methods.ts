@@ -237,6 +237,14 @@ Meteor.methods({
     return session._id;
   },
 
+  demoSession(groupNumber: number){
+    const session = Sessions.findOne({schoolNumber: groupNumber, active: true});
+    if (!session){
+      throw new Meteor.Error('not found', `Group ${groupNumber} has no active sessions.`);
+    }
+    return session._id;
+  },
+
   leaveSession(sessionId: string, studentNumber: number){
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
@@ -257,6 +265,9 @@ Meteor.methods({
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (session.questionId === questionId) {
+      return;
     }
 
     let iteration = (session.questionIterations[questionId] || 0) + 1;
@@ -334,6 +345,9 @@ Meteor.methods({
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    if (session.questionId == null) {
+      return;
     }
 
     let originalIteration = session.questionIteration;
@@ -514,7 +528,7 @@ Meteor.methods({
         if (md2.reset) {
           break;
         }
-        duration += md2.duration;
+        duration += (md2.duration || 0);
       }
       responseCounts[`${response.SessionID} / ${response.QuestionNumber}`][response.StudentID] = (responseCounts[`${response.SessionID} / ${response.QuestionNumber}`][response.StudentID] || 0) +1;
       data.ResponseTime = (duration/1000).toFixed(3);

@@ -7,6 +7,8 @@ import { MeteorObservable } from 'meteor-rxjs';
 import { StudentSessionPage } from '../studentSession/studentSession';
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
+import {School} from "api/models";
+import {Schools} from "api/collections";
 
 
 @Component({
@@ -16,9 +18,8 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 export class LoginPage extends DestructionAwareComponent {
   private loginEmail = '';
   private loginPassword = '';
-  private sessionGroupNumber = '';
-  private sessionStudentNumber = '';
   private device;
+  private allSchools;
 
   constructor(
     private alertCtrl: AlertController,
@@ -36,6 +37,18 @@ export class LoginPage extends DestructionAwareComponent {
       this.device = 'web';
     }
     console.log(`=========== ${this.device} device detected`);
+  }
+
+  ngOnInit() {
+    MeteorObservable.subscribe('schools')
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(() => {
+      MeteorObservable.autorun()
+      .takeUntil(this.componentDestroyed$)
+      .subscribe(() => {
+        this.allSchools = Schools.find({});
+      });
+    });
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
@@ -68,21 +81,71 @@ export class LoginPage extends DestructionAwareComponent {
     });
   }
 
-  joinSession(): void {
-    if (this.sessionGroupNumber === '' || this.sessionStudentNumber === ''){
-      const alert = this.alertCtrl.create({
-        title: 'Oops!',
-        message: `${this.sessionGroupNumber === '' ? 'Group Number' : 'Student Number'} is required`,
-        buttons: ['OK']
+  chooseStudent(selectedSchool: School) {
+    let studentAlert = this.alertCtrl.create();
+    studentAlert.setCssClass('wide-input');
+    studentAlert.setTitle('Choose Group:');
+    studentAlert.addInput({
+      type: 'number',
+      name: 'studentNumber',
+      placeholder: 'Student Number'
+    });
+    studentAlert.addButton('Cancel');
+    studentAlert.addButton({
+      text: 'Ok',
+      handler: (data) => {
+        this.joinSession(selectedSchool, data.studentNumber);
+      }
+    });
+    studentAlert.present();
+  }
+
+  chooseSchool(intent: string) {
+    let schoolAlert = this.alertCtrl.create();
+    schoolAlert.setCssClass('wide-input');
+    schoolAlert.setTitle('Choose Group:');
+    this.allSchools.forEach((school: School) => {
+      schoolAlert.addInput({
+        type: 'radio',
+        label: `Group ${school.idNumber} (at ${school.name})`,
+        value: school.idNumber.toString()
       });
-      alert.present();
-      return;
-    }
+    });
+    schoolAlert.addButton('Cancel');
+    schoolAlert.addButton({
+      text: 'Ok',
+      handler: (schoolId: string) => {
+        let selectedSchool: School;
+        this.allSchools.forEach((school) => {
+          if (school.idNumber == schoolId) {
+            selectedSchool = school;
+          }
+        });
+        if (intent === 'join') {
+          this.chooseStudent(selectedSchool);
+        } else {
+          this.startDemo(selectedSchool);
+        }
+      }
+    });
+    schoolAlert.present();
+  }
 
-    let groupNumber = parseInt(this.sessionGroupNumber).toString();
-    let studentNumber = parseInt(this.sessionStudentNumber).toString();
+  startDemo(selectedSchool: School): void {
+    Meteor.call('demoSession', selectedSchool.idNumber, (error, result) => {
+      if (error){
+        this.errorAlert.present(error, 11);
+        return;
+      }
+      return this.navCtrl.push(StudentSessionPage, {
+        sessionId: result,
+        demo: true
+      });
+    })
+  }
 
-    Meteor.call('joinSession', groupNumber, studentNumber, (error, result) => {
+  joinSession(selectedSchool: School, studentNumber: number): void {
+    Meteor.call('joinSession', selectedSchool.idNumber, studentNumber, (error, result) => {
       if (error){
         this.errorAlert.present(error, 11);
         return;

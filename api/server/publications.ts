@@ -17,10 +17,6 @@ Meteor.publish('users', function(): Mongo.Cursor<User> {
 
 
 Meteor.publish('schools', function(): Mongo.Cursor<School> {
-  if (!this.userId) {
-    return;
-  }
-
   return Schools.collection.find({}, {});
 });
 

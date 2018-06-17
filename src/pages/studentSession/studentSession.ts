@@ -16,8 +16,10 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
   studentSessionId: string;
   studentNumber: number;
+  demo: boolean;
   session: Session;
   preloads: any = {};
+  demoResponse: string;
 
   constructor(
     private navParams: NavParams,
@@ -59,6 +61,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   ngOnInit(): void {
     this.studentSessionId = this.navParams.get('sessionId');
     this.studentNumber = this.navParams.get('studentNumber');
+    this.demo = !!this.navParams.get('demo');
 
     MeteorObservable.subscribe('activeSession', this.studentSessionId)
     .takeUntil(this.componentDestroyed$)
@@ -69,7 +72,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
         const updatedSession = Sessions.findOne({_id: this.studentSessionId});
         console.log(updatedSession);
-        this.updateSessionChanges(this.session, updatedSession);
         this.session = updatedSession;
 
         this.ref.detectChanges();
@@ -82,9 +84,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     });
   }
 
-  updateSessionChanges (oldSession: Session, newSession: Session): void {
-  }
-
   ngOnDestroy(): void {
     Meteor.call('leaveSession', this.studentSessionId, this.studentNumber, (error, result) => {
       if (error && error.reason != "Session does not exist"){
@@ -95,16 +94,33 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   }
 
   selectCard(cardName: string): void {
+    if (this.demo) {
+      this.demoResponse = cardName;
+      this.ref.detectChanges();
+      return;
+    }
+
     if (this.session && this.session.readyForResponse) {
       Meteor.call('sendQuestionResponse', this.session._id, this.studentNumber, cardName, (error, result) => {
         if (error){
           this.handleError(error, 20);
           return;
         }
-      })
+        this.ref.detectChanges();
+      });
     }
-
     this.ref.detectChanges();
+  }
+
+  resetDemoResponse(): void {
+    this.demoResponse = null;
+    this.ref.detectChanges();
+  }
+
+  exitDemo(): void {
+    this.navCtrl.setRoot(LoginPage, {}, {
+      animate: true
+    });
   }
 
   handleError(e: Error, id: number): void {

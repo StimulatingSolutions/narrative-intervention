@@ -24,6 +24,7 @@
   .img-card-container {
     width: 897px;
     height: 558px;
+    margin: 0 auto;
     position: relative;
     table {
       position: absolute;
@@ -180,6 +181,26 @@
         border-right: 2px solid black;
         font-size: 20px;
       }
+    }
+  }
+
+  .demo-buttons-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+
+    button.right-edge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    button.left-edge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
     }
   }
 

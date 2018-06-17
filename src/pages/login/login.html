@@ -18,23 +18,16 @@
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="login()">Login</button>
-        <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
+        <button ion-button class="space-left" color="secondary" (click)="resetUserPassword()">Reset Password</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
   <ion-list class="top-margin" *ngIf="device === 'student' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
     <ion-item>
-      <ion-label floating>Group Number</ion-label>
-      <ion-input [(ngModel)]="sessionGroupNumber" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student Number</ion-label>
-      <ion-input [(ngModel)]="sessionStudentNumber" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-buttons class='action-buttons'>
-        <button ion-button (click)="joinSession()">Join Session</button>
+        <button ion-button (click)="chooseSchool('join')">Join Session</button>
+        <button ion-button class="space-left" color="warning" (click)="chooseSchool('demo')">Start Demonstration</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
