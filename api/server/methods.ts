@@ -14,7 +14,7 @@ const nonEmptyString = Match.Where((str) => {
   return str.length > 0;
 });
 
-Meteor.methods({
+let methods = {
 
   createNewUser(email: string, name: string, role: string): void {
     if (!this.userId) {
@@ -315,14 +315,12 @@ Meteor.methods({
     }
 
     let originalIteration = session.questionIteration;
-    let iteration = session.questionIteration + 1;
     let update: any = {
       $set: {
-        responses: {},
-        questionIteration: iteration,
+        responses: {}
       }
     };
-    update.$set[`questionIterations.${session.questionId}`] = iteration;
+    update.$set[`completedSteps.${session.questionStepId}`] = false;
     update.$set[`questionResponses.${session.questionId}`] = {};
     Sessions.update(sessionId, update);
 
@@ -338,6 +336,8 @@ Meteor.methods({
       QuestionIteration: originalIteration
     };
     ResponseMetadata.insert(event);
+
+    methods.finishQuestion(sessionId);
   },
 
   finishQuestion(sessionId: string){
@@ -416,7 +416,7 @@ Meteor.methods({
     StudentResponses.insert(event);
   },
 
-  setCurrentStep(sessionId: string, stepId: number, questionType: string) {
+  setCurrentStep(sessionId: string, stepId: number, completed: boolean, questionType: string) {
     console.log('setting current step: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session) {
@@ -427,7 +427,7 @@ Meteor.methods({
         currentStepId: stepId
       }
     };
-    update.$set[`completedSteps.${stepId}`] = !session.completedSteps[stepId];
+    update.$set[`completedSteps.${stepId}`] = completed;
     if (session.openResponse) {
       update.$set.backupQuestionType = questionType;
     } else {
@@ -487,11 +487,6 @@ Meteor.methods({
         md.duration = event.timestamp.getTime() - md.timestamp.getTime();
       } else if (event.type === 'timer-reset') {
         let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
-        let startEvent: MetadataEvent = _.extend({}, md);
-        startEvent.QuestionIteration++;
-        startEvent.timestamp = event.timestamp;
-        questionMetadata[`${startEvent.SessionID} / ${startEvent.QuestionNumber} / ${startEvent.QuestionIteration}`] = startEvent;
-        md.duration = event.timestamp.getTime() - md.timestamp.getTime();
         md.reset = true;
       }
     }
@@ -564,4 +559,6 @@ Meteor.methods({
     StudentResponses.remove({SessionID: {$in: sessionIds}});
     Sessions.remove({_id: {$in: sessionIds}});
   }
-});
+};
+
+Meteor.methods(methods);

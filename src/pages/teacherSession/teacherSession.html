@@ -1,7 +1,7 @@
 <ion-content class="teacher-session-page-content" >
 
   <div *ngIf="session" class='side-bar-container'>
-    <sideBarInfo [session]='session' (onFindPlace)='handleFindPlace($event)'></sideBarInfo>
+    <sideBarInfo [session]='session' (onFindPlace)="handleFindPlace($event)"></sideBarInfo>
   </div>
 
   <div padding class='session-container'>

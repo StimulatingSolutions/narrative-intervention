@@ -8,6 +8,7 @@ import { Session } from 'api/models';
 import { LoginPage } from '../login/login';
 
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
+import {DeviceDetector} from "../../util/deviceDetector";
 @Component({
   selector: 'studentSession',
   templateUrl: 'studentSession.html'
@@ -93,14 +94,18 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     })
   }
 
-  selectCard(cardName: string): void {
+  selectCard(type: string, cardName: string): void {
+    if (type === 'click' && DeviceDetector.device != 'web' || type === 'touch' && DeviceDetector.device === 'web') {
+      return;
+    }
+
     if (this.demo) {
       this.demoResponse = cardName;
       this.ref.detectChanges();
       return;
     }
 
-    if (this.session && this.session.readyForResponse) {
+    if (this.session && this.session.readyForResponse && this.session.responses[this.studentNumber] != cardName) {
       Meteor.call('sendQuestionResponse', this.session._id, this.studentNumber, cardName, (error, result) => {
         if (error){
           this.handleError(error, 20);

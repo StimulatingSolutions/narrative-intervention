@@ -4,8 +4,8 @@
       <ion-buttons class='button-container find-place'>
         <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
       </ion-buttons>
-      <ion-buttons class='button-container reset' (click)="doReset()" *ngIf="headTeacher && session?.readyForResponse">
-        <button ion-button color="warning">Redo Question?</button>
+      <ion-buttons class='button-container reset' *ngIf="headTeacher && session?.readyForResponse">
+        <button ion-button color="warning" (click)="doReset()">Redo Question?</button>
       </ion-buttons>
       <ion-buttons class='button-container exit'>
         <button ion-button color='danger' (click)="exitCurrentSession()">Exit</button>

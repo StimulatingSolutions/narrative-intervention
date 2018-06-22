@@ -6,6 +6,7 @@ import { Sessions } from 'api/collections';
 import { Session } from 'api/models';
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {Step} from "../lesson-plans/step";
+import {ErrorAlert} from "../../services/errorAlert";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
   session: Session;
 
   constructor(
+    private errorAlert: ErrorAlert,
     private navParams: NavParams,
     private ref: ChangeDetectorRef
   ) {
@@ -55,6 +57,15 @@ export class TeacherSessionPage extends DestructionAwareComponent implements OnI
 
   ngOnDestroy(): void {
     Step.resetIds();
+  }
+
+  handleReset(): void {
+    Meteor.call('timerReset', this.session._id, (error, result) => {
+      if (error){
+        this.errorAlert.present(error, 5);
+        return;
+      }
+    });
   }
 
   handleFindPlace (): void {

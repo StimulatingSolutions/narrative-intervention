@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, OnInit} from "@angular/core";
 import {Session} from "api/models";
+import {DeviceDetector} from "../../util/deviceDetector";
 
 
 let nextStepId: number = 0;
@@ -13,6 +14,7 @@ export class Step implements OnInit {
 
   stepId: number;
   questionId?: number;
+  done: boolean;
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
@@ -22,7 +24,7 @@ export class Step implements OnInit {
   @Input() defaultResponse: string;
   @Input() openResponse: boolean;
 
-  @Output() onStepClicked =  new EventEmitter<number>();
+  @Output() onStepClicked =  new EventEmitter<any>();
   @Output() onReady =  new EventEmitter<Step>();
 
   constructor(
@@ -43,8 +45,12 @@ export class Step implements OnInit {
     nextQuestionId = 1;
   }
 
-  clickStep() {
-    this.onStepClicked.emit(this.stepId);
+  clickStep(type: string) {
+    if (type === 'click' && DeviceDetector.device != 'web' || type === 'touch' && DeviceDetector.device === 'web') {
+      return;
+    }
+    this.done = this.questionId ? true : !this.done;
+    this.onStepClicked.emit({stepId: this.stepId, checked: this.done});
   }
 
 }

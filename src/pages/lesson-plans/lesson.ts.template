@@ -22,28 +22,38 @@ export class Lesson__LESSON_NUM__ implements OnInit {
   }
 
   ngOnInit():void {
+    (<any>window).uncheckQuestion = () => {
+      this.steps[this.session.questionStepId].done = false;
+    };
     this.headTeacher = (Meteor.userId() == this.session.creatorsId);
 
     if (!this.headTeacher) {
       return;
     }
+
+    for (let i in this.session.completedSteps) {
+      if (this.steps[i]) {
+        this.steps[i].done = this.session.completedSteps[i];
+      }
+    }
   }
 
   stepReady(step: Step) {
+    step.done = this.session.completedSteps[step.stepId];
     this.steps[step.stepId] = step;
   }
 
-  stepClicked(stepId) {
+  stepClicked(event: any) {
     if (this.session.review) {
-      this.session.completedSteps[stepId] = true;
-      this.session.currentStepId = stepId;
+      this.session.completedSteps[event.stepId] = event.checked;
+      this.session.currentStepId = event.stepId;
 
-      if (this.steps[stepId].questionType) {
+      if (this.steps[event.stepId].questionType) {
         this.session.readyForResponse = true;
-        this.session.questionStepId = stepId;
-        this.session.questionType = this.steps[stepId].questionType;
-        this.session.correctAnswer = this.steps[stepId].correctAnswer;
-        this.session.openResponse = this.steps[stepId].openResponse;
+        this.session.questionStepId = event.stepId;
+        this.session.questionType = this.steps[event.stepId].questionType;
+        this.session.correctAnswer = this.steps[event.stepId].correctAnswer;
+        this.session.openResponse = this.steps[event.stepId].openResponse;
         return;
       }
 
@@ -59,38 +69,31 @@ export class Lesson__LESSON_NUM__ implements OnInit {
       return;
     }
 
-    if (this.session.openResponse) {
-      // in open response mode, we only block clicking on questions
-      if (this.steps[stepId].questionType) {
-        return;
-      }
-    } else {
-      // in regular question mode, we block clicking on any step
-      if (this.session.questionStepId) {
-        this.doneAdd('show-warning');
+    if (this.session.questionStepId || this.session.openResponse && this.steps[event.stepId].questionType) {
+      // in regular question mode when clicking any step, or open response mode when clicking a question, animate and block
+      this.doneAdd('show-warning');
+      setTimeout(() => {
+        this.doneAdd('down');
         setTimeout(() => {
-          this.doneAdd('down');
+          this.doneRemove('down');
           setTimeout(() => {
-            this.doneRemove('down');
+            this.doneAdd('down');
             setTimeout(() => {
-              this.doneAdd('down');
-              setTimeout(() => {
-                this.doneRemove('down');
-                this.doneRemove('show-warning');
-              }, 300);
-            }, 200);
+              this.doneRemove('down');
+              this.doneRemove('show-warning');
+            }, 300);
           }, 200);
         }, 200);
-        return
-      }
+      }, 200);
+      return
     }
 
-    if (this.steps[stepId].questionType) {
-      Meteor.call('startQuestion', this.session._id, stepId, this.steps[stepId].questionId, this.steps[stepId].questionType, this.steps[stepId].correctAnswer, this.steps[stepId].openResponse, this.errorAlert.handler(6));
+    if (this.steps[event.stepId].questionType) {
+      Meteor.call('startQuestion', this.session._id, event.stepId, this.steps[event.stepId].questionId, this.steps[event.stepId].questionType, this.steps[event.stepId].correctAnswer, this.steps[event.stepId].openResponse, this.errorAlert.handler(6));
       return;
     }
 
-    Meteor.call('setCurrentStep', this.session._id, stepId, this.steps[stepId].defaultResponse, this.errorAlert.handler(7));
+    Meteor.call('setCurrentStep', this.session._id, event.stepId, event.checked, this.steps[event.stepId].defaultResponse, this.errorAlert.handler(7));
   }
 
   doneAdd(c) {
@@ -110,7 +113,13 @@ export class Lesson__LESSON_NUM__ implements OnInit {
   }
 
   getCounts(): string {
-    return `${Object.keys(this.session.completedSteps).length} checked, out of ${this.steps.length}`
+    let count: number = 0;
+    for (let i=0; i<this.steps.length; i++) {
+      if (this.session.completedSteps[i]) {
+        count++;
+      }
+    }
+    return `${count} checked, out of ${this.steps.length}`
   }
 
 }

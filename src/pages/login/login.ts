@@ -9,6 +9,7 @@ import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {School} from "api/models";
 import {Schools} from "api/collections";
+import {DeviceDetector} from "../../util/deviceDetector";
 
 
 @Component({
@@ -18,8 +19,8 @@ import {Schools} from "api/collections";
 export class LoginPage extends DestructionAwareComponent {
   private loginEmail = '';
   private loginPassword = '';
-  private device;
   private allSchools;
+  private device: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -28,14 +29,7 @@ export class LoginPage extends DestructionAwareComponent {
     private navCtrl: NavController
   ) {
     super();
-    let dims = ''+window.screen.width+'x'+window.screen.height;
-    if (dims === '1024x600') {
-      this.device = 'student';
-    } else if (dims === '800x1280') {
-      this.device = 'teacher';
-    } else {
-      this.device = 'web';
-    }
+    this.device = DeviceDetector.device;
     console.log(`=========== ${this.device} device detected`);
   }
 
