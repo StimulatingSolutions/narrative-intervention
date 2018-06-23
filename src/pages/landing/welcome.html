@@ -14,7 +14,7 @@
     <ion-item *ngFor="let session of unfinishedSessions | async">
       <ion-buttons>
         <div class="button-label">[ <b>{{session.schoolName}}, Group {{session.schoolNumber}}</b> ]: &nbsp; Lesson {{session.lesson}} &mdash; created on {{timeString(session.creationTimestamp)}}</div>
-        <button ion-button (click)="joinSession(session._id)">Re-Join Session</button>
+        <button ion-button (click)="joinSession(session._id)">{{(!userId || userId == session.creatorsId) ? "Re-Join Session" : "Join as Co-Teacher"}}</button>
         <button ion-button color="danger" (click)="finishSession(session)">Mark Session Finished</button>
       </ion-buttons>
     </ion-item>
