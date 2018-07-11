@@ -27,6 +27,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   public showUserManagement: boolean;
   public showSchoolManagement: boolean;
   public showDataManagement: boolean;
+  public showSessionManagement: boolean;
   public isAdmin: boolean;
 
   public unfinishedSessions;
@@ -42,14 +43,18 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     super();
     this.showUserManagement = false;
     this.showSchoolManagement = false;
+    this.showSessionManagement = false;
+    this.showDataManagement = false;
+    this.isAdmin = false;
 
     MeteorObservable.call<string[]>('getUserRoles')
     .takeUntil(this.componentDestroyed$)
     .subscribe({
       next: (result: string[]) => {
-        this.showUserManagement = !!_.intersection(result, ['admin', 'researcher']).length;
+        this.showUserManagement = result.indexOf('admin') !== -1;
         this.showSchoolManagement = this.showUserManagement;
-        this.showDataManagement = this.showUserManagement;
+        this.showDataManagement = !!_.intersection(result, ['admin', 'researcher']).length;
+        this.showSessionManagement = !!_.intersection(result, ['admin', 'teacher']).length;
         this.isAdmin = result.indexOf('admin') !== -1;
       },
       error: this.errorAlert.presenter(2)

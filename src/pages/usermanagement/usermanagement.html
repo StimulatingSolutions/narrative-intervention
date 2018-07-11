@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="navbar-bg">
-    <ion-title>Account Management</ion-title>
+    <ion-title>User Management</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -21,31 +21,35 @@
       <ion-card-content>
         <ion-list radio-group [(ngModel)]="editUserAccountActive">
           <ion-list-header>
-            Account Active
+            User Status
           </ion-list-header>
           <ion-item>
             <ion-label>Active</ion-label>
             <ion-radio value="active"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Deactive</ion-label>
+            <ion-label>Inactive</ion-label>
             <ion-radio value="deactive"></ion-radio>
           </ion-item>
         </ion-list>
         <ion-list radio-group [(ngModel)]="editUserAccountType">
           <ion-list-header>
-            Account Type
+            User Type
           </ion-list-header>
           <ion-item>
-            <ion-label>Teacher</ion-label>
+            <ion-label>Teacher
+              <br/><span class="notes">Teachers can review lessons, start sessions as head teachers, or join sessions as co-teachers.</span></ion-label>
             <ion-radio value="teacher"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Researcher</ion-label>
+            <ion-label>Researcher
+              <br/><span class="notes">Researchers can download session data.</span></ion-label>
             <ion-radio value="researcher"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Admin</ion-label>
+            <ion-label>Admin
+              <br/><span class="notes">Admins can do everything Teachers and Researchers can do.  In addition, Admins can
+              <br/>add and edit users, add and edit groups/schools, and clear session data.</span></ion-label>
             <ion-radio value="admin"></ion-radio>
           </ion-item>
         </ion-list>
@@ -61,7 +65,7 @@
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="updateUser()">Update User</button>
         <button ion-button color="secondary" (click)="resetUserPassword()">Reset Password</button>
-        <button ion-button (click)="hideUserEdit()">Cancel</button>
+        <button ion-button color="warning" (click)="hideUserEdit()">Cancel</button>
       </ion-buttons>
     </ion-card>
   </div>
@@ -76,7 +80,7 @@
         Add User
       </ion-card-header>
       <ion-card-content>
-        <ion-item>
+        <ion-item class="no-input-border">
           <ion-label floating>Name</ion-label>
           <ion-input [(ngModel)]="addUserName" type="text"></ion-input>
         </ion-item>
@@ -86,25 +90,29 @@
         </ion-item>
         <ion-list radio-group [(ngModel)]="addUserAccountType">
           <ion-list-header>
-            Account Type
+            User Type
           </ion-list-header>
           <ion-item>
-            <ion-label>Teacher</ion-label>
+            <ion-label>Teacher
+              <br/><span class="notes">Teachers can review lessons, start sessions as head teachers, or join sessions as co-teachers.</span></ion-label>
             <ion-radio value="teacher"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Researcher</ion-label>
+            <ion-label>Researcher
+              <br/><span class="notes">Researchers can download session data.</span></ion-label>
             <ion-radio value="researcher"></ion-radio>
           </ion-item>
           <ion-item>
-            <ion-label>Admin</ion-label>
+            <ion-label>Admin
+              <br/><span class="notes">Admins can do everything Teachers and Researchers can do.  In addition, Admins can
+              <br/>add and edit users, add and edit groups/schools, and clear session data.</span></ion-label>
             <ion-radio value="admin"></ion-radio>
           </ion-item>
         </ion-list>
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="addUser()">Add</button>
-        <button ion-button (click)="showAddUser(false)">Cancel</button>
+        <button ion-button color="warning" (click)="showAddUser(false)">Cancel</button>
       </ion-buttons>
     </ion-card>
   </div>

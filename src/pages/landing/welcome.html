@@ -23,7 +23,7 @@
   <br/>
   <br/>
 
-  <ion-list>
+  <ion-list [hidden]="!showSessionManagement">
     <ion-list-header>Session Options:</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>
@@ -57,7 +57,7 @@
     </ion-item>
     <ion-item [hidden]='!showSchoolManagement'>
       <ion-buttons class='action-buttons'>
-        <button ion-button color="secondary" (click)="viewSchoolManagement()">Group Management</button>
+        <button ion-button color="secondary" (click)="viewSchoolManagement()">Group / School Management</button>
       </ion-buttons>
     </ion-item>
   </ion-list>

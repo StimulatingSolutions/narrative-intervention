@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="navbar-bg">
-    <ion-title>Group Management</ion-title>
+    <ion-title>Group / School Management</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -34,7 +34,7 @@
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="updateSchool()">Update Group</button>
-        <button ion-button (click)="hideSchoolEdit()">Cancel</button>
+        <button ion-button color="warning" (click)="hideSchoolEdit()">Cancel</button>
       </ion-buttons>
     </ion-card>
   </div>
@@ -64,7 +64,7 @@
       </ion-card-content>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="addSchool()">Add Group</button>
-        <button ion-button (click)="showAddSchool(false)">Cancel</button>
+        <button ion-button color="warning" (click)="showAddSchool(false)">Cancel</button>
       </ion-buttons>
     </ion-card>
   </div>

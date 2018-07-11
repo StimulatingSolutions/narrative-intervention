@@ -157,6 +157,14 @@ button[ion-button] {
   box-shadow: none !important;
 }
 
+.no-input-border.item-input .item-inner {
+  border: 0 !important;
+}
+
 button.space-left {
   margin-left: 80px;
+}
+
+ion-label .notes {
+  font-size: 85%;
 }
