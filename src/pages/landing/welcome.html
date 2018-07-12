@@ -49,7 +49,7 @@
   <br/>
 
   <ion-list [hidden]='!showUserManagement && !showSchoolManagement'>
-    <ion-list-header>Management Options:</ion-list-header>
+    <ion-list-header>System Management Options:</ion-list-header>
     <ion-item [hidden]='!showUserManagement'>
       <ion-buttons class='action-buttons'>
         <button ion-button color="secondary" (click)="viewUserManagement()">User Management</button>
@@ -71,6 +71,26 @@
       <ion-buttons class='action-buttons'>
         <button ion-button color="warning" (click)="viewDataManagement()">Data Management</button>
       </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <br/>
+  <br/>
+
+  <ion-list>
+    <ion-list-header>Questions?</ion-list-header>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="danger" (click)="about()">About This Software</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item [hidden]='!showDataManagement'>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="secondary" (click)="videos()">How-to Videos</button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      For other questions, please contact a Narrative Intervention administrator.
     </ion-item>
   </ion-list>
 

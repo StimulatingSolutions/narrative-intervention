@@ -6,7 +6,7 @@
 
 <ion-content padding class="login-page-content">
   <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
-    <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers, Researchers and Admins:</ion-list-header>
+    <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers, Researchers, and Admins:</ion-list-header>
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input [(ngModel)]="loginEmail" type="email"></ion-input>
@@ -27,15 +27,16 @@
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="chooseSchool('join')">Join Session</button>
-        <button ion-button class="space-left" color="warning" (click)="chooseSchool('demo')">Start Demonstration</button>
+        <button ion-button class="space-left" color="warning" (click)="chooseSchool('demo')">Start Student Demonstration</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
-  <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
+  <ion-list class="top-margin">
     <ion-list-header class="form-header">Questions?</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>
-        <button ion-button color="danger" (click)="info()">Click here for information</button>
+        <button ion-button color="danger" (click)="about()">About This Software</button>
+        <button ion-button color="danger" *ngIf="device === 'teacher' || device === 'web'" (click)="help()">Help</button>
       </ion-buttons>
     </ion-item>
   </ion-list>

@@ -274,4 +274,14 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     }
     return moment(epoch).format('YYYY/MM/DD[ at ]h:mm a');
   }
+
+  about(): void {
+    // go to About page
+    //this.navCtrl.push(LoginPage, {});
+  }
+
+  videos(): void {
+    // go to Videos page
+    //this.navCtrl.push(LoginPage, {});
+  }
 }

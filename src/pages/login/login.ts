@@ -151,9 +151,13 @@ export class LoginPage extends DestructionAwareComponent {
     })
   }
 
-  info(): void {
-    // go to info page
+  about(): void {
+    // go to About page
     //this.navCtrl.push(LoginPage, {});
+  }
+
+  help(): void {
+    // open Help modal
   }
 
 }
