@@ -24,10 +24,20 @@
 
     tbody tr {
       cursor: pointer;
-    }
+      &:hover {
+        background: #EEE;
+      }
 
-    tr.selected {
-      background: #FFA;
+      &.selected {
+        background: #FFA;
+        &:hover {
+          background: #EE7;
+        }
+      }
+
+      td.checkbox-cell {
+        line-height: 10px;
+      }
     }
 
     span.complete {

@@ -7,9 +7,14 @@
 <ion-content padding class="user-management-page-content">
 
   <ion-list no-lines>
-    <div class='user-update-list management-item' *ngFor="let user of allUsers | async">
-      <button class="management-edit-button button-md" ion-button color="secondary" (click)="selectUserToEdit(user)">Edit User</button>
-      <span class="management-edit-label">{{user.profile.email}} <span *ngIf=""></span></span>
+    <div class='user-update-list management-item' [ngClass]="{inactive: user.roles.indexOf('deactive') > -1}" *ngFor="let user of allUsers | async">
+      <button *ngIf="user.roles.indexOf('deactive') > -1" class="management-edit-button button-md" ion-button color="danger" (click)="selectUserToEdit(user)">Edit User</button>
+      <button *ngIf="user.roles.indexOf('deactive') == -1" class="management-edit-button button-md" ion-button color="secondary" (click)="selectUserToEdit(user)">Edit User</button>
+      <div>
+        <span class="management-edit-label">{{user.profile.name}} &nbsp;({{accountType(user)}}<span *ngIf="user.roles.indexOf('deactive') > -1">, inactive</span>)</span>
+        <br/>
+        <span class="management-edit-label">{{user.profile.email}}</span>
+      </div>
     </div>
   </ion-list>
 

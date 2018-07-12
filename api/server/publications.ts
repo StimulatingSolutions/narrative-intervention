@@ -10,7 +10,8 @@ Meteor.publish('users', function(): Mongo.Cursor<User> {
 
   return Users.collection.find({}, {
     fields: {
-      profile: 1
+      profile: 1,
+      roles: 1
     }
   });
 });

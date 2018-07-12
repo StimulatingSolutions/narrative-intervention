@@ -171,4 +171,13 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
       error: this.errorAlert.presenter(26)
     });
   }
+
+  accountType(user: any): string {
+    for (let role of this.accountTypeRoles) {
+      if (user.roles.indexOf(role) != -1) {
+        return role[0].toUpperCase()+role.substr(1);
+      }
+    }
+    return '';
+  }
 }

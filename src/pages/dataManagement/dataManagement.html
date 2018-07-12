@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let session of sessions" (click)="toggleCheckbox(session._id)" [ngClass]="{'selected': checkboxes[session._id]}">
-          <td><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
+          <td class="checkbox-cell"><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
           <td>{{timeString(session.creationTimestamp)}}</td>
           <td>{{session.schoolNumber}}</td>
           <td>{{session.schoolName}}</td>

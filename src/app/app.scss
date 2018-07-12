@@ -127,14 +127,18 @@ button[ion-button] {
 .management-item {
   font-size: large;
   margin-bottom: 10px;
+  font-weight: 400;
+  &.inactive {
+    color: #666;
+    font-weight: 300;
+    .management-edit-label {
+      font-style: italic;
+    }
+  }
 }
 
 .management-edit-button {
   margin-right: 5px;
-}
-
-.management-edit-label {
-  line-height: 36px;
 }
 
 .logout-button {
@@ -167,4 +171,8 @@ button.space-left {
 
 ion-label .notes {
   font-size: 85%;
+}
+
+.no-padding {
+  padding: 0 !important;
 }

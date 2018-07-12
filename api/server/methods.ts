@@ -89,7 +89,7 @@ let methods = {
         validRoles.push(role.name);
       }
     });
-      console.log('UPDATE USER ROLES', user._id, validRoles);
+    console.log('UPDATE USER ROLES', user._id, validRoles);
     Roles.setUserRoles(user._id, validRoles);
 
     Meteor.users.update(user._id, {
