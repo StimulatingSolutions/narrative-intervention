@@ -36,7 +36,7 @@
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button color="danger" (click)="about()">About This Software</button>
-        <button ion-button color="danger" *ngIf="device === 'teacher' || device === 'web'" (click)="help()">Help</button>
+        <button ion-button class="space-left" color="danger" *ngIf="device === 'teacher' || device === 'web'" (click)="help()">Help!</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
