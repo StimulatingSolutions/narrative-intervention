@@ -484,9 +484,15 @@ let methods = {
         questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`] = event;
       } else if (event.type === 'question-end') {
         let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        if (!md) {
+          console.error(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Can't find corresponding metadata for question-end: ${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}\n${JSON.stringify(event, null, 2)}`)
+        }
         md.duration = event.timestamp.getTime() - md.timestamp.getTime();
       } else if (event.type === 'timer-reset') {
         let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        if (!md) {
+          console.error(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Can't find corresponding metadata for timer-reset: ${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}\n${JSON.stringify(event, null, 2)}`)
+        }
         md.reset = true;
       }
     }
