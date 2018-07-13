@@ -17,6 +17,8 @@ import { SideBarInfo } from '../pages/teacherSession/sideBarInfo';
 import { LessonPlans } from '../pages/lesson-plans/lessonPlans';
 import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
+import { LoginHelpPage } from "../pages/loginHelp/loginHelp";
+import { VideosPage } from "../pages/videos/videos";
 // __LESSON_IMPORTS__
 
 require('raf');
@@ -34,6 +36,8 @@ require('smoothscroll-polyfill').polyfill();
     TeacherSessionPage,
     StudentSessionPage,
     SideBarInfo,
+    LoginHelpPage,
+    VideosPage,
     LessonPlans,
 // __LESSONS__    Step
   ],
@@ -53,6 +57,8 @@ require('smoothscroll-polyfill').polyfill();
     TeacherSessionPage,
     StudentSessionPage,
     SideBarInfo,
+    LoginHelpPage,
+    VideosPage,
     LessonPlans,
 // __LESSONS__    Step
   ],

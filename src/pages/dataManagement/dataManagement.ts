@@ -34,7 +34,7 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
       next: (result: string[]) => {
         this.isAdmin = result.indexOf('admin') !== -1;
       },
-      error: this.errorAlert.presenter(2)
+      error: this.errorAlert.presenter(7)
     });
   }
 

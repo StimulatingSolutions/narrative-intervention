@@ -10,6 +10,7 @@ import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {School} from "api/models";
 import {Schools} from "api/collections";
 import {DeviceDetector} from "../../util/deviceDetector";
+import {LoginHelpPage} from "../loginHelp/loginHelp";
 
 
 @Component({
@@ -128,7 +129,7 @@ export class LoginPage extends DestructionAwareComponent {
   startDemo(selectedSchool: School): void {
     Meteor.call('demoSession', selectedSchool.idNumber, (error, result) => {
       if (error){
-        this.errorAlert.present(error, 11);
+        this.errorAlert.present(error, 12);
         return;
       }
       return this.navCtrl.push(StudentSessionPage, {
@@ -157,7 +158,7 @@ export class LoginPage extends DestructionAwareComponent {
   }
 
   help(): void {
-    // open Help modal
+    this.navCtrl.push(LoginHelpPage, {});
   }
 
 }

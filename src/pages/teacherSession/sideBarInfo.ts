@@ -55,7 +55,7 @@ export class SideBarInfo implements OnInit {
     (<any>window).uncheckQuestion();
     Meteor.call('timerReset', this.session._id, (error, result) => {
       if (error){
-        this.errorAlert.present(error, 5);
+        this.errorAlert.present(error, 6);
         return;
       }
     });

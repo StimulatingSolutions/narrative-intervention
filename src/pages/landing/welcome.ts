@@ -17,6 +17,7 @@ import * as moment from "moment";
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {DataManagementPage} from "../dataManagement/dataManagement";
+import {VideosPage} from "../videos/videos";
 
 @Component({
   selector: 'welcome',
@@ -281,7 +282,6 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   }
 
   videos(): void {
-    // go to Videos page
-    //this.navCtrl.push(LoginPage, {});
+    this.navCtrl.push(VideosPage, {});
   }
 }
