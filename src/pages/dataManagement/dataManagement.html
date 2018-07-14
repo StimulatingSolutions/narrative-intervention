@@ -15,7 +15,7 @@
         <thead>
         <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-          <th>Session Started</th>
+          <th>Session Start</th>
           <th>Group</th>
           <th>School</th>
           <th>Cohort</th>
@@ -28,14 +28,14 @@
         <tbody>
         <tr *ngFor="let session of sessions" (click)="toggleCheckbox(session._id)" [ngClass]="{'selected': checkboxes[session._id]}">
           <td class="checkbox-cell"><ion-checkbox [(ngModel)]="checkboxes[session._id]"></ion-checkbox></td>
-          <td>{{timeString(session.creationTimestamp)}}</td>
+          <td>{{dayString(session.creationTimestamp)}}<br/>{{timeString(session.creationTimestamp)}}</td>
           <td>{{session.schoolNumber}}</td>
           <td>{{session.schoolName}}</td>
           <td>{{session.cohortNumber}}</td>
           <td>{{session.lesson}}</td>
           <td>{{session.creatorsName}}</td>
           <td><span *ngIf="!session.active" class="complete">yes</span><span *ngIf="session.active" class="incomplete">no</span></td>
-          <td>{{timeString(session.lastDownload)}}</td>
+          <td>{{dayString(session.lastDownload)}}<br/>{{timeString(session.lastDownload)}}</td>
         </tr>
         </tbody>
       </table>

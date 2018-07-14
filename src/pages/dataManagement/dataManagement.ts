@@ -175,11 +175,18 @@ export class DataManagementPage extends DestructionAwareComponent implements OnI
     sessionAlert.present();
   }
 
+  dayString(epoch: number) {
+    if (!epoch) {
+      return null;
+    }
+    return moment(epoch).format('YYYY/MM/DD');
+  }
+
   timeString(epoch: number) {
     if (!epoch) {
       return null;
     }
-    return moment(epoch).format('YYYY/MM/DD[ at ]h:mm a');
+    return moment(epoch).format('h:mm a');
   }
 
 }
