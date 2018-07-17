@@ -5,7 +5,7 @@ import { MeteorObservable } from 'meteor-rxjs';
 import { Users } from 'api/collections';
 import { User } from 'api/models';
 
-import * as _ from 'lodash';
+import {includes} from 'lodash';
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
@@ -119,12 +119,12 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
     .subscribe({
       next: (result: string[]) => {
         this.accountTypeRoles.forEach( accountTypeRole => {
-          if (_.includes(result, accountTypeRole)){
+          if (includes(result, accountTypeRole)){
             this.editUserAccountType = accountTypeRole;
           }
         });
         this.accountActiveRoles.forEach( accountActiveRole => {
-          if (_.includes(result, accountActiveRole)){
+          if (includes(result, accountActiveRole)){
             this.editUserAccountActive = accountActiveRole;
           }
         })

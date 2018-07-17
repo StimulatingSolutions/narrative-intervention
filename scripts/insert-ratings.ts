@@ -1,7 +1,4 @@
-import * as fs from "fs";
 import * as getStdin from "get-stdin";
-import * as RegexEscape from "regex-escape";
-
 
 
 let lessonNumber: number =  parseInt(process.argv[2]);

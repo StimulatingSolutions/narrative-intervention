@@ -4,7 +4,7 @@ import {Profile, User, School, Session, LoggedEvent, StudentResponse, Downloaded
 import { check, Match } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
-import * as _ from 'lodash';
+import {includes} from 'lodash';
 import moment = require("moment-timezone");
 import {buildCsv} from "./buildCsv";
 import {getQuestionTypeId, getResponseId} from "./ids";
@@ -85,7 +85,7 @@ let methods = {
     }
     const validRoles = [];
     Roles.getAllRoles().forEach( role => {
-      if(_.includes(roles, role.name)){
+      if(includes(roles, role.name)){
         validRoles.push(role.name);
       }
     });
@@ -112,7 +112,7 @@ let methods = {
     const validRoles = [];
     Roles.getAllRoles().forEach( role => {
       console.log('role', role);
-      if(_.includes(roles, role)){
+      if(includes(roles, role)){
         validRoles.push(role);
       }
     });

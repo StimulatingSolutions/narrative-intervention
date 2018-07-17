@@ -8,12 +8,28 @@
 
   <button ion-button color="danger" (click)="dismiss()">Back to your Dashboard</button>
 
-  <ion-list class="top-margin">
-    <ion-list-header>How-To: Manage and download session data</ion-list-header>
-    <ion-item>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/LaWzaZRik0M?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="showDataManagement">
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Manage and download session data</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LaWzaZRik0M?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="showSessionManagement">
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Run a session</ion-list-header>
+      <ion-item>
+        Not yet posted
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Practice running sessions and review lesson plans</ion-list-header>
+      <ion-item>
+        Not yet posted
+      </ion-item>
+    </ion-list>
+  </div>
   <div *ngIf="isAdmin">
     <ion-list class="top-margin">
       <ion-list-header>How-To: Manage user accounts</ion-list-header>
