@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="navbar-bg">
+    <ion-title>How-To Videos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="video-page-content">
+
+  <button ion-button color="danger" (click)="dismiss()">Back to your Dashboard</button>
+
+  <ion-list class="top-margin">
+    <ion-list-header>How-To: Manage and download session data</ion-list-header>
+    <ion-item>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/LaWzaZRik0M?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="isAdmin">
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Manage user accounts</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/hoC1sXPDxSg?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Manage groups, schools, and cohorts</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/sk3sTJjydvM?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Set up a teacher's tablet</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/cug_DdG6-vk?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Set up a student's tablet</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/U809gG1KSOk?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Reset a teacher's tablet</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VHD2Td83ZUE?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>How-To: Reset a student's tablet</ion-list-header>
+      <ion-item>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/rhRHie9EaqM?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </ion-item>
+    </ion-list>
+    <ion-list class="top-margin">
+      <ion-list-header>
+        <button ion-button color="danger" (click)="dismiss()">Back to your Dashboard</button>
+      </ion-list-header>
+    </ion-list>
+  </div>
+
+</ion-content>

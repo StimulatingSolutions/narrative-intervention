@@ -1,9 +1,23 @@
 {
   "name": "narrative-intervention",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
+  "version": "1.0.0",
+  "author": {
+    "name": "Stimulating Solutions, LLC",
+    "email": "contact@stimulating-solutions.com",
+    "url": "https://www.stimulating-solutions.com/"
+  },
+  "contributors": [
+    {
+      "name": "Joe Ibershoff",
+      "email": "joe@stimulating-solutions.com"
+    },{
+      "name": "Jason Hettmansperger",
+      "email": "jason@stimulating-solutions.com"
+    }
+  ],
+  "repository": "https://github.com/StimulatingSolutions/narrative-intervention",
+  "homepage": "https://narrative-intervention.stimulating-solutions.com/",
+  "license": "MIT",
   "scripts": {
     "api": "cd api && meteor run",
     "clean": "ionic-app-scripts clean",
@@ -74,7 +88,7 @@
     "typescript": "^2.6.1",
     "typescript-extends": "^1.0.1"
   },
-  "description": "An Ionic project",
+  "description": "An android app and webapp to facilitate the Narrative Structure Intervention developed by University of Kentucky Department of Psychology",
   "config": {
     "ionic_webpack": "./webpack.config.js"
   },
