@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import initializeEmailTemplates from './emailTemplates';
 
-import * as _ from 'lodash';
+import {difference, includes} from 'lodash';
 import {User} from "./models";
 import {ResponseMetadata, Schools, Sessions, StudentResponses} from "./collections";
 
@@ -12,11 +12,11 @@ Meteor.startup(() => {
   //SETUP USER ROLES
   const rolesList = ['teacher', 'researcher', 'admin', 'active', 'deactive'];
   const currentRoles = Roles.getAllRoles().map( role => {return role.name});
-  const missingRoles = _.difference(rolesList, currentRoles);
+  const missingRoles = difference(rolesList, currentRoles);
   missingRoles.forEach( missingRole => {
     Roles.createRole(missingRole);
   });
-  const extraRoles = _.difference(currentRoles, rolesList);
+  const extraRoles = difference(currentRoles, rolesList);
   extraRoles.forEach( extraRole => {
     let usersWithExtraRole: User[] = Roles.getUsersInRole(extraRole).fetch();
     Roles.removeUsersFromRoles(usersWithExtraRole, extraRole);
@@ -52,7 +52,7 @@ Meteor.startup(() => {
       if (!attempt.allowed){
         return false;
       }
-      return _.includes(attempt.user.roles, 'active');
+      return includes(attempt.user.roles, 'active');
     }
 
     if (attempt.type === 'resume'){

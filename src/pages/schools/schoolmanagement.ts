@@ -6,7 +6,6 @@ import { School } from 'api/models';
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 
-//import * as _ from 'lodash';
 
 @Component({
   selector: 'schoolmanagement',

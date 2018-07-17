@@ -11,7 +11,7 @@ import { UserManagementPage } from '../usermanagement/usermanagement';
 import { SchoolManagementPage } from '../schools/schoolmanagement';
 import { availableLessons } from './availableLessons';
 
-import * as _ from 'lodash';
+import {intersection} from 'lodash';
 import {TeacherSessionPage} from "../teacherSession/teacherSession";
 import * as moment from "moment";
 import {ErrorAlert} from "../../services/errorAlert";
@@ -54,8 +54,8 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       next: (result: string[]) => {
         this.showUserManagement = result.indexOf('admin') !== -1;
         this.showSchoolManagement = this.showUserManagement;
-        this.showDataManagement = !!_.intersection(result, ['admin', 'researcher']).length;
-        this.showSessionManagement = !!_.intersection(result, ['admin', 'teacher']).length;
+        this.showDataManagement = !!intersection(result, ['admin', 'researcher']).length;
+        this.showSessionManagement = !!intersection(result, ['admin', 'teacher']).length;
         this.isAdmin = result.indexOf('admin') !== -1;
       },
       error: this.errorAlert.presenter(2)
