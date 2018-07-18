@@ -8,20 +8,22 @@
 
   <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers, Researchers, and Admins:</ion-list-header>
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input [(ngModel)]="loginEmail" type="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input [(ngModel)]="loginPassword" type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-buttons class='action-buttons'>
-        <button ion-button (click)="login()">Login</button>
-        <button ion-button class="right" color="warning" (click)="resetUserPassword()">Reset Password</button>
-      </ion-buttons>
-    </ion-item>
+    <form (submit)="login()">
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input [(ngModel)]="loginEmail" type="email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [(ngModel)]="loginPassword" name="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item class="no-border">
+        <ion-buttons class='action-buttons'>
+          <button type="submit" ion-button (click)="login()">Login</button>
+          <button type="button" ion-button class="right" color="warning" (click)="resetUserPassword()">Reset Password</button>
+        </ion-buttons>
+      </ion-item>
+    </form>
   </ion-list>
 
   <ion-list class="top-margin" *ngIf="device === 'student' || device === 'web'">
