@@ -13,6 +13,6 @@ export class LoginHelpPage {
   ) { }
 
   dismiss() {
-    this.navCtrl.goToRoot({});
+    this.navCtrl.pop();
   }
 }

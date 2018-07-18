@@ -18,6 +18,7 @@ import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {DataManagementPage} from "../dataManagement/dataManagement";
 import {VideosPage} from "../videos/videos";
+import {AboutSoftwarePage} from "../about-software/about-software";
 
 @Component({
   selector: 'welcome',
@@ -277,8 +278,7 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   }
 
   about(): void {
-    // go to About page
-    //this.navCtrl.push(LoginPage, {});
+    this.navCtrl.push(AboutSoftwarePage, {});
   }
 
   videos(): void {

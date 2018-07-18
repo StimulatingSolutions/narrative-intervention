@@ -71,7 +71,7 @@ ion-navbar, ion-header, ion-content {
 }
 
 .top-margin {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 
 ion-list-header {
@@ -161,8 +161,8 @@ button[ion-button] {
   border: 0 !important;
 }
 
-button.space-left {
-  margin-left: 80px;
+button.right {
+  float: right;
 }
 
 ion-label .notes {
@@ -176,4 +176,35 @@ ion-label .notes {
 .item-md .item-button {
   padding: 0 1.1em !important;
   height: 3.6rem !important;
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
+
+.license-text {
+  white-space: pre-wrap;
+  background-color: #EEE;
+  word-break: keep-all;
+  padding: 16px;
+  font-family: monospace;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #666;
+}
+
+.info-value {
+  font-family: monospace;
+}
+
+.outdent {
+  text-indent: -15px;
+  padding-left: 15px;
+}
+
+.no-border .item-inner {
+  border: 0 !important;
 }

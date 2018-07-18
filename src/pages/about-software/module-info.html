@@ -1,0 +1,20 @@
+<ion-item text-wrap>
+  <div *ngIf="info.owners">
+    <div class="outdent"><span class="info-label">NPM Package Name:</span> <span class="info-value">{{info.name}}</span></div>
+    <div class="outdent"><span class="info-label">NPM Package Version:</span> <span class="info-value">{{info.version}}</span></div>
+    <div class="outdent"><span class="info-label">NPM Package URL:</span> <span class="info-value">https://www.npmjs.com/package/{{info.name}}</span></div>
+    <div class="outdent"><span class="info-label">NPM Owner(s):</span> <span class="info-value">{{info.owners}}</span></div>
+  </div>
+  <div class="outdent" *ngIf="info.respository"><span class="info-label">Official Repository:</span> <span class="info-value">{{info.respository}}</span></div>
+  <div class="outdent" *ngIf="info.publisher"><span class="info-label">Author(s):</span> <span class="info-value">{{info.publisher}}</span></div>
+  <div class="outdent" *ngIf="info.email"><span class="info-label">Author email:</span> <span class="info-value">{{info.email}}</span></div>
+  <div class="outdent" *ngIf="info.url"><span class="info-label">Author URL:</span> <span class="info-value">{{info.url}}</span></div>
+  <div class="outdent" *ngIf="info.copyright && !disallowCopyright"><span class="info-label">Copyright:</span> <span class="info-value">{{info.copyright}}</span></div>
+  <div class="outdent" *ngIf="!info.copyright && !disallowCopyright">
+    <span class="info-label">No explicit copyright notice could be found for this package. Copyright is presumed to be
+      held by the author(s), or possibly the NPM owner(s).
+    </span>
+  </div>
+  <div class="outdent" *ngIf="info.notice"><span class="info-label">The following notice or license exceptions apply:</span></div>
+  <div class="license-text" *ngIf="info.notice">{{info.notice}}</div>
+</ion-item>

@@ -11,6 +11,7 @@ import {School} from "api/models";
 import {Schools} from "api/collections";
 import {DeviceDetector} from "../../util/deviceDetector";
 import {LoginHelpPage} from "../loginHelp/loginHelp";
+import {AboutSoftwarePage} from "../about-software/about-software";
 
 
 @Component({
@@ -153,8 +154,7 @@ export class LoginPage extends DestructionAwareComponent {
   }
 
   about(): void {
-    // go to About page
-    //this.navCtrl.push(LoginPage, {});
+    this.navCtrl.push(AboutSoftwarePage, {});
   }
 
   help(): void {

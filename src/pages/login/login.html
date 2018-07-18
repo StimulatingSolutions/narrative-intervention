@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content padding class="login-page-content">
-  <ion-list *ngIf="device === 'teacher' || device === 'web'">
+
+  <ion-list class="top-margin" *ngIf="device === 'teacher' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Teachers, Researchers, and Admins:</ion-list-header>
     <ion-item>
       <ion-label floating>Email</ion-label>
@@ -18,25 +19,27 @@
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="login()">Login</button>
-        <button ion-button class="space-left" color="warning" (click)="resetUserPassword()">Reset Password</button>
+        <button ion-button class="right" color="warning" (click)="resetUserPassword()">Reset Password</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
+
   <ion-list class="top-margin" *ngIf="device === 'student' || device === 'web'">
     <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button (click)="chooseSchool('join')">Join Session</button>
-        <button ion-button class="space-left" color="secondary" (click)="chooseSchool('demo')">Start Student Demonstration</button>
+        <button ion-button class="right" color="secondary" (click)="chooseSchool('demo')">Start Student Demonstration</button>
       </ion-buttons>
     </ion-item>
   </ion-list>
+
   <ion-list class="top-margin">
     <ion-list-header class="form-header">Questions?</ion-list-header>
     <ion-item>
       <ion-buttons class='action-buttons'>
         <button ion-button color="danger" (click)="about()">About This Software</button>
-        <button ion-button class="space-left" color="danger" *ngIf="device === 'teacher' || device === 'web'" (click)="help()">Help!</button>
+        <button ion-button class="right" color="danger" *ngIf="device === 'teacher' || device === 'web'" (click)="help()">Help!</button>
       </ion-buttons>
     </ion-item>
   </ion-list>

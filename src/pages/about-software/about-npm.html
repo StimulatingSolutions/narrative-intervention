@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="navbar-bg">
+    <ion-title>About NPM Third Party Software</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="about-npm-content">
+
+  <button class="top-margin" ion-button color="danger" (click)="dismiss()">Back to where you were</button>
+
+  <ion-card class="top-margin">
+    <ion-list>
+      <ion-list-header>
+        NPM Package Licensing and Copyright
+      </ion-list-header>
+      <ion-item text-wrap>
+        The Narrative Structure app (webapp, Android app for teachers, and Android app for students) makes use of software
+        written by third parties.  No one truly writes software "from scratch" nowadays; we all stand on the shoulders of giants.
+        Although no software (in source code or binary format) written by third parties is included in the repository for
+        this app's source code, some of that software is transformed, statically linked, and/or distributed within the
+        running app as part of standard "vendor.js" webapp practices, and/or as part of the Android apk install files.
+      </ion-item>
+      <ion-item text-wrap>
+        The software packages listed below were all obtained via NPM (Node Package Manager: https://www.npmjs.com/) using
+        the package name and version number given.  The package details below are grouped by the license under which each
+        package's use is allowed:
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card class="top-margin" *ngFor="let licenceId of licenseInfo.order">
+    <ion-card-header>{{licenceId}}</ion-card-header>
+    <div class="license-text">{{licenseText[licenceId].fullText}}</div>
+    <ion-list>
+      <ion-list-header>Applicable Packages:</ion-list-header>
+      <module-info *ngFor="let packageInfo of licenseInfo.licensedDependencies[licenceId]" [info]="packageInfo" [disallowCopyright]="!!licenseText[licenceId].disallowCopyright"></module-info>
+    </ion-list>
+  </ion-card>
+
+  <button class="top-margin" ion-button color="danger" (click)="dismiss()">Back to where you were</button>
+
+</ion-content>

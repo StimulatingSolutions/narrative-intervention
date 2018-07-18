@@ -1,61 +1,64 @@
 <ion-header>
   <ion-navbar color="navbar-bg">
-    <ion-title>How-To Videos</ion-title>
+    <ion-title>About This Software</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="video-page-content">
+<ion-content padding class="about-software-content">
 
-  <button ion-button color="danger" (click)="dismiss()">Back to your Dashboard</button>
+  <button class="top-margin" ion-button color="danger" (click)="dismiss()">Back to where you were</button>
 
-  <ion-list class="top-margin">
-    <ion-list-header>How-To: Manage and download session data</ion-list-header>
-    <ion-item>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/LaWzaZRik0M?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </ion-item>
-  </ion-list>
-  <div *ngIf="isAdmin">
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Manage user accounts</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/hoC1sXPDxSg?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Manage groups, schools, and cohorts</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/sk3sTJjydvM?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Set up a teacher's tablet</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/cug_DdG6-vk?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Set up a student's tablet</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/U809gG1KSOk?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Reset a teacher's tablet</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/VHD2Td83ZUE?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
-      <ion-list-header>How-To: Reset a student's tablet</ion-list-header>
-      <ion-item>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/rhRHie9EaqM?rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ion-item>
-    </ion-list>
-    <ion-list class="top-margin">
+  <ion-card class="top-margin">
+    <ion-list>
       <ion-list-header>
-        <button ion-button color="danger" (click)="dismiss()">Back to your Dashboard</button>
+        About This Software
       </ion-list-header>
+      <ion-item text-wrap>
+        The Narrative Structure app (webapp, Android app for teachers, and Android app for students)
+        was designed and developed by Stimulating Solutions, LLC
+        <span class="nobr">&lt;contact@stimulating-solutions.com&gt;</span>
+        <span class="nobr">(www.stimulating-solutions.com)</span>
+        on behalf of the University of Kentucky Department of Psychology to facilitate the use and
+        validation of the Narrative Structure Intervention.
+      </ion-item>
+      <module-info class="no-border" [info]="licenseInfo.mainInfo" [disallowCopyright]="!!licenseInfo.mainInfo.disallowCopyright"></module-info>
     </ion-list>
-  </div>
+  </ion-card>
+
+  <ion-card class="top-margin">
+    <ion-list>
+      <ion-list-header>
+        Obtaining and Licensing This Software
+      </ion-list-header>
+      <ion-item text-wrap>
+        The source code for this app is available at {{licenseInfo.mainInfo.repository}} under the following license:
+      </ion-item>
+      <div class="license-text">{{licenseText[licenseInfo.mainInfo.licenses].fullText.replace(licenseInfo.mainInfo.copyrightSwap, licenseInfo.mainInfo.copyright)}}</div>
+    </ion-list>
+  </ion-card>
+
+  <ion-card class="top-margin">
+    <ion-list>
+      <ion-list-header>
+        Third Party Licensing and Copyright
+      </ion-list-header>
+      <ion-item text-wrap>
+        The Narrative Structure app (webapp, Android app for teachers, and Android app for students) makes use of software
+        written by third parties.  No one truly writes software "from scratch" nowadays; we all stand on the shoulders of giants.
+        Although no software (in source code or binary format) written by third parties is included in the repository for
+        this app's source code, some of that software is transformed, statically linked, and/or distributed within the
+        running app as part of standard "vendor.js" webapp practices, and/or as part of the Android apk install files.
+      </ion-item>
+      <ion-item text-wrap>
+        For details (including copyright) about third party software packages which may be so distributed to you in the course
+        of your installation and use of this webapp / Android app:
+        <br/>
+        <button ion-button color="warning" (click)="npmDetails()">View NPM Package Licensing and Copyright Details</button>
+        <button ion-button color="warning" (click)="meteorDetails()">View Meteor Package Licensing and Copyright Details</button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <button class="top-margin" ion-button color="danger" (click)="dismiss()">Back to where you were</button>
 
 </ion-content>
