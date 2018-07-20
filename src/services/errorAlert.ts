@@ -5,7 +5,7 @@ import {AlertController} from "ionic-angular";
 export class ErrorAlert {
   constructor(private alertCtrl: AlertController) {}
 
-  public present(e: Error, id: number): void {
+  public present(e: Error | string, id: number): void {
     console.error(e);
 
     let content:any = {
@@ -13,7 +13,7 @@ export class ErrorAlert {
       buttons: ['OK'],
       cssClass: 'error-alert'
     };
-    if (e && e.message) {
+    if ((e instanceof Error) && e.message) {
       content.message = e.message;
     } else {
       content.message = ((typeof e) === 'string') ? e : JSON.stringify(e);

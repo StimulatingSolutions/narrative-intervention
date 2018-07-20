@@ -155,7 +155,11 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
     if (activeSessionsForGroup.length == 0) {
       this.errorAlert.present(new Error(`Group ${school.idNumber} has no active sessions right now.`), 1);
     } else if (activeSessionsForGroup.length == 1) {
-      this.joinSession(activeSessionsForGroup[0]._id);
+      if (activeSessionsForGroup[0].creatorsId == Meteor.user()._id) {
+        this.errorAlert.present("You can't join a session you created as co-teacher.", 15);
+      } else {
+        this.joinSession(activeSessionsForGroup[0]._id);
+      }
     } else {
       let sessionAlert = this.alertCtrl.create();
       sessionAlert.setCssClass('wide-input');

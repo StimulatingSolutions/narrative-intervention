@@ -37,8 +37,11 @@ export class Lesson05 implements OnInit {
   }
 
   stepReady(step: Step) {
-    step.done = this.session.completedSteps[step.stepId];
     this.steps[step.stepId] = step;
+    if (!this.headTeacher) {
+      return;
+    }
+    step.done = this.session.completedSteps[step.stepId];
   }
 
   getCounts(): string {
