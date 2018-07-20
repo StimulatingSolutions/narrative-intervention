@@ -80,7 +80,7 @@ export class Step implements OnInit {
       return;
     }
 
-    if (this.session.questionStepId || this.session.openResponse && this.questionType) {
+    if ((!this.session.openResponse && this.session.questionStepId) || (this.session.openResponse && this.questionType)) {
       // in regular question mode when clicking any step, or open response mode when clicking a question, animate and block
       Step.doneAdd('show-warning');
       setTimeout(() => {

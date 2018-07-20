@@ -460,6 +460,7 @@ let methods = {
       'QuestionIteration',
       'QuestionTypeID',
       'QuestionType',
+      'OpenResponse',
       'CorrectResponseID',
       'CorrectResponse',
       'StudentID',
@@ -495,9 +496,6 @@ let methods = {
     for (let response of responses) {
       let md: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`];
       let mdPrior: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration-1}`];
-      if (md.openResponse) {
-        continue;
-      }
       let data: DownloadedEvent = <DownloadedEvent>response;
       data.HeadTeacherID = sessions[data.SessionID].creatorsId;
       data.HeadTeacherName = sessions[data.SessionID].creatorsName;
@@ -510,6 +508,7 @@ let methods = {
       data.SessionTime = timestamp.format('HH:mm');
       data.QuestionType = sessions[data.SessionID].questionType;
       data.QuestionTypeID = getQuestionTypeId(sessions[data.SessionID].questionType);
+      data.OpenResponse = !!md.openResponse;
       data.CorrectResponse = md.correctResponse;
       data.CorrectResponseID = getResponseId(md.correctResponse);
       data.StudentResponseID = getResponseId(data.StudentResponse);

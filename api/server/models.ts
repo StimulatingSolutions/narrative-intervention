@@ -77,6 +77,7 @@ export interface DownloadedEvent extends StudentResponse {
   SessionTime: string,
   QuestionTypeID: number,
   QuestionType: string,
+  OpenResponse: boolean,
   CorrectResponse: string,
   CorrectResponseID: number,
   StudentResponseID: number,
