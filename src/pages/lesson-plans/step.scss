@@ -2,7 +2,7 @@ step {
   //background-color: #FFE;
   //border: 1px dotted lightgrey;
   padding: .01in .5in .01in .85in;
-  margin: 0 -.5in 0 -.75in;
+  margin: 0 -.5in 0 -.24in;
   display: block;
   min-height: 60px;
   &[questiontype] {
@@ -73,5 +73,9 @@ li li step {
       border-color: #BEB;
       background-color: #BEB;
     }
+  }
+  img {
+    display: block;
+    margin: 10px auto 0;
   }
 }

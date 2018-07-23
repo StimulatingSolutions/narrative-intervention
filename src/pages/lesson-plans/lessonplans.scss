@@ -1,6 +1,7 @@
 .lessons-container {
 
   .lesson-plan-wrapper {
+    //font-family: "Times New Roman", Georgia, serif;
     overflow: hidden;
     margin: 0 auto;
     background-color: white;
@@ -13,10 +14,69 @@
   h2 {
     font-size: 3.0rem;
   }
+  div {
+    line-height: 115%;
+    font-size: 20px;
+    .left {
+      display: inline-block;
+      width: 16%;
+      vertical-align: top;
+      float: none;
+    }
+    .right {
+      display: inline-block;
+      width: 83.2%;
+      vertical-align: top;
+      float: none;
+    }
+  }
+  .heading {
+    padding: .125in 8px;
+  }
+  .as-step {
+    padding: 5px;
+    border: 3px solid transparent;
+    margin-left: .61in;
+  }
+  li .as-step {
+    padding: 5px;
+    border: 3px solid transparent;
+    margin-left: 0;
+  }
+  .bullet {
+    position: absolute;
+    margin-left: -.25in;
+  }
   p {
     margin: 0;
     line-height: 115%;
     font-size: 20px;
+    position: relative;
+  }
+  .line-after {
+    margin-bottom: 20px !important;
+  }
+  .line-before {
+    margin-top: 20px !important;
+  }
+  p.heading + p, .hint p + p {
+    margin-top: 0;
+  }
+  p + p, .right + p, .right + .left, .right + .left + .right {
+    margin-top: 20px;
+    &.heading {
+      margin-top: 0;
+    }
+    &.heading {
+      margin-top: 0;
+    }
+  }
+  .tablets-only > p {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  ol.numbers li {
+    list-style-type: decimal;
   }
   .center {
     text-align: center;
@@ -25,6 +85,12 @@
     margin: 0;
     li {
       list-style-type: lower-alpha;
+      margin-left: .2in;
+      step {
+        margin-right: -.5in;
+        margin-left: -.85in;
+        padding-left: .85in;
+      }
     }
     ol {
       li {
@@ -42,22 +108,28 @@
     margin: 0;
     padding-bottom: .125in;
   }
-  .triple-border-1 {
-    border: 2px solid #CCC;
-    margin: 0 0 .125in;
+  .events {
+    background-color: lightgrey;
+    padding: .125in;
   }
-  .triple-border-2 {
-    border: 4px solid #888;
+  .tablets-only {
+    background-color: lightgrey;
+    border: 3px solid #000;
+    padding: .125in;
   }
-  .triple-border-3 {
-    border: 2px solid #000;
+  .black-border {
+    border: 3px solid #000;
     padding: 0 .125in;
     hr {
       margin: 0 -.05in;
+      background-color: darkgrey;
     }
     ul {
       padding-left: .3in;
     }
+  }
+  hr {
+    height: 2px;
   }
   hr.page-break {
     margin: .5in -.25in;
@@ -101,6 +173,9 @@
         }
       }
     }
+  }
+  .grey-bg {
+    background-color: lightgrey;
   }
   .instructions {
     margin: .125in 0 .125in -18px;

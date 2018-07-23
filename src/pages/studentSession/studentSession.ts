@@ -9,6 +9,8 @@ import { LoginPage } from '../login/login';
 
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {DeviceDetector} from "../../util/deviceDetector";
+import {preloadImage} from "../../util/preloadImage";
+
 @Component({
   selector: 'studentSession',
   templateUrl: 'studentSession.html'
@@ -19,7 +21,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   studentNumber: number;
   demo: boolean;
   session: Session;
-  preloads: any = {};
   demoResponse: string;
 
   constructor(
@@ -28,30 +29,10 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     private ref: ChangeDetectorRef,
   ) {
     super();
-    this.preloadImage('try', 500);
-    this.preloadImage('goal', 500);
-    this.preloadImage('outcome-fail', 500);
-    this.preloadImage('outcome-yes', 500);
-  }
-
-  preloadImage(name: string, delay: number) {
-    let img: HTMLImageElement = new Image();
-    this.preloads[name] = img;
-    let timeout = setTimeout(img.onerror, 1000+delay);
-    img.onerror = () => {
-      img.onerror = null;
-      img.onabort = null;
-      img.onload = null;
-      clearTimeout(timeout);
-      setTimeout(this.preloadImage.bind(this, name, Math.min(delay+100, 5000)), delay);
-    };
-    img.onabort = <(UIError)=>any> img.onerror;
-    img.onload = () => {
-      if (img.width !== 1104 || img.width !== 1104) {
-        img.onerror(null);
-      }
-    };
-    img.src = `/assets/imgs/${name}.png`;
+    preloadImage('try', 1104, 1104, 500);
+    preloadImage('goal', 1104, 1104, 500);
+    preloadImage('outcome-fail', 1104, 1104, 500);
+    preloadImage('outcome-yes', 1104, 1104, 500);
   }
 
   ngDoCheck(): void {

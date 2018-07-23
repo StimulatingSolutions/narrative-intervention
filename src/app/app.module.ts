@@ -20,9 +20,10 @@ import { MyApp } from './app.component';
 import { LoginHelpPage } from "../pages/loginHelp/loginHelp";
 import { VideosPage } from "../pages/videos/videos";
 import {AboutSoftwarePage} from "../pages/about-software/about-software";
-import {ModuleInfo} from "../pages/about-software/module-info";
 import {AboutNpmPage} from "../pages/about-software/about-npm";
 import {AboutMeteorPage} from "../pages/about-software/about-meteor";
+import {ModuleInfo} from "../pages/about-software/module-info";
+import { Lesson01 } from '../pages/lesson-plans/lesson01/lesson-01';
 import { Lesson05 } from '../pages/lesson-plans/lesson05/lesson-05';
 import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
 
@@ -49,9 +50,9 @@ require('smoothscroll-polyfill').polyfill();
     AboutNpmPage,
     AboutMeteorPage,
     LessonPlans,
+    Lesson01,
     Lesson05,
     Lesson06,
-
     Step
   ],
   imports: [
@@ -77,9 +78,9 @@ require('smoothscroll-polyfill').polyfill();
     AboutNpmPage,
     AboutMeteorPage,
     LessonPlans,
+    Lesson01,
     Lesson05,
     Lesson06,
-
     Step
   ],
   providers: [

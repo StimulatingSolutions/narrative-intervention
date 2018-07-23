@@ -39,7 +39,25 @@ WITH THE FILES OR THE USE OR OTHER DEALINGS IN THE FILES.
 
 ------------------------------------------------------------------------------
 
-### Lesson Plans
+### Lesson Plans (docx)
+
+* src/assets/lesson-plans/lesson-01.docx
+* src/assets/lesson-plans/lesson-02.docx
+* src/assets/lesson-plans/lesson-03.docx
+* src/assets/lesson-plans/lesson-04.docx
+* src/assets/lesson-plans/lesson-05.docx
+* src/assets/lesson-plans/lesson-06.docx
+* src/assets/lesson-plans/lesson-07.docx
+* src/assets/lesson-plans/lesson-08.docx
+* src/assets/lesson-plans/lesson-09.docx
+* src/assets/lesson-plans/lesson-10.docx
+* src/assets/lesson-plans/lesson-11.docx
+* src/assets/lesson-plans/lesson-12.docx
+* src/assets/lesson-plans/lesson-13.docx
+* src/assets/lesson-plans/lesson-14.docx
+* src/assets/lesson-plans/lesson-15.docx
+
+### Lesson Plans (html)
 
 * src/pages/lesson-plans/lesson01/lesson-01.html
 * src/pages/lesson-plans/lesson02/lesson-02.html
@@ -56,6 +74,12 @@ WITH THE FILES OR THE USE OR OTHER DEALINGS IN THE FILES.
 * src/pages/lesson-plans/lesson13/lesson-13.html
 * src/pages/lesson-plans/lesson14/lesson-14.html
 * src/pages/lesson-plans/lesson15/lesson-15.html
+
+### Lesson Plan Images
+
+* src/assets/imgs/because.png
+* src/assets/imgs/what.png
+* src/assets/imgs/why.png
 
 ### Student Response Images
 

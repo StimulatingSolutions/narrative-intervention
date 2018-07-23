@@ -1,0 +1,195 @@
+<html><head><style>
+  body { background-color: lightgrey; }
+  .lessons-container {
+    max-width: 800px;
+  }
+  .lessons-container .lesson-plan-wrapper {
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: white;
+    padding-left: 0.1in;
+  }
+  .lessons-container lesson-plan {
+    padding: 0.25in 0.5in 0.5in;
+    display: block;
+  }
+  .lessons-container h2 {
+    font-size: 3rem;
+  }
+  .lessons-container p {
+    margin: 0;
+    line-height: 115%;
+    font-size: 20px;
+  }
+  .lessons-container .center {
+    text-align: center;
+  }
+  .lessons-container ol {
+    margin: 0;
+  }
+  .lessons-container ol li {
+    list-style-type: lower-alpha;
+  }
+  .lessons-container ol ol li {
+    list-style-type: decimal;
+  }
+  .lessons-container ol ul {
+    padding-bottom: 0;
+  }
+  .lessons-container ol ul li {
+    list-style-type: disc;
+  }
+  .lessons-container ul {
+    margin: 0;
+    padding-bottom: 0.125in;
+  }
+  .lessons-container .black-border {
+    border: 2px solid #000;
+    padding: 0 0.125in;
+  }
+  .lessons-container .black-border hr {
+    margin: 0 -0.05in;
+  }
+  .lessons-container .black-border ul {
+    padding-left: 0.3in;
+  }
+  .lessons-container hr.page-break {
+    margin: 0.5in -0.25in;
+  }
+  .lessons-container .v-padding {
+    padding: 0.125in 0;
+  }
+  .lessons-container .bullet-heading {
+    padding-left: 0.25in;
+  }
+  .lessons-container blockquote {
+    margin-top: 0;
+    margin-right: 0;
+  }
+  .lessons-container ol .hint {
+    margin-left: -40px;
+  }
+  .lessons-container .hint {
+    background-color: #eee;
+    border: 1px dashed black;
+    margin: 0.125in 0 0.125in 0;
+    padding: 0.125in 0.25in;
+  }
+  .lessons-container .hint li {
+    padding: 0.0625in 0;
+  }
+  .lessons-container .hint li p {
+    padding: 0;
+  }
+  .lessons-container .hint p {
+    padding: 0.0625in 0;
+  }
+  .lessons-container .hint .t-bullets li {
+    list-style-type: none;
+    position: relative;
+  }
+  .lessons-container .hint .t-bullets li:before {
+    padding: 0;
+    content: "T:";
+    position: absolute;
+    left: -0.25in;
+  }
+  .lessons-container .instructions {
+    margin: 0.125in 0 0.125in -18px;
+    padding: 3px;
+    background-color: lightgrey;
+  }
+  .lessons-container .instructions p {
+    padding: 0.0625in 0;
+  }
+  .lessons-container .instructions li step p {
+    padding: 0;
+  }
+  .lessons-container .no-bullets li {
+    list-style-type: none;
+  }
+  .lessons-container .end-warning {
+    text-align: center;
+    padding: 30px 0;
+    margin: 20px 0;
+    font-size: 80px;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+  .lessons-container .end-count {
+    text-align: center;
+    padding: 30px 0;
+    margin: 20px 0;
+    font-size: 40px;
+  }
+  step {
+    padding: 0.01in 0.5in 0.01in 0.85in;
+    margin: 0 -0.5in 0 -0.75in;
+    display: block;
+    min-height: 60px;
+    position: relative;
+  }
+  step[questiontype] {
+    padding-top: 0.1in;
+    padding-bottom: 0.1in;
+  }
+  step[questiontype] .done-checkbox {
+    top: 0;
+    padding-top: 0.2025in;
+  }
+  step .done-checkbox-buffer {
+    height: 65px;
+    width: 87px;
+    top: -0.3in !important;
+  }
+  step .done-checkbox, step .done-checkbox-buffer {
+    cursor: pointer;
+    position: absolute;
+    left: 0.28in;
+    font-size: 32px;
+    top: 2px;
+    padding: 0.125in 0.3in 0.3in;
+    margin: -0.125in -0.3in -0.3in;
+    color: #00f;
+  }
+  step .done-checkbox ion-icon[name="checkbox-outline"], step .done-checkbox-buffer ion-icon[name="checkbox-outline"] {
+    color: #000;
+    opacity: 0.6;
+  }
+  step .done-checkbox {
+    z-index: 1;
+  }
+  li li step {
+    padding-left: 1.26in;
+    margin-left: -1.16in;
+  }
+  .instructions step {
+    padding-left: 0.69in;
+    margin-left: -0.59in;
+  }
+  .step-content {
+    padding: 5px;
+    border: 3px solid transparent;
+  }
+  .step-content.subdued {
+    opacity: 0.7;
+  }
+  .step-content.highlighted {
+    border-color: #ee1;
+    background-color: #ee1;
+  }
+  .step-content.question {
+    border-color: #ebb;
+  }
+  .step-content.question.open-response {
+    border-color: #beb;
+  }
+  .step-content.active-question {
+    border-color: #ebb;
+    background-color: #ebb;
+  }
+  .step-content.active-question.open-response {
+    border-color: #beb;
+    background-color: #beb;
+  }
+</style></head><body><div class="lessons-container"><div class="lesson-plan-wrapper">
