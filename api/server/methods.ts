@@ -477,7 +477,7 @@ let methods = {
     for (let session of Sessions.find({_id: {$in: sessionIds}}).fetch()) {
       sessions[session._id] = session;
     }
-    let metadata: MetadataEvent[] = ResponseMetadata.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
+    let metadata: MetadataEvent[] = ResponseMetadata.find({SessionID: {$in: sessionIds}}, {sort: {timestamp: 1}}).fetch();
     let questionMetadata: { [k: string]: MetadataEvent } = {};
     let responseCounts: { [k: string]: { [k: string]: number } } = {};
     for (let event of metadata) {
@@ -492,7 +492,7 @@ let methods = {
       }
     }
 
-    let responses: StudentResponse[] = StudentResponses.find({SessionID: {$in: sessionIds}}, {sort: {creationTimestamp: 1}}).fetch();
+    let responses: StudentResponse[] = StudentResponses.find({SessionID: {$in: sessionIds}}, {sort: {timestamp: 1}}).fetch();
     for (let response of responses) {
       let md: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`];
       let mdPrior: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration-1}`];
