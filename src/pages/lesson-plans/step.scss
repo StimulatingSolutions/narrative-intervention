@@ -34,6 +34,18 @@ step {
       color: #000;
       opacity: .6;
     }
+
+    li li & {
+      margin-left: -.91in;
+    }
+
+    .tablets-only &, .no-tablets & {
+      margin-left: -.34in;
+    }
+
+    .no-tablets & {
+      padding-top: .2025in;
+    }
   }
 
   .done-checkbox {

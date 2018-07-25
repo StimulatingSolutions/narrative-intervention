@@ -5,7 +5,7 @@
     overflow: hidden;
     margin: 0 auto;
     background-color: white;
-    padding-left: .1in;
+    //padding-left: .1in;
   }
   lesson-plan {
     padding: .25in .5in .5in;
@@ -37,6 +37,9 @@
     padding: 5px;
     border: 3px solid transparent;
     margin-left: .61in;
+    &.center {
+      margin-left: 0;
+    }
   }
   li .as-step {
     padding: 5px;
@@ -67,13 +70,9 @@
     &.heading {
       margin-top: 0;
     }
-    &.heading {
+    &.as-step {
       margin-top: 0;
     }
-  }
-  .tablets-only > p {
-    padding-left: 8px;
-    padding-right: 8px;
   }
   ol.numbers li {
     list-style-type: decimal;
@@ -115,7 +114,26 @@
   .tablets-only {
     background-color: lightgrey;
     border: 3px solid #000;
+  }
+  .no-tablets {
+    background-color: #EEE;
+    border: 1px dashed black;
+    step {
+      padding-top: .1in;
+      padding-bottom: .1in;
+    }
+  }
+  .tablets-only, .no-tablets {
     padding: .125in;
+    margin: .125in 0;
+    > p {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+  li .tablets-only, li .no-tablets {
+    margin-left: -59px;
+    padding-left: .74in;
   }
   .black-border {
     border: 3px solid #000;
@@ -145,13 +163,28 @@
     margin-right: 0;
   }
   ol .hint {
-    margin-left: -40px;
+    margin-left: -59px;
   }
   .hint {
     background-color: #EEE;
     border: 1px dashed black;
-    margin: .125in 0 .125in 0;
+    margin: .125in 0;
     padding: .125in .25in;
+    &.connected-below {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    &.connected-above {
+      margin-top: 0;
+    }
+    .compact {
+      padding-top: 0;
+      padding-bottom: 0;
+      li {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
     li {
       padding: .0625in 0;
       p {
