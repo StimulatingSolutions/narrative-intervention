@@ -89,8 +89,6 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
   }
 
   resetUserPassword(): void {
-    console.log('USER!: ', this.userToEdit);
-
     MeteorObservable.call('sendResetUserPasswordEmailFromId', this.userToEdit._id)
     .takeUntil(this.componentDestroyed$)
     .subscribe({
@@ -107,7 +105,6 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
   }
 
   selectUserToEdit(user): void {
-    console.log('selected user: ', user);
     this.userToEdit = user;
     this.editUserName = user.profile.name;
     this.editUserEmail = user.profile.email;

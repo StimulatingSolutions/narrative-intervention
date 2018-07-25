@@ -104,6 +104,9 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<step([^>]*)>\\s*<ul>\\s*<li>([^<]*(?:<(?!/li>)[^<]*)*)\\s*</li>\\s*</ul>\\s*</step>', 'gi'), '<ul>\n<li>\n<step$1>\n$2\n</step>\n</li>\n</ul>');
   s = s.replace(new RegExp('</ul>\\s*<ul>\\s*', 'gi'), '');
 
+  s = s.replace(new RegExp('<p>((?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)', 'i'), '<h2 class="line-before">$1</h2>');
+  s = s.replace(new RegExp('<p>', 'i'), '<p class="line-before">');
+
   s = s.replace(new RegExp('</em>(\\s*):', 'gi'), ':</em>$1');
   s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
   console.log(s);

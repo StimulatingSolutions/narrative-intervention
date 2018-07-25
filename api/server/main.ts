@@ -46,8 +46,6 @@ Meteor.startup(() => {
 
   Accounts.validateLoginAttempt( attempt => {
 
-    //console.log('LOGIN', attempt)
-
     if (attempt.type === 'password'){
       if (!attempt.allowed){
         return false;

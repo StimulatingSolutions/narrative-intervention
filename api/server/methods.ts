@@ -37,7 +37,6 @@ let methods = {
 
     const validRoles = ['active'];
     Roles.getAllRoles().forEach( testRole => {
-      console.log('role', testRole);
       if(testRole.name === role) {
         validRoles.push(role);
       }
@@ -89,7 +88,6 @@ let methods = {
         validRoles.push(role.name);
       }
     });
-    console.log('UPDATE USER ROLES', user._id, validRoles);
     Roles.setUserRoles(user._id, validRoles);
 
     Meteor.users.update(user._id, {
@@ -111,7 +109,6 @@ let methods = {
 
     const validRoles = [];
     Roles.getAllRoles().forEach( role => {
-      console.log('role', role);
       if(includes(roles, role)){
         validRoles.push(role);
       }
@@ -261,7 +258,6 @@ let methods = {
   },
 
   startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean, practice: boolean) {
-    console.log('starting question: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -308,7 +304,6 @@ let methods = {
   },
 
   timerReset(sessionId: string){
-    console.log('timer reset');
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -341,7 +336,6 @@ let methods = {
   },
 
   finishQuestion(sessionId: string){
-    console.log('finishing question');
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -417,7 +411,6 @@ let methods = {
   },
 
   setCurrentStep(sessionId: string, stepId: number, completed: boolean, questionType: string) {
-    console.log('setting current step: ', stepId);
     const session = Sessions.findOne({_id: sessionId});
     if (!session) {
       throw new Meteor.Error('Session Error', 'Session does not exist');

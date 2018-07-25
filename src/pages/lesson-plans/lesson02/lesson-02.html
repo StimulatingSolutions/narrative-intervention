@@ -334,7 +334,7 @@
           </step>
         </li>
       </ul>
-      <div class="hint"><p class="v-padding"><em><strong>Use Completed Lesson 1 Magician Narrative Board for
+      <div class="hint"><p><em><strong>Use Completed Lesson 1 Magician Narrative Board for
         Review: </strong></em></p>
         <p>For the review of the previous magician narrative, the teacher should use a completed Velcro board from the
           Magician Narrative in Lesson 1, which included the events and Because Strings, and point to the board while
@@ -458,7 +458,7 @@
             you
             see it? If you see or hear a goal during a story, I want you to tap on that card on the screen.”</p>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Activate first practice item by tapping the fidelity box to the left.]</p>
           <p>Say: “Can you tap on it now?”</p>
           <p>[Students tap the GOAL card and hold up their tablet.]</p>
@@ -474,7 +474,7 @@
             practice tapping and showing your GOAL card again. Let’s pretend you see or hear a goal. What do you
             do?”</p>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Activate second practice item by tapping the fidelity box to the left.]</p>
           <p>[Students tap the GOAL card and hold up their tablet.]</p>
           <p>[Before pressing the ‘Done’ button on the top right of the screen, teachers should double-check to make
@@ -801,7 +801,7 @@
       </step>
       <div class="tablets-only">
         <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Teacher will activate student responses by tapping the fidelity box to the left.]</p>
           <p>[Students should tap on the GOAL card and hold up their tablet.]</p>
           <p>[Before pressing the ‘Done’ button on the top right of the screen, teachers should double-check to make
@@ -823,7 +823,7 @@
       </div>
       <div class="tablets-only">
         <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Teacher will activate student responses by tapping the fidelity box to the left.]</p>
           <p>[Students should tap the GOAL card and hold up their tablet.]</p>
           <p>[Before pressing the ‘Done’ button on the top right of the screen, teachers should double-check to make
@@ -1457,15 +1457,16 @@
           as I begin to read.”</p>
       </step>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[READ SLIDE 2]</p>
-        <p>“Mr. Penny loved Halloween. He was always in the Halloween play. This year he was going to be the ghost.
+        <p>[READ SLIDE 2]
+          <br/>“Mr. Penny loved Halloween. He was always in the Halloween play. This year he was going to be the ghost.
           (go
           to
           next slide)”</p>
       </step>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[READ SLIDE 3]</p>
-        <p>“On Halloween Mr. Penny headed for town. He met Bert and Laura along the way. ‘Happy HICCUP Halloween.’ ‘Oh
+        <p>[READ SLIDE 3]
+          <br/>“On Halloween Mr. Penny headed for town. He met Bert and Laura along the way. ‘Happy HICCUP Halloween.’
+          ‘Oh
           my,’ said Laura. ‘You have the hiccups.’ ‘All HICCUP day’ said Mr. Penny. ‘That’s too bad,’ said Bert. ‘It’s
           worse than HICCUP bad,’ said Mr. Penny. ‘How can I play HICCUP a ghost with hiccups?” ‘What you need is a
           big
@@ -1740,9 +1741,9 @@
     </ul>
   </div>
   <div class="hint"><p><em><strong>If students start packing up:</strong></em></p>
-      <p>Students may try to get up or start packing their things during the wrap-up. If so they should be instructed
-        that (1) the lesson is not over yet, (2) our group rules still apply, and (3) the teacher will let them know
-        when it is time for them to pack up their things.</p>
+    <p>Students may try to get up or start packing their things during the wrap-up. If so they should be instructed
+      that (1) the lesson is not over yet, (2) our group rules still apply, and (3) the teacher will let them know
+      when it is time for them to pack up their things.</p>
   </div>
   <p class="heading">8. <strong>Closure</strong>
     (2 min.)</p>

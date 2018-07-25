@@ -102,7 +102,7 @@ export class Step implements OnInit {
     this.done = this.questionId ? true : !this.done;
 
     if (this.questionType) {
-      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, this.openResponse, this.errorAlert.handler(16));
+      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, this.openResponse, this.practice == "true", this.errorAlert.handler(16));
       return;
     }
 

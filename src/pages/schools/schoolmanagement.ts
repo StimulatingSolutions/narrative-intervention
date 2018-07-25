@@ -49,7 +49,6 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
 
     //CHECK EMPTYS
     if(!this.addSchoolName || !this.addSchoolNumber || !this.addSchoolCohort){
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+JSON.stringify({addSchoolName: this.addSchoolName, addSchoolNumber: this.addSchoolNumber, addSchoolCohort: this.addSchoolCohort}));
       if (!retry) {
         this.ref.detectChanges();
         setTimeout(()=>{
@@ -79,7 +78,6 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   }
 
   selectSchoolToEdit(school): void {
-    console.log('selected school: ', school);
     this.schoolToEdit = school;
     this.editSchoolName = school.name;
     this.editSchoolNumber = school.idNumber;

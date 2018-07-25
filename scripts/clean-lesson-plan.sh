@@ -16,9 +16,8 @@ cat $TMP_OUTPUT_DIR/lesson-${LESSON_NUM}.tmp2.md | pandoc -f markdown_strict -t 
 if [[ ! -e "./src/pages/lesson-plans/lesson${LESSON_NUM}" ]]
 then
   mkdir -p ./src/pages/lesson-plans/lesson${LESSON_NUM}
-  touch ./src/pages/lesson-plans/lesson${LESSON_NUM}/lesson-${LESSON_NUM}-notes.md
   cat ./src/pages/lesson-plans/lesson.ts.template | sed -e "s/__LESSON_NUM__/${LESSON_NUM}/g"  > ./src/pages/lesson-plans/lesson${LESSON_NUM}/lesson-${LESSON_NUM}.ts
-  ./scripts/rebuild-available-lessons.sh
+  #./scripts/rebuild-available-lessons.sh
 fi
 
 echo -n > ./src/pages/lesson-plans/lesson${LESSON_NUM}/lesson-${LESSON_NUM}.html

@@ -35,11 +35,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
     preloadImage('outcome-yes', 1104, 1104, 500);
   }
 
-  ngDoCheck(): void {
-    //need to know what to display
-    console.log('SESSION QUESTION!', this.session);
-  }
-
   ngOnInit(): void {
     this.studentSessionId = this.navParams.get('sessionId');
     this.studentNumber = this.navParams.get('studentNumber');
@@ -53,7 +48,6 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
       .subscribe(() => {
 
         const updatedSession = Sessions.findOne({_id: this.studentSessionId});
-        console.log(updatedSession);
         this.session = updatedSession;
 
         this.ref.detectChanges();
