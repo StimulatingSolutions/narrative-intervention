@@ -18,25 +18,23 @@
         </div>
       </div>
       <div class="student-list" *ngIf="!session?.review">
-        <div *ngIf="!session?.openResponse">
-          <div class="student" *ngFor="let student of getActiveStudents()">
+        <div class="student" *ngFor="let student of getActiveStudents()">
 
-            <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) === -1">
-                <ion-icon name="radio-button-off"></ion-icon>
-              </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && (!session?.correctAnswer || session?.correctAnswer == session?.responses[student])">
-                <ion-icon name="checkmark-circle"></ion-icon>
-              </div>
-              <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
-                <ion-icon name="close-circle"></ion-icon>
-              </div>
-              <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(student) === -1 || (session?.correctAnswer && session?.correctAnswer != session?.responses[student]))">
-                {{student}}
-              </span>
-              <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1">
-                {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{session?.responses[student]}}
-              </div>
+          <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) === -1">
+              <ion-icon name="radio-button-off"></ion-icon>
+            </div>
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && (!session?.correctAnswer || session?.correctAnswer == session?.responses[student])">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1 && session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
+              <ion-icon name="close-circle"></ion-icon>
+            </div>
+            <span [class.bold]="session?.readyForResponse && (idsWithAnswer.indexOf(student) === -1 || (session?.correctAnswer && session?.correctAnswer != session?.responses[student]))">
+              {{student}}
+            </span>
+            <div class='student-response' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) > -1">
+              {{['difficulty','appeal','efficacy'].indexOf(session.questionType) != -1 ? session.questionType+': ' : ''}}{{session?.responses[student]}}
             </div>
           </div>
         </div>
@@ -74,7 +72,7 @@
             This is a <em>practice</em> question.
           </p>
           <p *ngIf="!session?.correctAnswer && session?.review">
-            This question does not have a designated correct answer<em>{{session?.practice ? ' (practice)' : ''}}</em>.
+            This {{session?.questionType}} question does not have a designated correct answer<em>{{session?.practice ? ' (practice)' : ''}}</em>.
           </p>
           <div class="final-instructions" *ngIf="headTeacher">
             <p class="done-instructions">

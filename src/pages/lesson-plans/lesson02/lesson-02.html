@@ -458,7 +458,8 @@
             you
             see it? If you see or hear a goal during a story, I want you to tap on that card on the screen.”</p>
         </step>
-        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" [practice]="true" correctAnswer="goal" (onReady)="stepReady($event)"
+              [session]="session">
           <p>[Activate first practice item by tapping the fidelity box to the left.]</p>
           <p>Say: “Can you tap on it now?”</p>
           <p>[Students tap the GOAL card and hold up their tablet.]</p>
@@ -474,7 +475,8 @@
             practice tapping and showing your GOAL card again. Let’s pretend you see or hear a goal. What do you
             do?”</p>
         </step>
-        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" [practice]="true" correctAnswer="goal" (onReady)="stepReady($event)"
+              [session]="session">
           <p>[Activate second practice item by tapping the fidelity box to the left.]</p>
           <p>[Students tap the GOAL card and hold up their tablet.]</p>
           <p>[Before pressing the ‘Done’ button on the top right of the screen, teachers should double-check to make
@@ -801,7 +803,8 @@
       </step>
       <div class="tablets-only">
         <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
-        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="goal" [practice]="true" correctAnswer="goal" (onReady)="stepReady($event)"
+              [session]="session">
           <p>[Teacher will activate student responses by tapping the fidelity box to the left.]</p>
           <p>[Students should tap on the GOAL card and hold up their tablet.]</p>
           <p>[Before pressing the ‘Done’ button on the top right of the screen, teachers should double-check to make
@@ -1106,7 +1109,7 @@
             “Now that we have finished the activity I want you to think about how hard it was for you, how much
             you
             liked it, and how much you think you learned. I will ask you a question, and I want you to tap the answer on
-            your tablet that best shows what you think. The answer you choose should have a yellow border around it
+            your tablet that best shows what you think. The answer you choose should have a yellow or green border around it
             after
             you tap it.”
           </div>
@@ -1128,24 +1131,34 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did just now with finding the balloons in the school and the balloon popping activity
             was
             <em>really
               hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or <em>really easy</em>. Think, Ready, Respond.”
-            [Tap
-            the fidelity box to activate response mode]
-            <p class="line-before">[Students respond]</p>
           </div>
         </step>
         <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
+            <p class="line-before">[Students respond]</p>
+          </div>
+        </step>
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to identify GOALS was <em>really hard</em>, <em>hard</em>, <em>okay</em>,
             <em>easy</em>,
-            or <em>really easy</em>. Think, Ready, Respond.” [Tap the fidelity box to activate response mode]
+            or <em>really easy</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -1164,7 +1177,7 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did right now with finding the balloons in the school and the balloon popping
@@ -1172,17 +1185,29 @@
             was
             <em>not fun at all</em>, <em>not really fun</em>, <em>okay</em>, <em>fun</em>, or <em>really fun</em>.
             Think,
-            Ready, Respond.” [Tap the fidelity box to activate response mode]
-            <p class="line-before">[Students respond]</p>
+            Ready, Respond.”
           </div>
         </step>
         <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
+            <p class="line-before">[Students respond]</p>
+          </div>
+        </step>
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to find GOALS was <em>not fun at all</em>, <em>not really fun</em>,
             <em>okay</em>,
             <em>fun</em>,
-            or <em>really fun</em>. Think, Ready, Respond.” [Tap the fidelity box to activate response mode]
+            or <em>really fun</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -1201,23 +1226,27 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify a GOAL in a story <em>I couldn’t do it</em>, <em>I could do
             it
             with
-            help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.” [Tap the fidelity box to activate
-            response
-            mode]
+            help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
       </li>
       <li>
+        <p class="as-step">Co-teacher will circulate to make sure that students are recording their responses accurately on the
+          tablet.</p>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          <p>Co-teacher will circulate to make sure that students are recording their responses accurately on the
-            tablet.</p>
           <p>[Do not collect student tablets. Do not turn them off. Students will use them again after the break.]</p>
         </step>
       </li>
@@ -1374,7 +1403,9 @@
           you
           see a goal. When you hear a goal, tap on the goal card, and hold your tablet up.”</p>
       </div>
-      <p class="as-step center">[If tablets are NOT available: Have students hold up their goal cards.]</p>
+      <div class="no-tablets">
+        <p class="center">[If tablets are NOT available: Have students hold up their goal cards.]</p>
+      </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <ol start="4">
           <li><p>Then we will record that goal on one of these yellow thought bubbles to help us remember what the
@@ -1428,6 +1459,8 @@
           what I am teaching you. The only talking that you will do is if you are confused or don’t understand, you
           should
           ask questions to help you learn what we are doing.”</p>
+      </step>
+      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “So this means during ‘I Do/You Watch’ you will be listening with your ears [point to ears], watching
           with
           your eyes [point to eyes], thinking with your brain [point to brain], and at the end raising with your hand
@@ -1436,11 +1469,10 @@
       </step>
     </li>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[While reading, the Lead Teacher will think aloud to demonstrate his/her thought processes used to identify
-          goals. As well, demonstrate the use of the cards and Goal Organizer/Picture Cards during your think
-          aloud.]</p>
-      </step>
+      <p class="as-step">[While reading, the Lead Teacher will think aloud to demonstrate his/her thought processes used
+        to identify
+        goals. As well, demonstrate the use of the cards and Goal Organizer/Picture Cards during your think
+        aloud.]</p>
       <step class="grey-bg" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p><strong>Think Aloud/Say:</strong> “The main character in this story is Mr. Penny, so I am going to add this
           picture of Mr. Penny to our Velcro board.”</p>
@@ -1532,8 +1564,8 @@
       </step>
     </li>
     <li>
+      <p class="as-step">[Explain to students that we will now be switching to “<strong>I Do/You Help.</strong>”]</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Explain to students that we will now be switching to “<strong>I Do/You Help.</strong>”]</p>
         <p>Say: “We are now going to switch to ‘<strong>I Do/You Help</strong>.’ [<em>Place these roles onto the Roles
           Chart</em>.] That means I’ll be doing some of the talking and explaining, and you all will be helping me
           out.
@@ -1601,7 +1633,7 @@
             “Now that we have finished the activity I want you to think about how hard it was for you, how much
             you
             liked it, and how much you think you learned. I will ask you a question, and I want you to tap the answer on
-            your tablet that best shows what you think. The answer you choose should have a yellow border around it
+            your tablet that best shows what you think. The answer you choose should have a yellow or green border around it
             after
             you tap it.”
           </div>
@@ -1623,22 +1655,32 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did just now with the <em>Ghost with the Halloween Hiccups</em> book activity was <em>really
             hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or <em>really easy</em>. Think, Ready, Respond.”
-            [Tap
-            the fidelity box to activate response mode]
-            <p class="line-before">[Students respond]</p>
           </div>
         </step>
         <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
+            <p class="line-before">[Students respond]</p>
+          </div>
+        </step>
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to identify GOALS was <em>really hard</em>, <em>hard</em>, <em>okay</em>,
             <em>easy</em>,
-            or <em>really easy</em>. Think, Ready, Respond.” [Tap the fidelity box to activate response mode]
+            or <em>really easy</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -1656,22 +1698,34 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did right now with the <em>Ghost with the Halloween Hiccups</em> book activity was <em>not
             fun
             at all</em>, <em>not really fun</em>, <em>okay</em>, <em>fun</em>, or <em>really fun</em>. Think, Ready,
-            Respond.” [Tap the fidelity box to activate response mode]
-            <p class="line-before">[Students respond]</p>
+            Respond.”
           </div>
         </step>
         <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
+            <p class="line-before">[Students respond]</p>
+          </div>
+        </step>
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to find GOALS was <em>not fun at all</em>, <em>not really fun</em>, <em>okay</em>,
             <em>fun</em>,
-            or <em>really fun</em>. Think, Ready, Respond.” [Tap the fidelity box to activate response mode]
+            or <em>really fun</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -1688,14 +1742,18 @@
           for
           students to respond, teachers should tap the fidelity box next to the question to activate response
           mode.]</p>
-        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify a GOAL in a story <em>I couldn’t do it</em>, <em>I could do it
             with
-            help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.” [Tap the fidelity box to activate
-            response
-            mode]
+            help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>

@@ -275,7 +275,7 @@ let methods = {
         questionId: questionId,
         correctAnswer: correctAnswer,
         currentStepId: stepId,
-        openResponse: !!openResponse,
+        openResponse: openResponse,
         responses: session.questionResponses[questionId] || {},
         questionIteration: iteration,
         practice: practice
@@ -286,10 +286,6 @@ let methods = {
     update.$set[`questionResponses.${questionId}`] = update.$set.responses;
     Sessions.update(sessionId, update);
 
-    if (practice) {
-      return;
-    }
-
     let event: MetadataEvent = {
       type: "question-start",
       timestamp: new Date(),
@@ -298,7 +294,8 @@ let methods = {
       SessionID: sessionId,
       QuestionNumber: questionId,
       QuestionIteration: iteration,
-      openResponse: !!openResponse
+      openResponse: openResponse,
+      practice: practice
     };
     ResponseMetadata.insert(event);
   },
@@ -318,10 +315,6 @@ let methods = {
     update.$set[`completedSteps.${session.questionStepId}`] = false;
     update.$set[`questionResponses.${session.questionId}`] = {};
     Sessions.update(sessionId, update);
-
-    if (session.practice) {
-      return;
-    }
 
     let event: MetadataEvent = {
       type: "timer-reset",
@@ -363,10 +356,6 @@ let methods = {
     }
     Sessions.update(sessionId, update);
 
-    if (session.practice) {
-      return;
-    }
-
     let event: MetadataEvent = {
       type: "question-end",
       timestamp: new Date(),
@@ -394,10 +383,6 @@ let methods = {
     update.$set[`responses.${studentNumber}`] = selectedCard;
 
     Sessions.update(sessionId, update);
-
-    if (session.practice) {
-      return;
-    }
 
     let event: StudentResponse = {
       timestamp: new Date(),
@@ -454,6 +439,7 @@ let methods = {
       'QuestionTypeID',
       'QuestionType',
       'OpenResponse',
+      'Practice',
       'CorrectResponseID',
       'CorrectResponse',
       'StudentID',
@@ -501,7 +487,8 @@ let methods = {
       data.SessionTime = timestamp.format('HH:mm');
       data.QuestionType = sessions[data.SessionID].questionType;
       data.QuestionTypeID = getQuestionTypeId(sessions[data.SessionID].questionType);
-      data.OpenResponse = !!md.openResponse;
+      data.OpenResponse = md.openResponse;
+      data.Practice = md.practice;
       data.CorrectResponse = md.correctResponse;
       data.CorrectResponseID = getResponseId(md.correctResponse);
       data.StudentResponseID = getResponseId(data.StudentResponse);

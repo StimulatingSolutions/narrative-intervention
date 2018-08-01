@@ -443,8 +443,7 @@
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Ask: “What happened?” [make “what happened” gesture, see Base Appendix, p. 16.]</p>
         <p>Now say: “The balloon popped.”</p>
-        <p>Co-teacher places the card that says [The balloon popped]</p>
-        <p>on the Velcro board.</p>
+        <p>Co-teacher places the card that says [The balloon popped] on the Velcro board.</p>
       </step>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Ask: “Why did that happen?” [make “why” gesture, see Base Appendix, p. 16.]</p>
@@ -930,23 +929,32 @@
           response
           mode.]</p>
 
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did just now with Alex the Magician and the balloon popping activity was <em>really
             hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or <em>really easy</em>. Think, Ready,
             Respond.”
+          </div>
+        </step>
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
             [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to identify causes and events was <em>really hard</em>, <em>hard</em>,
-            <em>okay</em>, <em>easy</em>, or <em>really easy</em>. Think, Ready, Respond.” [Tap the fidelity box
-            to
-            activate response mode]
+            <em>okay</em>, <em>easy</em>, or <em>really easy</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -984,22 +992,33 @@
           for students to respond, teachers should tap the fidelity box next to the question to activate
           response
           mode.]</p>
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did right now with Alex the Magician and the balloon popping activity was <em>not
             fun at
             all</em>, <em>not really fun</em>, <em>okay</em>, <em>fun</em>, or <em>really fun</em>. Think, Ready,
-            Respond.” [Tap the fidelity box to activate response mode]
+            Respond.”
+          </div>
+        </step>
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to find causes and events was <em>not fun at all</em>, <em>not really fun</em>,
-            <em>okay</em>, <em>fun</em>, or <em>really fun</em>. Think, Ready, Respond.” [Tap the fidelity box to
-            activate response mode]
+            <em>okay</em>, <em>fun</em>, or <em>really fun</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
@@ -1029,64 +1048,75 @@
           for students to respond, teachers should tap the fidelity box next to the question to activate
           response
           mode.]</p>
-        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify the events in a story <em>I couldn’t do it</em>, <em>I could
             do
-            it with help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.” [Tap the fidelity box to
-            activate response mode]
-            <p class="line-before">[Students respond]</p>
+            it with help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.”
           </div>
         </step>
         <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
+            <p class="line-before">[Students respond]</p>
+          </div>
+        </step>
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify causes in a story <em>I couldn’t do it</em>, <em>I could do
             it
-            with help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.” [Tap the fidelity box to
-            activate response mode]
+            with help</em>, <em>I could do it by myself</em>. Think, Ready, Respond.”
+          </div>
+        </step>
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
+          <div class="left">&nbsp;</div>
+          <div class="right">
+            [Tap the fidelity box to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
       </li>
       <li>
+        <p class="as-step">Co-teacher will circulate to make sure that students are recording their responses accurately
+          on the
+          tablet.</p>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          <p>Co-teacher will circulate to make sure that students are recording their responses accurately on the
-            tablet.</p>
           <p>[Collect student tablets. Do not turn them off. They will be distributed again during Evaluation
             #2]</p>
         </step>
       </li>
     </ol>
   </div>
-  <p class="v-padding line-before">[If tablets are NOT available follow directions below]</p>
-  <ol>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Sometimes we will stop during the lesson to ask you some questions about the activities that we are
-          doing. We want these answers to be honest and private.”</p>
-        <p>[Model how to hold up your folder so that the teacher can see, but none of the other students can see.
-          Ask students to be completely quiet at this time.]</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Pass out one green folder and one chip to each child.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Read script from pp. 25-28 of the Student Evaluation Script in the Base Appendix. As you read each
-          question, have students mark their responses with their chip.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Co-teacher will record students’ responses on the record sheet on pp. 4-5 of the Lesson 1 Appendix.</p>
-      </step>
-    </li>
-  </ol>
+  <div class="no-tablets">
+    <p class="center">[If tablets are NOT available follow directions below]</p>
+    <ol>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “Sometimes we will stop during the lesson to ask you some questions about the activities that we are
+            doing. We want these answers to be honest and private.”</p>
+          <p>[Model how to hold up your folder so that the teacher can see, but none of the other students can see.
+            Ask students to be completely quiet at this time.]</p>
+        </step>
+      </li>
+      <li>
+        <p class="as-step">Pass out one green folder and one chip to each child.</p>
+      </li>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Read script from pp. 25-28 of the Student Evaluation Script in the Base Appendix. As you read each
+            question, have students mark their responses with their chip.</p>
+        </step>
+      </li>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Co-teacher will record students’ responses on the record sheet on pp. 4-5 of the Lesson 1 Appendix.</p>
+        </step>
+      </li>
+    </ol>
+  </div>
   <hr class="page-break"/>
   <div class="black-border line-after">
     <p class="heading"><em><strong>Materials for Part 6: Directed Movement Break</strong></em></p>
@@ -1204,6 +1234,8 @@
           Do/You Watch,’ you should be listening; you should be actively listening and thinking inside your head,
           trying hard to learn what I am teaching you. The only talking that you will do is if you are confused or
           don’t understand, you should ask questions to help you learn what we are doing.”</p>
+      </step>
+      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “So, this means during ‘I Do/You Watch’ you will be listening with your ears, [point to ears and
           have students do with you] watching with your eyes, [point to eyes and have students do with you] thinking
           with your brain, [point to brain and have students do with you] and at the end raising with your hand
@@ -1325,7 +1357,7 @@
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>[Continue watching the video.]</p>
-        <p>Teacher says: “Now I’m going to have each of you come up and map out each of the events just like I just
+        <p>Say: “Now I’m going to have each of you come up and map out each of the events just like I just
           did. You will map out the event and its cause, make the connection using a BECAUSE string, and retell out
           loud what happened and why it happened. Then you will get a chance to act out what happened.”</p>
       </step>
@@ -1798,35 +1830,38 @@
         </step>
       </li>
       <li>
+        <p class="as-step">Co-teacher will circulate to make sure that students are recording their responses accurately
+          on the
+          tablet.</p>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          <p>Co-teacher will circulate to make sure that students are recording their responses accurately on the
-            tablet.</p>
           <p>[Collect student tablets.]</p>
         </step>
       </li>
     </ol>
   </div>
 
-  <p class="v-padding line-before">[If tablets are NOT available follow directions below]</p>
-  <ol>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Pass out green folders and chips.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Read each question from p. 28 of the Student Evaluation Script in the Base Appendix orally. Have
-          students
-          mark their responses with their chip.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Co-teacher will record students’ responses on the record sheet.</p>
-      </step>
-    </li>
-  </ol>
+  <div class="no-tablets">
+    <p class="center">[If tablets are NOT available follow directions below]</p>
+    <ol>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Pass out green folders and chips.</p>
+        </step>
+      </li>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Read each question from p. 28 of the Student Evaluation Script in the Base Appendix orally. Have
+            students
+            mark their responses with their chip.</p>
+        </step>
+      </li>
+      <li>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Co-teacher will record students’ responses on the record sheet.</p>
+        </step>
+      </li>
+    </ol>
+  </div>
   <hr class="page-break"/>
   <div class="black-border">
     <p class="v-padding"><em><strong>Materials for Part 10: Closure</strong></em></p>

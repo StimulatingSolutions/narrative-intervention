@@ -57,6 +57,7 @@ export interface MetadataEvent extends LoggedEvent {
   questionType?: string,
   correctResponse?: string,
   openResponse?: boolean,
+  practice?: boolean,
   duration?: number,
   reset?: boolean
 }
@@ -84,5 +85,6 @@ export interface DownloadedEvent extends StudentResponse {
   Correct: boolean,
   ResponseTime: string,
   Invalidated: boolean,
-  StudentResponseCount: number
+  StudentResponseCount: number,
+  Practice?: boolean
 }

@@ -20,11 +20,11 @@ export class Step implements OnInit {
 
   @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
-  @Input() practice?: string;
+  @Input() practice?: boolean;
   @Input() correctAnswer?: string;  // sometimes, a question will not have a correct answer
   @Input() session: Session;
   @Input() defaultResponse: string;
-  @Input() openResponse: boolean;
+  @Input() openResponse?: boolean;
 
   @Output() onStepClicked =  new EventEmitter<any>();
   @Output() onReady =  new EventEmitter<Step>();
@@ -102,7 +102,7 @@ export class Step implements OnInit {
     this.done = this.questionId ? true : !this.done;
 
     if (this.questionType) {
-      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, this.openResponse, this.practice == "true", this.errorAlert.handler(16));
+      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, !!this.openResponse, !!this.practice, this.errorAlert.handler(16));
       return;
     }
 

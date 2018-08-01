@@ -73,17 +73,17 @@ li li step {
     background-color: #EE1;
   }
   &.question {
-    border-color: #EBB;
+    border-color: #E99;
     &.open-response {
-      border-color: #BEB;
+      border-color: #9E9;
     }
   }
   &.active-question {
-    border-color: #EBB;
-    background-color: #EBB;
+    border-color: #E99;
+    background-color: #E99;
     &.open-response {
-      border-color: #BEB;
-      background-color: #BEB;
+      border-color: #9E9;
+      background-color: #9E9;
     }
   }
   img {
