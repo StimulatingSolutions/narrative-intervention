@@ -33,13 +33,18 @@
   .heading {
     padding: .125in 8px;
   }
+  step .heading {
+    padding: 0 0 12px;
+  }
+  .as-step-left {
+    padding: 5px;
+    border: 3px solid transparent;
+    margin: 0;
+  }
   .as-step {
     padding: 5px;
     border: 3px solid transparent;
     margin-left: .61in;
-    &.center {
-      margin-left: 0;
-    }
   }
   li .as-step {
     padding: 5px;
@@ -57,16 +62,16 @@
     position: relative;
   }
   .line-after {
-    margin-bottom: 20px !important;
+    margin-bottom: 16px !important;
   }
   .line-before {
-    margin-top: 20px !important;
+    margin-top: 16px !important;
   }
   p.heading + p, .hint p + p {
     margin-top: 0;
   }
-  p + p, .right + p, .right + .left, .right + .left + .right {
-    margin-top: 20px;
+  p + p, .right + p, .right + .left, .right + .left + .right, p + .left, p + .left + .right {
+    margin-top: 16px;
     &.heading {
       margin-top: 0;
     }
@@ -74,11 +79,22 @@
       margin-top: 0;
     }
   }
+  p.heading + .left, p.heading + .left + .right {
+    margin-top: 0;
+  }
   ol.numbers li {
     list-style-type: decimal;
   }
-  .center {
+  .center, .center-left {
     text-align: center;
+    padding-bottom: 8px;
+  }
+  li {
+    .tablets-only, .no-tablets {
+      .center-left, .as-step-left {
+        margin-left: -.615in;
+      }
+    }
   }
   ol {
     margin: 0;
@@ -103,9 +119,17 @@
       }
     }
   }
-  ul {
+  ul, ol {
     margin: 0;
     padding-bottom: .125in;
+  }
+  step {
+    ul, ol {
+      padding-left: 30px;
+      li {
+        padding-left: 5px;
+      }
+    }
   }
   .events {
     background-color: lightgrey;
@@ -207,6 +231,9 @@
       }
     }
   }
+  .grey-bg + .grey-bg {
+    margin-top: 12px;
+  }
   .grey-bg {
     background-color: lightgrey;
   }
@@ -226,9 +253,9 @@
   }
   .end-warning {
     text-align: center;
-    padding: 30px 0;
+    padding: 1px 0;
     margin: 20px 0;
-    font-size: 80px;
+    font-size: 40px;
     font-weight: bolder;
     text-decoration: underline;
   }
