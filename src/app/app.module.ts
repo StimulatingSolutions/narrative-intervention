@@ -25,6 +25,8 @@ import {AboutMeteorPage} from "../pages/about-software/about-meteor";
 import {ModuleInfo} from "../pages/about-software/module-info";
 import { Lesson01 } from '../pages/lesson-plans/lesson01/lesson-01';
 import { Lesson02 } from '../pages/lesson-plans/lesson02/lesson-02';
+import { Lesson03 } from '../pages/lesson-plans/lesson03/lesson-03';
+import { Lesson04 } from '../pages/lesson-plans/lesson04/lesson-04';
 import { Lesson05 } from '../pages/lesson-plans/lesson05/lesson-05';
 import { Lesson06 } from '../pages/lesson-plans/lesson06/lesson-06';
 
@@ -53,6 +55,8 @@ require('smoothscroll-polyfill').polyfill();
     LessonPlans,
     Lesson01,
     Lesson02,
+    Lesson03,
+    Lesson04,
     Lesson05,
     Lesson06,
     Step
@@ -82,6 +86,8 @@ require('smoothscroll-polyfill').polyfill();
     LessonPlans,
     Lesson01,
     Lesson02,
+    Lesson03,
+    Lesson04,
     Lesson05,
     Lesson06,
     Step

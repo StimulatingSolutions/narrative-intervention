@@ -104,11 +104,52 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<step([^>]*)>\\s*<ul>\\s*<li>([^<]*(?:<(?!/li>)[^<]*)*)\\s*</li>\\s*</ul>\\s*</step>', 'gi'), '<ul>\n<li>\n<step$1>\n$2\n</step>\n</li>\n</ul>');
   s = s.replace(new RegExp('</ul>\\s*<ul>\\s*', 'gi'), '');
 
-  s = s.replace(new RegExp('<p>((?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)', 'i'), '<h2 class="line-before">$1</h2>');
+  s = s.replace(new RegExp('<p>((?:[^<]*(?:<(?!/p>)[^<]*)*))</p>', 'i'), '<h2 class="line-before">$1</h2>');
   s = s.replace(new RegExp('<p>', 'i'), '<p class="line-before">');
 
   s = s.replace(new RegExp('</em>(\\s*):', 'gi'), ':</em>$1');
   s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
+
+  if (lessonNumber == 3) {
+    s = s.replace(new RegExp('(<li><p>Lesson 3 Magician Narrative Review from Lesson 2 Mastery Sheet \\(Lesson 3 Appendix, p. 2\\)</p>)\\s*<ul>', 'i'), '$1\n</li>');
+  } else if (lessonNumber == 4) {
+    s = s.replace(new RegExp('</ul>\\s*<blockquote>\\s*(<p>[^<]*</p>)\\s*<p>((?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)\\s*</blockquote>', 'i'), '<li>$1</li>\n</ul>\n<hr/>\n<p class="v-padding">$2');
+  }
+  s = s.replace(new RegExp('<div class="hint"><p>(<em><strong>Building Board from Previous Lesson:</strong></em></p>)\\s*<ol>\\s*<step[^>]*>\\s*(<p><em>Before the lesson begins:</em></p>)\\s*<ol>\\s*([^<]*(?:<(?!/ol>)[^<]*)*\\s*</ol>\\s*</div>)\\s*</li>\\s*</ol>', 'i'), '<div class="hint connected-above">\n<p class="v-padding">$1\s$2\n<ol class="numbers">\n$3');
+  s = s.replace(new RegExp('<p>\\s*(\\d+\\.)\\s*<strong>', 'gi'), '<p class="heading">$1 <strong>');
+  s = s.replace(new RegExp('(<p class="heading">\\d+\\.(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)\\s*<ol>\\s*(<step[^>]*>)\\s*<p class="v-padding">\\w\\.\\s*', 'gi'), '$1\n<ol>\n<li>\n$2\n<p>');
+  s = s.replace(new RegExp('<ol>\\s*<step[^>]*>\\s*', 'gi'), '');
+  s = s.replace(new RegExp('<step[^>]*>\\s*(<p class="heading">(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)\\s*<p>\\w\\.\\s*((?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)\\s*</step>', 'gi'), '$1\n<ol>\n<li>\n<p class="as-step">$2');
+  s = s.replace(new RegExp('<step[^>]*>\\s*(\\d+\\.[^<]*(?:<(?!/step>)[^<]*)*)\\s*</step>\\s*<step[^>]*>\\s*<p>\\[If tablets are available(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*</step>\\s*</li>', 'gi'), '<p class="heading">$1</p>\n<div class="tablets-only">\n<p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>\n<p class="as-step">$2</p>\n<ol>');
+  s = s.replace(new RegExp('<p>(<strong>[^<]*:</strong>)</p>', 'gi'), '<p class="heading">$1</p>');
+  s = s.replace(new RegExp('<li>\\s*(<step[^>]*>\\s*[^<]*(?:<(?!/step>)[^<]*)*\\s*</step>)\\s*<step[^>]*>\\s*<p>(\\[If tablets are NOT[^<]*(?:<(?!/p>)[^<]*)*</p>)\\s*</step>\\s*</li>\\s*([^<]*(?:<(?!/ol>)[^<]*)*</ol>)', 'gi'), '<li>\n$1</li></ol>\n</div>\n<div class="no-tablets">\n<p class="center">$2\n<ol>$3\n</div>');
+  s = s.replace(new RegExp('<step[^>]*>\\s*(\\d+\\.\\s*<strong>[^<]*(?:<(?!/step>)[^<]*)*)</step>\\s*</li>', 'gi'), '<p class="heading">$1</p>\n<ol>');
+
+  s = s.replace(new RegExp('\\bClicking\\b', 'g'), 'Tapping');
+  s = s.replace(new RegExp('\\bclicking\\b', 'g'), 'tapping');
+  s = s.replace(new RegExp('\\bClicked\\b', 'g'), 'Tapped');
+  s = s.replace(new RegExp('\\bclicked\\b', 'g'), 'tapped');
+  s = s.replace(new RegExp('\\bClicks\\b', 'g'), 'Taps');
+  s = s.replace(new RegExp('\\bclicks\\b', 'g'), 'taps');
+  s = s.replace(new RegExp('\\bClick\\b', 'g'), 'Tap');
+  s = s.replace(new RegExp('\\bclick\\b', 'g'), 'tap');
+  s = s.replace(new RegExp('\\bPressing\\b', 'g'), 'Tapping');
+  s = s.replace(new RegExp('\\bpressing\\b', 'g'), 'tapping');
+  s = s.replace(new RegExp('\\bPressed\\b', 'g'), 'Tapped');
+  s = s.replace(new RegExp('\\bpressed\\b', 'g'), 'tapped');
+  s = s.replace(new RegExp('\\bPresses\\b', 'g'), 'Taps');
+  s = s.replace(new RegExp('\\bpresses\\b', 'g'), 'taps');
+  s = s.replace(new RegExp('\\bPress\\b', 'g'), 'Tap');
+  s = s.replace(new RegExp('\\bpress\\b', 'g'), 'tap');
+  s = s.replace(new RegExp('\\bHitting\\b', 'g'), 'Tapping');
+  s = s.replace(new RegExp('\\bhitting\\b', 'g'), 'tapping');
+  s = s.replace(new RegExp('\\bHitted\\b', 'g'), 'Tapped');
+  s = s.replace(new RegExp('\\bhitted\\b', 'g'), 'tapped');
+  s = s.replace(new RegExp('\\bHits\\b', 'g'), 'Taps');
+  s = s.replace(new RegExp('\\bhits\\b', 'g'), 'taps');
+  s = s.replace(new RegExp('\\bHit\\b', 'g'), 'Tap');
+  s = s.replace(new RegExp('\\bhit\\b', 'g'), 'tap');
+
   console.log(s);
 
 
