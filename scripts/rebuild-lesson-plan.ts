@@ -108,10 +108,11 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<p>', 'i'), '<p class="line-before">');
 
   s = s.replace(new RegExp('</em>(\\s*):', 'gi'), ':</em>$1');
-  s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
 
   if (lessonNumber == 3) {
     s = s.replace(new RegExp('(<li><p>Lesson 3 Magician Narrative Review from Lesson 2 Mastery Sheet \\(Lesson 3 Appendix, p. 2\\)</p>)\\s*<ul>', 'i'), '$1\n</li>');
+    // TODO: temporary thing to expedite dev
+    s = s.replace(new RegExp('(<p>\\[Students respond]</p>)\\s*</step>\\s*</li>\\s*</ol>', 'gi'), '$1');
   } else if (lessonNumber == 4) {
     s = s.replace(new RegExp('</ul>\\s*<blockquote>\\s*(<p>[^<]*</p>)\\s*<p>((?:[^<]*(?:<(?!/p>)[^<]*)*)</p>)\\s*</blockquote>', 'i'), '<li>$1</li>\n</ul>\n<hr/>\n<p class="v-padding">$2');
   }
@@ -124,6 +125,44 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<p>(<strong>[^<]*:</strong>)</p>', 'gi'), '<p class="heading">$1</p>');
   s = s.replace(new RegExp('<li>\\s*(<step[^>]*>\\s*[^<]*(?:<(?!/step>)[^<]*)*\\s*</step>)\\s*<step[^>]*>\\s*<p>(\\[If tablets are NOT[^<]*(?:<(?!/p>)[^<]*)*</p>)\\s*</step>\\s*</li>\\s*([^<]*(?:<(?!/ol>)[^<]*)*</ol>)', 'gi'), '<li>\n$1</li></ol>\n</div>\n<div class="no-tablets">\n<p class="center">$2\n<ol>$3\n</div>');
   s = s.replace(new RegExp('<step[^>]*>\\s*(\\d+\\.\\s*<strong>[^<]*(?:<(?!/step>)[^<]*)*)</step>\\s*</li>', 'gi'), '<p class="heading">$1</p>\n<ol>');
+
+  s = s.replace(new RegExp(`<p><strong>Lesson ${lessonNumber}</strong></p>\\s*<hr class="page-break"/>`, 'i'), `<p class="center line-after"><strong>Lesson ${lessonNumber}</strong></p>`);
+  s = s.replace(new RegExp(`</div>\\s*(<p class="center line-after"><strong>Lesson ${lessonNumber}</strong></p>)`, 'i'), `</div>\n<hr class="page-break"/>\n$1`);
+  s = s.replace(new RegExp('<div class="black-border">\\s*(<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>)', 'i'), '<div class="hint connected-below">\n$1');
+  s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
+  s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
+  s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
+  s = s.replace(new RegExp('<step[^>]*>\\s*<p>(\\[If tablets are available follow the directions in this dark gray box]</p>[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<div class="tablets-only">\n<p class="as-step center">$1</div>');
+  s = s.replace(new RegExp('<step[^>]*>\\s*<p>(\\[If tablets are NOT available[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<div class="as-step no-tablets">\n<p class="center">$1</div>');
+  s = s.replace(new RegExp('(<div class="tablets-only">[^<]*(?:<(?!/div>)[^<]*)*)</div>\\s*((?:<step[^>]*>[^<]*(?:<(?!/step>)[^<]*)*</step>\\s*)+)(<div class="no-tablets">)', 'gi'), '$1$2</div>\n$3');
+  s = s.replace(new RegExp('<li>\\s*<p>', 'gi'), '<li>\n<p>');
+  s = s.replace(new RegExp('</p>\\s*</li>', 'gi'), '</p>\n</li>');
+  s = s.replace(new RegExp('(<step[^>]*>)\\s*<ol>\\s*<li>\\s*([^<]*(?:<(?!/li>)[^<]*)*)</li>\\s*</ol>\\s*([^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<ol>\n<li>\n$1\n$2\n$3\n</step>\n</li>\n</ol>');
+
+  s = s.replace(new RegExp('<p class="heading">[^<]*(?:<(?!/p>)[^<]*)*Student Evaluation #\\d[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*<div class="tablets-only">[^<]*(?:<(?!/div>)[^<]*)*</div>', 'gi'), (match) => {
+    return match.replace(new RegExp('<step[^>]*>\\s*((?:<p[^>]*>[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)*)\\s*<p>\\s*(?:\\d\\.)?\\s*Say:\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*((?:<p>\\s*\\[\\s*Students\\s*respond\\s*]\\s*</p>)?)\\s*((?:<p[^>]*>[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)*)\\s*</step>', 'gi'), (match2, pre, p1, p2, post) => {
+      let respond = '';
+      let step = 'defaultResponse';
+      if (p2) {
+        respond = '<p class="line-before">[Students respond]</p>\n';
+        step = 'questionType';
+      }
+      return `<step ${step}="goal" (onReady)="stepReady($event)" [session]="session">\n${pre}\n<div class="left">Say:</div>\n<div class="right">\n${p1}\n${respond}</div>\n${post}\n</step>`;
+    });
+  });
+
+  s = s.replace(new RegExp('\\s*(?:</li>)?\\s*(?:</ol>)?(?:<step[^>]*>)?\\s*<p>END OF LESSON</p>\\s*<p>([^<]*(?:<(?!/p>)[^<]*)*</p>)\\s*(?:</step>)?\\s*(?:</li>)?\\s*', 'gi'), '</li>\n</ol>\n<h2 class="center">END OF LESSON</h2>\n<p class="center">$1');
+
+  s = s.replace(new RegExp('<step([^>]*)>\\s*(<p>\\s*<strong>\\s*Think\\s*Aloud\\s*/\\s*Say\\s*:\\s*</strong>)', 'gi'), '<step class="grey-bg" $1>\n$2');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+  s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
+
+  s = s.replace(new RegExp('</ol>\\s*<ol>\\s*', 'gi'), '');
+  s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
 
   s = s.replace(new RegExp('\\bClicking\\b', 'g'), 'Tapping');
   s = s.replace(new RegExp('\\bclicking\\b', 'g'), 'tapping');
@@ -154,7 +193,7 @@ getStdin().then((s: string) => {
 
 
   // trailing markup
-  console.log('</ol>\n</div>');
+  console.log('</div>');
 
   process.exit(0);
 });

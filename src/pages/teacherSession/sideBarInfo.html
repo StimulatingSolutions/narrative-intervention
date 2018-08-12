@@ -68,11 +68,8 @@
           <p *ngIf="session?.correctAnswer">
             The correct answer is: <b>{{session?.correctAnswer}}</b><em>{{session?.practice ? ' (practice)' : ''}}</em>.
           </p>
-          <p *ngIf="!session?.correctAnswer && !session?.review && session?.practice">
-            This is a <em>practice</em> question.
-          </p>
-          <p *ngIf="!session?.correctAnswer && session?.review">
-            This {{session?.questionType}} question does not have a designated correct answer<em>{{session?.practice ? ' (practice)' : ''}}</em>.
+          <p *ngIf="!session?.correctAnswer">
+            This <em>{{session?.questionType}}</em> question does not have a designated correct answer<em>{{session?.practice ? ' (practice)' : ''}}</em>.
           </p>
           <div class="final-instructions" *ngIf="headTeacher">
             <p class="done-instructions">

@@ -46,10 +46,14 @@
     border: 3px solid transparent;
     margin-left: .61in;
   }
-  li .as-step {
+  li .as-step, li > p {
     padding: 5px;
     border: 3px solid transparent;
     margin-left: 0;
+  }
+  .black-border li > p {
+    padding: 0;
+    border: 0;
   }
   .bullet {
     position: absolute;
@@ -137,7 +141,7 @@
   }
   .tablets-only {
     background-color: lightgrey;
-    border: 3px solid #000;
+    border: 2px solid #000;
   }
   .no-tablets {
     background-color: #EEE;
@@ -156,8 +160,11 @@
     }
   }
   li .tablets-only, li .no-tablets {
-    margin-left: -59px;
+    margin-left: -59.2px;
     padding-left: .74in;
+  }
+  li ol li .tablets-only, li ol li .no-tablets {
+    margin-left: -118.4px;
   }
   .black-border {
     border: 3px solid #000;
@@ -179,6 +186,9 @@
   .v-padding {
     padding: .125in 0;
   }
+  .v-padding-bottom {
+    padding-bottom: .125in;
+  }
   .bullet-heading {
     padding-left: .25in;
   }
@@ -188,6 +198,28 @@
   }
   ol .hint {
     margin-left: -59px;
+  }
+  .overview {
+    background-color: #EEE;
+    border: 1px dashed black;
+    margin: .125in 0;
+    padding: .125in .25in;
+    .no-line-above {
+      margin-top: 0;
+    }
+    .no-line-below {
+      padding-bottom: 0;
+    }
+    ol, ul {
+      padding-bottom: 16px;
+      margin-left: -.05in;
+      li {
+        margin-left: 0;
+        p {
+          margin-left: .05in;
+        }
+      }
+    }
   }
   .hint {
     background-color: #EEE;
@@ -233,6 +265,9 @@
   }
   .grey-bg + .grey-bg {
     margin-top: 12px;
+  }
+  .grey-bg + .grey-bg.connected {
+    margin-top: 0;
   }
   .grey-bg {
     background-color: lightgrey;

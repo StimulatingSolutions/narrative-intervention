@@ -447,7 +447,7 @@
           goals.”</p>
       </step>
       <div class="tablets-only">
-        <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
+        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
         <p class="as-step">[Goal card will pop up on each student’s tablet when the teacher reaches this portion of
           the
           script. Students
@@ -487,7 +487,7 @@
         </step>
       </div>
       <div class="no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
         <p class="as-step">[Pass out a goal card to each student.]</p>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
           <p>Say: “Let’s practice showing your GOAL card. You see or hear a goal. What do you do?”</p>
@@ -496,7 +496,7 @@
       </div>
       <div class="tablets-only">
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
+          <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
           <p>Say: “When the background of the tablet is white, you will be able to tap on the screen and select the goal
             card. When the background is black, you will still see the goal card, but tapping won’t activate the goal
             card.
@@ -802,7 +802,7 @@
           see if we can listen for a GOAL and its CAUSE. If you hear a goal what will you do?”</p>
       </step>
       <div class="tablets-only">
-        <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
+        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
         <step questionType="goal" [practice]="true" correctAnswer="goal" (onReady)="stepReady($event)"
               [session]="session">
           <p>[Teacher will activate student responses by tapping the fidelity box to the left.]</p>
@@ -814,7 +814,7 @@
         </step>
       </div>
       <div class="no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
         <p>[Students should hold up the goal card]</p>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Play video a second time]</p>
@@ -825,7 +825,7 @@
         </step>
       </div>
       <div class="tablets-only">
-        <p class="center">[If tablets are available follow the directions in this dark gray box]</p>
+        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
         <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
           <p>[Play video a second time]</p>
           <p>[Teacher will activate student responses by tapping the fidelity box to the left.]</p>
@@ -837,7 +837,7 @@
         </step>
       </div>
       <div class="no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
         <p>[Students should hold up the goal card]</p>
       </div>
       <div class="hint"><p><em><strong>Teacher Response Instruction: </strong></em></p>
@@ -1098,7 +1098,7 @@
       students to respond if they have not made a response. If necessary, teachers can also remind students to wait for
       the magic words, ‘Think, Ready, Respond’ before responding. Once all student responses have been recorded, the
       teacher will tap on the ‘Done’ button on the top right of the screen on the teacher tablet. If the teacher tries
-      to move on to the next question without hitting ‘Done,’ the ‘Done’ button will flash until it is tapped.
+      to move on to the next question without tapping ‘Done,’ the ‘Done’ button will flash until it is tapped.
       Co-teachers should circulate to ensure that students are responding to the questions appropriately.]</p>
     <ol>
       <li>
@@ -1395,7 +1395,7 @@
       </step>
       <div class="tablets-only">
         <step questionType="goal" [openResponse]="true" (onReady)="stepReady($event)" [session]="session">
-          <p class="center">[If tablets are available follow the directions below]</p>
+          <p class="as-step center">[If tablets are available follow the directions below]</p>
           <p>Say: “The background on your tablet is white, which means you can tap on the goal card any time you think
             you
             see a goal. When you hear a goal, tap on the goal card, and hold your tablet up.”</p>
@@ -1407,7 +1407,7 @@
         </step>
       </div>
       <div class="no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
         <p class="center">[Have students hold up their goal cards.]</p>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -1543,7 +1543,7 @@
       </step>
       <div class="tablets-only">
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          <p class="center">[If tablets are available follow the directions below]</p>
+          <p class="as-step center">[If tablets are available follow the directions below]</p>
           <p class="center">[The free response period is over. Tap the Done button to end the activity.]</p>
         </step>
       </div>
@@ -1629,7 +1629,7 @@
       for
       the magic words, ‘Think, Ready, Respond’ before responding. Once all student responses have been recorded, the
       teacher will tap on the ‘Done’ button on the top right of the screen on the teacher tablet. If the teacher tries
-      to move on to the next question without hitting ‘Done,’ the ‘Done’ button will flash until it is tapped.
+      to move on to the next question without tapping ‘Done,’ the ‘Done’ button will flash until it is tapped.
       Co-teachers should circulate to ensure that students are responding to the questions appropriately.]</p>
     <ol>
       <li>
@@ -1772,7 +1772,7 @@
     </ol>
   </div>
   <div class="no-tablets">
-    <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+    <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
     <ol>
       <li>
         <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
