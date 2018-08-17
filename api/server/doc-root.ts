@@ -21,7 +21,7 @@ if (fs.existsSync(process.env.PWD + '/public/index.html')) {
 // calculate eTags for possibly more efficient 304 responses
 let info: any = {};
 info.root = {path: path+'index.html'};
-info.teacher = {path: path+'teacher/index.html'};
+info.teacher = {path: path+'web/index.html'};
 info.student = {path: path+'student/index.html'};
 
 
