@@ -7,6 +7,7 @@ import {difference, includes} from 'lodash';
 import {User} from "./models";
 import {ResponseMetadata, Schools, Sessions, StudentResponses} from "./collections";
 
+
 Meteor.startup(() => {
 
   //SETUP USER ROLES

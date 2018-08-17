@@ -39,9 +39,9 @@ then
   npm run meteor-client:prod-bundle
 fi
 npm run ionic:build-prod
-rm -rf ./www/teacher
-mv ./www/build ./www/teacher
-cp ./src/tablet.html ./www/teacher/index.html
+rm -rf ./www/web
+mv ./www/build ./www/web
+cp ./src/tablet.html ./www/web/index.html
 
 mv ./srchide/studentSession ./src/pages
 mv ./srchide/studentLogin ./src/pages
