@@ -54,5 +54,5 @@ function buildFileHandler(fileInfo: any) {
 }
 
 WebApp.connectHandlers.use("/", buildFileHandler(info.root));
-WebApp.connectHandlers.use("/web/", buildFileHandler(info.teacher));
-WebApp.connectHandlers.use("/student/", buildFileHandler(info.student));
+WebApp.connectHandlers.use("/web", buildFileHandler(info.teacher));
+WebApp.connectHandlers.use("/student", buildFileHandler(info.student));
