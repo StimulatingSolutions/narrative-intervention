@@ -23,8 +23,8 @@ if (fs.existsSync(process.env.PWD + '/public/index.html')) {
 // calculate eTags for possibly more efficient 304 responses
 let info: any = {};
 info.root = {path: path+'index.html'};
-info.teacher = {path: path+'teacher.html'};
-info.student = {path: path+'student.html'};
+info.teacher = {path: path+'teacher/index.html'};
+info.student = {path: path+'student/index.html'};
 
 
 function buildFileHandler(fileInfo: any) {
@@ -54,5 +54,5 @@ function buildFileHandler(fileInfo: any) {
 }
 
 WebApp.connectHandlers.use("/", buildFileHandler(info.root));
-WebApp.connectHandlers.use("/teacher/", buildFileHandler(info.teacher));
+WebApp.connectHandlers.use("/web/", buildFileHandler(info.teacher));
 WebApp.connectHandlers.use("/student/", buildFileHandler(info.student));
