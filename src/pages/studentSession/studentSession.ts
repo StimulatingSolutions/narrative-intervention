@@ -5,11 +5,10 @@ import { MeteorObservable } from 'meteor-rxjs';
 import { Sessions } from 'api/collections';
 import { Session } from 'api/models';
 
-import { LoginPage } from '../login/login';
-
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
 import {DeviceDetector} from "../../util/deviceDetector";
 import {preloadImage} from "../../util/preloadImage";
+import {StudentLoginPage} from "../studentLogin/studentLogin";
 
 @Component({
   selector: 'studentSession',
@@ -52,7 +51,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
 
         this.ref.detectChanges();
         if (!this.session.active){
-          this.navCtrl.setRoot(LoginPage, {}, {
+          this.navCtrl.setRoot(StudentLoginPage, {}, {
             animate: true
           });
         }
@@ -98,7 +97,7 @@ export class StudentSessionPage extends DestructionAwareComponent implements OnI
   }
 
   exitDemo(): void {
-    this.navCtrl.setRoot(LoginPage, {}, {
+    this.navCtrl.setRoot(StudentLoginPage, {}, {
       animate: true
     });
   }

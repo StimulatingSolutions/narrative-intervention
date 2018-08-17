@@ -12,35 +12,47 @@ let crypto = Npm.require('crypto');
 // load file data -- this will only ever really get used on prod in our setup, so no need to worry about changing data
 
 let path: string;
-let data: string;
 
 if (fs.existsSync(process.env.PWD + '/public/index.html')) {
   // dev environment
-  path = process.env.PWD + '/public/index.html';
+  path = process.env.PWD + '/public/';
 } else if (fs.existsSync(process.env.PWD + '/api/public/index.html')) {
   // heroku environment
-  path = process.env.PWD + '/api/public/index.html';
+  path = process.env.PWD + '/api/public/';
 }
-// calculate eTag for possibly more efficient 304 responses
-data = fs.readFileSync(path);
-let eTag: string = crypto.createHash('md5').update(data).digest('hex');
+// calculate eTags for possibly more efficient 304 responses
+let info: any = {};
+info.root = {path: path+'index.html'};
+info.teacher = {path: path+'teacher.html'};
+info.student = {path: path+'student.html'};
 
 
-WebApp.connectHandlers.use("/", function(req, res, next) {
-  if (req.method !== 'GET') {
-    return next();
-  }
+function buildFileHandler(fileInfo: any) {
+  return function(req, res, next) {
+    if (req.method !== 'GET') {
+      return next();
+    }
 
-  // if we can get away with a 304 Not Modified response, do that
-  if (req.headers['if-none-match'] === eTag) {
-    res.writeHead(304, 'Not Modified');
-    return res.end();
-  }
+    if (!fileInfo.data) {
+      fileInfo.data = fs.readFileSync(fileInfo.path);
+      fileInfo.eTag = crypto.createHash('md5').update(fileInfo.data).digest('hex');
+    }
 
-  // send the actual data instead
-  res.writeHead(200, {
-    'ETag': eTag,
-    'Content-Type': 'text/html'
-  });
-  return res.end(data);
-});
+    // if we can get away with a 304 Not Modified response, do that
+    if (req.headers['if-none-match'] === fileInfo.eTag) {
+      res.writeHead(304, 'Not Modified');
+      return res.end();
+    }
+
+    // send the actual data instead
+    res.writeHead(200, {
+      'ETag': fileInfo.eTag,
+      'Content-Type': 'text/html'
+    });
+    return res.end(fileInfo.data);
+  };
+}
+
+WebApp.connectHandlers.use("/", buildFileHandler(info.root));
+WebApp.connectHandlers.use("/teacher/", buildFileHandler(info.teacher));
+WebApp.connectHandlers.use("/student/", buildFileHandler(info.student));

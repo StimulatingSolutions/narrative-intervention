@@ -1,0 +1,17 @@
+.login-page-content {
+  .instructions {
+    text-align: center;
+    font-size: medium;
+    margin: 50px;
+  }
+  .form-header {
+    margin-bottom: 0;
+    font-size: 200%;
+    ion-label {
+      margin-bottom: 0;
+    }
+  }
+  .action-buttons {
+    margin-left: -2px;
+  }
+}

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="navbar-bg">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login-page-content">
+
+  <ion-list class="top-margin">
+    <ion-list-header *ngIf="device === 'web'" class="form-header">Students:</ion-list-header>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button (click)="chooseSchool('join')">Join Session</button>
+        <button ion-button class="right" color="secondary" (click)="chooseSchool('demo')">Start Student Demonstration</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-list class="top-margin">
+    <ion-list-header class="form-header">Questions?</ion-list-header>
+    <ion-item>
+      <ion-buttons class='action-buttons'>
+        <button ion-button color="danger" (click)="about()">About This Software</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
