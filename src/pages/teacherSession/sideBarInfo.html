@@ -4,7 +4,7 @@
       <ion-buttons class='button-container find-place'>
         <button ion-button color="secondary" (click)="findMyPlace()">Find My Place</button>
       </ion-buttons>
-      <ion-buttons class='button-container reset' *ngIf="headTeacher && session?.readyForResponse">
+      <ion-buttons class='button-container reset' *ngIf="headTeacher && session?.readyForResponse && !session?.review">
         <button ion-button color="warning" (click)="doReset()">Redo Question?</button>
       </ion-buttons>
       <ion-buttons class='button-container exit'>
@@ -19,7 +19,6 @@
       </div>
       <div class="student-list" *ngIf="!session?.review">
         <div class="student" *ngFor="let student of getActiveStudents()">
-
           <div [class.waitingforanswer]="session?.readyForResponse" [class.answered]="idsWithAnswer.indexOf(student) > -1" [class.incorrect]="session?.correctAnswer && session?.correctAnswer != session?.responses[student]">
             <div class='answered-icon' *ngIf="session?.readyForResponse && idsWithAnswer.indexOf(student) === -1">
               <ion-icon name="radio-button-off"></ion-icon>
@@ -38,31 +37,37 @@
             </div>
           </div>
         </div>
-        <div class="note" *ngIf="session?.activeStudents.length === 0 && session?.active">
-          <i>No students have connected to this session yet.</i>
+        <div class="note" *ngIf="session?.active && session?.review">
+          <i>Students cannot connect to lesson reviews.</i>
         </div>
         <div class="note" *ngIf="!session?.active">
           <i>This session has been marked as finished by the head teacher.</i>
         </div>
       </div>
       <div class="student-count">
-        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 1">
+        <div *ngIf="session?.review">
+          <i>This is a lesson review.</i>
+        </div>
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 0 && !session?.review">
+          <i>No students have connected to this session yet.</i>
+        </div>
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 1 && !session?.review">
           There is <b>1</b> student in this session.
         </div>
-        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length !== 1">
-          There are <b>{{session?.activeStudents.length || 0}}</b> students in this session.
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length > 1 && !session?.review">
+          There are <b>{{session?.activeStudents.length}}</b> students in this session.
         </div>
         <div *ngIf="session?.readyForResponse && !session?.openResponse">
-          <p *ngIf="waitCount === 1">
+          <p *ngIf="waitCount === 1 && !session?.review">
             <b>1</b> student has not responded yet.
           </p>
-          <p *ngIf="waitCount !== 1">
+          <p *ngIf="waitCount !== 1 && !session?.review">
             <b>{{waitCount}}</b> students have not responded yet.
           </p>
-          <p *ngIf="session?.correctAnswer && incorrectCount === 1">
+          <p *ngIf="session?.correctAnswer && incorrectCount === 1 && !session?.review">
             <b>1</b> student has an incorrect answer selected.
           </p>
-          <p *ngIf="session?.correctAnswer && incorrectCount !== 1">
+          <p *ngIf="session?.correctAnswer && incorrectCount !== 1 && !session?.review">
             <b>{{incorrectCount}}</b> students have an incorrect answer selected.
           </p>
           <p *ngIf="session?.correctAnswer">

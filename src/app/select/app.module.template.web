@@ -23,6 +23,8 @@ import {AboutSoftwarePage} from "../pages/about-software/about-software";
 import {AboutNpmPage} from "../pages/about-software/about-npm";
 import {AboutMeteorPage} from "../pages/about-software/about-meteor";
 import {ModuleInfo} from "../pages/about-software/module-info";
+// __LESSON_IMPORTS__
+
 
 require('raf');
 require('smoothscroll-polyfill').polyfill();
@@ -46,8 +48,8 @@ require('smoothscroll-polyfill').polyfill();
     AboutNpmPage,
     AboutMeteorPage,
     LessonPlans,
-    Step
-  ].concat(lessons),
+// __LESSONS__    Step
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -71,8 +73,8 @@ require('smoothscroll-polyfill').polyfill();
     AboutNpmPage,
     AboutMeteorPage,
     LessonPlans,
-    Step
-  ].concat(lessons),
+// __LESSONS__    Step
+  ],
   providers: [
     StatusBar,
     SplashScreen,
