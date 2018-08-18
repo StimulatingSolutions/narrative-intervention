@@ -13,6 +13,11 @@ fi
 
 rm -rf client-bundle.tgz
 
+
+# monkey-patch ionic-app-scripts to work in prod mode with angular-meteor:
+cp ./scripts/@ionic_app-scripts_dist_aot_utils.js ./node_modules/\@ionic/app-scripts/dist/aot/utils.js
+
+
 cp ./src/app/select/app.component.teacher ./src/app/app.component.ts
 cp ./src/app/select/app.module.teacher ./src/app/app.module.ts
 mkdir -p srchide

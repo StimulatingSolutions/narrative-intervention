@@ -18,10 +18,10 @@ let methods = {
 
   createNewUser(email: string, name: string, role: string): void {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new user');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -62,10 +62,10 @@ let methods = {
 
   sendResetUserPasswordEmailFromId(id: string): void {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to send a reset password email for another user');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -75,10 +75,10 @@ let methods = {
 
   updateUser(user: User, profile: Profile, roles: string[]){
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to update a user');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -91,7 +91,7 @@ let methods = {
     Roles.setUserRoles(user._id, validRoles);
 
     Meteor.users.update(user._id, {
-      $set: {profile}
+      $set: {profile, email: profile.email}
     });
   },
 
@@ -102,7 +102,7 @@ let methods = {
         'User must be logged-in.');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -121,29 +121,18 @@ let methods = {
   getUserRoles(id = this.userId): string[] {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized',
-        'User must be logged-in to create a new chat');
+        'User must be logged-in to get user roles');
     }
     return Roles.getRolesForUser(id);
-  },
-
-
-  updateProfile(user: User, profile: Profile): void {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
-    }
-
-    Meteor.users.update(user._id, {
-      $set: {profile}
-    });
   },
 
   //SCHOOLS
   createNewSchool(school: School): void {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new school');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -161,7 +150,7 @@ let methods = {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new school');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -183,10 +172,10 @@ let methods = {
   //SESSIONS
   createNewSession(session: Session): void {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new session');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher', 'teacher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin', 'teacher'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission');
     }
@@ -205,7 +194,7 @@ let methods = {
 
   setSessionActive(id: string, active: boolean){
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'User must be logged-in to create a new chat');
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to activate or deactivate a session');
     }
     if (!active){
       Sessions.update(id, {
@@ -419,7 +408,7 @@ let methods = {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to download data');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission to download data');
     }
@@ -529,7 +518,7 @@ let methods = {
       throw new Meteor.Error('unauthorized', 'User must be logged-in to download data');
     }
 
-    if (!Roles.userIsInRole(this.userId, ['admin', 'researcher'])){
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
       throw new Meteor.Error('unauthorized',
         'User does not have permission to download data');
     }

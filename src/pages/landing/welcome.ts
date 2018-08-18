@@ -35,6 +35,8 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
   public unfinishedSessions;
   public allSchools;
   public userId;
+  public userName;
+  public userEmail;
 
 
   constructor(
@@ -71,6 +73,8 @@ export class WelcomePage extends DestructionAwareComponent implements OnInit {
       .takeUntil(this.componentDestroyed$)
       .subscribe(() => {
         this.userId = Meteor.user()._id;
+        this.userName = Meteor.user().profile.name;
+        this.userEmail = Meteor.user().profile.email;
         let criteria: any = {active: true};
         if (!this.isAdmin) {
           criteria.creatorsId = Meteor.user()._id;

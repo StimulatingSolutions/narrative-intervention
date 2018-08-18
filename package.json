@@ -22,6 +22,7 @@
     "api": "cd api && meteor run",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
+    "deploy": "./scripts/deploy.sh",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:build-prod": "ionic-app-scripts build --log-level debug --prod --aot --minifyjs --minifycss --optimizejs --generateSourceMap false",

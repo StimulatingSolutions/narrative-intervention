@@ -142,7 +142,7 @@ export class UserManagementPage extends DestructionAwareComponent implements OnI
 
     const profile = {
       name: this.editUserName,
-      email: this.userToEdit.profile.email,
+      email: this.editUserEmail,
       picture: ''
     };
 
