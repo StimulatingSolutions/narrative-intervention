@@ -53,7 +53,7 @@
         <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 1 && !session?.review">
           There is <b>1</b> student in this session.
         </div>
-        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length > 1 && !session?.review">
+        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length !== 1 && !session?.review">
           There are <b>{{session?.activeStudents.length || 0}}</b> students in this session.
         </div>
         <div *ngIf="session?.readyForResponse && !session?.openResponse">
