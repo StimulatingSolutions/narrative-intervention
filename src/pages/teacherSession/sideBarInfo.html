@@ -37,8 +37,8 @@
             </div>
           </div>
         </div>
-        <div class="note" *ngIf="session?.active && session?.review">
-          <i>Students cannot connect to lesson reviews.</i>
+        <div class="note" *ngIf="session?.active && !session?.review">
+          <i>No students have connected to this session yet.</i>
         </div>
         <div class="note" *ngIf="!session?.active">
           <i>This session has been marked as finished by the head teacher.</i>
@@ -46,16 +46,15 @@
       </div>
       <div class="student-count">
         <div *ngIf="session?.review">
-          <i>This is a lesson review.</i>
-        </div>
-        <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 0 && !session?.review">
-          <i>No students have connected to this session yet.</i>
+          <p>
+            <i>This is a lesson plan review.</i>
+          </p>
         </div>
         <div *ngIf="!session?.readyForResponse && session?.activeStudents.length === 1 && !session?.review">
           There is <b>1</b> student in this session.
         </div>
         <div *ngIf="!session?.readyForResponse && session?.activeStudents.length > 1 && !session?.review">
-          There are <b>{{session?.activeStudents.length}}</b> students in this session.
+          There are <b>{{session?.activeStudents.length || 0}}</b> students in this session.
         </div>
         <div *ngIf="session?.readyForResponse && !session?.openResponse">
           <p *ngIf="waitCount === 1 && !session?.review">
