@@ -1,7 +1,7 @@
 <div [ngClass]="{'lesson-plan-wrapper': true, 'lesson-review': session.review}">
-  <h2 class="line-before">NS Lesson #4</h2>
+  <h2 class="line-before">NS Lesson #4 ({{session.review ? "review" : ("for "+session.schoolName+", Group "+session.schoolNumber)}})</h2>
   <p class="line-before"><em>Objectives:</em> Upon completion of the following lesson students will be able to:</p>
-  <ul>
+  <ul class="objectives">
     <li>
       <p>Explain what outcomes are (primary)</p>
     </li>
@@ -35,7 +35,7 @@
         <p>Student Goal/Try/Outcome Cards (on tablet or actual cards, see Base Appendix, p. 5)</p>
       </li>
       <li>
-        <p>Goal/Try/Outcome Anchor Chart (for reference only, Base Appendix, p. 6)</p>
+        <p><span class="grey-bg">Goal/Try/Outcome Anchor Chart</span> (for reference only, Base Appendix, p. 6)</p>
       </li>
       <li>
         <p>How to Place Cards on Goal/Causal Connections Organizer (Base Appendix, p. 7)</p>
@@ -44,7 +44,7 @@
         <p>Blank Goal/Causal Organizer (Base Appendix, p. 8)</p>
       </li>
       <li>
-        <p>Outcome Prompt Flowchart (for reference only, Base Appendix, p. 9)</p>
+        <p><span class="grey-bg">Outcome Prompt Flowchart</span> (for reference only, Base Appendix, p. 9)</p>
       </li>
       <li>
         <p>Inference Anchor Chart (Base Appendix, p. 10)</p>
@@ -59,10 +59,10 @@
         <p>Small Group Practice Chart (Base Appendix, pp. 13-15)</p>
       </li>
       <li>
-        <p>Gestures Instruction Sheet (for reference only, Base Appendix, pp. 16-17)</p>
+        <p><span class="grey-bg">Gestures Instruction Sheet</span> (for reference only, Base Appendix, pp. 16-17)</p>
       </li>
       <li>
-        <p>Directed Movement Activities (Base Appendix, pp. 18-24) (laminated copies)</p>
+        <p><span class="grey-bg">Directed Movement Activities</span> (Base Appendix, pp. 18-24) (laminated copies)</p>
       </li>
       <li>
         <p>Green folder for teacher with Student Evaluation Script (Base Appendix, pp. 25-45)</p>
@@ -72,7 +72,7 @@
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Lesson 4 Appendix <em>(To be printed):</em> </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Lesson 4 Appendix</span> <em>(To be printed):</em> </strong></p>
     <ul>
       <li>
         <p>Lesson 4 Intro Balloon Popping Mastery Sheet (Lesson 4 Appendix, p. 1)</p>
@@ -94,7 +94,7 @@
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Technology: </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Technology</span>: </strong></p>
     <ul>
       <li>
         <p>Laptop</p>
@@ -113,7 +113,7 @@
         <p>Pens (3)</p>
       </li>
       <li>
-        <p>Plastic Cups (6)</p>
+        <p><span class="grey-bg">Plastic Cups</span> (6)</p>
       </li>
       <li>
         <p>Apron</p>
@@ -131,38 +131,40 @@
         <p>Chart Marker</p>
       </li>
       <li>
-        <p>Stickers</p>
+        <p><span class="grey-bg">Stickers</span></p>
       </li>
       <li>
         <p>Chips for Green Folders (6)</p>
       </li>
       <li>
-        <p>Wet Erase Markers (3)</p>
+        <p><span class="grey-bg">Wet Erase Markers</span> (3)</p>
       </li>
       <li>
         <p>O-Rings</p>
       </li>
       <li>
-        <p>Wikki Stix</p>
+        <p><span class="grey-bg">Wikki Stix</span></p>
       </li>
       <li>
-        <p>Velcro Boards (4)</p>
+        <p><span class="grey-bg">Velcro Boards</span> (4)</p>
       </li>
       <li>
         <p>Story Creation Bags (set of 12)</p>
       </li>
       <li>
-        <p>Example Bag (1 goal card, 1 try card, 1 outcome fail card, 1 outcome yes card, 1 because card, and 1 because
-          string)</p>
+        <p><span class="grey-bg">Example Bag (1 goal card, 1 try card, 1 outcome fail card, 1 outcome yes card, 1 because card, and 1 because
+          string)</span></p>
       </li>
       <li>
-        <p>Role Cards (2 sets; I Do, I Help, I Watch, You Do Together, You Help, You Watch)</p>
+        <p><span class="grey-bg">Role Cards</span> (2 sets; I Do, I Help, I Watch, You Do Together, You Help, You Watch)
+        </p>
       </li>
       <li>
-        <p>Role Charts (set of 2)</p>
+        <p><span class="grey-bg">Role Charts</span> (set of 2)</p>
       </li>
       <li>
-        <p>Procedure Cards (8 sets; 1 goal card, 1 try card, 1 outcome yes card, 1 outcome fail card, 1 procedure
+        <p><span class="grey-bg">Procedure Cards</span> (8 sets; 1 goal card, 1 try card, 1 outcome yes card, 1 outcome
+          fail card, 1 procedure
           card)</p>
       </li>
       <li>
@@ -170,14 +172,15 @@
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Videos/PowerPoints Needed: </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Videos/PowerPoints Needed</span>: </strong></p>
     <ul>
       <li>
         <p>PowerPoint: <em>The Ghost with the Halloween Hiccups</em> (1 copy)</p>
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Pre-Printed Cards <em>(in Lesson 4 Box):</em> </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Pre-Printed Cards</span> <em>(in Lesson 4 Box):</em> </strong>
+    </p>
     <ul>
       <li>
         <p>Lesson 4 Intro: Balloon Popping</p>
@@ -194,14 +197,15 @@
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Boards from Previous Lesson(s): </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Boards from Previous Lesson(s)</span>: </strong></p>
     <ul>
       <li>
         <p>Lesson 3 Magician Narrative Review (build before the lesson begins)</p>
       </li>
     </ul>
     <hr/>
-    <p class="v-padding"><strong>Additional Materials and Props <em>(in Lesson 4 Box):</em> </strong></p>
+    <p class="v-padding"><strong><span class="grey-bg">Additional Materials and Props</span> <em>(in Lesson 4 Box):</em>
+    </strong></p>
     <ul>
       <li>
         <p>8 helium-inflated balloons (for Magician Narrative)</p>
@@ -232,7 +236,7 @@
   </div>
   <hr class="page-break"/>
   <p class="center line-after"><strong>Lesson 4</strong></p>
-  <div class="black-border">
+  <div class="hint connected-below">
     <p class="v-padding"><em><strong>Set up for the Magician Narrative</strong></em></p>
     <p><em>Before the lesson begins:</em></p>
     <p>Discuss and make arrangements with your co-teacher and with research personnel to decide which two props you will
@@ -256,8 +260,8 @@
     <p>Undergraduate helpers/research personnel will set up the props for the Magician Narrative, but you will need to
       tell them which props to set up and where to place the props before the lesson begins.</p></div>
   <div class="hint connected-above">
-    <p class="v-padding"><em><strong>Building Board from Previous Lesson:</strong></em></p>s<p><em>Before the lesson
-    begins:</em></p>
+    <p class="v-padding"><em><strong>Building Board from Previous Lesson:</strong></em></p>
+    <p><em>Before the lesson begins:</em></p>
     <ol class="numbers">
       <li>
         <p>Build the Lesson 3 Magician Narrative Review Velcro board using the Lesson 3 Magician Narrative Review
@@ -334,9 +338,7 @@
       </step>
     </li>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Explain to students that we will now begin with “<strong>I Do/You Help.</strong>”]</p>
-      </step>
+      <p>[Explain to students that we will now begin with “<strong>I Do/You Help.</strong>”]</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “We are now going to begin with ‘<strong>I Do/You Help</strong>.’ [<em>Place these roles onto the Roles
           Chart</em>.] Sometimes when we are working together, once I think that you are getting the hang of it, I will
@@ -360,13 +362,11 @@
       </step>
     </li>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Use the script below to remind students about declarative, procedural, and conditional knowledge associated
-          with events, causes, goals, tries, and the goal and TRY cards, and review the Magician Narrative from Lesson
-          3.]</p>
-        <p>[This review should be QUICK and almost game-like. To make it quicker, you should commit the script to memory
-          as much as you can and call on students rather than waiting for them to raise their hands.]</p>
-      </step>
+      <p>[Use the script below to remind students about declarative, procedural, and conditional knowledge associated
+        with events, causes, goals, tries, and the goal and TRY cards, and review the Magician Narrative from Lesson
+        3.]</p>
+      <p>[This review should be QUICK and almost game-like. To make it quicker, you should commit the script to memory
+        as much as you can and call on students rather than waiting for them to raise their hands.]</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Let’s review what we have learned so far about <strong>EVENTS, CAUSES, GOALS, and TRIES</strong>.
           Remember, you can use the procedure card to help you remember.”</p>
@@ -404,9 +404,7 @@
           </step>
         </li>
       </ul>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p><strong>Review how to find the GOAL…</strong></p>
-      </step>
+      <p><strong>Review how to find the GOAL…</strong></p>
       <ul>
         <li>
           <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -429,16 +427,16 @@
       </ul>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="goal" [practice]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students should tap on the GOAL card and hold the tablet up]</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the GOAL card and hold the tablet up]</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available: Have students hold up their goal card.]</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available: Have students hold up their goal card.]</p>
       </div>
       <ul>
         <li>
@@ -467,18 +465,16 @@
           below. If students are having difficulty, the teacher may also choose to review the information without
           student input.</p>
       </div>
+      <p>Review how to find the initiating event using the <strong>Because Card</strong>.</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Review how to find the initiating event using the <strong>Because Card</strong>.</p>
         <ul>
           <li>
             <p>Say: “After we figure out the goal, what question do we ask ourselves?”</p>
             <p>[Students respond: Why does the character have this goal?]</p>
             <p>[make “why” gesture]</p>
+            <p>Say: “This helps us think about what CAUSED the character to have that goal.”</p>
           </li>
         </ul>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “This helps us think about what CAUSED the character to have that goal.”</p>
       </step>
       <ul>
         <li>
@@ -509,7 +505,8 @@
         </li>
       </ul>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “We can retell the story by saying the goal, ‘I want to pop the balloon’ and then I can say <em>‘because’</em>
+        <p>Say: “We can retell the story by saying the goal, ‘I want to pop the balloon’ and then I can say
+          <em>‘because’</em>
           and connect the goal to WHY the character wanted to do it.”</p>
         <p>[Trace finger along the Because String while saying because].</p>
       </step>
@@ -526,7 +523,7 @@
           do [point to the blue Because card], WHICH CAUSED [trace finger along the Because String while saying WHICH
           CAUSED] me to want to pop this balloon.’” [point to yellow thought bubble]</p>
       </step>
-      <p class="v-padding bullet-heading"><strong>Next, review finding TRIES: </strong></p>
+      <p class="v-padding"><strong>Next, review finding TRIES: </strong></p>
       <ul>
         <li>
           <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -547,19 +544,19 @@
           </step>
         </li>
       </ul>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[If tablets are available follow the directions in this gray box]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the TRY card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available: Have students hold up their try card.]</p>
+      <div class="tablets-only">
+        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="goal" [practice]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students should tap on the TRY card and hold the tablet up]</p>
+          <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
+      </div>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available: Have students hold up their try card.]</p>
       </div>
       <ul>
         <li>
@@ -602,13 +599,13 @@
             <p>Say: “I squeezed the balloon [point to TRY #1] BECAUSE [trace finger along the Because String while
               saying BECAUSE] my goal was to pop the balloon.” [point to the yellow thought bubble]</p>
           </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Or, I can tell the story by saying the CAUSE first, ‘I wanted to pop the balloon [point to the yellow
+              thought bubble], WHICH CAUSED [trace finger along the Because String while saying WHICH CAUSED] me to squeeze
+              the balloon [TRY #1].’”</p>
+          </step>
         </li>
       </ul>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Or, I can tell the story by saying the CAUSE first, ‘I wanted to pop the balloon [point to the yellow
-          thought bubble], WHICH CAUSED [trace finger along the Because String while saying WHICH CAUSED] me to squeeze
-          the balloon [TRY #1].’”</p>
-      </step>
     </li>
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -681,51 +678,53 @@
         <p>[Goal, Try, Outcome Fail and Outcome Yes cards will be displayed on the student tablets when the teacher
           reaches this portion of the script. Students will not be able to select the cards until teachers tap the
           fidelity box in which they ask students to tap on the card.]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “Now take a look at your tablets. You should each have an OUTCOME FAIL card that looks like mine on
+            them. It’s below the GOAL card. Do you see it? We are going to use this picture to represent an OUTCOME
+            FAIL.”</p>
+          <p>[tap/hold up OUTCOME FAIL card on demo tablet]</p>
+        </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “If you see or hear an OUTCOME FAIL in a story, I want you to tap the OUTCOME FAIL card on the screen.
+            After you tap on the OUTCOME FAIL card, I want you to hold your tablet up so that I can see that you think
+            there is an OUTCOME FAIL in the story. Let’s practice tapping and showing your OUTCOME FAIL card. Pretend
+            we’re reading a story, and you see that a character does not achieve their goal, what do you do?”</p>
+        </step>
+        <step questionType="goal" correctAnswer="outcome-fail" [practice]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>Say: “That’s right you will tap on the OUTCOME FAIL card and hold your tablet up. Good job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
+        <step questionType="goal" correctAnswer="outcome-fail" [practice]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “Let’s practice that again. You hear an OUTCOME FAIL. What do you do?”</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Now take a look at your tablets. You should each have an OUTCOME FAIL card that looks like mine on
-          them. It’s below the GOAL card. Do you see it? We are going to use this picture to represent an OUTCOME
-          FAIL.”</p>
-        <p>[tap/hold up OUTCOME FAIL card on demo tablet]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “If you see or hear an OUTCOME FAIL in a story, I want you to tap the OUTCOME FAIL card on the screen.
-          After you tap on the OUTCOME FAIL card, I want you to hold your tablet up so that I can see that you think
-          there is an OUTCOME FAIL in the story. Let’s practice tapping and showing your OUTCOME FAIL card. Pretend
-          we’re reading a story, and you see that a character does not achieve their goal, what do you do?”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>Say: “That’s right you will tap on the OUTCOME FAIL card and hold your tablet up. Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Let’s practice that again. You hear an OUTCOME FAIL. What do you do?”</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>Say: “Now, let’s look at the OUTCOME FAIL card. We are going to use this picture to represent an OUTCOME
-          FAIL.”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “Now, let’s look at the OUTCOME FAIL card. We are going to use this picture to represent an OUTCOME
+            FAIL.”</p>
+        </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “If you see or hear an OUTCOME FAIL in a story, I want you to hold up your OUTCOME FAIL card so that I
+            can see that you think there is an OUTCOME FAIL in the story. Let’s practice holding up your OUTCOME FAIL
+            card. Pretend we’re reading a story, and you see that a character does not achieve their goal, what do you
+            do?”</p>
+          <p>[Students hold up OUTCOME FAIL cards]</p>
+          <p>Say: “That’s right you will hold up your OUTCOME FAIL card. Good job!”</p>
+        </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>Say: “Let’s practice that again. You hear an OUTCOME FAIL. What do you do?”</p>
+          <p>[Students hold up OUTCOME FAIL cards]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “If you see or hear an OUTCOME FAIL in a story, I want you to hold up your OUTCOME FAIL card so that I
-          can see that you think there is an OUTCOME FAIL in the story. Let’s practice holding up your OUTCOME FAIL
-          card. Pretend we’re reading a story, and you see that a character does not achieve their goal, what do you
-          do?”</p>
-        <p>[Students hold up OUTCOME FAIL cards]</p>
-        <p>Say: “That’s right you will hold up your OUTCOME FAIL card. Good job!”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Let’s practice that again. You hear an OUTCOME FAIL. What do you do?”</p>
-        <p>[Students hold up OUTCOME FAIL cards]</p>
-      </step>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “We will write what happened [make “what happened” gesture] on this card that has a red border around it
           so we know this was an Outcome Fail. The red border reminds us that we did not get our goal.”</p>
@@ -742,19 +741,21 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>Say: “Good job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>Say: “Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students hold up their OUTCOME FAIL card.]</p>
-        <p>Say: “Good job!”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up their OUTCOME FAIL card.]</p>
+          <p>Say: “Good job!”</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Good job. You know how to show your outcome fail card. After we figure out what the outcome was, we
@@ -891,22 +892,22 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-yes" [practice]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME YES card and hold the tablet up]</p>
+          <p>Say: “That’s right you will tap on the OUTCOME YES card and hold your tablet up. Good job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME YES card and hold the tablet up]</p>
-        <p>Say: “That’s right you will tap on the OUTCOME YES card and hold your tablet up. Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up OUTCOME YES cards]</p>
+          <p>Say: “That’s right you will hold up your OUTCOME YES card. Good job!”</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Students hold up OUTCOME YES cards]</p>
-        <p>Say: “That’s right you will hold up your OUTCOME YES card. Good job!”</p>
-      </step>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “So, I would write down what happened [make “what happened” gesture] on the Outcome Yes card. I will
           write, “The balloon popped” on the Outcome Yes card.”</p>
@@ -972,8 +973,8 @@
           they are ready to help. Make sure to point to each part to help students make the connection between the
           Velcro board and the retelling.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p class="heading"><strong>Teacher Retelling:</strong></p>
+      <div class="grey-bg">
+        <p><strong>Teacher Retelling:</strong></p>
         <p>Say: “My goal was to pop this balloon <em>because</em> [make finger move] popping balloons is one of my
           favorite things to do. The first thing I tried to pop the balloon was to squeeze it. This caused the balloon
           to squish a little, but it didn’t pop. So, I did not get my goal. Since my first TRY didn’t work and my goal
@@ -981,7 +982,7 @@
           caused it to pop. So, I got my goal. I decided to make a second TRY to pop the balloon <em>because</em> [make
           finger move] my goal was still the same and because [make finger move] my first try didn’t work. My second TRY
           was to stick the balloon with a pin. When I did that it popped, so I got my goal.”</p>
-      </step>
+      </div>
     </li>
   </ol>
   <hr class="page-break"/>
@@ -1021,18 +1022,17 @@
       </li>
     </ul>
   </div>
-  <div class="hint"><p><em><strong>Overview of Magician Narrative Activity and Charting </strong></em></p>
-    <p>(This is just an overview of the activity. The script follows.)</p>
+  <div class="overview"><p><em><strong>Overview of Magician Narrative Activity and Charting </strong></em></p>
+    <p class="no-line-above">(This is just an overview of the activity. The script follows.)</p>
     <p><em>Materials to Take Along on Journey:</em></p>
-    <p>Teacher will bring:</p>
-    <ul>
+    <p class="no-line-above">Teacher will bring:</p>
+    <ul class="no-line-below">
       <li>
         <p>Tablet with lesson on it</p>
       </li>
     </ul>
-    <hr/>
-    <p class="v-padding">Co-teacher will bring:</p>
-    <ul>
+    <p>Co-teacher will bring:</p>
+    <ul class="no-line-below">
       <li>
         <p>Velcro board with goal, blue Because card, and first try charted (build together with students)</p>
       </li>
@@ -1048,9 +1048,9 @@
       <li>
         <p>Wikki stix</p>
       </li>
-      <li>
-        <p>Students will bring:</p>
-      </li>
+    </ul>
+    <p>Students will bring:</p>
+    <ul>
       <li>
         <p>Procedure card</p>
       </li>
@@ -1068,7 +1068,7 @@
       </li>
     </ul>
     <p><em>Use the following procedure:</em></p>
-    <ol>
+    <ol class="numbers">
       <li>
         <p>Brainstorm the first TRY.</p>
       </li>
@@ -1122,9 +1122,7 @@
       </step>
     </li>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Review what has happened in the Magician Narrative to this point with the students.]</p>
-      </step>
+      <p>[Review what has happened in the Magician Narrative to this point with the students.]</p>
       <div class="hint"><p><em><strong>Reviewing the Magician Narrative</strong></em></p>
         <p>As time permits, have students assist with the retelling. If there is sufficient time to have students
           assist, make sure students refer to and use the Velcro board. If you are retelling the story, point to each
@@ -1154,20 +1152,22 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
+            job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
-          job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students hold up their OUTCOME FAIL card]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up their OUTCOME FAIL card]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “You’re right. The balloons were not in [Location 1]. It was an Outcome Fail.”</p>
@@ -1193,20 +1193,22 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
+            job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
-          job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students hold up their OUTCOME FAIL card]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up their OUTCOME FAIL card]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “You’re right. The balloons were not in [Location 2]. It was an Outcome Fail.”</p>
@@ -1229,20 +1231,22 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
+            job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
-          job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students hold up their OUTCOME FAIL card]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up their OUTCOME FAIL card]</p>
+          <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “You’re right. The balloons were not in [Location 3]. It was an Outcome Fail.”</p>
@@ -1264,20 +1268,22 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="outcome-yes" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students tap on the OUTCOME YES card and hold the tablet up]</p>
+          <p>Say: “Yes, if we see an OUTCOME YES we need to tap our OUTCOME YES card and hold up our tablets. Good
+            job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students tap on the OUTCOME YES card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see an OUTCOME YES we need to tap our OUTCOME YES card and hold up our tablets. Good
-          job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students hold up their OUTCOME YES card]</p>
-        <p>Say: “Yes, if we see an OUTCOME YES we need to hold up our OUTCOME YES card. Good job!”</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students hold up their OUTCOME YES card]</p>
+          <p>Say: “Yes, if we see an OUTCOME YES we need to hold up our OUTCOME YES card. Good job!”</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “You’re right. The balloons were in [Location 4]. It was an Outcome Yes.”</p>
@@ -1295,29 +1301,31 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+        <step questionType="goal" correctAnswer="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Activate question by tapping the fidelity box to the left.]</p>
+          <p>[Students should tap on the GOAL card and hold the tablet up and say “Our goal is to take the balloons to
+            Alex the Magician.”]</p>
+          <p>Say: “Yes, our GOAL is to take the balloons to Alex the Magician. I’m glad to see that you tapped your GOAL
+            card and held up your tablets. Good job!”</p>
+          <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+            make sure that all students have responded to the question by looking at the list of student responses on the
+            top left.]</p>
+          <p>[If students do <em>not</em> tap on the GOAL card and hold up their tablet]</p>
+          <p>Say: “What should you do if you hear a GOAL in a story?”</p>
+          <p>[Students tap on the GOAL card and hold the tablet up]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the GOAL card and hold the tablet up and say “Our goal is to take the balloons to
-          Alex the Magician.”]</p>
-        <p>Say: “Yes, our GOAL is to take the balloons to Alex the Magician. I’m glad to see that you tapped your GOAL
-          card and held up your tablets. Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-        <p>[If students do <em>not</em> tap on the GOAL card and hold up their tablet]</p>
-        <p>Say: “What should you do if you hear a GOAL in a story?”</p>
-        <p>[Students tap on the GOAL card and hold the tablet up]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students should hold up their GOAL card and say “Our goal is to take the balloons to Alex the
-          Magician.”]</p>
-        <p>Say: “Yes, our GOAL is to take the balloons to Alex the Magician. I’m glad to see that you held up your GOAL
-          card. Good job!”</p>
-        <p>[If students do <em>not</em> hold up the GOAL card]</p>
-        <p>Say: “What should you do if you hear a GOAL in a story?”</p>
-        <p>[Students hold up the GOAL card]</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[Students should hold up their GOAL card and say “Our goal is to take the balloons to Alex the
+            Magician.”]</p>
+          <p>Say: “Yes, our GOAL is to take the balloons to Alex the Magician. I’m glad to see that you held up your GOAL
+            card. Good job!”</p>
+          <p>[If students do <em>not</em> hold up the GOAL card]</p>
+          <p>Say: “What should you do if you hear a GOAL in a story?”</p>
+          <p>[Students hold up the GOAL card]</p>
+        </step>
       </div>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Can someone put our new goal on our board?”</p>
@@ -1376,286 +1384,300 @@
           </li>
         </ol>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>1. TRY #1: [make sure the door to your classroom is closed. Make sure you have the balloons with you and that
-          the Co-teacher has the Velcro board and pre-printed cards.]</p>
-        <p>Say: “Okay, so if our goal is to take the balloons to Alex the Magician, we need to think about what our
-          first TRY will be.”</p>
-        <p>TRY #1 OPTION 1: (You plan to go out of the classroom):</p>
-        <p>Say: “I guess we will go out the door and then we probably should turn (right or left) and go down the hall.
-          That is our first TRY”</p>
-        <p>[If you are going out of the classroom then “Turn left down the hall” or “Turn right down the hall” would be
-          TRY #1 and the banner will be spread across the hall on either the right or the left]</p>
-        <p>TRY #1 OPTION 2: (You plan to stay in the classroom—use if you think the children will have difficulty
-          maintaining focus in the hallways):</p>
-        <p>Say: “I guess we will go out the door. That is our first TRY.”</p>
-        <p>[If you are staying in the classroom then that will be TRY #1— “Go out the door” and the banner will be
-          blocking the door on the other side.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Wait a second! I just said TRY. Are we TRYING something? Our goal is to take the balloons to Alex the
-          Magician. Are we doing something to TRY to get the balloons to her? If we are making a TRY, what should we
-          do?”</p>
-      </step>
-      <div class="tablets-only">
-        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the TRY card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-        <p>[If students do <em>not</em> tap on the TRY card and hold up their tablet]</p>
-        <p>Say: “What should you do if you hear a TRY in a story?”</p>
-        <p>[Students tap on the TRY card and hold the tablet up]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students should hold up their TRY card]</p>
-        <p>Say: “Yes, if we see a TRY we need to hold up our TRY card. Good job!”</p>
-        <p>[If students do <em>not</em> hold up the TRY card]</p>
-        <p>Say: “What should you do if you hear a TRY in a story?”</p>
-        <p>[Students hold up the TRY card]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Let’s write our TRY on this blank TRY card. Now that we are about to make our TRY, we need to chart it
-          on our Velcro board first. We will write what we will TRY on this TRY card. Can someone put the TRY card on
-          the Velcro board?”</p>
-        <p>[Co-teacher: Writes TRY #1 on the blank TRY card (either “Turn right/left down the hall” or “Go out the
-          door”)]</p>
-        <p>[Student should: Place the TRY #1 card under the goal on the Velcro board.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Ask: “After we make a TRY, we ask WHY. WHY are we TRYING this?” [make “why” gesture]</p>
-        <p>[Give one student a Because String to make the causal connections between TRY#1 and the GOAL on the Velcro
-          board.]</p>
-        <p>[Students respond: We are going (down this hallway/out the door) BECAUSE (make finger move) our goal is to
-          take the balloons to Alex the Magician.]</p>
-        <p>Say: “Can you say it the other way?”</p>
-        <p>[Students respond: Our goal is to take the balloons to Alex the Magician, WHICH CAUSED (make finger move) us
-          to go (down this hallway/out the door).]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Now that we have our first TRY mapped out let’s take our tablets (or Goal/Try/Outcome cards) and line
-          up at the door to begin our journey. Remember, that we will need to be respectful and stay on task while we
-          are traveling. We will also need to follow our rules. We must walk and stay together. Let’s head out! Let’s
-          TRY to go (down this hallway/out this door) to get to Alex the Magician’s house.”</p>
-        <p>[Teacher and students take their tablets (or goal, try and outcome cards) with them so they can raise them
-          when they see a goal, try, or outcome]</p>
-        <p>[Co-teacher takes Velcro board, pre-printed cards, and wikki stix to use along the way]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Open the door and see a large banner that says “Read” and a “Caution Wet Paint” sign next to it]</p>
-        <p>Say: “Oh no! These people are making a huge painting on the floor. It’s wet and there’s no way we can get
-          around it to (get down the hallway/go out the door).”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “So, what happened when we tried to (go down the hallway/go out the door)? [make “what happened”
-          gesture] What is the result of this try?”</p>
-      </step>
-      <div class="tablets-only">
-        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the OUTCOME FAIL card and hold the tablet up and say a painting was blocking the
-          way]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
-          job!”</p>
-        <p>[If students do <em>not</em> tap on the OUTCOME FAIL card and hold up their tablet]</p>
-        <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students should hold up their OUTCOME FAIL card and say a painting was blocking the way]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
-        <p>[If students do <em>not</em> hold up the OUTCOME FAIL card]</p>
-        <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
-        <p>[Students hold up the OUTCOME FAIL card]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “You’re right. We couldn’t go (down the hallway/out the door) because a painting was blocking our way.
-          It was an Outcome Fail.”</p>
-        <p>[Ask a student to place the “Painting blocking our way” Outcome Fail card on the Velcro board next to TRY
-          #1]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Ask: “WHY did this outcome happen?” [make “why” gesture]</p>
-        <p>[Ask a student to place Because string to connect the first Outcome Fail to TRY#1]</p>
-        <p>Say: “Can someone retell the connection?”</p>
-        <p>[Students respond: We couldn’t go (down the hallway/out the door) BECAUSE (make finger move) a painting was
-          blocking our way.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Did we achieve our goal of taking the balloons to Alex the Magician?”</p>
-        <p>[Students respond: No, a painting was blocking our way. TRY#1 didn’t work. We can’t take the balloons to her
-          this way. So, this is an outcome fail. We did not achieve our goal.]</p>
-        <p>Say: “Let’s look at our procedure cards. Remember, after we know an outcome we think, is our goal still the
-          same?”</p>
-        <p>[Have students trace the red arrow on the procedure card and say “Is the goal still the same?”]</p>
-        <p>[Students respond: Yes, our goal is still the same. We still need to find a way to get the balloons to Alex
-          the Magician so she can practice her trick.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>2. TRY #2: [Try to keep the students focused on you and not looking around the hallway or the classroom]</p>
-        <p>Say: “Okay, so if our goal is to take the balloons to Alex the Magician, we need to think about a different
-          way to get them to her. We will have to plan what our second TRY will be.”</p>
-        <p>TRY #2 OPTION 1: (You are going out of the classroom):</p>
-        <p>Say: “We have to get these balloons to Alex the Magician. Let’s TRY getting out of the school by going the
-          other way down the hall. We can go out the door at the end of the hall.”</p>
-        <p>[If you are going out of the classroom then “Go out the door at the end of the hall” or something to that
-          effect would be TRY #2 and there will be caution tape spread across the door at the end of the hall, and there
-          will be a “broken door” sign on it.]</p>
-        <p>TRY #2 OPTION 2: (You are staying in the classroom—use if you think the children will have difficulty
-          maintaining focus in the hallways):</p>
-        <p>Say: “Well, we can’t go out the door, and we have to get these balloons to Alex the Magician. What can we TRY
-          now? The only other way out is through the window. That will have to be our second TRY.”</p>
-        <p>[If you are staying in the classroom then that will be TRY #2— “Go out the window.” You have to “sell” this
-          option by sounding desperate. As you open the blinds, you will see caution tape and a “broken window” sign on
-          the window]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Wait a second! I just said TRY. Are we TRYING something? Our goal is to take the balloons to Alex the
-          Magician. Are we doing something else to TRY to get the balloons to her? If we are making a TRY, what should
-          we do?”</p>
-      </step>
-      <div class="tablets-only">
-        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the TRY card and hold the tablet up]</p>
-        <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
-        <p>[If students do <em>not</em> tap on the TRY card and hold up their tablet]</p>
-        <p>Say: “What should you do if you hear a TRY in a story?”</p>
-        <p>[Students tap on the TRY card and hold the tablet up]</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students should hold up their TRY card]</p>
-        <p>Say: “Yes, if we see a TRY we need to hold up our TRY card. Good job!”</p>
-        <p>[If students do <em>not</em> hold up the TRY card]</p>
-        <p>Say: “What should you do if you hear a TRY in a story?”</p>
-        <p>[Students hold up the TRY card]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Let’s write our TRY on this blank TRY card. Now that we are about to make another TRY, we need to chart
-          it on our Velcro board. We will write what we will TRY on this card. Then we will place it under the goal
-          thought bubble on the Velcro board.”</p>
-        <p>[Co-teacher writes TRY #2 on the blank TRY card (either “Go out the door at the end of the hall” or “Go out
-          the window”)]</p>
-        <p>Say: “Remember, we put the TRY cards underneath the goal.”</p>
-        <p>[Ask a student to place the TRY #2 card under the goal and to the right of the first Outcome Fail card on the
-          Velcro board.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Ask: “After we make a TRY, we ask WHY. WHY are we TRYING this?” [make “why” gesture]</p>
-        <p>[Give one student a Because String to make the causal connections between TRY#2 and the GOAL on the Velcro
-          board.]</p>
-        <p>[Students respond: We are going (out the door at the end of the hall/out the window) BECAUSE (make finger
-          move) our goal is to take the balloons to Alex the Magician.]</p>
-        <p>Say: “Can you say it the other way?”</p>
-        <p>[Students respond: Our goal is to take the balloons to Alex the Magician, WHICH CAUSED (make finger move) us
-          to go (out the door at the end of the hall/out the window).]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Is there another reason why we made this try? Can someone make another connection?”</p>
-        <p>[Students should connect TRY #2 to the first Outcome Fail and say: We are also going to (Location #2) BECAUSE
-          our first try was not successful.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Now that we have our second TRY mapped out let’s continue our journey. Let’s TRY to go (out the door at
-          the end of the hall/out this window) to get to Alex the Magician’s house.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>TRY #2 OPTION 1:</p>
-        <p>[Go down the hall to the door and see that it has caution tape across it and a “broken door” sign]</p>
-        <p>Say: “Oh no! There is caution tape here and a broken door sign). It looks like they are doing some sort of
-          construction. That means we shouldn’t go any further because it could be dangerous. We better not take a
-          risk.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>TRY #2 OPTION 2:</p>
-        <p>[Open the blinds on a window in your classroom to reveal that it has caution tape across it and a “broken
-          window” sign]</p>
-        <p>Say: “Oh no! There is caution tape here and a broken window sign. It looks like they are doing some sort of
-          construction. That means we shouldn’t go any further because it could be dangerous. We better not take a
-          risk.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “So, what is the result of this try? What happened when we tried to (go out the door at the end of the
-          hall/go out the window)?” [make “what happened” gesture]</p>
-      </step>
-      <div class="tablets-only">
-        <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Activate question by tapping the fidelity box to the left.]</p>
-        <p>[Students should tap on the OUTCOME FAIL card and hold the tablet up and say there was caution tape blocking
-          the door/window and a broken door/window sign]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
-          job!”</p>
-        <p>[If students do <em>not</em> tap on the OUTCOME FAIL card and hold up their tablet]</p>
-        <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
-        <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
-        <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
-          make sure that all students have responded to the question by looking at the list of student responses on the
-          top left.]</p>
-      </step>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
-        <p>[Students should hold up their OUTCOME FAIL card and say there was caution tape blocking the door/window and
-          a broken door/window sign]</p>
-        <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
-        <p>[If students do <em>not</em> hold up the OUTCOME FAIL card]</p>
-        <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
-        <p>[Students hold up the OUTCOME FAIL card]</p>
-      </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “You’re right. We couldn’t go (out the door at the end of the hallway/out the window) because there was
-          caution tape in the way. It was an Outcome Fail.”</p>
-        <p>[Ask a student to place the “Caution tape in the way” Outcome Fail card on the Velcro board next to TRY
-          #2]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Ask: “WHY did this outcome happen?” [make “why” gesture]</p>
-        <p>[Ask a student to place Because string to connect the second Outcome Fail to TRY#2]</p>
-        <p>Say: “Can someone retell the connection?”</p>
-        <p>[Students respond: We couldn’t go out the door at the end of the hall/out the window BECAUSE [make finger
-          move] there was caution tape blocking the door/window. So, we didn’t achieve our goal of taking the balloons
-          to Alex the Magician.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “Did we achieve our goal of taking the balloons to Alex the Magician?”</p>
-        <p>[Students respond: No, caution tape was in the way. TRY#2 didn’t work. We can’t take the balloons to her. So,
-          this is an Outcome Fail. We did not achieve our goal.]</p>
-        <p>Say: “Let’s look at our procedure cards. Remember, after we know an outcome we think, is our goal still the
-          same?”</p>
-        <p>[Have students trace the red arrow on the procedure card and say “Is the goal still the same?”]</p>
-        <p>[Students respond: Yes, our goal is still the same. We still need to find a way to get the balloons to Alex
-          the Magician so she can practice her trick.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “That was our last way out. We don’t have any more time to figure out another way to get the balloons to
-          Alex the Magician today. We have work to do! Our goal is still the same, so we will come back to this next
-          time. We’ll put the balloons here in the room for now.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “We will have to figure out what to do with the balloons next, but first, let’s retell the story so far.
-          Remember, we can use the Velcro board to help us retell the story. I’m going to retell the story to you using
-          the Velcro board. As you listen, think about whether I am doing a good job or not. Think about whether I have
-          too much detail, not enough detail, or whether it is just right. I want to try to make the retelling sound
-          like a story, but I don’t need to include every single detail.”</p>
-      </step>
+      <ol>
+        <li>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>TRY #1: [make sure the door to your classroom is closed. Make sure you have the balloons with you and that
+              the Co-teacher has the Velcro board and pre-printed cards.]</p>
+            <p>Say: “Okay, so if our goal is to take the balloons to Alex the Magician, we need to think about what our
+              first TRY will be.”</p>
+            <p>TRY #1 OPTION 1: (You plan to go out of the classroom):</p>
+            <p>Say: “I guess we will go out the door and then we probably should turn (right or left) and go down the hall.
+              That is our first TRY”</p>
+            <p>[If you are going out of the classroom then “Turn left down the hall” or “Turn right down the hall” would be
+              TRY #1 and the banner will be spread across the hall on either the right or the left]</p>
+            <p><span class="grey-bg">TRY #1 OPTION 2: (You plan to stay in the classroom—use if you think the children will have difficulty
+          maintaining focus in the hallways):</span></p>
+            <p><span class="grey-bg">Say: “I guess we will go out the door. That is our first TRY.”</span></p>
+            <p><span class="grey-bg">[If you are staying in the classroom then that will be TRY #1— “Go out the door” and the banner will be
+          blocking the door on the other side.]</span></p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Wait a second! I just said TRY. Are we TRYING something? Our goal is to take the balloons to Alex the
+              Magician. Are we doing something to TRY to get the balloons to her? If we are making a TRY, what should we
+              do?”</p>
+          </step>
+          <div class="tablets-only">
+            <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+            <step questionType="goal" correctAnswer="try" (onReady)="stepReady($event)" [session]="session">
+              <p>[Activate question by tapping the fidelity box to the left.]</p>
+              <p>[Students should tap on the TRY card and hold the tablet up]</p>
+              <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
+              <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+                make sure that all students have responded to the question by looking at the list of student responses on the
+                top left.]</p>
+              <p>[If students do <em>not</em> tap on the TRY card and hold up their tablet]</p>
+              <p>Say: “What should you do if you hear a TRY in a story?”</p>
+              <p>[Students tap on the TRY card and hold the tablet up]</p>
+            </step>
+          </div>
+          <div class="no-tablets">
+            <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+            <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+              <p>[Students should hold up their TRY card]</p>
+              <p>Say: “Yes, if we see a TRY we need to hold up our TRY card. Good job!”</p>
+              <p>[If students do <em>not</em> hold up the TRY card]</p>
+              <p>Say: “What should you do if you hear a TRY in a story?”</p>
+              <p>[Students hold up the TRY card]</p>
+            </step>
+          </div>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Let’s write our TRY on this blank TRY card. Now that we are about to make our TRY, we need to chart it
+              on our Velcro board first. We will write what we will TRY on this TRY card. Can someone put the TRY card on
+              the Velcro board?”</p>
+            <p>[Co-teacher: Writes TRY #1 on the blank TRY card (either “Turn right/left down the hall” or “Go out the
+              door”)]</p>
+            <p>[Student should: Place the TRY #1 card under the goal on the Velcro board.]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Ask: “After we make a TRY, we ask WHY. WHY are we TRYING this?” [make “why” gesture]</p>
+            <p>[Give one student a Because String to make the causal connections between TRY#1 and the GOAL on the Velcro
+              board.]</p>
+            <p>[Students respond: We are going (down this hallway/out the door) BECAUSE (make finger move) our goal is to
+              take the balloons to Alex the Magician.]</p>
+            <p>Say: “Can you say it the other way?”</p>
+            <p>[Students respond: Our goal is to take the balloons to Alex the Magician, WHICH CAUSED (make finger move) us
+              to go (down this hallway/out the door).]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Now that we have our first TRY mapped out let’s take our tablets (or Goal/Try/Outcome cards) and line
+              up at the door to begin our journey. Remember, that we will need to be respectful and stay on task while we
+              are traveling. We will also need to follow our rules. We must walk and stay together. Let’s head out! Let’s
+              TRY to go (down this hallway/out this door) to get to Alex the Magician’s house.”</p>
+            <p>[Teacher and students take their tablets (or goal, try and outcome cards) with them so they can raise them
+              when they see a goal, try, or outcome]</p>
+            <p>[Co-teacher takes Velcro board, pre-printed cards, and wikki stix to use along the way]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>[Open the door and see a large banner that says “Read” and a “Caution Wet Paint” sign next to it]</p>
+            <p>Say: “Oh no! These people are making a huge painting on the floor. It’s wet and there’s no way we can get
+              around it to (get down the hallway/go out the door).”</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “So, what happened when we tried to (go down the hallway/go out the door)? [make “what happened”
+              gesture] What is the result of this try?”</p>
+          </step>
+          <div class="tablets-only">
+            <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+            <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+              <p>[Activate question by tapping the fidelity box to the left.]</p>
+              <p>[Students should tap on the OUTCOME FAIL card and hold the tablet up and say a painting was blocking the
+                way]</p>
+              <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
+                job!”</p>
+              <p>[If students do <em>not</em> tap on the OUTCOME FAIL card and hold up their tablet]</p>
+              <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
+              <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+              <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+                make sure that all students have responded to the question by looking at the list of student responses on the
+                top left.]</p>
+            </step>
+          </div>
+          <div class="no-tablets">
+            <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+            <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+              <p>[Students should hold up their OUTCOME FAIL card and say a painting was blocking the way]</p>
+              <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+              <p>[If students do <em>not</em> hold up the OUTCOME FAIL card]</p>
+              <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
+              <p>[Students hold up the OUTCOME FAIL card]</p>
+            </step>
+          </div>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “You’re right. We couldn’t go (down the hallway/out the door) because a painting was blocking our way.
+              It was an Outcome Fail.”</p>
+            <p>[Ask a student to place the “Painting blocking our way” Outcome Fail card on the Velcro board next to TRY
+              #1]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Ask: “WHY did this outcome happen?” [make “why” gesture]</p>
+            <p>[Ask a student to place Because string to connect the first Outcome Fail to TRY#1]</p>
+            <p>Say: “Can someone retell the connection?”</p>
+            <p>[Students respond: We couldn’t go (down the hallway/out the door) BECAUSE (make finger move) a painting was
+              blocking our way.]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Did we achieve our goal of taking the balloons to Alex the Magician?”</p>
+            <p>[Students respond: No, a painting was blocking our way. TRY#1 didn’t work. We can’t take the balloons to her
+              this way. So, this is an outcome fail. We did not achieve our goal.]</p>
+            <p>Say: “Let’s look at our procedure cards. Remember, after we know an outcome we think, is our goal still the
+              same?”</p>
+            <p>[Have students trace the red arrow on the procedure card and say “Is the goal still the same?”]</p>
+            <p>[Students respond: Yes, our goal is still the same. We still need to find a way to get the balloons to Alex
+              the Magician so she can practice her trick.]</p>
+          </step>
+        </li>
+        <li>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>TRY #2: [Try to keep the students focused on you and not looking around the hallway or the classroom]</p>
+            <p>Say: “Okay, so if our goal is to take the balloons to Alex the Magician, we need to think about a different
+              way to get them to her. We will have to plan what our second TRY will be.”</p>
+            <p>TRY #2 OPTION 1: (You are going out of the classroom):</p>
+            <p>Say: “We have to get these balloons to Alex the Magician. Let’s TRY getting out of the school by going the
+              other way down the hall. We can go out the door at the end of the hall.”</p>
+            <p>[If you are going out of the classroom then “Go out the door at the end of the hall” or something to that
+              effect would be TRY #2 and there will be caution tape spread across the door at the end of the hall, and there
+              will be a “broken door” sign on it.]</p>
+            <p><span class="grey-bg">TRY #2 OPTION 2: (You are staying in the classroom—use if you think the children will have difficulty
+              maintaining focus in the hallways):</span></p>
+            <p><span class="grey-bg">Say: “Well, we can’t go out the door, and we have to get these balloons to Alex the Magician. What can we TRY
+              now? The only other way out is through the window. That will have to be our second TRY.”</span></p>
+            <p><span class="grey-bg">[If you are staying in the classroom then that will be TRY #2— “Go out the window.” You have to “sell” this
+              option by sounding desperate. As you open the blinds, you will see caution tape and a “broken window” sign on
+              the window]</span></p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Wait a second! I just said TRY. Are we TRYING something? Our goal is to take the balloons to Alex the
+              Magician. Are we doing something else to TRY to get the balloons to her? If we are making a TRY, what should
+              we do?”</p>
+          </step>
+          <div class="tablets-only">
+            <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+            <step questionType="goal" correctAnswer="try" (onReady)="stepReady($event)" [session]="session">
+              <p>[Activate question by tapping the fidelity box to the left.]</p>
+              <p>[Students should tap on the TRY card and hold the tablet up]</p>
+              <p>Say: “Yes, if we see a TRY we need to tap our TRY card and hold up our tablets. Good job!”</p>
+              <p>[If students do <em>not</em> tap on the TRY card and hold up their tablet]</p>
+              <p>Say: “What should you do if you hear a TRY in a story?”</p>
+              <p>[Students tap on the TRY card and hold the tablet up]</p>
+              <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+                make sure that all students have responded to the question by looking at the list of student responses on the
+                top left.]</p>
+            </step>
+          </div>
+          <div class="no-tablets">
+            <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+            <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+              <p>[Students should hold up their TRY card]</p>
+              <p>Say: “Yes, if we see a TRY we need to hold up our TRY card. Good job!”</p>
+              <p>[If students do <em>not</em> hold up the TRY card]</p>
+              <p>Say: “What should you do if you hear a TRY in a story?”</p>
+              <p>[Students hold up the TRY card]</p>
+            </step>
+          </div>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Let’s write our TRY on this blank TRY card. Now that we are about to make another TRY, we need to chart
+              it on our Velcro board. We will write what we will TRY on this card. Then we will place it under the goal
+              thought bubble on the Velcro board.”</p>
+            <p>[Co-teacher writes TRY #2 on the blank TRY card (either “Go out the door at the end of the hall” or “Go out
+              the window”)]</p>
+            <p>Say: “Remember, we put the TRY cards underneath the goal.”</p>
+            <p>[Ask a student to place the TRY #2 card under the goal and to the right of the first Outcome Fail card on the
+              Velcro board.]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Ask: “After we make a TRY, we ask WHY. WHY are we TRYING this?” [make “why” gesture]</p>
+            <p>[Give one student a Because String to make the causal connections between TRY#2 and the GOAL on the Velcro
+              board.]</p>
+            <p>[Students respond: We are going (out the door at the end of the hall/out the window) BECAUSE (make finger
+              move) our goal is to take the balloons to Alex the Magician.]</p>
+            <p>Say: “Can you say it the other way?”</p>
+            <p>[Students respond: Our goal is to take the balloons to Alex the Magician, WHICH CAUSED (make finger move) us
+              to go (out the door at the end of the hall/out the window).]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Is there another reason why we made this try? Can someone make another connection?”</p>
+            <p>[Students should connect TRY #2 to the first Outcome Fail and say: We are also going to (Location #2) BECAUSE
+              our first try was not successful.]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Now that we have our second TRY mapped out let’s continue our journey. Let’s TRY to go (out the door at
+              the end of the hall/out this window) to get to Alex the Magician’s house.”</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>TRY #2 OPTION 1:</p>
+            <p>[Go down the hall to the door and see that it has caution tape across it and a “broken door” sign]</p>
+            <p>Say: “Oh no! There is caution tape here and a broken door sign). It looks like they are doing some sort of
+              construction. That means we shouldn’t go any further because it could be dangerous. We better not take a
+              risk.”</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p><span class="grey-bg">TRY #2 OPTION 2:</span></p>
+            <p><span class="grey-bg">[Open the blinds on a window in your classroom to reveal that it has caution tape across it and a “broken
+              window” sign]</span></p>
+            <p><span class="grey-bg">Say: “Oh no! There is caution tape here and a broken window sign. It looks like they are doing some sort of
+              construction. That means we shouldn’t go any further because it could be dangerous. We better not take a
+              risk.”</span></p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “So, what is the result of this try? What happened when we tried to (go out the door at the end of the
+              hall/go out the window)?” [make “what happened” gesture]</p>
+          </step>
+          <div class="tablets-only">
+            <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
+            <step questionType="goal" correctAnswer="outcome-fail" (onReady)="stepReady($event)" [session]="session">
+              <p>[Activate question by tapping the fidelity box to the left.]</p>
+              <p>[Students should tap on the OUTCOME FAIL card and hold the tablet up and say there was caution tape blocking
+                the door/window and a broken door/window sign]</p>
+              <p>Say: “Yes, if we see an OUTCOME FAIL we need to tap our OUTCOME FAIL card and hold up our tablets. Good
+                job!”</p>
+              <p>[If students do <em>not</em> tap on the OUTCOME FAIL card and hold up their tablet]</p>
+              <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
+              <p>[Students tap on the OUTCOME FAIL card and hold the tablet up]</p>
+              <p>[Before tapping the ‘Done’ button on the top right of the screen to move on, teachers should double-check to
+                make sure that all students have responded to the question by looking at the list of student responses on the
+                top left.]</p>
+            </step>
+          </div>
+          <div class="no-tablets">
+            <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
+            <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+              <p>[Students should hold up their OUTCOME FAIL card and say there was caution tape blocking the door/window and
+                a broken door/window sign]</p>
+              <p>Say: “Yes, if we see an OUTCOME FAIL we need to hold up our OUTCOME FAIL card. Good job!”</p>
+              <p>[If students do <em>not</em> hold up the OUTCOME FAIL card]</p>
+              <p>Say: “What should you do if you hear an OUTCOME in a story?”</p>
+              <p>[Students hold up the OUTCOME FAIL card]</p>
+            </step>
+          </div>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “You’re right. We couldn’t go (out the door at the end of the hallway/out the window) because there was
+              caution tape in the way. It was an Outcome Fail.”</p>
+            <p>[Ask a student to place the “Caution tape in the way” Outcome Fail card on the Velcro board next to TRY
+              #2]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Ask: “WHY did this outcome happen?” [make “why” gesture]</p>
+            <p>[Ask a student to place Because string to connect the second Outcome Fail to TRY#2]</p>
+            <p>Say: “Can someone retell the connection?”</p>
+            <p>[Students respond: We couldn’t go out the door at the end of the hall/out the window BECAUSE [make finger
+              move] there was caution tape blocking the door/window. So, we didn’t achieve our goal of taking the balloons
+              to Alex the Magician.”</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “Did we achieve our goal of taking the balloons to Alex the Magician?”</p>
+            <p>[Students respond: No, caution tape was in the way. TRY#2 didn’t work. We can’t take the balloons to her. So,
+              this is an Outcome Fail. We did not achieve our goal.]</p>
+            <p>Say: “Let’s look at our procedure cards. Remember, after we know an outcome we think, is our goal still the
+              same?”</p>
+            <p>[Have students trace the red arrow on the procedure card and say “Is the goal still the same?”]</p>
+            <p>[Students respond: Yes, our goal is still the same. We still need to find a way to get the balloons to Alex
+              the Magician so she can practice her trick.]</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “That was our last way out. We don’t have any more time to figure out another way to get the balloons to
+              Alex the Magician today. We have work to do! Our goal is still the same, so we will come back to this next
+              time. We’ll put the balloons here in the room for now.”</p>
+          </step>
+          <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+            <p>Say: “We will have to figure out what to do with the balloons next, but first, let’s retell the story so far.
+              Remember, we can use the Velcro board to help us retell the story. I’m going to retell the story to you using
+              the Velcro board. As you listen, think about whether I am doing a good job or not. Think about whether I have
+              too much detail, not enough detail, or whether it is just right. I want to try to make the retelling sound
+              like a story, but I don’t need to include every single detail.”</p>
+          </step>
+        </li>
+      </ol>
     </li>
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -1663,49 +1685,51 @@
           with not enough detail, and one retelling that is “just right.” After you model each retelling ask students to
           critique the retelling.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <div class="tablets-only modeling">
         <p><strong>Teacher Modeling: </strong></p>
-        <p><span class="underline">Too Much Detail:</span></p>
-        <p>Say: “Our goal today was to bring Alex the Magician the balloons because she needs them to practice her trick
-          for the party. She doesn’t live very far from here… I think she has a brick house with lots of flowers out
-          front. We decided we were going to walk to her house to bring them to her. First, we tried [INSERT TRY #1],
-          but we couldn’t get by because there was a painting on the floor blocking our way. The painting was very long
-          and had lots of different colors of paint and said something about reading. I’m not sure who made it but they
-          did a great job! We thought about walking over it but decided to TRY something else instead. We didn’t get our
-          goal, so that was an outcome fail. Our next TRY was to [INSERT TRY #2] to see if we could leave that way but
-          there was caution tape blocking the way. I’ve seen caution tape like that before—when my neighbors were
-          getting their driveway fixed! We couldn’t go over it—we might fall and hurt ourselves! That was an outcome
-          fail since we did not get our goal of bringing the balloons to Alex the Magician. We went to the (door/window)
-          to try to get out that way. I’ve never gone out of the school using that (door/window). It seems like it
-          should have worked, but in the end, there was a note on the (door/window) saying that it was broken. So, we
-          couldn’t use it to get out. Unfortunately, that was another outcome fail since we did not get our goal of
-          bringing the balloons to Alex the Magician.”</p>
-        <p>Say: “What did you think of my retelling? Did it have too much detail? Not enough detail? Or, was it just
-          right?”</p>
-        <p>[Students respond]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p><span class="underline">Not Enough Detail:</span></p>
-        <p>Say: “We wanted to bring the balloons to Alex the Magician. First, we tried [INSERT TRY #1]. Outcome fail.
-          Then we tried [INSERT TRY #2]. Outcome fail.”</p>
-        <p>Say: “What did you think of my retelling this time? Did it have too much detail? Not enough detail? Or, was
-          it just right?”</p>
-        <p>[Students respond]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p><span class="underline">Just Right:</span></p>
-        <p>Say: “Our goal today was to bring the balloons to Alex the Magician because she needs the balloons to
-          practice her trick for the party. First, we tried [INSERT TRY #1], but we came across a painting that was
-          blocking our way. We were not able to get past to bring the balloons to Alex the Magician, so this was an
-          outcome fail. Our goal was still to bring her the balloons, so next we tried [INSERT TRY #2]. When we got
-          there, we found that there was caution tape blocking our way, so we were not able to get past. This was
-          another outcome fail since we did not get our goal of bringing the balloons to Alex the Magician. Our goal was
-          still the same. Unfortunately, we didn’t get our goal of bringing the balloons to Alex the Magician. We will
-          have to try another time.”</p>
-        <p>Say: “What did you think of my retelling this time? Did it have too much detail? Not enough detail? Or, was
-          it just right?”</p>
-        <p>[Students respond]</p>
-      </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p><span class="underline">Too Much Detail:</span></p>
+          <p>Say: “Our goal today was to bring Alex the Magician the balloons because she needs them to practice her trick
+            for the party. She doesn’t live very far from here… I think she has a brick house with lots of flowers out
+            front. We decided we were going to walk to her house to bring them to her. First, we tried [INSERT TRY #1],
+            but we couldn’t get by because there was a painting on the floor blocking our way. The painting was very long
+            and had lots of different colors of paint and said something about reading. I’m not sure who made it but they
+            did a great job! We thought about walking over it but decided to TRY something else instead. We didn’t get our
+            goal, so that was an outcome fail. Our next TRY was to [INSERT TRY #2] to see if we could leave that way but
+            there was caution tape blocking the way. I’ve seen caution tape like that before—when my neighbors were
+            getting their driveway fixed! We couldn’t go over it—we might fall and hurt ourselves! That was an outcome
+            fail since we did not get our goal of bringing the balloons to Alex the Magician. We went to the (door/window)
+            to try to get out that way. I’ve never gone out of the school using that (door/window). It seems like it
+            should have worked, but in the end, there was a note on the (door/window) saying that it was broken. So, we
+            couldn’t use it to get out. Unfortunately, that was another outcome fail since we did not get our goal of
+            bringing the balloons to Alex the Magician.”</p>
+          <p>Say: “What did you think of my retelling? Did it have too much detail? Not enough detail? Or, was it just
+            right?”</p>
+          <p>[Students respond]</p>
+        </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p><span class="underline">Not Enough Detail:</span></p>
+          <p>Say: “We wanted to bring the balloons to Alex the Magician. First, we tried [INSERT TRY #1]. Outcome fail.
+            Then we tried [INSERT TRY #2]. Outcome fail.”</p>
+          <p>Say: “What did you think of my retelling this time? Did it have too much detail? Not enough detail? Or, was
+            it just right?”</p>
+          <p>[Students respond]</p>
+        </step>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p><span class="underline">Just Right:</span></p>
+          <p>Say: “Our goal today was to bring the balloons to Alex the Magician because she needs the balloons to
+            practice her trick for the party. First, we tried [INSERT TRY #1], but we came across a painting that was
+            blocking our way. We were not able to get past to bring the balloons to Alex the Magician, so this was an
+            outcome fail. Our goal was still to bring her the balloons, so next we tried [INSERT TRY #2]. When we got
+            there, we found that there was caution tape blocking our way, so we were not able to get past. This was
+            another outcome fail since we did not get our goal of bringing the balloons to Alex the Magician. Our goal was
+            still the same. Unfortunately, we didn’t get our goal of bringing the balloons to Alex the Magician. We will
+            have to try another time.”</p>
+          <p>Say: “What did you think of my retelling this time? Did it have too much detail? Not enough detail? Or, was
+            it just right?”</p>
+          <p>[Students respond]</p>
+        </step>
+      </div>
     </li>
   </ol>
   <hr class="page-break"/>
@@ -1741,7 +1765,7 @@
       tapped. Co-teachers should circulate to ensure that students are responding to the questions appropriately.]</p>
     <ol>
       <li>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <p class="heading"><strong>Directions:</strong></p>
           <p>[Distribute student tablets]</p>
           <div class="left">Say:</div>
@@ -1754,7 +1778,7 @@
         </step>
       </li>
       <li>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <p class="heading"><strong>Ask Questions:</strong></p>
           <div class="left">Say:</div>
           <div class="right">
@@ -1766,35 +1790,36 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did just now with trying to take the balloons to Alex the Magician and the balloon popping activity
             was <em>really hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or <em>really easy</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “Learning how to identify OUTCOMES was <em>really hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or
+            “Learning how to identify OUTCOMES was <em>really hard</em>, <em>hard</em>, <em>okay</em>,
+            <em>easy</em>, or
             <em>really easy</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Now we are going to think about how much we liked the activity we just did.”
@@ -1805,7 +1830,7 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did right now with trying to take the balloons to Alex the Magician and the balloon popping
@@ -1813,28 +1838,28 @@
             fun</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to find OUTCOMES was <em>not fun at all</em>, <em>not really fun</em>, <em>okay</em>,
             <em>fun</em>, or <em>really fun</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Now we are going to think about how well you think you can identify GOALS, TRIES, and OUTCOMES in a story.”
@@ -1844,39 +1869,41 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify a GOAL in a story <em>I couldn’t do it</em>, <em>I could do it with
             help</em>, <em>I could do it by myself</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “If someone asked me to identify what a character does to TRY to get their goal in a story, <em>I couldn’t
-            do it</em>, <em>I could do it with help</em>, <em>I could do it by myself</em>.”
+            “If someone asked me to identify what a character does to TRY to get their goal in a story,
+            <em>I couldn’t
+              do it</em>, <em>I could do it with help</em>, <em>I could do it by myself</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-          7. Say: “If someone asked me to identify the OUTCOME in a story <em>I couldn’t do it</em>, <em>I could do it
-          with help</em>, <em>I could do it by myself</em>.”
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
+          7. Say: “If someone asked me to identify the OUTCOME in a story <em>I couldn’t do it</em>,
+          <em>I could do it
+            with help</em>, <em>I could do it by myself</em>.”
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
@@ -1923,22 +1950,19 @@
       </li>
     </ul>
   </div>
-  <p class="heading">4. <strong>Directed Movement Break</strong> (Co-teacher leads this 5-minute activity while Lead
-    teacher prepares for second half of lesson)
-  </p>
-  <ol>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+  <p class="heading">4. <strong>Directed Movement Break</strong></p>
+  <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+    <p>(Co-teacher leads this 5-minute activity while Lead
+      teacher prepares for second half of lesson)
+    </p>
+    <ol>
+      <li>
         <p>The co-teacher will lead a directed movement break.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      </li>
+      <li>
         <p>After movement break have students come back to the classroom to refocus as a group.</p>
-      </step>
-    </li>
-    <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      </li>
+      <li>
         <p>Say: “Today we have been learning about OUTCOMES. When a character in a story has a goal, they will make a
           TRY to get their goal. Outcomes are the result of a TRY that the character makes. To find an OUTCOME we ask,
           “What happened” and “What was the result of the try?” Sometimes the character gets their goal—we call this an
@@ -1946,9 +1970,9 @@
           ask ourselves ‘why?’ [make “why” gesture] to figure out the cause of the OUTCOME. When we find goals, tries,
           and outcomes in stories it helps us to understand and remember better. Can anyone give me an example of an
           OUTCOME from your movement break?”</p>
-      </step>
-    </li>
-  </ol>
+      </li>
+    </ol>
+  </step>
   <hr class="page-break"/>
   <div class="black-border">
     <p class="v-padding"><em><strong>Materials for Part 5: Teacher Modeling/Guided Practice with Picture
@@ -1981,9 +2005,7 @@
     Hiccups</em></strong> (20 mins.)</p>
   <ol>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[Explain to students that we will continue with “<strong>I Do/You Help.</strong>”]</p>
-      </step>
+      <p>[Explain to students that we will continue with “<strong>I Do/You Help.</strong>”]</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “We are now going to continue with ‘<strong>I Do/You Help</strong>.’ [<em>Place these roles onto the
           Roles Chart</em>.] Sometimes when we are working together, once I think that you are getting the hang of it, I
@@ -2004,8 +2026,6 @@
         <p>Say: “Just like we have been practicing finding goals, tries, and outcomes in our Magician Narrative, we can
           also find goals, tries, and outcomes in books. Today we are going to practice this with some books we have
           already read.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Remember that you can use the procedure card to help you remember how to find goals, tries, and
           outcomes.”</p>
       </step>
@@ -2034,32 +2054,33 @@
     </li>
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>Say: “We’re going to reread <em>The Ghost with the Halloween Hiccups</em> and focus on the OUTCOMES and WHY
+        <p>Say: “We’re going to reread
+          <em>The Ghost with the Halloween Hiccups</em> and focus on the OUTCOMES and WHY
           those outcomes happened. Remember, as I read you will tap/hold up your cards to let me know when you think you
           hear a GOAL, a TRY, or an OUTCOME.”</p>
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-        <p>[The rest of this activity is a free response period. Students can freely respond when they identify a GOAL,
-          TRY, or OUTCOME in the story by tapping the GOAL, TRY, OUTCOME FAIL, or OUTCOME YES cards and holding up their
-          tablet. Teachers can monitor responses by looking at student tablets when they are held up. You should not tap
-          the Done button until the end of this activity.]</p>
+        <step questionType="goal" [openResponse]="true" (onReady)="stepReady($event)" [session]="session">
+          <p>[The rest of this activity is a free response period. Students can freely respond when they identify a GOAL,
+            TRY, or OUTCOME in the story by tapping the GOAL, TRY, OUTCOME FAIL, or OUTCOME YES cards and holding up their
+            tablet. Teachers can monitor responses by looking at student tablets when they are held up. You should not tap
+            the Done button until the end of this activity.]</p>
+        </step>
       </div>
-      <div class="as-step no-tablets">
-        <p class="center">[If tablets are NOT available follow directions in this light gray box]</p>
+      <div class="no-tablets">
+        <p class="as-step center">[If tablets are NOT available follow directions in this light gray box]</p>
         <p>[Students will hold up their GOAL, TRY, OUTCOME FAIL, or OUTCOME YES cards when they feel it is appropriate
           throughout this activity.]</p>
       </div>
     </li>
     <li>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p>[While reading, the Lead Teacher will think aloud to demonstrate his/her thought processes used to identify
-          goals and tries, and outcomes using the script below. The teacher will demonstrate the use of the tablet/cards
-          (students can tap/hold up their cards as well if they are ready) and ask students to assist in building the
-          Velcro board organizer. After the second try (putting a paper hat on head and singing), you will stop thinking
-          aloud and guide the students less.]</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <p>[While reading, the Lead Teacher will think aloud to demonstrate his/her thought processes used to identify
+        goals and tries, and outcomes using the script below. The teacher will demonstrate the use of the tablet/cards
+        (students can tap/hold up their cards as well if they are ready) and ask students to assist in building the
+        Velcro board organizer. After the second try (putting a paper hat on head and singing), you will stop thinking
+        aloud and guide the students less.]</p>
+      <step class="grey-bg" class="grey-bg" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p class="heading"><strong>Think Aloud with Student Help:</strong></p>
         <p>Say: “Since Mr. Penny is the main character in the story, we need to put this picture of him on the
           board.”</p>
@@ -2084,7 +2105,7 @@
           worse than HICCUP bad,’ said Mr. Penny. ‘How can I play HICCUP a ghost with hiccups?” ‘What you need is a big
           drink of water,’ said Laura. <strong>[STOP READING]</strong></p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p class="heading"><strong>Think Aloud with Student Help:</strong></p>
         <p>Say: “I think I heard a GOAL here. I think Mr. Penny wants to get rid of his hiccups.”</p>
         <p>[Teacher will tap/hold up GOAL card on demo tablet. Students may tap/hold their GOAL cards up as well.]</p>
@@ -2108,7 +2129,7 @@
           “That did it!” he said. “My hiccups are HICCUP! HICCUP! HICCUP!” Bert sighed. “I’m sorry,” he said. “Maybe you
           can get rid of them in town.” <strong>[STOP READING]</strong></p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p class="heading"><strong>Think Aloud with Student Help:</strong></p>
         <p>Say: “He took a drink of water. Then he held his breath, and he is talking about his hiccups. So, I think
           this is a TRY.”</p>
@@ -2120,7 +2141,7 @@
           his hiccups.”</p>
         <p>[Ask a student to put a Because String connecting the TRY to the GOAL].</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now I have to think about what the OUTCOME, or result, of this TRY is. After he took the drink of water
           and held his breath, he hiccupped some more. So, what happens is that he continues to hiccup. This means he
           did not get his goal, it is an Outcome Fail.</p>
@@ -2150,7 +2171,7 @@
           So Mr. Penny put a paper hat on his head. He tried to sing, “Row, row your boat, gently down HICCUP the
           stream.” That was as far as he could get. <strong>[STOP READING]</strong></p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p class="heading"><strong>Think Aloud with Student Help:</strong></p>
         <p>Say: “I see another TRY!”</p>
         <p>[Teacher will tap/hold up TRY card on demo tablet. Students may tap/hold up their TRY cards as well.]</p>
@@ -2164,7 +2185,7 @@
           work.”</p>
         <p>[Ask student to place Because String connecting the TRY to the previous OUTCOME FAIL].</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now I have to think about what the OUTCOME of this TRY is. He puts on a paper hat and starts singing a
           song, but then he hiccups some more. This means he did not get his goal, it is an Outcome Fail.”</p>
         <p>[Teacher will tap/hold up OUTCOME FAIL card on demo tablet. Students may tap/hold up their OUTCOME FAIL cards
@@ -2193,23 +2214,23 @@
           help. “Tickle his nose,” he said.</p>
         <p>[Someone should tap/hold up a TRY card about here so <strong>STOP READING</strong>]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “I see that some of you heard a TRY. What did you hear?”</p>
         <p>[Students respond: Mr. Penny tried to tickle his nose with a feather]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Good, job. Can someone put that TRY on the Velcro board organizer?”</p>
         <p>[Ask a student to put the TRY card on the board. Be sure that they place it under the goal and next to the
           last outcome.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now we need to ask ourselves ‘Why did Mr. Penny TRY to tickle his nose with a feather?’ [make “why”
           gesture]</p>
         <p>[Students respond: He tickled his nose with a feather BECAUSE [make finger move] he wants to get rid of his
           hiccups.]</p>
         <p>[Ask a student to connect the TRY to the GOAL using a Because string]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Why else did Mr. Penny have to tickle his nose with a feather?”</p>
         <p>[Students respond: He also tried to tickle his nose with a feather because [make finger move] putting a paper
           hat on his head and singing a song didn’t work.]</p>
@@ -2223,22 +2244,22 @@
           AH-CHOO! HICCUP!” Mr. Penny started to cry. “Now I have the AH-CHOO sneezes as well as the hiccups.”</p>
         <p>[Someone should tap/hold up an OUTCOME FAIL card about here so <strong>STOP READING</strong>]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “I see that some of you heard an OUTCOME. What did you hear?”</p>
         <p>[Students respond: Mr. Penny still has the hiccups. It was an Outcome Fail.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Good, job. Can someone put that OUTCOME FAIL on the Velcro board organizer?”</p>
         <p>[Ask a student to put the OUTCOME FAIL card on the board. Be sure that they place it next to the last
           TRY.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now, we have to ask ourselves, “WHY did this OUTCOME happen?” [make “why” gesture]</p>
         <p>[Students respond: Mr. Penny continued to hiccup BECAUSE [make finger move] tickling his nose with a feather
           didn’t work.]</p>
         <p>[Ask a student to connect the TRY and the OUTCOME using a Because String]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “He did not get his goal of getting rid of his hiccups. Now that you have found the OUTCOME, what do we
           ask ourselves? [Direct students to the red arrow on the procedure card]</p>
         <p>[Students respond: Students should trace the red arrow and say “Is the goal still the same?” and add that
@@ -2252,8 +2273,6 @@
           <br/>
           What am I HICCUP going to do?” wondered Mr. Penny. He went on down the road. “The play starts HICCUP in an
           hour.”</p>
-      </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>[READ SLIDE 19]
           <br/>
           The town clock said seven. “I’ll have to HICCUP tell everyone to go HICCUP home,” he said. “I’m afraid they
@@ -2268,22 +2287,22 @@
           jumped right out of his shoes.</p>
         <p>[Someone should tap/hold up a TRY card about here so <strong>STOP READING</strong>]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “I see that some of you heard a TRY. What did you hear?”</p>
         <p>[Students respond: The kids dressed up and scared Mr. Penny.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Good, job. Can someone put that TRY on the Velcro board organizer?”</p>
         <p>[Ask a student to put the TRY card on the board. Be sure that they place it under the goal and next to the
           last outcome.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now we need to ask ourselves ‘Why did the kids TRY scaring Mr. Penny?’” [make “why” gesture]</p>
         <p>[Students respond: The kids TRIED scaring Mr. Penny BECAUSE [make finger move] he wants to get rid of his
           hiccups.]</p>
         <p>[Ask a student to connect the TRY to the GOAL using a Because string]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Why else did the kids scare Mr. Penny?”</p>
         <p>[Students respond: The kids tried scaring Mr. Penny BECAUSE [make finger move] tickling his nose with a
           feather didn’t work.]</p>
@@ -2308,22 +2327,22 @@
           And Mr. Penny was the best ghost ever.</p>
         <p>[Someone should tap/hold up an OUTCOME YES card about here so <strong>STOP READING</strong>]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “I see that some of you heard an OUTCOME. What did you hear?”</p>
         <p>[Students respond: Mr. Penny got rid of his hiccups. It was an Outcome Yes.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Good, job. Can someone put that OUTCOME YES on the Velcro board organizer?”</p>
         <p>[Ask a student to put the OUTCOME YES card on the board. Be sure that they place it next to the last
           TRY.]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “Now, we have to ask ourselves, “WHY did this OUTCOME happen?” [make “why” gesture]</p>
         <p>[Students respond: Mr. Penny got rid of his hiccups BECAUSE [make finger move] the kids scared him and it
           worked.]</p>
         <p>[Ask a student to connect the TRY and the OUTCOME using a Because String]</p>
       </step>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <step class="grey-bg connected" defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
         <p>Say: “He got his goal! He getting rid of his hiccups. Now that you have found the OUTCOME, what do we ask
           ourselves? [Direct students to the red arrow on the procedure card]</p>
         <p>[Students respond: Students should trace the red arrow and say “Is the goal still the same?” and say “No, his
@@ -2331,13 +2350,15 @@
       </step>
       <div class="tablets-only">
         <p class="as-step center">[If tablets are available follow the directions in this dark gray box]</p>
-        <p>[The free response period is over. Tap the Done button to end the activity.]</p>
+        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+          <p>[The free response period is over. Tap the Done button to end the activity.]</p>
+        </step>
       </div>
-      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <div class="hint">
         <p><strong><em>Retelling the Story</em> [if time permits]</strong></p>
         <p>You can either model how to retell the story or have students retell it depending on time and student
           readiness.</p>
-      </step>
+      </div>
     </li>
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
@@ -2384,7 +2405,7 @@
       tapped. Co-teachers should circulate to ensure that students are responding to the questions appropriately.]</p>
     <ol>
       <li>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <p class="heading"><strong>Directions:</strong></p>
           <p>[Distribute student tablets]</p>
           <div class="left">Say:</div>
@@ -2409,35 +2430,36 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “What we did just now with the <em>Ghost with the Halloween Hiccups</em> book activity was <em>really
             hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or <em>really easy</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “Learning how to identify OUTCOMES was <em>really hard</em>, <em>hard</em>, <em>okay</em>, <em>easy</em>, or
+            “Learning how to identify OUTCOMES was <em>really hard</em>, <em>hard</em>, <em>okay</em>,
+            <em>easy</em>, or
             <em>really easy</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="difficulty" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Now we are going to think about how much we liked the activity we just did.”
@@ -2448,35 +2470,36 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “What we did right now with the <em>Ghost with the Halloween Hiccups</em> book activity was <em>not fun at
-            all</em>, <em>not really fun</em>, <em>okay</em>, <em>fun</em>, or <em>really fun</em>.”
+            “What we did right now with the <em>Ghost with the Halloween Hiccups</em> book activity was
+            <em>not fun at
+              all</em>, <em>not really fun</em>, <em>okay</em>, <em>fun</em>, or <em>really fun</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Learning how to find OUTCOMES was <em>not fun at all</em>, <em>not really fun</em>, <em>okay</em>,
             <em>fun</em>, or <em>really fun</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="appeal" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Now we are going to think about how well you think you can identify GOALS, TRIES, and OUTCOMES in a story.”
@@ -2486,42 +2509,44 @@
             for students to respond, teachers should tap the fidelity box next to the question to activate response
             mode.]</p>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “If someone asked me to identify a GOAL in a story <em>I couldn’t do it</em>, <em>I could do it with
             help</em>, <em>I could do it by myself</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “If someone asked me to identify what a character does to TRY to get their goal in a story, <em>I couldn’t
-            do it</em>, <em>I could do it with help</em>, <em>I could do it by myself</em>.”
+            “If someone asked me to identify what a character does to TRY to get their goal in a story,
+            <em>I couldn’t
+              do it</em>, <em>I could do it with help</em>, <em>I could do it by myself</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
             <p class="line-before">[Students respond]</p>
           </div>
         </step>
-        <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+        <step defaultResponse="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
-            “If someone asked me to identify the OUTCOME in a story <em>I couldn’t do it</em>, <em>I could do it with
-            help</em>, <em>I could do it by myself</em>.”
+            “If someone asked me to identify the OUTCOME in a story <em>I couldn’t do it</em>,
+            <em>I could do it with
+              help</em>, <em>I could do it by myself</em>.”
           </div>
         </step>
-        <step questionType="goal" (onReady)="stepReady($event)" [session]="session">
+        <step questionType="efficacy" (onReady)="stepReady($event)" [session]="session">
           <div class="left">Say:</div>
           <div class="right">
             “Think, Ready, Respond.” [Tap the fidelity box to the left to activate response mode]
@@ -2576,8 +2601,10 @@
   <p class="heading">7. <strong>Closure</strong> (2 min.)</p>
   <ol>
     <li>
-      <p class="as-step">Pass out refrigerator sheets to students and have them follow along as you review the
+      <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
+      <p>Pass out refrigerator sheets to students and have them follow along as you review the
         information.</p>
+      </step>
     </li>
     <li>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">

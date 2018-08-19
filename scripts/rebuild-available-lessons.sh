@@ -23,4 +23,5 @@ done
 echo "</div>" >> ./src/pages/lesson-plans/lessonplans.html
 echo "];" >> ./src/pages/landing/availableLessons.ts
 
-cat ./src/app/app.module.ts.template | sed "s|// __LESSON_IMPORTS__|`cat $TMP_OUTPUT_DIR/imports`|g" | sed "s|// __LESSONS__|`cat $TMP_OUTPUT_DIR/lessons`|g" | tr '~' '\n' > ./src/app/app.module.ts
+cat ./src/app/select/app.module.template.teacher | sed "s|// __LESSON_IMPORTS__|`cat $TMP_OUTPUT_DIR/imports`|g" | sed "s|// __LESSONS__|`cat $TMP_OUTPUT_DIR/lessons`|g" | tr '~' '\n' > ./src/app/select/app.module.teacher
+cat ./src/app/select/app.module.template.web | sed "s|// __LESSON_IMPORTS__|`cat $TMP_OUTPUT_DIR/imports`|g" | sed "s|// __LESSONS__|`cat $TMP_OUTPUT_DIR/lessons`|g" | tr '~' '\n' > ./src/app/select/app.module.web

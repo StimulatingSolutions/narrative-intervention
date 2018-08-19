@@ -1,7 +1,7 @@
 <div [ngClass]="{'lesson-plan-wrapper': true, 'lesson-review': session.review}">
   <h2 class="line-before">NS Lesson #3 ({{session.review ? "review" : ("for "+session.schoolName+", Group "+session.schoolNumber)}})</h2>
   <p class="line-before"><em>Objectives:</em> Upon completion of the following lesson students will be able to:</p>
-  <ul>
+  <ul class="objectives">
     <li>
       <p>Explain what attempts are (primary)</p>
     </li>
@@ -412,7 +412,7 @@
         knowledge associated
         with goals.]</p>
       <step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">
-        <p class="v-padding-bottom bullet-heading"><strong>Review how to find the GOAL…</strong></p>
+        <p class="v-padding-bottom"><strong>Review how to find the GOAL…</strong></p>
         <ul>
           <li>
             <p class="as-step">Ask: “What is a goal?”</p>
@@ -1730,10 +1730,10 @@
         <p>The co-teacher will lead a directed movement break.</p>
       </li>
       <li>
-        <p>b. After movement break have students come back to the classroom to refocus as a group.</p>
+        <p>After movement break have students come back to the classroom to refocus as a group.</p>
       </li>
       <li>
-        <p>c. Say: “Today we have been looking at GOALS in stories. Remember, a GOAL is something a character wants to
+        <p>Say: “Today we have been looking at GOALS in stories. Remember, a GOAL is something a character wants to
           do
           or
           get. We have also been learning about TRIES. A TRY is something a character does to get their GOAL. Once we

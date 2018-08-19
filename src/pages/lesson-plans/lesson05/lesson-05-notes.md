@@ -1,7 +1,0 @@
-- remove `</li></ol>` from above "Materials for Part 1"
-- fix above "9. Closure" section
-- fix "9. Closure" section
-- add `</li>` to end
-- fix "Setting Up for the Magician Narrative" to be `.hint` block
-- fix extra `<ol>` near "LOCATION 3"
-- change final .hint to triple-border and move outside `</ol>`

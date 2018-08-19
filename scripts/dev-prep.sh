@@ -13,7 +13,6 @@ fi
 
 cp ./src/app/select/app.component.web ./src/app/app.component.ts
 cp ./src/app/select/app.module.web ./src/app/app.module.ts
-cp ./src/app/select/lessonDeclarations.full ./src/app/lessonDeclarations.ts
 cp ./src/web.html ./src/index.html
 
 if [[ "$1" == "--bundle" ]]
