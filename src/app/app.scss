@@ -103,7 +103,10 @@ html {
 
 .wide-input {
   .alert-wrapper {
-    max-width: 400px !important;
+    max-width: 500px !important;
+    .alert-radio-group {
+      max-height: 90%;
+    }
   }
   .alert-message {
     font-size: large;

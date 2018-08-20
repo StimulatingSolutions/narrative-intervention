@@ -132,7 +132,7 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
   s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
   s = s.replace(new RegExp('(<div class="hint connected-below">\\s*<p class="v-padding"><em><strong>Setting Up for the Magician Narrative</strong></em></p>[^<]*(?:<(?!/div>)[^<]*)*)<ol>', 'i'), '$1<ol class="numbers">');
-  s = s.replace(new RegExp('<step[^>]*>\\s*<p>(\\[If tablets are available follow the directions in this dark gray box]</p>[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<div class="tablets-only">\n<p class="as-step center">$1</div>');
+  s = s.replace(new RegExp('<step[^>]*>\\s*<p>(\\[If tablets are available follow[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<div class="tablets-only">\n<p class="as-step center">$1</div>');
   s = s.replace(new RegExp('<step[^>]*>\\s*<p>(\\[If tablets are NOT available[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '<div class="no-tablets">\n<p class="as-step center">$1</div>');
   s = s.replace(new RegExp('(<div class="tablets-only">[^<]*(?:<(?!/div>)[^<]*)*)</div>\\s*((?:<step[^>]*>[^<]*(?:<(?!/step>)[^<]*)*</step>\\s*)+)(<div class="no-tablets">)', 'gi'), '$1$2</div>\n$3');
   s = s.replace(new RegExp('<div class="no-tablets">\\s*<p class="as-step center">([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*((?:<p>(?:[^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*)+)', 'gi'), '<div class="no-tablets">\n<p class="as-step center">$1</p>\n<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">$2</step>\n');
@@ -168,7 +168,6 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('(<p>\\s*\\[\\s*READ\\s*SLIDE\\s*\\d+\\s*])\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*<p>\\s*([^\\[])', 'gi'), '$1\n$2\n<br/>\n$3');
 
   s = s.replace(new RegExp('</ol>\\s*<ol>\\s*', 'gi'), '');
-  s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
 
   s = s.replace(new RegExp('\\bClicking\\b', 'g'), 'Tapping');
   s = s.replace(new RegExp('\\bclicking\\b', 'g'), 'tapping');
@@ -197,8 +196,8 @@ getStdin().then((s: string) => {
 
   s = s.replace(new RegExp('(<p class="heading">[^<]*(?:<(?!/p>)[^<]*)*Student Evaluation[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*<div class="tablets-only">[^<]*(?:<(?!/div>)[^<]*)*<ol>)([^<]*(?:<(?!/ol>)[^<]*)*)(</ol>\\s*</div>)', 'gi'), (match, p1, p2, p3) => {
     let steps = p2;
-    steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*<p class="heading"><strong>Directions:</strong></p>)', 'gi'), '<step defaultResponse="difficulty"$1');
-    steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*<p class="heading"><strong>Ask Questions:</strong></p>)', 'gi'), '<step defaultResponse="difficulty"$1');
+    steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*<p class="heading"><strong>Directions:\\s*</strong></p>)', 'gi'), '<step defaultResponse="difficulty"$1');
+    steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*<p class="heading"><strong>Ask Questions:\\s*</strong></p>)', 'gi'), '<step defaultResponse="difficulty"$1');
     steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*[^<]*(?:<(?!/step>)[^<]*)*<em>really\\s*hard</em>,\\s*<em>hard</em>,\\s*<em>okay</em>,\\s*<em>easy</em>,\\s*or\\s*<em>really\\s*easy</em>[^<]*(?:<(?!/step>)[^<]*)*</step>\\s*)<step questionType="goal"', 'gi'), '<step defaultResponse="difficulty"$1<step questionType="difficulty"');
     steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*[^<]*(?:<(?!/step>)[^<]*)*how much we liked[^<]*(?:<(?!/step>)[^<]*)*</step>\\s*)', 'gi'), '<step defaultResponse="appeal"$1');
     steps = steps.replace(new RegExp('<step defaultResponse="goal"([^>]*>\\s*[^<]*(?:<(?!/step>)[^<]*)*<em>not\\s*fun\\s*at\\s*all</em>,\\s*<em>not\\s*really\\s*fun</em>,\\s*<em>okay</em>,\\s*<em>fun</em>,\\s*or\\s*<em>really\\s*fun</em>[^<]*(?:<(?!/step>)[^<]*)*</step>\\s*)<step questionType="goal"', 'gi'), '<step defaultResponse="appeal"$1<step questionType="appeal"');
@@ -210,8 +209,27 @@ getStdin().then((s: string) => {
     let steps = p3.replace(new RegExp('<step[^>]*>\\s*<p>(?:\\w\\. )?([^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)</step>', 'gi'), '<p>$1');
     return `${p1}</p>\n<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">\n<p>${p2}${steps}\n</step>`;
   });
-  s = s.replace(new RegExp('<step([^>]*>\\s*<p class="heading"><strong>Think Aloud with Student Help:</strong></p>)', 'gi'), '<step class="grey-bg"$1');
+  s = s.replace(new RegExp('<step([^>]*>\\s*<p class="heading"><strong>Think Aloud with Student Help:\\s*</strong></p>)', 'gi'), '<step class="grey-bg"$1');
+  s = s.replace(new RegExp('(<p><em><strong>Activity Overview:\\s*</strong></em>[^<]*(?:<(?!(?:(?:p class="heading">)|(?:/step>)))[^<]*)*)(?:</step>\\s*)?(<p class="heading")', 'gi'), '<div class="overview">\n$1</div>\n$2');
+  s = s.replace(new RegExp('<ul>', 'i'), '<ul class="objectives">');
+  s = s.replace(new RegExp('<li>\\s*<step[^>]*>\\s*(<p>\\[Explain to students that we will now[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)</step>', 'gi'), '<li>\n$1');
+  s = s.replace(new RegExp('<li>\\s*(<step[^>]*>\\s*)(<p>\\[Explain to students that we will now[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)', 'gi'), '<li>\n$2$1');
+  s = s.replace(new RegExp('(</step>\\s*<step[^>]*>\\s*)(<p>\\[Explain to students that we will now[^<]*(?:<(?!/p>)[^<]*)*</p>\\s*)', 'gi'), '$2$1');
+  s = s.replace(new RegExp('(<div class="overview">[^<]*(?:<(?!/div>)[^<]*)*)<hr/>\\s*([^<]*(?:<(?!/div>)[^<]*)*)', 'gi'), '$1$2');
+  s = s.replace(new RegExp('<p>Teacher will bring:\\s*</p>\\s*<ul>', 'gi'), '<p class="no-line-above">Teacher will bring:</p>\n<ul class="no-line-below">');
+  s = s.replace(new RegExp('<p class="v-padding">Co-teacher will bring:\\s*</p>\\s*<ul>', 'gi'), '<p>Co-teacher will bring:</p>\n<ul class="no-line-below">');
+  s = s.replace(new RegExp('<li>(\\s*<p>Students will bring:\\s*</p>\\s*)</li>', 'gi'), '</ul>$1<ul>');
+  s = s.replace(new RegExp('(<p>\\s*<em>Use the following procedure:\\s*</em>\\s*</p>\\s*)<ol>', 'gi'), '$1<ol class="numbers">');
+  s = s.replace(new RegExp('<step([^>]*>\\s*<p>\\s*<strong>Teacher Modeling:)', 'gi'), '<step class="grey-bg"$1');
+  s = s.replace(new RegExp('<step[^>]*>\\s*(<p><strong>Example #[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), '$1');
+  s = s.replace(new RegExp('<step[^>]*>\\s*([^<]*(?:<(?!/step>)[^<]*)*<p>((?:Co-\\s*)?Teacher[:;])[^<]*(?:<(?!/step>)[^<]*)*)</step>', 'gi'), (match, p1) => {
+    p1 = p1.replace(new RegExp('<p>((?:Co-\\s*)?Teacher)\\s*[:;]\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>', 'gi'), '<div class="left">$1:</div>\n<div class="right">$2</div>');
+    p1 = p1.replace(new RegExp('<p>\\s*([^\\[][^<]*(?:<(?!/p>)[^<]*)*)</p>', 'gi'), '<div class="left">&nbsp;</div>\n<div class="right">$1</div>');
+    return `${p1}</p>\n<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">\n${p1}\n</step>`;
+  });
+  s = s.replace(new RegExp('<p class="as-step">(Pass out refrigerator sheets[^<]*(?:<(?!/p>)[^<]*)*)</p>', 'gi'), '<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">\n<p>$1</p>\n</step>');
 
+  s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
   console.log(s);
 
 

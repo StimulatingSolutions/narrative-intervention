@@ -241,6 +241,11 @@
       }
     }
   }
+  .hint.connected-above, .hint.connected-below {
+    li {
+      padding: 0;
+    }
+  }
   .hint {
     background-color: #EEE;
     border: 1px dashed black;
@@ -253,6 +258,12 @@
     &.connected-above {
       margin-top: 0;
     }
+    .indent {
+      padding-left: 30px;
+    }
+    .compact-below {
+      padding-bottom: 0;
+    }
     .compact {
       padding-top: 0;
       padding-bottom: 0;
@@ -262,22 +273,19 @@
       }
     }
     li {
-      padding: .0625in 0;
+      padding: 0;
       p {
         padding: 0;
       }
-    }
-    ol li {
-      padding: 0;
       &:first-child {
-        padding-top: .0625in;
+        padding-top: 8px;
       }
       &:last-child {
-        padding-bottom: .0625in;
+        padding-bottom: 8px;
       }
     }
     p {
-      padding: .0625in 0;
+      padding: 8px 0;
     }
     .t-bullets {
       li {
@@ -306,7 +314,7 @@
     padding: 3px;
     background-color: lightgrey;
     p {
-      padding: .0625in 0;
+      padding: 8px 0;
     }
     li step p {
       padding: 0;
