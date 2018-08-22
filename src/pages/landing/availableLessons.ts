@@ -4,4 +4,5 @@ export const availableLessons: string[] = [
   '3',
   '4',
   '5',
+  '6',
 ];
