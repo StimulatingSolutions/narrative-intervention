@@ -245,6 +245,20 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<step[^>]*>\\s*</step>\\s*', 'gi'), '');
   s = s.replace(new RegExp('(<step[^>]*>)\\s*<p>(\\(\\d\\w\\))\\s*([^<]*(?:<(?!/p>)[^<]*)*)</p>\\s*</step>', 'gi'), '$1\n<div class="left">$2</div>\n<div class="right">$3</div>\n</step>');
 
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Lesson \\d+ Appendix)', 'i'), '$1<span class="grey-bg">$2</span>');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Technology)\\s*:', 'i'), '$1<span class="grey-bg">$2</span>:');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Videos/PowerPoints Needed)\\s*:', 'i'), '$1<span class="grey-bg">$2</span>:');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Pre-Printed Cards)', 'i'), '$1<span class="grey-bg">$2</span>');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Boards from Previous Lesson\\(s\\))\\s*:', 'i'), '$1<span class="grey-bg">$2</span>:');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Additional Materials and Props)', 'i'), '$1<span class="grey-bg">$2</span>');
+  s = s.replace(new RegExp('(<hr/>\\s*<p class="v-padding"><strong>)(Magician Materials)', 'i'), '$1<span class="grey-bg">$2</span>');
+  s = s.replace(new RegExp('(<step[^>]*>)([^<]*(?:<(?!/step>)[^<]*)*)<ul>\\s*<li>([^<]*(?:<(?!/li>)[^<]*)*)</li>\\s*</ul>\\s*</step>\\s*<ul>', 'gi'), '$2\n<ul>\n<li>$1\n$3\n</step>\n</li>');
+  s = s.replace(new RegExp('<div class="hint">\\s*<p>\\s*<em>\\s*<strong>\\s*Prompts[^<]*(?:<(?!/div>)[^<]*)*</div>', 'gi'), (match) => {
+    match = match.replace(new RegExp('<p>(\\s*["“])', 'gi'), '<p class="indent">$1');
+    return match;
+  });
+  s = s.replace(new RegExp('</p>\\s*(<p>\\[The free response period is over[^<]*(?:<(?!/p>)[^<]*)*</p>)', 'gi'), '</p>\n<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">\n$1\n</step>');
+
   s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
   console.log(s);
 

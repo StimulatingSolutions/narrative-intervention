@@ -96,12 +96,12 @@
   }
   p + p, .right + p, .right + .left, .right + .left + .right, p + .left, p + .left + .right {
     margin-top: 16px;
-    &.heading {
-      margin-top: 0;
+    &.heading, &.as-step {
+      margin-top: 4px;
     }
-    &.as-step {
-      margin-top: 0;
-    }
+  }
+  p.v-padding + p {
+    margin-top: 4px;
   }
   .tablets-only .as-step + p, div.grey-bg p + p {
     margin-top: 8px;
