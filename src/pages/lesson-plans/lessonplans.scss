@@ -85,6 +85,9 @@
     font-size: 20px;
     position: relative;
   }
+  .l-padding-0 {
+    padding-left: 0 !important;
+  }
   .line-after {
     margin-bottom: 16px !important;
   }
@@ -106,6 +109,13 @@
   .tablets-only .as-step + p, div.grey-bg p + p {
     margin-top: 8px;
   }
+  div.grey-bg step p {
+    border: 0;
+    padding: 0;
+  }
+  div.grey-bg step p + p {
+    margin-top: 16px;
+  }
   div.grey-bg {
     padding: 8px;
   }
@@ -114,6 +124,7 @@
   }
   ol li div.grey-bg step {
     margin-left: -.24in;
+    padding-left: .61in;
   }
   p.heading + .left, p.heading + .left + .right {
     margin-top: 0;
@@ -158,6 +169,22 @@
   ul, ol {
     margin: 0;
     padding-bottom: .125in;
+    .compact li p {
+      border: 0;
+      padding: 0;
+    }
+  }
+  .grey-bg step {
+    ul, ol {
+      padding-left: 0;
+      padding-bottom: 0;
+      li {
+        margin-bottom: 16px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
   step {
     ul, ol {
@@ -240,17 +267,20 @@
   ol .hint {
     margin-left: -59px;
   }
+  .no-line-above {
+    margin-top: 0;
+  }
+  .no-line-below {
+    padding-bottom: 0;
+  }
+  .deindent {
+    margin-left: -.64in;
+  }
   .overview {
     background-color: #EEE;
     border: 1px dashed black;
     margin: .125in 0;
     padding: .125in .25in;
-    .no-line-above {
-      margin-top: 0;
-    }
-    .no-line-below {
-      padding-bottom: 0;
-    }
     ol, ul {
       padding-bottom: 16px;
       margin-left: -.05in;
@@ -329,6 +359,9 @@
   }
   .grey-bg {
     background-color: lightgrey;
+    &.light {
+      background-color: #EEE;
+    }
   }
   .instructions {
     margin: .125in 0 .125in -18px;

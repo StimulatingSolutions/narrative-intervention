@@ -258,6 +258,9 @@ getStdin().then((s: string) => {
     return match;
   });
   s = s.replace(new RegExp('</p>\\s*(<p>\\[The free response period is over[^<]*(?:<(?!/p>)[^<]*)*</p>)', 'gi'), '</p>\n<step defaultResponse="goal" (onReady)="stepReady($event)" [session]="session">\n$1\n</step>');
+  s = s.replace(new RegExp('(<step[^>]*>)\\s*<p[^>]*><strong>(Continue Reading the Story):?\\s*</strong>\\s*</p>\\s*', 'gi'), '<p><strong>$2:</strong></p>\n$1\n');
+  s = s.replace(new RegExp('<p><strong>(Continue Reading the Story):?\\s*</strong>\\s*</p>\\s*', 'gi'), '<p class="deindent"><strong>$1:</strong></p>\n');
+  s = s.replace(new RegExp('<p><strong>(Begin Reading the Story):?\\s*</strong>\\s*</p>\\s*', 'gi'), '<p class="deindent"><strong>$1:</strong></p>\n');
 
   s = s.replace(new RegExp('\\s+\n', 'gi'), '\n');
   console.log(s);

@@ -7,4 +7,6 @@ export const availableLessons: string[] = [
   '6',
   '7',
   '8',
+  '9',
+  '10',
 ];
