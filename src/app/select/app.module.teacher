@@ -18,10 +18,10 @@ import { Step } from '../pages/lesson-plans/step';
 import { MyApp } from './app.component';
 import { LoginHelpPage } from "../pages/loginHelp/loginHelp";
 import { VideosPage } from "../pages/videos/videos";
-import {AboutSoftwarePage} from "../pages/about-software/about-software";
-import {AboutNpmPage} from "../pages/about-software/about-npm";
-import {AboutMeteorPage} from "../pages/about-software/about-meteor";
-import {ModuleInfo} from "../pages/about-software/module-info";
+import { AboutSoftwarePage } from "../pages/about-software/about-software";
+import { AboutNpmPage } from "../pages/about-software/about-npm";
+import { AboutMeteorPage } from "../pages/about-software/about-meteor";
+import { ModuleInfo } from "../pages/about-software/module-info";
 import { Lesson01 } from '../pages/lesson-plans/lesson01/lesson-01';
 import { Lesson02 } from '../pages/lesson-plans/lesson02/lesson-02';
 import { Lesson03 } from '../pages/lesson-plans/lesson03/lesson-03';
@@ -32,6 +32,7 @@ import { Lesson07 } from '../pages/lesson-plans/lesson07/lesson-07';
 import { Lesson08 } from '../pages/lesson-plans/lesson08/lesson-08';
 import { Lesson09 } from '../pages/lesson-plans/lesson09/lesson-09';
 import { Lesson10 } from '../pages/lesson-plans/lesson10/lesson-10';
+import { Lesson11 } from '../pages/lesson-plans/lesson11/lesson-11';
 
 
 
@@ -66,6 +67,7 @@ require('smoothscroll-polyfill').polyfill();
     Lesson08,
     Lesson09,
     Lesson10,
+    Lesson11,
     Step
   ],
   imports: [
@@ -100,6 +102,7 @@ require('smoothscroll-polyfill').polyfill();
     Lesson08,
     Lesson09,
     Lesson10,
+    Lesson11,
     Step
   ],
   providers: [

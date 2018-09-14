@@ -9,4 +9,5 @@ export const availableLessons: string[] = [
   '8',
   '9',
   '10',
+  '11',
 ];

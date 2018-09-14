@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-export NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS=--max_old_space_size=8192
 MESSAGE=${1:-deploying}
 
 echo "###################################################### building for production"

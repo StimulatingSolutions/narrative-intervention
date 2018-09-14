@@ -14,6 +14,10 @@
   h2 {
     font-size: 3.0rem;
   }
+  img.full-width {
+    margin-left: -.70in;
+    max-width: none;
+  }
   div {
     line-height: 115%;
     font-size: 20px;
@@ -129,7 +133,7 @@
   p.heading + .left, p.heading + .left + .right {
     margin-top: 0;
   }
-  ol.numbers li {
+  ol.numbers > li {
     list-style-type: decimal;
   }
   .center, .center-left {
@@ -268,10 +272,10 @@
     margin-left: -59px;
   }
   .no-line-above {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
   .no-line-below {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
   }
   .deindent {
     margin-left: -.64in;
@@ -289,6 +293,9 @@
         p {
           margin-left: .05in;
         }
+      }
+      ol, ul {
+        padding-bottom: 0;
       }
     }
   }
@@ -321,6 +328,15 @@
       li {
         padding-top: 0;
         padding-bottom: 0;
+      }
+    }
+    ol, ul {
+      margin-left: -.05in;
+      li {
+        margin-left: 0;
+        p {
+          margin-left: .05in;
+        }
       }
     }
     li {
