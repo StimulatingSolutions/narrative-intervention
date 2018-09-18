@@ -6,6 +6,7 @@ import {ErrorAlert} from "../../services/errorAlert";
 
 let nextStepId: number = 0;
 let nextQuestionId: number = 1;
+let fidelity: number = 0;
 
 @Component({
   selector: 'step',
@@ -18,7 +19,6 @@ export class Step implements OnInit {
   done: boolean;
   headTeacher: boolean;
 
-  @Input() allSteps: Step[];  // there might be a better way of doing this
   @Input() questionType?: string;
   @Input() practice?: boolean;
   @Input() correctAnswer?: string;  // sometimes, a question will not have a correct answer
@@ -26,7 +26,6 @@ export class Step implements OnInit {
   @Input() defaultResponse: string;
   @Input() openResponse?: boolean;
 
-  @Output() onStepClicked =  new EventEmitter<any>();
   @Output() onReady =  new EventEmitter<Step>();
 
   constructor(
@@ -41,12 +40,18 @@ export class Step implements OnInit {
       // not all steps are questions
       this.questionId = nextQuestionId++;
     }
+    if (this.headTeacher) {
+      fidelity = this.session.headTeacherFidelity || 0;
+    } else {
+      fidelity = this.session.coTeacherFidelity || 0;
+    }
     this.onReady.emit(this);
   }
 
   public static resetIds(): void {
     nextStepId = 0;
     nextQuestionId = 1;
+    fidelity = 0;
   }
 
   clickStep(type: string) {
@@ -76,7 +81,14 @@ export class Step implements OnInit {
     }
 
     if (!this.headTeacher) {
-      this.done = this.questionId ? true : !this.done;
+      let done = this.questionId ? true : !this.done;
+      if (done && !this.done) {
+        fidelity++;
+      } else if (!done && this.done) {
+        fidelity--;
+      }
+      this.done = done;
+      Meteor.call('coTeacherFidelity', this.session._id, fidelity, nextStepId, this.errorAlert.handler(18));
       return;
     }
 
@@ -99,14 +111,20 @@ export class Step implements OnInit {
       return
     }
 
-    this.done = this.questionId ? true : !this.done;
+    let done = this.questionId ? true : !this.done;
+    if (done && !this.done) {
+      fidelity++;
+    } else if (!done && this.done) {
+      fidelity--;
+    }
+    this.done = done;
 
     if (this.questionType) {
-      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, !!this.openResponse, !!this.practice, this.errorAlert.handler(16));
+      Meteor.call('startQuestion', this.session._id, this.stepId, this.questionId, this.questionType, this.correctAnswer, !!this.openResponse, !!this.practice, fidelity, nextStepId, this.errorAlert.handler(16));
       return;
     }
 
-    Meteor.call('setCurrentStep', this.session._id, this.stepId, this.done, this.defaultResponse, this.errorAlert.handler(17));
+    Meteor.call('setCurrentStep', this.session._id, this.stepId, this.done, this.defaultResponse, fidelity, nextStepId, this.errorAlert.handler(17));
   }
 
   static doneAdd(c) {

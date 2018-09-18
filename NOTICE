@@ -78,15 +78,17 @@ WITH THE FILES OR THE USE OR OTHER DEALINGS IN THE FILES.
 ### Lesson Plan Images
 
 * src/assets/imgs/because.png
+* src/assets/imgs/boards1.png
+* src/assets/imgs/boards2.png
+* src/assets/imgs/events1.png
+* src/assets/imgs/events2.png
+* src/assets/imgs/perspective.png
 * src/assets/imgs/what.png
 * src/assets/imgs/why.png
 
 ### Student Response Images
 
-* src/assets/imgs/causal.png
-* src/assets/imgs/distal.png
 * src/assets/imgs/goal.png
 * src/assets/imgs/outcome-fail.png
 * src/assets/imgs/outcome-yes.png
-* src/assets/imgs/simple.png
 * src/assets/imgs/try.png

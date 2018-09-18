@@ -38,14 +38,4 @@ export abstract class BaseLesson implements OnInit {
     step.done = this.session.completedSteps[step.stepId];
   }
 
-  getCounts(): string {
-    let count: number = 0;
-    for (let i = 0; i < this.steps.length; i++) {
-      if (this.headTeacher ? this.session.completedSteps[i] : this.steps[i].done) {
-        count++;
-      }
-    }
-    return `${count} checked, out of ${this.steps.length}`
-  }
-
 }

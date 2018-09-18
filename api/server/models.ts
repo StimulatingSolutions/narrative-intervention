@@ -43,6 +43,9 @@ export interface Session {
   cohortNumber: number;
   lastDownload?: number;
   practice?: boolean;
+  totalSteps?: number;
+  headTeacherFidelity?: number;
+  coTeacherFidelity?: number;
 }
 
 export interface LoggedEvent {
@@ -86,5 +89,8 @@ export interface DownloadedEvent extends StudentResponse {
   ResponseTime: string,
   Invalidated: boolean,
   StudentResponseCount: number,
-  Practice?: boolean
+  Practice?: boolean,
+  HeadTeacherFidelity: number,
+  CoTeacherFidelity: number,
+  TotalFidelityBoxes: number
 }

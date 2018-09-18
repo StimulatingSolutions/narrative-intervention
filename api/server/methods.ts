@@ -246,7 +246,7 @@ let methods = {
     });
   },
 
-  startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean, practice: boolean) {
+  startQuestion(sessionId: string, stepId: number, questionId: number, questionType: string, correctAnswer: string, openResponse: boolean, practice: boolean, fidelityCount: number, totalSteps: number) {
     const session = Sessions.findOne({_id: sessionId});
     if (!session){
       throw new Meteor.Error('Session Error', 'Session does not exist');
@@ -267,7 +267,9 @@ let methods = {
         openResponse: openResponse,
         responses: session.questionResponses[questionId] || {},
         questionIteration: iteration,
-        practice: practice
+        practice: practice,
+        headTeacherFidelity: fidelityCount,
+        totalSteps: totalSteps
       }
     };
     update.$set[`completedSteps.${stepId}`] = true;
@@ -298,7 +300,8 @@ let methods = {
     let originalIteration = session.questionIteration;
     let update: any = {
       $set: {
-        responses: {}
+        responses: {},
+        headTeacherFidelity: session.headTeacherFidelity-1
       }
     };
     update.$set[`completedSteps.${session.questionStepId}`] = false;
@@ -384,14 +387,16 @@ let methods = {
     StudentResponses.insert(event);
   },
 
-  setCurrentStep(sessionId: string, stepId: number, completed: boolean, questionType: string) {
+  setCurrentStep(sessionId: string, stepId: number, completed: boolean, questionType: string, fidelityCount: number, totalSteps: number) {
     const session = Sessions.findOne({_id: sessionId});
     if (!session) {
       throw new Meteor.Error('Session Error', 'Session does not exist');
     }
     let update: any = {
       $set: {
-        currentStepId: stepId
+        currentStepId: stepId,
+        headTeacherFidelity: fidelityCount,
+        totalSteps: totalSteps
       }
     };
     update.$set[`completedSteps.${stepId}`] = completed;
@@ -400,6 +405,20 @@ let methods = {
     } else {
       update.$set.questionType = questionType;
     }
+    Sessions.update(sessionId, update);
+  },
+
+  coTeacherFidelity(sessionId: string, fidelityCount: number, totalSteps: number) {
+    const session = Sessions.findOne({_id: sessionId});
+    if (!session) {
+      throw new Meteor.Error('Session Error', 'Session does not exist');
+    }
+    let update: any = {
+      $set: {
+        coTeacherFidelity: fidelityCount,
+        totalSteps: totalSteps
+      }
+    };
     Sessions.update(sessionId, update);
   },
 
@@ -437,34 +456,50 @@ let methods = {
       'StudentResponse',
       'Correct',
       'ResponseTime',
-      'Invalidated'
+      'Invalidated',
+      'TotalFidelityBoxes',
+      'HeadTeacherFidelity',
+      'CoTeacherFidelity'
     ];
     let dataset: DownloadedEvent[] = [];
 
     let sessions: { [k:string]: Session } = {};
     for (let session of Sessions.find({_id: {$in: sessionIds}}).fetch()) {
       sessions[session._id] = session;
+      if (!session.headTeacherFidelity) {
+        session.headTeacherFidelity = 0;
+        for (let i of Object.keys(session.completedSteps)) {
+          if (session.completedSteps[i]) {
+            session.headTeacherFidelity++;
+          }
+        }
+      }
     }
     let metadata: MetadataEvent[] = ResponseMetadata.find({SessionID: {$in: sessionIds}}, {sort: {timestamp: 1}}).fetch();
     let questionMetadata: { [k: string]: MetadataEvent } = {};
     let responseCounts: { [k: string]: { [k: string]: number } } = {};
     for (let event of metadata) {
+      let key = `${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`;
       if (event.type === 'question-start') {
-        questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`] = event;
+        questionMetadata[key] = event;
       } else if (event.type === 'question-end') {
-        let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        let md: MetadataEvent = questionMetadata[key];
         md.duration = event.timestamp.getTime() - md.timestamp.getTime();
       } else if (event.type === 'timer-reset') {
-        let md: MetadataEvent = questionMetadata[`${event.SessionID} / ${event.QuestionNumber} / ${event.QuestionIteration}`];
+        let md: MetadataEvent = questionMetadata[key];
         md.reset = true;
       }
     }
 
     let responses: StudentResponse[] = StudentResponses.find({SessionID: {$in: sessionIds}}, {sort: {timestamp: 1}}).fetch();
     for (let response of responses) {
-      let md: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`];
+      let key = `${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration}`;
+      let md: MetadataEvent = questionMetadata[key];
       let mdPrior: MetadataEvent = questionMetadata[`${response.SessionID} / ${response.QuestionNumber} / ${response.QuestionIteration-1}`];
       let data: DownloadedEvent = <DownloadedEvent>response;
+      data.HeadTeacherFidelity = sessions[data.SessionID].headTeacherFidelity || 0;
+      data.CoTeacherFidelity = sessions[data.SessionID].coTeacherFidelity || 0;
+      data.TotalFidelityBoxes = sessions[data.SessionID].totalSteps || 0;
       data.HeadTeacherID = sessions[data.SessionID].creatorsId;
       data.HeadTeacherName = sessions[data.SessionID].creatorsName;
       data.SchoolName = sessions[data.SessionID].schoolName;

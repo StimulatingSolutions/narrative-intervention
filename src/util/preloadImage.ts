@@ -4,18 +4,31 @@ function preloadImage(name: string, expectedWidth: number, expectedHeight: numbe
   let img: HTMLImageElement = new Image();
   preloads[name] = img;
   let timeout;
-  img.onerror = () => {
+  let errorHandler = () => {
+    clearTimeout(timeout);
     img.onerror = null;
     img.onabort = null;
     img.onload = null;
-    clearTimeout(timeout);
-    setTimeout(preloadImage.bind(null, name, Math.min(delay+100, 5000)), delay);
+    setTimeout(preloadImage.bind(null, name, expectedWidth, expectedHeight, Math.min(delay+100, 5000)), delay);
   };
-  timeout = setTimeout(img.onerror, 1000+delay);
-  img.onabort = <(UIError)=>any> img.onerror;
+  img.onerror = (err) => {
+    let message = err ? err.message : null;
+    console.warn(`WARNING: failed to load image ${name}: ${message}`);
+    errorHandler();
+  };
+  timeout = setTimeout(() => {
+    console.warn(`WARNING: timed out trying to load image ${name}: ${1000+delay}ms`);
+    errorHandler();
+  }, 1000+delay);
+  img.onabort = () => {
+    console.warn(`WARNING: image load aborted for image ${name}`);
+    errorHandler();
+  };
   img.onload = () => {
-    if (img.width !== 1104 || img.width !== 1104) {
-      img.onerror(null);
+    clearTimeout(timeout);
+    if (img.width !== expectedWidth || img.height !== expectedHeight) {
+      console.warn(`WARNING: image size doesn't match for image ${name}: expected ${expectedWidth}x${expectedHeight}, got ${img.width}x${img.height}`);
+      errorHandler();
     }
   };
   img.src = `/assets/imgs/${name}.png`;
