@@ -18,6 +18,18 @@
     margin-left: -.70in;
     max-width: none;
   }
+  .pull-left {
+    margin-left: -60px;
+  }
+  .pull-left-2 {
+    margin-left: -45px;
+  }
+  .adjust-right {
+    margin-left: 8%;
+    .right {
+      min-height: 40px;
+    }
+  }
   div {
     line-height: 115%;
     font-size: 20px;
@@ -40,6 +52,10 @@
       left: 6%;
       width: 7%;
       text-align: right;
+    }
+    .fidelity {
+      position: absolute;
+      left: -24px;
     }
     .step-content {
       margin-left: 5%;
