@@ -187,6 +187,9 @@
       li {
         list-style-type: disc;
       }
+      ul li {
+        list-style-type: circle;
+      }
     }
   }
   ul, ol {
@@ -293,6 +296,9 @@
   .no-line-above {
     margin-top: 0 !important;
   }
+  li.no-line-above {
+    padding-top: 0 !important;
+  }
   .no-line-below {
     padding-bottom: 0 !important;
   }
@@ -368,6 +374,11 @@
       }
       &:last-child {
         padding-bottom: 8px;
+      }
+      li {
+        &:first-child, &:last-child {
+          padding: 0;
+        }
       }
     }
     p {
