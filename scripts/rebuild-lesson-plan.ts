@@ -34,8 +34,10 @@ getStdin().then((s: string) => {
   s = s.replace(new RegExp('<table>[^<]*(?:<(?!em>)[^<]*)*<em>([^<]*(?:<(?!/em>)[^<]*)*)</em>', 'i'), '</ol>\n<hr class="page-break"/>\n<div class="black-border">\n<p class="v-padding"><em>$1</em>');
   s = s.replace(new RegExp('</th>[^<]*(?:<(?!/th>)[^<]*)*</thead>', 'i'), '</div>\n<table>');
   s = s.replace(new RegExp('<th>[\\s_]*</th>', 'gi'), '');
+  s = s.replace(new RegExp('<th><strong>[\\s_]*</strong></th>', 'gi'), '');
   s = s.replace(new RegExp('<p>[\\s_]*</p>', 'gi'), '');
   s = s.replace(new RegExp('<td>[\\s_]*</td>', 'gi'), '');
+  s = s.replace(new RegExp('<td><strong>[\\s_]*</strong></td>', 'gi'), '');
   s = s.replace(new RegExp('<tr ?[^>]*>[\\s_]*</tr>', 'gi'), '');
 
   s = s.replace(new RegExp('<(/?)th>', 'gi'), '<$1td>');

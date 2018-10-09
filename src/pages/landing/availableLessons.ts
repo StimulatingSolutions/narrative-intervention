@@ -13,4 +13,5 @@ export const availableLessons: string[] = [
   '12',
   '13',
   '14',
+  '15',
 ];

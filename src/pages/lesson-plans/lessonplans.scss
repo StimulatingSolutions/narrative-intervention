@@ -155,6 +155,9 @@
   ol.numbers > li {
     list-style-type: decimal;
   }
+  ol.roman > li {
+    list-style-type: lower-roman;
+  }
   .center, .center-left {
     text-align: center;
     padding-bottom: 8px;

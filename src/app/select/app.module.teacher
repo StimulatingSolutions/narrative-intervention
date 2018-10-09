@@ -36,6 +36,7 @@ import { Lesson11 } from '../pages/lesson-plans/lesson11/lesson-11';
 import { Lesson12 } from '../pages/lesson-plans/lesson12/lesson-12';
 import { Lesson13 } from '../pages/lesson-plans/lesson13/lesson-13';
 import { Lesson14 } from '../pages/lesson-plans/lesson14/lesson-14';
+import { Lesson15 } from '../pages/lesson-plans/lesson15/lesson-15';
 
 
 
@@ -74,6 +75,7 @@ require('smoothscroll-polyfill').polyfill();
     Lesson12,
     Lesson13,
     Lesson14,
+    Lesson15,
     Step
   ],
   imports: [
@@ -112,6 +114,7 @@ require('smoothscroll-polyfill').polyfill();
     Lesson12,
     Lesson13,
     Lesson14,
+    Lesson15,
     Step
   ],
   providers: [
