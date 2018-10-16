@@ -1,7 +1,7 @@
 export default function () {
   //SETUP ACCOUNTS EMAIL TEMPLATES
   Accounts.emailTemplates.siteName = 'Narrative Structure';
-  Accounts.emailTemplates.from = 'Narrative Structure <no-reply@stimulating-solutions.com>';
+  Accounts.emailTemplates.from = 'Narrative Structure <nsapp@stimulating-solutions.com>';
   Accounts.emailTemplates.enrollAccount.subject = (user) => {
     return `Welcome to the NS app, ${user.profile.name}`;
   };
@@ -16,7 +16,7 @@ export default function () {
   Accounts.emailTemplates.resetPassword.from = () => {
     // Overrides the value set in `Accounts.emailTemplates.from` when resetting
     // passwords.
-    return 'NS Password Reset <no-reply@stimulating-solutions.com>';
+    return 'NS Password Reset <nsapp@stimulating-solutions.com>';
   };
   Accounts.emailTemplates.verifyEmail = {
      subject() {
