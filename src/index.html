@@ -3,10 +3,14 @@
 <head>
   <script type="application/javascript">
     function doRedirect() {
+      var parts = window.location.href.split('#');
+      var fragment = parts[1] ? '#'+parts[1] : '';
+      var query = parts[0].split('?')[1];
+      query = query ? '?'+query : '';
       if (''+window.screen.width+'x'+window.screen.height === '1024x600') {
-        window.location.href = '/student/';
+        window.location.href = '/student/'+query+fragment;
       } else {
-        window.location.href = '/web/';
+        window.location.href = '/web/'+query+fragment;
       }
     }
   </script>
