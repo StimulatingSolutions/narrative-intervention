@@ -5,6 +5,7 @@ import { Schools } from 'api/collections';
 import { School } from 'api/models';
 import {ErrorAlert} from "../../services/errorAlert";
 import {DestructionAwareComponent} from "../../util/destructionAwareComponent";
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   constructor(
     private errorAlert: ErrorAlert,
     private ref: ChangeDetectorRef,
+    private alertCtrl: AlertController
   ) {
     super();
   }
@@ -57,6 +59,7 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
       } else {
         this.errorAlert.present(new Error("Group Number, School Name, and Cohort are required."), 28);
       }
+      return;
     }
 
     const newSchool = {
@@ -89,7 +92,20 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
     this.editSchoolVisible = false;
   }
 
-  updateSchool(school): void {
+  updateSchool(retry: boolean = false): void {
+
+    //CHECK EMPTYS
+    if (!this.editSchoolName || !this.editSchoolNumber || !this.editSchoolCohort) {
+      if (!retry) {
+        this.ref.detectChanges();
+        setTimeout(()=>{
+          this.updateSchool(true);
+        }, 0);
+      } else {
+        this.errorAlert.present(new Error("Group Number, School Name, and Cohort are required."), 14);
+      }
+      return;
+    }
 
     let updates = {
       name: this.editSchoolName,
@@ -112,5 +128,37 @@ export class SchoolManagementPage extends DestructionAwareComponent implements O
   showAddSchool(visible: boolean): void {
     this.addSchoolVisible = visible;
     this.ref.detectChanges();
+  }
+
+  deleteSchool(): void {
+    let content:any = {
+      title: "Are you sure?",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: `Delete Group ${this.schoolToEdit.idNumber} at ${this.schoolToEdit.name}`,
+          handler: () => {
+            MeteorObservable.call('deleteSchool', this.schoolToEdit._id)
+            .takeUntil(this.componentDestroyed$)
+            .subscribe({
+              next: () => {
+                this.editSchoolVisible = false;
+                this.editSchoolName = null;
+                this.editSchoolNumber = null;
+                this.editSchoolCohort = null;
+              },
+              error: this.errorAlert.presenter(114)
+            });
+          }
+        }
+      ],
+      cssClass: 'error-alert',
+      message: `You are about to delete Group ${this.schoolToEdit.idNumber} at ${this.schoolToEdit.name} (Cohort ${this.schoolToEdit.cohort})!`
+    };
+    const alert = this.alertCtrl.create(content);
+    alert.present();
   }
 }

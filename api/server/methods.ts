@@ -169,6 +169,19 @@ let methods = {
     });
   },
 
+  deleteSchool(schoolId: string){
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'User must be logged-in to delete a school/cohort');
+    }
+
+    if (!Roles.userIsInRole(this.userId, ['admin'])){
+      throw new Meteor.Error('unauthorized',
+        'User does not have permission');
+    }
+
+    Schools.remove(schoolId);
+  },
+
   //SESSIONS
   createNewSession(session: Session): void {
     if (!this.userId) {
