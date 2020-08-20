@@ -52,7 +52,7 @@
     "@types/file-saver": "^1.3.0",
     "angular2-moment": "^1.7.0",
     "babel-runtime": "^6.26.0",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^5.0.0",
     "cordova-android": "^5.1.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-exclude-files": "^0.2.2",
